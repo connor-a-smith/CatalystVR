@@ -30,7 +30,7 @@ public class PointCloudManager : MonoBehaviour {
 	private Vector3 minValue;
 
 	
-	void Start () {
+	void OnEnable () {
 		// Create Resources folder
 		createFolders ();
 
@@ -39,7 +39,6 @@ public class PointCloudManager : MonoBehaviour {
 
 		loadScene ();
 	}
-
 
 
 	void loadScene(){

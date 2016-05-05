@@ -15,9 +15,12 @@ public class SequentialSceneLoader : MonoBehaviour {
 
     //Load the next scene or go back to 0 if at end.
     if (Input.GetKeyDown("n")) {
-      Debug.Log(SceneManager.sceneCount);
-      Debug.Log((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCount + 1));
       SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCount + 1));
     }
-	}
+
+    if (Input.GetKeyDown("r")) {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+  }
 }
