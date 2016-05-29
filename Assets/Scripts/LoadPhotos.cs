@@ -32,7 +32,7 @@ public class LoadPhotos : MonoBehaviour {
     public static List<Sprite> LoadPNG()
     {
         //Debug.Log(Directory.GetCurrentDirectory());
-        string[] files = Directory.GetFiles("Assets/Resources/photos");
+        string[] files = Directory.GetFiles("Assets/Resources/Photos");
         List<Sprite> sprites = new List<Sprite>();
 
         Debug.Log("Number of files: " + files.Length);
