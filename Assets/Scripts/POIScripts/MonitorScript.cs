@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StaticHolder : MonoBehaviour {
-
-    public static GameObject player;
+public class MonitorScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player = this.gameObject;
+        Controller.monitor = this;
 	}
 	
 	// Update is called once per frame

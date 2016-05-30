@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TextComponent : POIScriptComponent {
 
-    string sentence;
+    public string sentence;
 
 	// Use this for initialization
 	void Start () {
@@ -14,4 +15,17 @@ public class TextComponent : POIScriptComponent {
 	void Update () {
 	
 	}
+
+    public override void Activate()
+    {
+        base.Activate();
+        Controller.monitor.GetComponentInChildren<Text>().text = sentence;
+    }
+
+    public override void Deactivate()
+    {
+        base.Activate();
+        Controller.monitor.GetComponentInChildren<Text>().text = "";
+
+    }
 }
