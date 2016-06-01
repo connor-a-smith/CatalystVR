@@ -10,6 +10,7 @@ public class LoadPhotos : MonoBehaviour {
 
     List<Vector3> pictureLocations;
 
+    public int numPicsToLoad = 24;
 
     public Vector2 finalImageSize = new Vector2(19.20f, 10.80f);
     public float uniformImageScale = 0.3f;
@@ -20,10 +21,13 @@ public class LoadPhotos : MonoBehaviour {
     public string photoPath = "./Resources/PhotosToLoad";
     public Object photoPrefab;
 
+    int picsOnTopAndBottom;
+    int picsInMiddle;
+
     void Awake() {
         // load all images in sprites array
         //   sprites = LoadPNG();
-       // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
+        // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
         photos = new List<CatalystPhoto>();
         StartCoroutine(LoadPhoto());
     }
@@ -72,95 +76,126 @@ public class LoadPhotos : MonoBehaviour {
 
     void LoadPictureLocations(float numPics) {
 
+        float pictureHeight = finalImageSize.y * uniformImageScale;
+
+        if(numPics > 24) {
+
+            Debug.LogWarning("Number of pictures in directory exceeds 24. Only first 24 will be used");
+            numPics = 24;
+
+        }
+
         float spawnSphereRadius = 10.0f;
         pictureLocations = new List<Vector3>();
+        float rad2o2 = Mathf.Sqrt(2) / 2;
+
+        List<List<Vector3>> unitCircleLocations = new List<List<Vector3>>();
+
+        Vector3 unit0 = new Vector3(1, 0, 0);
+        Vector3 unit45 = new Vector3(rad2o2, 0, rad2o2);
+        Vector3 unit90 = new Vector3(0, 0, 1);
+        Vector3 unit135 = new Vector3(-rad2o2, 0, rad2o2);
+        Vector3 unit60 = new Vector3(Mathf.Cos(2 * Mathf.PI / 6), 0, Mathf.Sin(2 * Mathf.PI / 6));
+        Vector3 unit105 = new Vector3(-Mathf.Cos(2 * Mathf.PI / 6), 0, Mathf.Sin(2 * Mathf.PI / 6));
 
 
-        if(numPics == 1) {
+        //positions for the various sphere locations
+        unitCircleLocations.Add(new List<Vector3>());
+        unitCircleLocations[0] = new List<Vector3> { unit90 };
+        unitCircleLocations.Add(new List<Vector3>());
+        unitCircleLocations[1] = new List<Vector3> { unit60, unit105 };
+        unitCircleLocations.Add(new List<Vector3>());
+        unitCircleLocations[2] = new List<Vector3> { unit90, unit45, unit135 };
 
-            Vector3 spawnLoc = new Vector3(1, 0, 0);
-            spawnLoc *= spawnSphereRadius;
-            pictureLocations.Add(spawnLoc);
+
+        for(int i = 3; i < 8; i++) {
+
+            unitCircleLocations.Add(new List<Vector3>());
+            unitCircleLocations[i] = GetPositionsOnUnitCircleBySides(i + 1);
 
         }
 
-        else if(numPics == 2) {
+        //if the number of pictures is greater than eight
+        if(numPics > 8) {
 
-            //only spawn two pictures
+            //if it's evenly divisible by 3
+            if(numPics % 3 == 0) {
 
-        }
-
-        else if(numPics == 3) {
-
-            //three pic case
-        }
-
-        else if(numPics == 4) {
-
-        }
-
-        else if(numPics == 5) {
-
-        }
-
-        else if(numPics >= 8) {
-
-            float numRows = Mathf.Ceil(numPics / 8);
-
-            float rad2o2 = Mathf.Sqrt(2) / 2;
-
-            pictureLocations.Add(new Vector3(0, 0, 1));
-            pictureLocations.Add(new Vector3(rad2o2, 0, rad2o2));
-            pictureLocations.Add(new Vector3(1, 0, 0));
-            pictureLocations.Add(new Vector3(rad2o2, 0, -rad2o2));
-            pictureLocations.Add(new Vector3(0, 0, -1));
-            pictureLocations.Add(new Vector3(-rad2o2, 0, -rad2o2));
-            pictureLocations.Add(new Vector3(-1, 0, 0));
-            pictureLocations.Add(new Vector3(-rad2o2, 0, rad2o2));
-
-            for(int i = 0; i < pictureLocations.Count; i++) {
-
-                pictureLocations[i] *= spawnSphereRadius;
+                picsOnTopAndBottom = (int)numPics / 3;
+                picsInMiddle = picsOnTopAndBottom;
 
             }
 
-            int j = 0;
-            float yVal = 0;
-            float pictureHeight = finalImageSize.y * uniformImageScale;
+            else {
 
-            for(int i = 0; i < photos.Count; i++) {
+                picsOnTopAndBottom = (int)numPics / 3;
+                picsInMiddle = (int)numPics - (2 * picsOnTopAndBottom);
 
-                if(i % 8 == 0) {
+            }
 
+            Debug.Log("Picture Arrangement: " + picsInMiddle + " pictures in middle row, and " + picsOnTopAndBottom + " in the middle and top rows");
 
-                    if(Mathf.Ceil(i / 8) % 2 == 0) {
+            //iterates through each row of pictures
+            for(int i = 0; i < 3; i++) {
 
-                        yVal = -yVal;
-                    }
+                //middle row
+                if(i == 0) {
 
+                    //adds each picture location for the middle row
+                    for(int j = 0; j < unitCircleLocations[picsInMiddle - 1].Count; j++) {
 
-                    else {
-                        yVal = -yVal;
-                        yVal += pictureHeight + (pictureHeight / 4);
+                        Vector3 pictureLocation = unitCircleLocations[picsInMiddle - 1][j];
+
+                        pictureLocation *= spawnSphereRadius;
+                        pictureLocation += (Camera.main.transform.position);
+
+                        pictureLocations.Add(pictureLocation);
+
                     }
                 }
 
-                if(i < pictureLocations.Count) {
-
-                    j = i;
-
-                }
+                //top and bottom rows
                 else {
-                    j++;
+
+                    //adds each picture location for top and bottom rows
+                    for(int j = 0; j < unitCircleLocations[picsOnTopAndBottom - 1].Count; j++) {
+
+                        Vector3 pictureLocation = unitCircleLocations[picsOnTopAndBottom - 1][j];
+
+                        pictureLocation *= spawnSphereRadius;
+                        pictureLocation += (Camera.main.transform.position);
+
+                        if(i == 1) pictureLocation.y += (pictureHeight + pictureHeight / 4);
+                        if(i == 2) pictureLocation.y -= (pictureHeight + pictureHeight / 4);
+
+
+                        pictureLocations.Add(pictureLocation);
+
+                    }
                 }
+            }
+        }
 
-                if(j > pictureLocations.Count - 1) j = 0;
+        //special cases for number < 8
+        else {
 
-                Vector3 placeVector = pictureLocations[j];
-                placeVector.y = yVal;
+            //adds the correct picture locations
+            for(int i = 1; i <= 8; i++) {
+                if(numPics == i) {
 
-                photos[i].transform.position = placeVector;
+                    picsInMiddle = i;
+                    pictureLocations = unitCircleLocations[i - 1];
+                    for(int j = 0; j < pictureLocations.Count; j++) {
 
+                        pictureLocations[j] *= spawnSphereRadius;
+                        pictureLocations[j] += (Camera.main.transform.position);
+
+
+                    }
+
+                    break;
+
+                }
             }
         }
     }
@@ -204,6 +239,12 @@ public class LoadPhotos : MonoBehaviour {
             //checks the extension on the file
             if(Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg") {
 
+                if (imageFilePaths.Count >= numPicsToLoad) {
+
+                    Debug.LogWarning("Number of pictures in directory exceeds 24. Only first 24 will be used");
+                    break;
+                }
+
                 imageFilePaths.Add(str);
 
             }
@@ -239,18 +280,19 @@ public class LoadPhotos : MonoBehaviour {
             w.LoadImageIntoTexture(image);
             Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
             imageSprites.Add(imageSprite);
-            Debug.Log("IMAGE SIZE: " + imageSprite.bounds.size.x + ", " + imageSprite.bounds.size.y);
             yield return null;
         }
 
-        for (int i = 0; i < imageSprites.Count; i++) {
+        LoadPictureLocations(imageSprites.Count);
+
+        for(int i = 0; i < imageSprites.Count; i++) {
 
             Vector2 finalImageSize = new Vector2(19.20f, 10.80f);
             Vector2 currentImageSize = new Vector2(imageSprites[i].bounds.size.x, imageSprites[i].bounds.size.y);
             Vector3 scaleFactor = new Vector3(finalImageSize.x / currentImageSize.x, finalImageSize.y / currentImageSize.y);
 
             Debug.Log("Instantiating Image " + i + " of " + imageSprites.Count);
-            GameObject photoObj = (GameObject)GameObject.Instantiate(photoPrefab, GetValidPictureLocation(), new Quaternion());
+            GameObject photoObj = (GameObject)GameObject.Instantiate(photoPrefab, pictureLocations[i], new Quaternion());
             photoObj.GetComponent<SpriteRenderer>().sprite = imageSprites[i];
             Vector3 photoScale = photoObj.transform.localScale;
 
@@ -263,21 +305,42 @@ public class LoadPhotos : MonoBehaviour {
             photoObj.transform.localScale = photoScale;
             photoObj.GetComponent<BoxCollider>().size = photoObj.GetComponent<SpriteRenderer>().sprite.bounds.size;
 
-           // photoObj.GetComponent<BoxCollider>().size = finalImageSize;
-            //Debug.Log("COLLIDER SIZE: " + photoObj.GetComponent<BoxCollider>().size);
-
             photos.Add(photoObj.GetComponent<CatalystPhoto>());
 
             yield return null;
 
         }
 
-        LoadPictureLocations(imageSprites.Count);
+        for (int i = 0; i < photos.Count; i++) {
 
-        foreach(CatalystPhoto photo in photos) {
+            if (picsInMiddle > 3 && i < picsInMiddle) {
 
-            photo.gameObject.SetActive(true);
+                photos[i].isSpinning = true;
+
+            }
+
+            if (picsOnTopAndBottom > 3 && i >= picsInMiddle) {
+
+                photos[i].isSpinning = true;
+
+            }
+
+            photos[i].gameObject.SetActive(true);
 
         }
+    }
+
+    List<Vector3> GetPositionsOnUnitCircleBySides(int numSides) {
+
+        List<Vector3> returnList = new List<Vector3>();
+
+        for(int i = 0; i < numSides; i++) {
+            float radAngle = i * (2 * (Mathf.PI / numSides));
+            returnList.Add(new Vector3(Mathf.Cos(radAngle), 0, Mathf.Sin(radAngle)));
+
+        }
+
+        return returnList;
+
     }
 }

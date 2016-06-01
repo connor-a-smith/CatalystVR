@@ -4,6 +4,7 @@ using System.Collections;
 public class CatalystPhoto : MonoBehaviour {
 
     private float rotateSpeed = 0.05f;
+    public bool isSpinning = false;
     private bool selected;
     GameObject placeHolder;
 
@@ -19,11 +20,11 @@ public class CatalystPhoto : MonoBehaviour {
         transform.LookAt(Camera.main.transform.position, Vector3.up);
 
         // transform.Rotate(new Vector3(0.0f, 1.0f, 0.0f), Space.Self);
-        if(!selected) {
+        if(!selected && isSpinning) {
             this.transform.RotateAround(Camera.main.transform.position, new Vector3(0, 1, 0), rotateSpeed);
         }
         else {
-            if (placeHolder) {
+            if (placeHolder && isSpinning) {
                 placeHolder.transform.RotateAround(Camera.main.transform.position, new Vector3(0, 1, 0), rotateSpeed);
             }
         }
