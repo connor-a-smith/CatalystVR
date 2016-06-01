@@ -460,6 +460,7 @@ MonoBehaviour:
   defaultPOIMaterialEditor: {fileID: 0}
   highlightedPOIMaterialEditor: {fileID: 0}
   selectedPOIMaterialEditor: {fileID: 0}
+  photoPrefabEditor: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
 --- !u!1 &1135712483
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,9 +473,7 @@ GameObject:
   - 135: {fileID: 1135712486}
   - 23: {fileID: 1135712485}
   - 114: {fileID: 1135712484}
-  - 114: {fileID: 1135712491}
   - 114: {fileID: 1135712490}
-  - 114: {fileID: 1135712489}
   - 114: {fileID: 1135712492}
   m_Layer: 0
   m_Name: POI
@@ -553,17 +552,6 @@ Transform:
   - {fileID: 1648449592}
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &1135712489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1135712483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1135712490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,17 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentence: hOI Im TEMMiE
---- !u!114 &1135712491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1135712483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1135712492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +754,6 @@ GameObject:
   - 135: {fileID: 1510521225}
   - 23: {fileID: 1510521224}
   - 114: {fileID: 1510521223}
-  - 114: {fileID: 1510521222}
   - 114: {fileID: 1510521221}
   - 114: {fileID: 1510521220}
   m_Layer: 0
@@ -798,6 +774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataPath: \Resources\Photos
 --- !u!114 &1510521221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,17 +787,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentence: Everything's different...
---- !u!114 &1510521222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1510521219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1510521223
 MonoBehaviour:
   m_ObjectHideFlags: 0

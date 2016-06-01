@@ -293,7 +293,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -474,7 +474,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -555,6 +555,7 @@ MonoBehaviour:
   uniformImageScale: 0.3
   photoPath: /Resources/PicturesToLoad
   photoPrefab: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
+  loadOnAwake: 1
 --- !u!4 &1016170703
 Transform:
   m_ObjectHideFlags: 0

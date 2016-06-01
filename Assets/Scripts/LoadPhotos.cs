@@ -24,56 +24,29 @@ public class LoadPhotos : MonoBehaviour {
     int picsOnTopAndBottom;
     int picsInMiddle;
 
+    public bool loadOnAwake = false;
+
     void Awake() {
+
+        photoPrefab = Controller.photoPrefab;
         // load all images in sprites array
         //   sprites = LoadPNG();
         // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
+        if (loadOnAwake)
+        {
+            Load();
 
-        photoPath = Application.dataPath + photoPath;
-        photos = new List<CatalystPhoto>();
-        StartCoroutine(LoadPhoto());
-    }
-
-    void Start() {
-        // create the object
-        GameObject photo = new GameObject();
-
-
-        // add a "SpriteRenderer" component to the newly created object
-        //photo.AddComponent<SpriteRenderer>();
-
-        // assign the first loaded sprite to it
-        //photo.GetComponent<SpriteRenderer>().sprite = sprites[0];
+        }
     }
 
     /// <summary>
-    /// Loads all pngs from the photos directory. Unknown if works with other file types? 
+    /// Launching coroutine here instead of awake so that the loading can begin after the correct path is set.
     /// </summary>
-    /// <returns></returns>
-    public List<Sprite> LoadPNG() {
-        //Debug.Log(Directory.GetCurrentDirectory());
-        string[] files = Directory.GetFiles(photoPath);
-        List<Sprite> sprites = new List<Sprite>();
-
-        Debug.Log("Number of files: " + files.Length);
-
-        //For each file, load its data and convert to a sprite.
-        for(int i = 0; i < files.Length; i++) {
-            Texture2D tex = null;
-            byte[] fileData;
-
-            //Check if file exists and if its a png.
-            if(File.Exists(files[i]) && Path.GetExtension(files[i]) == ".png") {
-                Debug.Log("Loading: " + files[i]);
-                fileData = File.ReadAllBytes(files[i]);
-                tex = new Texture2D(2, 2);
-                tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
-
-                //Convert texture to sprite.
-                sprites.Add(Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2()));
-            }
-        }
-        return sprites;
+    public void Load()
+    {
+        photoPath = Application.dataPath + photoPath;
+        photos = new List<CatalystPhoto>();
+        StartCoroutine(LoadPhoto());
     }
 
     void LoadPictureLocations(float numPics) {
@@ -309,6 +282,8 @@ public class LoadPhotos : MonoBehaviour {
 
             photos.Add(photoObj.GetComponent<CatalystPhoto>());
 
+            photoObj.transform.parent = this.transform;
+
             yield return null;
 
         }
@@ -329,6 +304,12 @@ public class LoadPhotos : MonoBehaviour {
 
             photos[i].gameObject.SetActive(true);
 
+        }
+
+        //Used to hide every image when all images are loaded.
+        if (!loadOnAwake)
+        {
+            this.gameObject.SetActive(false);
         }
     }
 

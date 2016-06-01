@@ -16,14 +16,22 @@ public class Controller : MonoBehaviour {
     public Material highlightedPOIMaterialEditor;
     public Material selectedPOIMaterialEditor;
 
+    public static Object photoPrefab;
+    public Object photoPrefabEditor;
+
 
     // Use this for initialization
+    /// <summary>
+    /// Used to set up the static variables based on the dragged in variables.
+    /// </summary>
     void Start () {
         player = this.gameObject;
 
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;
         selectedPOIMat = selectedPOIMaterialEditor;
+
+        photoPrefab = photoPrefabEditor;
     }
 
     // Update is called once per frame
