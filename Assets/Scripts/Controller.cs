@@ -8,13 +8,26 @@ public class Controller : MonoBehaviour {
 
     public static POIScript selectedPOI;
 
-	// Use this for initialization
-	void Start () {
+    public static Material defaultPOIMat;
+    public static Material highlightedPOIMat;
+    public static Material selectedPOIMat;
+
+    public Material defaultPOIMaterialEditor;
+    public Material highlightedPOIMaterialEditor;
+    public Material selectedPOIMaterialEditor;
+
+
+    // Use this for initialization
+    void Start () {
         player = this.gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        defaultPOIMat = defaultPOIMaterialEditor;
+        highlightedPOIMat = highlightedPOIMaterialEditor;
+        selectedPOIMat = selectedPOIMaterialEditor;
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }

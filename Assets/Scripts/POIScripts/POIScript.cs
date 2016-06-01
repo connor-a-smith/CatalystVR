@@ -5,7 +5,11 @@ using System.Collections.Generic;
 public class POIScript : MonoBehaviour {
 
     bool activated = false;
+    bool visible = true;
     List<POIScriptComponent> components;
+
+    public float viewDistance = 10f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +19,11 @@ public class POIScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.LookAt(Controller.player.transform.position);
+
+        if (Vector3.Distance(Controller.player.transform.position, transform.position) > viewDistance)
+        {
+
+        }
 	}
 
     void OnMouseDown()
@@ -30,7 +39,7 @@ public class POIScript : MonoBehaviour {
         }
     }
 
-    void Activate()
+    public void Activate()
     {
         //If selected another node after without deactivating an old one.
         if (Controller.selectedPOI != null && Controller.selectedPOI != this )
@@ -48,7 +57,7 @@ public class POIScript : MonoBehaviour {
 
     }
 
-    void Deactivate()
+    public void Deactivate()
     {
         activated = false;
         Controller.selectedPOI = null;
@@ -56,6 +65,19 @@ public class POIScript : MonoBehaviour {
         for (int i = 0; i < components.Count; i++)
         {
             components[i].Deactivate();
+        }
+    }
+
+    public void Trigger()
+    {
+        if (!activated)
+        {
+            Activate();
+        }
+
+        else
+        {
+            Deactivate();
         }
     }
 }
