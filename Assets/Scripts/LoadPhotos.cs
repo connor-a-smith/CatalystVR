@@ -18,7 +18,7 @@ public class LoadPhotos : MonoBehaviour {
     private float picHeight;
     private float spawnOffset = 0;
 
-    public string photoPath = "./Resources/PhotosToLoad";
+    public string photoPath = "/Resources/PhotosToLoad";
     public Object photoPrefab;
 
     int picsOnTopAndBottom;
@@ -28,6 +28,8 @@ public class LoadPhotos : MonoBehaviour {
         // load all images in sprites array
         //   sprites = LoadPNG();
         // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
+
+        photoPath = Application.dataPath + photoPath;
         photos = new List<CatalystPhoto>();
         StartCoroutine(LoadPhoto());
     }

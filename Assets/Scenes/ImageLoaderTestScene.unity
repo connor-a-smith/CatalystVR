@@ -553,7 +553,7 @@ MonoBehaviour:
   numPicsToLoad: 12
   finalImageSize: {x: 19.2, y: 10.8}
   uniformImageScale: 0.3
-  photoPath: C:\Unity Projects\Catalyst\Catalyst\Assets\Resources\PicturesToLoad
+  photoPath: /Resources/PicturesToLoad
   photoPrefab: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
 --- !u!4 &1016170703
 Transform:
