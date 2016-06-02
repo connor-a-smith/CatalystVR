@@ -34,7 +34,7 @@ public class PhotoComponent : POIScriptComponent     {
 
     public override void Deactivate()
     {
-        base.Activate();
+        base.Deactivate();
 
         loaderObj.SetActive(false);
 

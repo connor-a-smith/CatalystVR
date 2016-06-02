@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum ComponentType {Photos, Audio, Videos, Text, Scene}
+
 public abstract class POIScriptComponent : MonoBehaviour {
 
     bool activated;
+    public bool activateImmediately = true;
 
 	// Use this for initialization
 	void Start () {
@@ -23,5 +26,21 @@ public abstract class POIScriptComponent : MonoBehaviour {
     public virtual void Deactivate()
     {
         activated = false;
+    }
+
+    /// <summary>
+    /// Toggles the current state.
+    /// </summary>
+    public void Toggle()
+    {
+        if (!activated)
+        {
+            Activate();
+        }
+
+        else
+        {
+            Deactivate();
+        }
     }
 }

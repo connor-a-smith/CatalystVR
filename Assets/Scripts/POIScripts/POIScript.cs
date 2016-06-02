@@ -28,21 +28,13 @@ public class POIScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (!activated)
-        {
-            Activate();
-        }
-
-        else
-        {
-            Deactivate();
-        }
+        Toggle();
     }
 
     public void Activate()
     {
         //If selected another node after without deactivating an old one.
-        if (Controller.selectedPOI != null && Controller.selectedPOI != this )
+        if (Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI)
         {
             Controller.selectedPOI.Deactivate();
         }
@@ -52,7 +44,10 @@ public class POIScript : MonoBehaviour {
 
         for (int i= 0; i < components.Count; i++)
         {
-            components[i].Activate();
+            if (components[i].activateImmediately)
+            {
+                components[i].Activate();
+            }
         }
 
     }
@@ -68,7 +63,10 @@ public class POIScript : MonoBehaviour {
         }
     }
 
-    public void Trigger()
+    /// <summary>
+    /// A way to toggle the state without needing to check the current state externally.
+    /// </summary>
+    public void Toggle()
     {
         if (!activated)
         {

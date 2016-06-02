@@ -100,7 +100,7 @@ public class GrabScript : MonoBehaviour
 
                     if (poi)
                     {
-                        poi.Trigger();
+                        poi.Toggle();
                     }
                 }
             }

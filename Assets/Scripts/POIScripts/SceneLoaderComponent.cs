@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class TextComponent : POIScriptComponent {
+public class SceneLoaderComponent : POIScriptComponent {
 
-    public string sentence;
+    public string sceneName;
 
 	// Use this for initialization
 	void Start () {
@@ -13,19 +13,18 @@ public class TextComponent : POIScriptComponent {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 
     public override void Activate()
     {
         base.Activate();
-        Controller.monitor.GetComponentInChildren<Text>().text = sentence;
+
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        Controller.monitor.GetComponentInChildren<Text>().text = "";
-
     }
 }
