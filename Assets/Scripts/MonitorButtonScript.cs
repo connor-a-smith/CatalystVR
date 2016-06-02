@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class MonitorButtonScript : MonoBehaviour {
-    public ComponentType specificType;
+    public ComponentType connectedType;
+    private POIScriptComponent connectedComponent;
+
+    private bool activatable = false;
     
     // Use this for initialization
 	void Start () {
@@ -14,13 +17,72 @@ public class MonitorButtonScript : MonoBehaviour {
 	
 	}
 
-    void Toggle()
+    /// <summary>
+    /// Toggle if activatable.
+    /// </summary>
+    public void AttemptToggle()
     {
-        //connectedComponent.Toggle();
+        if (activatable)
+        {
+            connectedComponent.Toggle();
+        }
     }
 
     void OnMouseDown()
     {
-        Toggle();
+        if (activatable)
+        {
+            AttemptToggle();
+        }
     }
+
+    public void OnNewNodeSelected()
+    {
+        GetComponentFromNode();
+
+        if (connectedComponent)
+        {
+            activatable = true;
+        }
+    }
+
+    public void OnNodeDeselected()
+    {
+        activatable = false;
+    }
+
+    /// <summary>
+    /// Using the enum, determine the connected component 
+    /// </summary>
+    void GetComponentFromNode()
+    {
+        if (connectedType == ComponentType.Photos)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<PhotoComponent>();
+        }
+
+        else if (connectedType == ComponentType.Audio)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<AudioComponent>();
+
+        }
+
+        else if (connectedType == ComponentType.Videos)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<VideoComponent>();
+
+        }
+
+        else if (connectedType == ComponentType.Text)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<TextComponent>();
+
+        }
+
+        else //if (connectedType == ComponentType.Scene)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<SceneLoaderComponent>();
+
+        }
+    } 
 }

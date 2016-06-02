@@ -93,7 +93,7 @@ public class GrabScript : MonoBehaviour
                 //Debug.Log(hit.transform.gameObject.name);
 
 
-                //If it got something, pull it.
+                //If it got something, activate it.
                 if (hit.transform != null)
                 {
                     POIScript poi = hit.transform.gameObject.GetComponent<POIScript>();
@@ -102,6 +102,14 @@ public class GrabScript : MonoBehaviour
                     {
                         poi.Toggle();
                     }
+
+                    MonitorButtonScript button = hit.transform.gameObject.GetComponent<MonitorButtonScript>();
+
+                    if (button)
+                    {
+                        button.AttemptToggle();
+                    }
+
                 }
             }
             lastPositions[i] = m_hands[i].transform.position;

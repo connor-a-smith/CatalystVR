@@ -42,6 +42,16 @@ public class POIScript : MonoBehaviour {
         activated = true;
         Controller.selectedPOI = this;
 
+
+        MonitorButtonScript[] buttons = Controller.monitor.GetComponentsInChildren<MonitorButtonScript>();
+
+        //Tell all the buttons that a new poi was selected.
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].OnNewNodeSelected();
+        }
+
+        //Tell all components to activate.
         for (int i= 0; i < components.Count; i++)
         {
             if (components[i].activateImmediately)
@@ -56,6 +66,14 @@ public class POIScript : MonoBehaviour {
     {
         activated = false;
         Controller.selectedPOI = null;
+
+        MonitorButtonScript[] buttons = Controller.monitor.GetComponentsInChildren<MonitorButtonScript>();
+
+        //Tell all the buttons that there is no current POI.
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].OnNodeDeselected();
+        }
 
         for (int i = 0; i < components.Count; i++)
         {
