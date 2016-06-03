@@ -47,7 +47,7 @@ public class GrabScript : MonoBehaviour {
 
             //If it got something, pull it.
             if(hit.transform != null) {
-                Debug.Log(hit.transform.gameObject.name);
+                //Debug.Log(hit.transform.gameObject.name);
 
                 //Debug.Log(hit.distance);
                 //grabPoints[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, hit.distance));

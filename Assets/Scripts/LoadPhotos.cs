@@ -216,7 +216,7 @@ public class LoadPhotos : MonoBehaviour {
         foreach(string str in files) {
 
             //checks the extension on the file
-            if(Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg") {
+            if(Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg" || Path.GetExtension(str) == ".JPG" || Path.GetExtension(str) == ".NEF") {
 
                 if (imageFilePaths.Count >= numPicsToLoad) {
 
