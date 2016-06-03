@@ -5,11 +5,7 @@ using System.Collections.Generic;
 public class POIScript : MonoBehaviour {
 
     bool activated = false;
-    bool visible = true;
     List<POIScriptComponent> components;
-
-    public float viewDistance = 10f;
-
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +14,7 @@ public class POIScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(Controller.player.transform.position);
-
-        if (Vector3.Distance(Controller.player.transform.position, transform.position) > viewDistance)
-        {
-
-        }
+        transform.LookAt(Controller.playerShip.transform.position);
 	}
 
     void OnMouseDown()

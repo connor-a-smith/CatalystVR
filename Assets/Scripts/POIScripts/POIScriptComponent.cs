@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ComponentType {Photos, Audio, Videos, Text, Scene}
+public enum ComponentType {Photos, Audio, Videos, Text, Scene, Zoom}
 
 public abstract class POIScriptComponent : MonoBehaviour {
 

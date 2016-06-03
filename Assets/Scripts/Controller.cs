@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour {
 
-    public static GameObject player;
+    public static GameObject playerShip;
     public static MonitorScript monitor;
 
     public static POIScript selectedPOI;
@@ -25,7 +25,7 @@ public class Controller : MonoBehaviour {
     /// Used to set up the static variables based on the dragged in variables.
     /// </summary>
     void Start () {
-        player = this.gameObject;
+        playerShip = this.gameObject;
 
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;

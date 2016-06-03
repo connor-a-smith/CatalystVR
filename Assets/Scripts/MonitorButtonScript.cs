@@ -79,10 +79,21 @@ public class MonitorButtonScript : MonoBehaviour {
 
         }
 
-        else //if (connectedType == ComponentType.Scene)
+        else if (connectedType == ComponentType.Scene)
         {
             connectedComponent = Controller.selectedPOI.GetComponent<SceneLoaderComponent>();
 
+        }
+
+        else if (connectedType == ComponentType.Zoom)
+        {
+            connectedComponent = Controller.selectedPOI.GetComponent<FocusTransformComponent>();
+
+        }
+
+        else
+        {
+            Debug.LogError("Component not setup in MonitorButtonScript");
         }
     } 
 }
