@@ -28,7 +28,7 @@ public class LoadPhotos : MonoBehaviour {
 
     void Start() {
 
-        // photoPrefab = Controller.photoPrefab;
+        photoPrefab = Controller.photoPrefab;
         // load all images in sprites array
         // sprites = LoadPNG();
         // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
