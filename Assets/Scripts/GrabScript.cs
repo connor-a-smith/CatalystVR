@@ -28,6 +28,7 @@ public class GrabScript : MonoBehaviour
         grabbedObjects = new Transform[2];
         lastPositions = new Vector3[2];
 
+
         for (int i = 0; i < m_hands.Length; i++)
         {
             //Debug.Log(i);
@@ -112,21 +113,23 @@ public class GrabScript : MonoBehaviour
 
                     if (mover)
                     {
-                        hit.transform.parent = grabPoints[i];
                         grabbedObjects[i] = hit.transform;
-                        grabbedObjects[i].transform.localPosition = new Vector3(0, 0, grabbedObjectOffset);
+                        grabbedObjects[i].transform.position = grabPoints[i].transform.position; // new Vector3(0, 0, grabbedObjectOffset);
 
-                        mover.setNewCurrentStart();
+                        mover.setNewTarget();
+
+                        //Setting local position on the ship, then setting new parent.
+                        hit.transform.parent = grabPoints[i];
+
                     }
 
                 }
             }
-            lastPositions[i] = m_hands[i].transform.position;
+
+            lastPositions[i] = m_hands[i].transform.localPosition;
 
         }
-
     }
-
 
     /** returns true if a controller is enabled and not docked */
     bool IsControllerActive(SixenseInput.Controller controller)
