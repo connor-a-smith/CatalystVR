@@ -47,13 +47,14 @@ public class GrabScript : MonoBehaviour
         for (int i = 0; i < m_hands.Length; i++)
         {
             RaycastHit hit;
-            Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, 100);
-            //Debug.Log(hit.transform.gameObject.name);
+            Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, Mathf.Infinity);
 
 
             //If it got something, pull it.
             if (hit.transform != null)
             {
+                Debug.Log(hit.transform.gameObject.name);
+
                 //Debug.Log(hit.distance);
                 //grabPoints[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, hit.distance));
                 //hit.rigidbody.AddForce((m_hands[i].gameObject.transform.position - hit.transform.position) * .5f, ForceMode.Impulse);
@@ -92,7 +93,7 @@ public class GrabScript : MonoBehaviour
             if (IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonDown(SixenseButtons.TRIGGER))
             {
                 //RaycastHit hit;
-                Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, 100);
+                Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, Mathf.Infinity);
                 //Debug.Log(hit.transform.gameObject.name);
                 
                 //If it got something, activate it.
