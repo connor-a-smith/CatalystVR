@@ -20,6 +20,9 @@ public class GrabScript : MonoBehaviour
     //How far back the grabbed object appears to look natural.
     public float grabbedObjectOffset = -.05f;
 
+    CatalystPhoto selectedPhoto;
+
+
     // Use this for initialization
     void Start()
     {
@@ -123,6 +126,39 @@ public class GrabScript : MonoBehaviour
 
                     }
 
+                    Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hitInfo;
+
+                    if (Physics.Raycast(raycast, out hitInfo, Mathf.Infinity))
+                    {
+                        CatalystPhoto hitPhoto = hitInfo.collider.gameObject.GetComponent<CatalystPhoto>();
+
+                        if (hitPhoto)
+                        {
+
+                            //if a photo has already been selected and is on screen
+                            if (selectedPhoto)
+                            {
+                                //transition the selected photo away
+                                selectedPhoto.ImageTransition();
+                            }
+
+                            //if the user clicked the same photo they had selected before
+                            if (hitPhoto == selectedPhoto)
+                            {
+
+                                //deselects the photo
+                                selectedPhoto = null;
+                            }
+
+                            //if the user clicked a different photo
+                            else {
+                                //sets the selected photo to the newly hit one
+                                selectedPhoto = hitPhoto;
+                                selectedPhoto.ImageTransition();
+                            }
+                        }
+                    }
                 }
             }
 

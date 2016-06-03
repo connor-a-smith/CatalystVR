@@ -25,7 +25,7 @@ public class TextComponent : POIScriptComponent {
     public override void Deactivate()
     {
         base.Deactivate();
-        Controller.monitor.GetComponentInChildren<Text>().text = "";
+        Controller.monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
 
     }
 }
