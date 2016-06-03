@@ -187,8 +187,6 @@ public class LoadPhotos : MonoBehaviour {
         float photoSphereRadius = 30.0f;
         float theta = 0, phi = 0;
 
-
-
         // theta = 2 * Mathf.PI * Random.Range(0f, 1f);
         phi = Mathf.Acos((2f * Random.Range(0f, 1f)) - 1f);
 
@@ -289,7 +287,10 @@ public class LoadPhotos : MonoBehaviour {
 
         }
 
-        for (int i = 0; i < photos.Count; i++) {
+        PlacePhotos();
+
+
+        for(int i = 0; i < photos.Count; i++) {
 
             if (picsInMiddle > 3 && i < picsInMiddle) {
 
@@ -307,7 +308,6 @@ public class LoadPhotos : MonoBehaviour {
 
         }
 
-        PlacePhotos();
 
         //Used to hide every image when all images are loaded.
         if (!loadOnAwake)
