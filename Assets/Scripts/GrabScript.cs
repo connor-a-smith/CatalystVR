@@ -11,7 +11,7 @@ public class GrabScript : MonoBehaviour
     //The Transforms where grabbing occurs
     Transform[] grabPoints;
 
-    //If an object is being dragged it will be stored here so it's parent can be set to null after done.
+    //If an object is being dragged it will be stored here so its parent can be set to null after done.
     Transform[] grabbedObjects;
 
     //Store the positions of the hands last frame for the velocity when an object is being held.
@@ -19,12 +19,6 @@ public class GrabScript : MonoBehaviour
 
     //How far back the grabbed object appears to look natural.
     public float grabbedObjectOffset = -.05f;
-
-    //If disabled, the player cannot pull.
-    public bool pullEnabled = true;
-
-    //An array of the cheat sheet and info screens.
-    public GameObject[] infoScreens;
 
     // Use this for initialization
     void Start()
@@ -69,30 +63,34 @@ public class GrabScript : MonoBehaviour
                 grabPoints[i].GetComponent<LineRenderer>().SetColors(Color.white, Color.white);
             }
 
-            //If any of the face buttons are pressed, show the appropriate info screen.
-            if (IsControllerActive(m_hands[i].m_controller) && (m_hands[i].m_controller.GetButtonDown(SixenseButtons.ONE) ||
-                m_hands[i].m_controller.GetButtonDown(SixenseButtons.TWO) || m_hands[i].m_controller.GetButtonDown(SixenseButtons.THREE) ||
-                m_hands[i].m_controller.GetButtonDown(SixenseButtons.FOUR)))
-            {
-                // infoScreens[i].SetActive(!infoScreens[i].activeSelf);
-            }
+
+            ////If any of the face buttons are pressed, show the appropriate info screen.
+            //if (IsControllerActive(m_hands[i].m_controller) && (m_hands[i].m_controller.GetButtonDown(SixenseButtons.ONE) ||
+            //    m_hands[i].m_controller.GetButtonDown(SixenseButtons.TWO) || m_hands[i].m_controller.GetButtonDown(SixenseButtons.THREE) ||
+            //    m_hands[i].m_controller.GetButtonDown(SixenseButtons.FOUR)))
+            //{
+            //    // infoScreens[i].SetActive(!infoScreens[i].activeSelf);
+            //}
 
 
-            //On release, remove the parent and add velocity.
+            //On release, reset the mover.
             if (IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonUp(SixenseButtons.TRIGGER))
             {
+                if (grabbedObjects[i] != null)
+                {
+                    //Potentially lerp mover back?
+                    grabbedObjects[i].GetComponent<ShipMovementScript>().returnToStart();
 
+                    grabbedObjects[i] = null;
+                }
             }
 
-            if (pullEnabled && IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonDown(SixenseButtons.TRIGGER))
+            if (IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonDown(SixenseButtons.TRIGGER))
             {
-
-
                 //RaycastHit hit;
                 Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, 100);
                 //Debug.Log(hit.transform.gameObject.name);
-
-
+                
                 //If it got something, activate it.
                 if (hit.transform != null)
                 {
@@ -108,6 +106,17 @@ public class GrabScript : MonoBehaviour
                     if (button)
                     {
                         button.AttemptToggle();
+                    }
+
+                    ShipMovementScript mover = hit.transform.gameObject.GetComponent<ShipMovementScript>();
+
+                    if (mover)
+                    {
+                        hit.transform.parent = grabPoints[i];
+                        grabbedObjects[i] = hit.transform;
+                        grabbedObjects[i].transform.localPosition = new Vector3(0, 0, grabbedObjectOffset);
+
+                        mover.setNewCurrentStart();
                     }
 
                 }
