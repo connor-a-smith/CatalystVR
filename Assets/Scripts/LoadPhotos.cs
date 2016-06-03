@@ -26,7 +26,7 @@ public class LoadPhotos : MonoBehaviour {
 
     public bool loadOnAwake = false;
 
-    void Awake() {
+    void Start() {
 
         photoPrefab = Controller.photoPrefab;
         // load all images in sprites array

@@ -7,7 +7,7 @@ public class ForwardScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    Cursor.lockState = CursorLockMode.Locked;
+   // Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame
@@ -19,7 +19,7 @@ public class ForwardScript : MonoBehaviour {
     if(Input.GetMouseButton(1)) {
       transform.position -= transform.GetChild(0).forward * speed;
     }
-    Cursor.lockState = CursorLockMode.Locked;
+    //Cursor.lockState = CursorLockMode.Locked;
 
 
   }

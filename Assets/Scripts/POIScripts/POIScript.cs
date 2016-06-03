@@ -15,6 +15,11 @@ public class POIScript : MonoBehaviour {
 
         buttons = Controller.monitor.GetComponentsInChildren<MonitorButtonScript>();
 
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame

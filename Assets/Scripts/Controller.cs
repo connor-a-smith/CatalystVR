@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour {
     /// <summary>
     /// Used to set up the static variables based on the dragged in variables.
     /// </summary>
-    void Start () {
+    void Awake () {
         playerShip = this.gameObject;
 
         defaultPOIMat = defaultPOIMaterialEditor;
