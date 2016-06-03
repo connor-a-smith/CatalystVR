@@ -21,13 +21,13 @@ public class FocusTransformComponent : POIScriptComponent {
 
         Debug.Log(transformValueObject.transform.position); 
 
-        //Teleport to location.
-        Controller.playerShip.transform.position = transformValueObject.transform.position;
+        //Teleport to location. Shifting down by cam height so that camera is in the correct position.
+        Controller.playerShip.transform.position = transformValueObject.transform.position - new Vector3(0,Camera.main.transform.position.y,0);
         Controller.playerShip.transform.rotation = transformValueObject.transform.rotation;
 
-        //Lerp to location.
+        //Lerp to location. Need to implement
 
-        //Accelerate to location.
+        //Accelerate to location. Need to implement.
     }
 
     public override void Deactivate()
