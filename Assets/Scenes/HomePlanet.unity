@@ -542,6 +542,146 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &487506621
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1180139805}
+    m_Modifications:
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.17818865
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4794058
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.47376502
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.716914
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 60.155003
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 161.18102
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -11.408001
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+      propertyPath: m_Name
+      value: POI- Iraq
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_IsPrefabParent: 0
+--- !u!4 &487506622 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_PrefabInternal: {fileID: 487506621}
+--- !u!1 &487506623 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_PrefabInternal: {fileID: 487506621}
+--- !u!114 &487506624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487506623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &487506625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487506623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Ancient Iraq monastary destroyed by Isis
+--- !u!114 &487506626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487506623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  dataPath: \Resources\IraqWorld
+--- !u!114 &487506627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487506623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  transformValueObject: {fileID: 632541408}
+--- !u!65 &487506628
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487506623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.47, z: 1}
+  m_Center: {x: -3.13, y: 1.78, z: 0}
 --- !u!1001 &558811693
 Prefab:
   m_ObjectHideFlags: 0
@@ -696,6 +836,33 @@ BoxCollider:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
   m_PrefabInternal: {fileID: 558811693}
+--- !u!1 &632541408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 632541409}
+  m_Layer: 0
+  m_Name: Iraq
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632541409
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 632541408}
+  m_LocalRotation: {x: 0.2342657, y: 0.03390244, z: -0.48556936, w: 0.84154177}
+  m_LocalPosition: {x: -2.3544705, y: 5.576555, z: -5.024169}
+  m_LocalScale: {x: 1.3689443, y: 1.3689439, z: 1.3689443}
+  m_Children: []
+  m_Father: {fileID: 487506622}
+  m_RootOrder: 3
 --- !u!43 &866854662
 Mesh:
   m_ObjectHideFlags: 0
@@ -1145,7 +1312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  dataPath: \Resources\Photos
+  dataPath: \Resources\MarSabaWorld
 --- !u!114 &1505412219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,7 +1360,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1505412215}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 572437b324f346646a4a329394bae7f1, type: 3}
   m_Name: 
