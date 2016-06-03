@@ -19,6 +19,8 @@ public class Controller : MonoBehaviour {
     public static Object photoPrefab;
     public Object photoPrefabEditor;
 
+    public static MonitorButtonScript[] buttons;
+
 
     // Use this for initialization
     /// <summary>
@@ -26,12 +28,20 @@ public class Controller : MonoBehaviour {
     /// </summary>
     void Awake () {
         playerShip = this.gameObject;
+        monitor = transform.Find("Monitor").gameObject.GetComponent<MonitorScript>();
 
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;
         selectedPOIMat = selectedPOIMaterialEditor;
 
         photoPrefab = photoPrefabEditor;
+
+        buttons = monitor.GetComponentsInChildren<MonitorButtonScript>();
+
+        for (int i = 0; i < Controller.buttons.Length; i++)
+        {
+            Controller.buttons[i].gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
