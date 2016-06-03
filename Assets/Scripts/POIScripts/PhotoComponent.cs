@@ -27,15 +27,14 @@ public class PhotoComponent : POIScriptComponent     {
     public override void Activate()
     {
         base.Activate();
-
         loaderObj.SetActive(true);
+        loaderObj.GetComponent<LoadPhotos>().PlacePhotos();
 
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-
         loaderObj.SetActive(false);
 
     }
