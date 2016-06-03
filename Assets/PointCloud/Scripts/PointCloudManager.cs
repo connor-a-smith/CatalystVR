@@ -44,12 +44,12 @@ public class PointCloudManager : MonoBehaviour {
 	void loadScene(){
 		// Check if the PointCloud was loaded previously
 		if(!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/" + filename)){
-			//UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources/PointCloudMeshes", filename);
+			UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources/PointCloudMeshes", filename);
 			loadPointCloud ();
 		} else if (forceReload){
-			//UnityEditor.FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Resources/PointCloudMeshes/" + filename);
-			//UnityEditor.AssetDatabase.Refresh();
-			//UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources/PointCloudMeshes", filename);
+			UnityEditor.FileUtil.DeleteFileOrDirectory(Application.dataPath + "/Resources/PointCloudMeshes/" + filename);
+			UnityEditor.AssetDatabase.Refresh();
+			UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources/PointCloudMeshes", filename);
 			loadPointCloud ();
 		} else
 			// Load stored PointCloud
@@ -104,7 +104,7 @@ public class PointCloudManager : MonoBehaviour {
 				colors[i] = Color.cyan;
 
 			// Relocate Points near the origin
-			//calculateMin(points[i]);
+			calculateMin(points[i]);
 
 			// GUI
 			progress = i *1.0f/(numPoints-1)*1.0f;
@@ -130,7 +130,7 @@ public class PointCloudManager : MonoBehaviour {
 		InstantiateMesh (numPointGroups-1, numPoints- (numPointGroups-1) * limitPoints);
 
 		//Store PointCloud
-		//UnityEditor.PrefabUtility.CreatePrefab ("Assets/Resources/PointCloudMeshes/" + filename + ".prefab", pointCloud);
+		UnityEditor.PrefabUtility.CreatePrefab ("Assets/Resources/PointCloudMeshes/" + filename + ".prefab", pointCloud);
 
 		loaded = true;
 	}
@@ -148,9 +148,9 @@ public class PointCloudManager : MonoBehaviour {
 
 
 		// Store Mesh
-		//UnityEditor.AssetDatabase.CreateAsset(pointGroup.GetComponent<MeshFilter> ().mesh, "Assets/Resources/PointCloudMeshes/" + filename + @"/" + filename + meshInd + ".asset");
-		//UnityEditor.AssetDatabase.SaveAssets ();
-		//UnityEditor.AssetDatabase.Refresh();
+		UnityEditor.AssetDatabase.CreateAsset(pointGroup.GetComponent<MeshFilter> ().mesh, "Assets/Resources/PointCloudMeshes/" + filename + @"/" + filename + meshInd + ".asset");
+		UnityEditor.AssetDatabase.SaveAssets ();
+		UnityEditor.AssetDatabase.Refresh();
 	}
 
 	Mesh CreateMesh(int id, int nPoints, int limitPoints){
@@ -192,11 +192,11 @@ public class PointCloudManager : MonoBehaviour {
 	}
 
 	void createFolders(){
-		//if(!Directory.Exists (Application.dataPath + "/Resources/"))
-		//	UnityEditor.AssetDatabase.CreateFolder ("Assets", "Resources");
+		if(!Directory.Exists (Application.dataPath + "/Resources/"))
+			UnityEditor.AssetDatabase.CreateFolder ("Assets", "Resources");
 
-		//if (!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/"))
-			//UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources", "PointCloudMeshes");
+		if (!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/"))
+			UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources", "PointCloudMeshes");
 	}
 
 
