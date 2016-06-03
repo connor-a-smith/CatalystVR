@@ -136,7 +136,13 @@ public class GrabScript : MonoBehaviour {
                             selectedPhoto = hitPhoto;
                             selectedPhoto.ImageTransition();
                         }
+                    }
 
+                    HomeButtonScript home = hit.collider.gameObject.GetComponent<HomeButtonScript>();
+
+                    if (home)
+                    {
+                        home.GoHome();
                     }
                 }
             }
