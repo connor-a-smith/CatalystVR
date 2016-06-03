@@ -14,7 +14,8 @@ public class POIScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(Controller.playerShip.transform.position);
+        //No need to look at player anymore. btw messes up child objects too, such as focus positions.
+        // transform.LookAt(Controller.playerShip.transform.position);
 	}
 
     void OnMouseDown()

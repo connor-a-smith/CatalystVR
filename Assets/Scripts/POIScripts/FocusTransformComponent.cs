@@ -19,6 +19,8 @@ public class FocusTransformComponent : POIScriptComponent {
     {
         base.Activate();
 
+        Debug.Log(transformValueObject.transform.position); 
+
         //Teleport to location.
         Controller.playerShip.transform.position = transformValueObject.transform.position;
         Controller.playerShip.transform.rotation = transformValueObject.transform.rotation;
