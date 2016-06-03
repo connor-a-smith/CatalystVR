@@ -12,7 +12,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sites/Luxor.unity
   - enabled: 1
-    path: Assets/Scenes/PointCloudScene.unity
+    path: Assets/Scenes/Sites/Mar Saba.unity
   - enabled: 1
     path: Assets/Scenes/MeshScene.unity
   - enabled: 0
