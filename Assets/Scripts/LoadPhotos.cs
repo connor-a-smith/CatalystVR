@@ -26,7 +26,12 @@ public class LoadPhotos : MonoBehaviour {
 
     public bool loadOnAwake = false;
 
+    GameObject photoHolder;
+
     void Start() {
+
+        photoHolder = new GameObject();
+
 
         photoPrefab = Controller.photoPrefab;
         // load all images in sprites array
@@ -197,15 +202,9 @@ public class LoadPhotos : MonoBehaviour {
 
         return sphereCoords;
 
-
-
     }
 
     IEnumerator LoadPhoto() {
-
-        GameObject photoHolder = new GameObject();
-        photoHolder.transform.parent = this.transform;
-        photoHolder.transform.position = Camera.main.transform.position;
 
         List<Sprite> imageSprites = new List<Sprite>();
         List<string> imageFilePaths = new List<string>();
@@ -279,15 +278,12 @@ public class LoadPhotos : MonoBehaviour {
             photoScale.x = -photoScale.x;
             photoScale.x *= scaleFactor.x;
             photoScale.y *= scaleFactor.y;
-
             photoScale *= uniformImageScale;
 
             photoObj.transform.localScale = photoScale;
             photoObj.GetComponent<BoxCollider>().size = photoObj.GetComponent<SpriteRenderer>().sprite.bounds.size;
 
             photos.Add(photoObj.GetComponent<CatalystPhoto>());
-
-            photoObj.transform.parent = photoHolder.transform;
 
             yield return null;
 
@@ -311,16 +307,13 @@ public class LoadPhotos : MonoBehaviour {
 
         }
 
+        PlacePhotos();
+
         //Used to hide every image when all images are loaded.
         if (!loadOnAwake)
         {
             this.gameObject.SetActive(false);
         }
-
-        photoHolder.transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.rotation.eulerAngles.y, Camera.main.transform.rotation.eulerAngles.z));
-
-       
-
     }
 
     List<Vector3> GetPositionsOnUnitCircleBySides(int numSides) {
@@ -334,6 +327,23 @@ public class LoadPhotos : MonoBehaviour {
         }
 
         return returnList;
+
+    }
+    
+    public void PlacePhotos() {
+
+        photoHolder.transform.parent = this.transform;
+        photoHolder.transform.position = Camera.main.transform.position;
+
+        for (int i = 0; i < photos.Count; i++) {
+
+            LoadPictureLocations(photos.Count);
+            photos[i].transform.position = pictureLocations[i];
+            photos[i].transform.parent = photoHolder.transform;
+
+        }
+
+        photoHolder.transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.rotation.eulerAngles.y, Camera.main.transform.rotation.eulerAngles.z));
 
     }
 }
