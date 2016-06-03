@@ -85,6 +85,48 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &64839911
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -78.36562
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 219.73074
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -121.79637
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000016292068
+      objectReference: {fileID: 0}
+    - target: {fileID: 463294, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: af5824a85af85ee49917de10e973ae30, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &370673097
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +210,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -230,7 +271,6 @@ Transform:
   m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
