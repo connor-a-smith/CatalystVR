@@ -7,13 +7,14 @@ public class POIScript : MonoBehaviour {
     bool activated = false;
     List<POIScriptComponent> components;
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update () {
         //No need to look at player anymore. btw messes up child objects too, such as focus positions.
         // transform.LookAt(Controller.playerShip.transform.position);
 	}
@@ -33,14 +34,13 @@ public class POIScript : MonoBehaviour {
 
         activated = true;
         Controller.selectedPOI = this;
-
-
-        MonitorButtonScript[] buttons = Controller.monitor.GetComponentsInChildren<MonitorButtonScript>();
-
+        
         //Tell all the buttons that a new poi was selected.
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < Controller.buttons.Length; i++)
         {
-            buttons[i].OnNewNodeSelected();
+            Controller.buttons[i].gameObject.SetActive(true);
+
+            Controller.buttons[i].OnNewNodeSelected();
         }
 
         //Tell all components to activate.
@@ -59,12 +59,11 @@ public class POIScript : MonoBehaviour {
         activated = false;
         Controller.selectedPOI = null;
 
-        MonitorButtonScript[] buttons = Controller.monitor.GetComponentsInChildren<MonitorButtonScript>();
-
         //Tell all the buttons that there is no current POI.
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < Controller.buttons.Length; i++)
         {
-            buttons[i].OnNodeDeselected();
+            Controller.buttons[i].OnNodeDeselected();
+            Controller.buttons[i].gameObject.SetActive(false);
         }
 
         for (int i = 0; i < components.Count; i++)

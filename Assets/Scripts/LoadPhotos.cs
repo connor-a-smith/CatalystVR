@@ -26,12 +26,13 @@ public class LoadPhotos : MonoBehaviour {
 
     public bool loadOnAwake = false;
 
-    void Awake() {
+    void Start() {
 
         photoPrefab = Controller.photoPrefab;
         // load all images in sprites array
-        //   sprites = LoadPNG();
+        // sprites = LoadPNG();
         // photoPath = Application.dataPath + "/Resources/PicturesToLoad";
+
         if (loadOnAwake)
         {
             Load();
@@ -202,6 +203,10 @@ public class LoadPhotos : MonoBehaviour {
 
     IEnumerator LoadPhoto() {
 
+        GameObject photoHolder = new GameObject();
+        photoHolder.transform.parent = this.transform;
+        photoHolder.transform.position = Camera.main.transform.position;
+
         List<Sprite> imageSprites = new List<Sprite>();
         List<string> imageFilePaths = new List<string>();
 
@@ -282,7 +287,7 @@ public class LoadPhotos : MonoBehaviour {
 
             photos.Add(photoObj.GetComponent<CatalystPhoto>());
 
-            photoObj.transform.parent = this.transform;
+            photoObj.transform.parent = photoHolder.transform;
 
             yield return null;
 
@@ -311,6 +316,9 @@ public class LoadPhotos : MonoBehaviour {
         {
             this.gameObject.SetActive(false);
         }
+
+        photoHolder.transform.rotation = Camera.main.transform.rotation;
+
     }
 
     List<Vector3> GetPositionsOnUnitCircleBySides(int numSides) {

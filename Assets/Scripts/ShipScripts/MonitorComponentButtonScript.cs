@@ -4,6 +4,9 @@ using System.Collections;
 public class MonitorComponentButtonScript : MonitorButtonScript {
     public ComponentType connectedType;
     private POIScriptComponent connectedComponent;
+
+    public GameObject activeSprite;
+    public GameObject inactiveSprite;
     
     // Use this for initialization
 	void Start () {
@@ -32,7 +35,15 @@ public class MonitorComponentButtonScript : MonitorButtonScript {
 
         if (connectedComponent)
         {
+            activeSprite.SetActive(true);
+            inactiveSprite.SetActive(false);
             activatable = true;
+        }
+
+        else
+        {
+            activeSprite.SetActive(false);
+            inactiveSprite.SetActive(true);
         }
     }
 

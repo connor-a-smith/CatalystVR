@@ -5,7 +5,7 @@ public class MonitorScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Controller.monitor = this;
+        //Controller.monitor = this;
 	}
 	
 	// Update is called once per frame
