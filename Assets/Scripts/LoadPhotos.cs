@@ -317,7 +317,9 @@ public class LoadPhotos : MonoBehaviour {
             this.gameObject.SetActive(false);
         }
 
-        photoHolder.transform.rotation = Camera.main.transform.rotation;
+        photoHolder.transform.rotation = Quaternion.Euler(new Vector3(0, Camera.main.transform.rotation.eulerAngles.y, Camera.main.transform.rotation.eulerAngles.z));
+
+       
 
     }
 
