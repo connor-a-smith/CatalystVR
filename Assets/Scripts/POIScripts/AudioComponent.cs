@@ -18,6 +18,7 @@ public class AudioComponent : POIScriptComponent
 
     public override void Activate()
     {
+
         base.Activate();
 
         AudioSource source = Controller.monitor.GetComponentInChildren<AudioSource>();
