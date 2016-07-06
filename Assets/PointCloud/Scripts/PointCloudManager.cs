@@ -3,9 +3,9 @@ using System.Collections;
 using System.IO;
 
 public class PointCloudManager : MonoBehaviour {
-
-	// File
-	public string dataPath;
+#if UNITY_EDITOR
+    // File
+    public string dataPath;
 	private string filename;
 	public Material matVertex;
 
@@ -191,13 +191,13 @@ public class PointCloudManager : MonoBehaviour {
 			minValue.z = point.z;
 	}
 
-	void createFolders(){
-		if(!Directory.Exists (Application.dataPath + "/Resources/"))
-			UnityEditor.AssetDatabase.CreateFolder ("Assets", "Resources");
-
-		if (!Directory.Exists (Application.dataPath + "/Resources/PointCloudMeshes/"))
-			UnityEditor.AssetDatabase.CreateFolder ("Assets/Resources", "PointCloudMeshes");
-	}
+    void createFolders() {
+        if(!Directory.Exists(Application.dataPath + "/Resources/"))
+            UnityEditor.AssetDatabase.CreateFolder("Assets", "Resources");
+        if(!Directory.Exists(Application.dataPath + "/Resources/PointCloudMeshes/")) {
+            UnityEditor.AssetDatabase.CreateFolder("Assets/Resources", "PointCloudMeshes");
+        }
+    }
 
 
 	void OnGUI(){
@@ -210,5 +210,5 @@ public class PointCloudManager : MonoBehaviour {
 			GUI.EndGroup ();
 		}
 	}
-
+#endif
 }

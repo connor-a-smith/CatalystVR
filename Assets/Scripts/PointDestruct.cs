@@ -5,7 +5,8 @@ using System;
 
 public class PointDestruct : MonoBehaviour {
 
-  [SerializeField]
+#if UNITY_EDITOR
+    [SerializeField]
   private string filepath;
 
   private string writePath;
@@ -78,4 +79,5 @@ public class PointDestruct : MonoBehaviour {
 	void Update () {
 	
 	}
+#endif
 }
