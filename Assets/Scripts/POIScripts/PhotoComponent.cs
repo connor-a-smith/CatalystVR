@@ -9,32 +9,35 @@ public class PhotoComponent : POIScriptComponent     {
     private GameObject loaderObj;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         loaderObj = new GameObject();
         loaderObj.transform.position = this.transform.position;
         loaderObj.transform.parent = this.transform;
-        
+
         loaderObj.AddComponent<LoadPhotos>();
         loaderObj.GetComponent<LoadPhotos>().photoPath = dataPath;
+
+        // Load the photos. Should only happen once on scene start.
         loaderObj.GetComponent<LoadPhotos>().Load();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     public override void Activate()
     {
+        // Calls Activate on parent object.
         base.Activate();
-        loaderObj.SetActive(true);
-        loaderObj.GetComponent<LoadPhotos>().PlacePhotos();
 
+        // Sets the photo loader to active.
+        loaderObj.SetActive(true);
+
+        // Place photos in the correct location.
+        loaderObj.GetComponent<LoadPhotos>().PlacePhotos();
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
+
+        // Deactivate the loader object.
         loaderObj.SetActive(false);
 
     }
