@@ -19,8 +19,6 @@ public class GrabScript : MonoBehaviour {
     //How far back the grabbed object appears to look natural.
     public float grabbedObjectOffset = -.05f;
 
-    CatalystPhoto selectedPhoto;
-
 
     // Use this for initialization
     void Start() {
@@ -47,11 +45,6 @@ public class GrabScript : MonoBehaviour {
 
             //If it got something, pull it.
             if(hit.transform != null) {
-                //Debug.Log(hit.transform.gameObject.name);
-
-                //Debug.Log(hit.distance);
-                //grabPoints[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, hit.distance));
-                //hit.rigidbody.AddForce((m_hands[i].gameObject.transform.position - hit.transform.position) * .5f, ForceMode.Impulse);
                 grabPoints[i].GetComponent<LineRenderer>().SetColors(Color.green, Color.green);
             }
 
@@ -60,16 +53,6 @@ public class GrabScript : MonoBehaviour {
                 //grabPoints[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, 5));
                 grabPoints[i].GetComponent<LineRenderer>().SetColors(Color.white, Color.white);
             }
-
-
-            ////If any of the face buttons are pressed, show the appropriate info screen.
-            //if (IsControllerActive(m_hands[i].m_controller) && (m_hands[i].m_controller.GetButtonDown(SixenseButtons.ONE) ||
-            //    m_hands[i].m_controller.GetButtonDown(SixenseButtons.TWO) || m_hands[i].m_controller.GetButtonDown(SixenseButtons.THREE) ||
-            //    m_hands[i].m_controller.GetButtonDown(SixenseButtons.FOUR)))
-            //{
-            //    // infoScreens[i].SetActive(!infoScreens[i].activeSelf);
-            //}
-
 
             //On release, reset the mover.
             if(IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonUp(SixenseButtons.TRIGGER)) {
@@ -84,67 +67,23 @@ public class GrabScript : MonoBehaviour {
             if(IsControllerActive(m_hands[i].m_controller) && m_hands[i].m_controller.GetButtonDown(SixenseButtons.TRIGGER)) {
                 //RaycastHit hit;
                 Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, Mathf.Infinity);
-                //Debug.Log(hit.transform.gameObject.name);
 
-                //If it got something, activate it.
-                if(hit.transform != null) {
-                    POIScript poi = hit.transform.gameObject.GetComponent<POIScript>();
+                GameObject hitObject = Controller.inputManager.HandleHit(hit);
 
-                    if(poi) {
-                        poi.Toggle();
-                    }
+                ShipMovementScript mover = hit.transform.gameObject.GetComponent<ShipMovementScript>();
 
-                    MonitorButtonScript button = hit.transform.gameObject.GetComponent<MonitorButtonScript>();
+                if (mover)
+                {
+                    grabbedObjects[i] = hit.transform;
+                    grabbedObjects[i].transform.position = grabPoints[i].transform.position; // new Vector3(0, 0, grabbedObjectOffset);
 
-                    if(button) {
-                        button.AttemptToggle();
-                    }
+                    mover.setNewTarget();
 
-                    ShipMovementScript mover = hit.transform.gameObject.GetComponent<ShipMovementScript>();
+                    //Setting local position on the ship, then setting new parent.
+                    hit.transform.parent = grabPoints[i];
 
-                    if(mover) {
-                        grabbedObjects[i] = hit.transform;
-                        grabbedObjects[i].transform.position = grabPoints[i].transform.position; // new Vector3(0, 0, grabbedObjectOffset);
-
-                        mover.setNewTarget();
-
-                        //Setting local position on the ship, then setting new parent.
-                        hit.transform.parent = grabPoints[i];
-
-                    }
-
-                    CatalystPhoto hitPhoto = hit.collider.gameObject.GetComponent<CatalystPhoto>();
-
-                    if(hitPhoto) {
-
-                        //if a photo has already been selected and is on screen
-                        if(selectedPhoto) {
-                            //transition the selected photo away
-                            selectedPhoto.ImageTransition();
-                        }
-
-                        //if the user clicked the same photo they had selected before
-                        if(hitPhoto == selectedPhoto) {
-
-                            //deselects the photo
-                            selectedPhoto = null;
-                        }
-
-                        //if the user clicked a different photo
-                        else {
-                            //sets the selected photo to the newly hit one
-                            selectedPhoto = hitPhoto;
-                            selectedPhoto.ImageTransition();
-                        }
-                    }
-
-                    HomeButtonScript home = hit.collider.gameObject.GetComponent<HomeButtonScript>();
-
-                    if (home)
-                    {
-                        home.GoHome();
-                    }
                 }
+                //Debug.Log(hit.transform.gameObject.name);
             }
 
             lastPositions[i] = m_hands[i].transform.localPosition;

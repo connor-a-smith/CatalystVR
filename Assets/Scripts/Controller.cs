@@ -6,6 +6,7 @@ public class Controller : MonoBehaviour {
 
     public static GameObject playerShip;
     public static MonitorScript monitor;
+    public static InputManagerScript inputManager;
 
     public static POIScript selectedPOI;
 
@@ -30,7 +31,8 @@ public class Controller : MonoBehaviour {
     /// </summary>
     void Awake () {
         playerShip = this.gameObject;
-        monitor = transform.Find("Monitor").gameObject.GetComponent<MonitorScript>();
+        monitor = GetComponentInChildren<MonitorScript>();
+        inputManager = GetComponentInChildren<InputManagerScript>();
 
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;

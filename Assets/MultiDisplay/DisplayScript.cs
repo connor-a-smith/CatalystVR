@@ -9,7 +9,6 @@ public class DisplayScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		/*
 		//searches all the children of this object for Cameras 
 		cameras = GetComponentsInChildren<Camera> ();
 
@@ -21,9 +20,6 @@ public class DisplayScript : MonoBehaviour {
 				Debug.LogError ("Error: Can't find CameraRig");
 			}
 		}
-		*/
-
-
 
 		Debug.Log("displays connected: " + Display.displays.Length);
 		//loops through each display and activates it
