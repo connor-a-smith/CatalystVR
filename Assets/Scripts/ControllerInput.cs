@@ -11,7 +11,7 @@ public class ControllerInput : MonoBehaviour
     public float forwardSpeed = 5;
     private bool justActivated = false;
 
-
+    public Camera raycastCam;
     // Use this for initialization
     void Start()
     {
@@ -50,7 +50,7 @@ public class ControllerInput : MonoBehaviour
             justActivated = true;
 
             RaycastHit hit;
-            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward,out hit, Mathf.Infinity);
+            Physics.Raycast(raycastCam.transform.position, raycastCam.transform.forward,out hit, Mathf.Infinity);
             
             Controller.inputManager.HandleHit(hit);
 
