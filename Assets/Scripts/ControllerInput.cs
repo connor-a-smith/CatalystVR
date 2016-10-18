@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class ControllerInput : MonoBehaviour
 {
@@ -19,26 +21,26 @@ public class ControllerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("Horizontal") * xRotationSpeed, 0);
-        }
-
-        if (Input.GetAxis("Vertical") != 0)
-        {
-            Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("Vertical") * yRotationSpeed, 0, 0);
-        }
-
         if (Input.GetAxis("RightStickHorizontal") != 0)
         {
-            //Debug.Log(Input.GetAxis("RightStickHorizontal"));
-            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("RightStickHorizontal") * forwardSpeed * Controller.playerShip.transform.right);
+            Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0);
         }
 
         if (Input.GetAxis("RightStickVertical") != 0)
         {
+            Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0);
+        }
+
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            //Debug.Log(Input.GetAxis("RightStickHorizontal"));
+            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
+        }
+
+        if (Input.GetAxis("Vertical") != 0)
+        {
             //Debug.Log(Input.GetAxis("RightStickVertical"));
-            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("RightStickVertical") * forwardSpeed * Controller.playerShip.transform.forward);
+            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
         }
 
         //On trigger press, activate
@@ -59,7 +61,10 @@ public class ControllerInput : MonoBehaviour
             justActivated = false;
         }
 
-
+        if (Input.GetKey(KeyCode.A))//else if (Input.GetButton("joystick button 0"))
+        {
+            SceneManager.LoadScene("Mar Saba");
+        }
     }
 
 
