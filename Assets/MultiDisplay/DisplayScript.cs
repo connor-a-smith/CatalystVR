@@ -21,8 +21,6 @@ public class DisplayScript : MonoBehaviour {
 			}
 		}
 
-
-
 		Debug.Log("displays connected: " + Display.displays.Length);
 		//loops through each display and activates it
 		foreach (Display display in Display.displays) {
