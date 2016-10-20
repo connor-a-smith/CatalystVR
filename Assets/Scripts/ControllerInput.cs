@@ -23,12 +23,12 @@ public class ControllerInput : MonoBehaviour
     {
         if (Input.GetAxis("RightStickHorizontal") != 0)
         {
-            Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0);
+            Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self);
         }
 
         if (Input.GetAxis("RightStickVertical") != 0)
         {
-            Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0);
+            Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0, Space.Self);
         }
 
         if (Input.GetAxis("Horizontal") != 0)
@@ -64,6 +64,14 @@ public class ControllerInput : MonoBehaviour
         if (Input.GetKey(KeyCode.A))//else if (Input.GetButton("joystick button 0"))
         {
             SceneManager.LoadScene("Mar Saba");
+        }
+        if (Input.GetKey(KeyCode.S))//else if (Input.GetButton("joystick button 0"))
+        {
+            SceneManager.LoadScene("Luxor");
+        }
+        if (Input.GetKey(KeyCode.D))//else if (Input.GetButton("joystick button 0"))
+        {
+            SceneManager.LoadScene("MultiDisplayPlanet");
         }
     }
 
