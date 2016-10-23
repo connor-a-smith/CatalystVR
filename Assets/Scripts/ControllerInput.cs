@@ -95,15 +95,18 @@ public class ControllerInput : MonoBehaviour
                 Controller.inputManager.HandleHit(hit);
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
-                //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
-                //Similar to loop in dpad, but if current button is active, then there is no change.
-                while (!Controller.buttons[selectedButtonIndex].activatable)
+                if (Controller.selectedPOI != null)
                 {
-                    selectedButtonIndex = (selectedButtonIndex + 1) % Controller.buttons.Length;
-                }
+                    //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
+                    //Similar to loop in dpad, but if current button is active, then there is no change.
+                    while (!Controller.buttons[selectedButtonIndex].activatable)
+                    {
+                        selectedButtonIndex = (selectedButtonIndex + 1) % Controller.buttons.Length;
+                    }
 
-                //Select this new button.
-                Controller.buttons[selectedButtonIndex].select();
+                    //Select this new button.
+                    Controller.buttons[selectedButtonIndex].select();
+                }
             }
 
             //POI Selected, trigger it.

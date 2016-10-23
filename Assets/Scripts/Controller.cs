@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Controller : MonoBehaviour {
+    //Is this running in the cave?
+    public static bool isCave = false;
 
     public static GameObject playerShip;
     public static MonitorScript monitor;
