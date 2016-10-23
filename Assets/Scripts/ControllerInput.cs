@@ -57,12 +57,23 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
         {
+            //Deselect the old button.
+            Controller.buttons[selectedButtonIndex].deselect();
+            
             if (Controller.selectedPOI != null)
             {
+                //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
+                //Adding the length of buttons in case index is 0 and moving left. Then -1 becomes length -1, going to end. All else will be handled by mod.
+                do
+                {
+                    selectedButtonIndex = (selectedButtonIndex + (int)Input.GetAxis("Xbox DpadX") + Controller.buttons.Length) % Controller.buttons.Length;
+                }
+                while (!Controller.buttons[selectedButtonIndex].activatable);
 
+                //Select this new button.
+                Controller.buttons[selectedButtonIndex].select();
                 justActivatedDpad = true;
             }
-
         }
 
         //On release of dpad, allow to be used again.
@@ -76,11 +87,32 @@ public class ControllerInput : MonoBehaviour
         {
             justActivatedA = true;
 
-            RaycastHit hit;
-            Physics.Raycast(raycastCam.transform.position, raycastCam.transform.forward,out hit, Mathf.Infinity);
-            
-            Controller.inputManager.HandleHit(hit);
+            if (Controller.selectedPOI == null)
+            {
+                RaycastHit hit;
+                Physics.Raycast(raycastCam.transform.position, raycastCam.transform.forward, out hit, Mathf.Infinity);
+
+                Controller.inputManager.HandleHit(hit);
+
+                //If a POI was selected by this hit, we need to set the active GUI object.
+                //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
+                //Similar to loop in dpad, but if current button is active, then there is no change.
+                while (!Controller.buttons[selectedButtonIndex].activatable)
+                {
+                    selectedButtonIndex = (selectedButtonIndex + 1) % Controller.buttons.Length;
+                }
+
+                //Select this new button.
+                Controller.buttons[selectedButtonIndex].select();
+            }
+
+            //POI Selected, trigger it.
+            else
+            {
+                Controller.buttons[selectedButtonIndex].AttemptToggle();
+            }
         }
+
 
         //On release of button, allow to be used again.
         else if (Input.GetAxis("Xbox A") == 0)

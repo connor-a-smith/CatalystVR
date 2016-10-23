@@ -14,7 +14,7 @@ public class MonitorButtonScript : MonoBehaviour
     public GameObject selectedSprite;
     public GameObject pressedSprite;
 
-    protected bool activatable = false;
+    public bool activatable = false;
 
     // Use this for initialization
     void Start()
@@ -35,6 +35,55 @@ public class MonitorButtonScript : MonoBehaviour
             AttemptToggle();
         }
     }
+
+    void OnMouseEnter()
+    {
+        if (activatable)
+        {
+            showSelectedSprite();
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (activatable)
+        {
+            showActiveSprite();
+        }
+    }
+
+    /// <summary>
+    /// Handle what happens when a button is selected.
+    /// </summary>
+    public void select()
+    {
+        showSelectedSprite();
+    }
+
+    /// <summary>
+    /// Handle what happens when a button is deselected.
+    /// </summary>
+    public void deselect()
+    {
+        showActiveSprite();
+    }
+
+    void showSelectedSprite()
+    {
+        activeSprite.SetActive(false);
+        inactiveSprite.SetActive(false);
+        selectedSprite.SetActive(true);
+        pressedSprite.SetActive(false);
+    }
+
+    void showActiveSprite()
+    {
+        activeSprite.SetActive(true);
+        inactiveSprite.SetActive(false);
+        selectedSprite.SetActive(false);
+        pressedSprite.SetActive(false);
+    }
+
     /// <summary>
     /// Toggle if activatable.
     /// </summary>
@@ -107,6 +156,12 @@ public class MonitorButtonScript : MonoBehaviour
         {
             connectedComponent = Controller.selectedPOI.GetComponent<FocusTransformComponent>();
 
+        }
+            
+        else if (connectedType == ComponentType.Back)
+        {
+            //Bit sketchy, relies on back button having the deselect script.
+            connectedComponent = GetComponent<MonitorButtonDeselectScript>();
         }
 
         else

@@ -474,10 +474,10 @@ RectTransform:
   m_Children:
   - {fileID: 1906696534}
   - {fileID: 1726888437}
-  - {fileID: 1321415249}
-  - {fileID: 1500546280}
-  - {fileID: 1032150555}
   - {fileID: 757653000}
+  - {fileID: 1321415249}
+  - {fileID: 1032150555}
+  - {fileID: 1500546280}
   - {fileID: 720268588}
   - {fileID: 857119518}
   m_Father: {fileID: 1701186852}
@@ -2661,6 +2661,7 @@ MonoBehaviour:
   inactiveSprite: {fileID: 877687436}
   selectedSprite: {fileID: 2012382514}
   pressedSprite: {fileID: 1891313314}
+  activatable: 0
 --- !u!65 &720268590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2830,6 +2831,7 @@ GameObject:
   - 224: {fileID: 757653000}
   - 65: {fileID: 757653002}
   - 114: {fileID: 757653001}
+  - 114: {fileID: 757653003}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -2855,7 +2857,7 @@ RectTransform:
   - {fileID: 1230415442}
   - {fileID: 1618024432}
   m_Father: {fileID: 106797791}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -91, y: -89}
@@ -2872,11 +2874,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 3
+  connectedType: 6
   activeSprite: {fileID: 1166960438}
   inactiveSprite: {fileID: 1230415441}
   selectedSprite: {fileID: 1623757932}
   pressedSprite: {fileID: 957753963}
+  activatable: 0
 --- !u!65 &757653002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2890,6 +2893,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 68.6, y: 80.9, z: 1}
   m_Center: {x: -24.33, y: 0, z: 0}
+--- !u!114 &757653003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 757652999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0574f3d9b7e5c4a8db76489071b6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
 --- !u!1 &786555562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,15 +3504,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 877687436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00015267174}
-  m_LocalScale: {x: 0.5986611, y: 3.705616, z: 2.1007462}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.59866077, y: 3.705616, z: 2.1007454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 720268588}
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23.99987, y: 0.0000076293945}
+  m_AnchoredPosition: {x: -24, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &877687438
@@ -4289,6 +4304,7 @@ MonoBehaviour:
   inactiveSprite: {fileID: 27947535}
   selectedSprite: {fileID: 933958363}
   pressedSprite: {fileID: 1553480399}
+  activatable: 0
 --- !u!1 &1039864927
 GameObject:
   m_ObjectHideFlags: 0
@@ -5580,7 +5596,7 @@ RectTransform:
   - {fileID: 1501939963}
   - {fileID: 123516189}
   m_Father: {fileID: 106797791}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -37.2, y: -89}
@@ -5615,6 +5631,7 @@ MonoBehaviour:
   inactiveSprite: {fileID: 1501939962}
   selectedSprite: {fileID: 107654703}
   pressedSprite: {fileID: 1533040057}
+  activatable: 0
 --- !u!1 &1334098044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6217,7 +6234,7 @@ RectTransform:
   - {fileID: 1334098045}
   - {fileID: 1381482172}
   m_Father: {fileID: 106797791}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 74.7, y: -89}
@@ -6252,6 +6269,7 @@ MonoBehaviour:
   inactiveSprite: {fileID: 1334098044}
   selectedSprite: {fileID: 1265807373}
   pressedSprite: {fileID: 1552958199}
+  activatable: 0
 --- !u!1 &1501939962
 GameObject:
   m_ObjectHideFlags: 0
@@ -7571,6 +7589,7 @@ MonoBehaviour:
   inactiveSprite: {fileID: 1142928884}
   selectedSprite: {fileID: 1251719396}
   pressedSprite: {fileID: 496845397}
+  activatable: 0
 --- !u!1 &1776860856
 GameObject:
   m_ObjectHideFlags: 0
@@ -7740,14 +7759,14 @@ RectTransform:
   m_GameObject: {fileID: 1891313314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0577974, y: 6.547594, z: 3.7118878}
+  m_LocalScale: {x: 0.59866077, y: 3.705616, z: 2.1007454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 720268588}
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.3999631, y: -0.00008392334}
+  m_AnchoredPosition: {x: -24, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1891313316
@@ -8424,14 +8443,14 @@ RectTransform:
   m_GameObject: {fileID: 2012382514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0577984, y: 6.547594, z: 3.7118897}
+  m_LocalScale: {x: 0.59866077, y: 3.705616, z: 2.1007454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 720268588}
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.399965, y: -0.00008392334}
+  m_AnchoredPosition: {x: -24, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2012382516
