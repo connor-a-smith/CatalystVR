@@ -9,7 +9,16 @@ public class ControllerInput : MonoBehaviour
     public float yRotationSpeed = -30;
 
     public float forwardSpeed = 5;
-    private bool justActivated = false;
+
+    //Vars to Avoid duplicate actions on one press.
+    //Was the A button just hit? 
+    private bool justActivatedA = false;
+
+    //Was the DPad just used?
+    private bool justActivatedDpad = false;
+
+    private MonitorButtonScript currentlySelectedButton = null;
+    private int selectedButtonIndex = 0;
 
     public Camera raycastCam;
     // Use this for initialization
@@ -46,24 +55,40 @@ public class ControllerInput : MonoBehaviour
             Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
         }
 
-        //On trigger press, activate
-        if (Input.GetAxis("RightTrigger") != 0 && !justActivated)
+        if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
         {
-            //Debug.Log(Input.GetAxis("RightTrigger"));
-            justActivated = true;
+            if (Controller.selectedPOI != null)
+            {
+
+                justActivatedDpad = true;
+            }
+
+        }
+
+        //On release of dpad, allow to be used again.
+        if (Input.GetAxis("Xbox DpadX") == 0 && justActivatedDpad)
+        {
+            justActivatedDpad = false;
+        }
+
+        //On trigger press, activate
+        if (Input.GetAxis("Xbox A") != 0 && !justActivatedA)
+        {
+            justActivatedA = true;
 
             RaycastHit hit;
             Physics.Raycast(raycastCam.transform.position, raycastCam.transform.forward,out hit, Mathf.Infinity);
             
             Controller.inputManager.HandleHit(hit);
-
         }
 
-        else if (Input.GetAxis("RightTrigger") == 0)
+        //On release of button, allow to be used again.
+        else if (Input.GetAxis("Xbox A") == 0)
         {
-            justActivated = false;
+            justActivatedA = false;
         }
 
+        //TODO Remove
         if (Input.GetKey(KeyCode.A))//else if (Input.GetButton("joystick button 0"))
         {
             SceneManager.LoadScene("Mar Saba");
@@ -77,6 +102,4 @@ public class ControllerInput : MonoBehaviour
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
     }
-
-
 }

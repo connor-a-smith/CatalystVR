@@ -26,7 +26,7 @@ public class POIScript : MonoBehaviour {
 
     public void Activate()
     {
-        //If selected another node after without deactivating an old one.
+        //If selected another node without deactivating an old one, then deactivate the old one.
         if (Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI)
         {
             Controller.selectedPOI.Deactivate();

@@ -44,10 +44,10 @@ public class Controller : MonoBehaviour {
 
         for (int i = 0; i < Controller.buttons.Length; i++)
         {
-            Controller.buttons[i].gameObject.SetActive(false);
+            buttons[i].gameObject.SetActive(false);
         }
 
-        Controller.monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+        monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
     }
 
     // Update is called once per frame
