@@ -14,6 +14,10 @@ public class ControllerInput : MonoBehaviour
     //Was the A button just hit? 
     private bool justActivatedA = false;
 
+    //Was the B button just hit? 
+    private bool justActivatedB = false;
+
+
     //Was the DPad just used?
     private bool justActivatedDpad = false;
 
@@ -45,13 +49,11 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") != 0)
         {
-            //Debug.Log(Input.GetAxis("RightStickHorizontal"));
             Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
         }
 
         if (Input.GetAxis("Vertical") != 0)
         {
-            //Debug.Log(Input.GetAxis("RightStickVertical"));
             Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
         }
 
@@ -82,7 +84,7 @@ public class ControllerInput : MonoBehaviour
             justActivatedDpad = false;
         }
 
-        //On trigger press, activate
+        //On a press, activate
         if (Input.GetAxis("Xbox A") != 0 && !justActivatedA)
         {
             justActivatedA = true;
@@ -115,12 +117,26 @@ public class ControllerInput : MonoBehaviour
                 Controller.buttons[selectedButtonIndex].AttemptToggle();
             }
         }
-
-
+        
         //On release of button, allow to be used again.
         else if (Input.GetAxis("Xbox A") == 0)
         {
             justActivatedA = false;
+        }
+
+        //On b press, deactvate selected POI.
+        if (Input.GetAxis("Xbox B") != 0 && !justActivatedA)
+        {
+            if (Controller.selectedPOI != null)
+            {
+                Controller.selectedPOI.Deactivate();
+            }
+        }
+
+        //On release of button, allow to be used again.
+        else if (Input.GetAxis("Xbox B") == 0)
+        {
+            justActivatedB = false;
         }
 
         //TODO Remove

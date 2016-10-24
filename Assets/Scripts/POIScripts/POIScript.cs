@@ -7,7 +7,6 @@ public class POIScript : MonoBehaviour {
     bool activated = false;
     List<POIScriptComponent> components;
 
-
     // Use this for initialization
     void Start () {
         components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
@@ -34,6 +33,7 @@ public class POIScript : MonoBehaviour {
 
         activated = true;
         Controller.selectedPOI = this;
+        GetComponentInChildren<Renderer>().material = Controller.selectedPOIMat;
         
         //Tell all the buttons that a new poi was selected.
         for (int i = 0; i < Controller.buttons.Length; i++)
@@ -58,6 +58,8 @@ public class POIScript : MonoBehaviour {
     {
         activated = false;
         Controller.selectedPOI = null;
+        GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
+
 
         //Tell all the buttons that there is no current POI.
         for (int i = 0; i < Controller.buttons.Length; i++)
@@ -87,4 +89,22 @@ public class POIScript : MonoBehaviour {
             Deactivate();
         }
     }
+
+    /// <summary>
+    /// Highlight the POI if it is hit in the raycast.
+    /// </summary>
+    public void Highlight()
+    {
+        GetComponentInChildren<Renderer>().material = Controller.highlightedPOIMat;
+    }
+
+    /// <summary>
+    /// UnHighlight the POI if it is not hit in the raycast.
+    /// </summary>
+    public void UnHighlight()
+    {
+        GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
+    }
 }
+
+    

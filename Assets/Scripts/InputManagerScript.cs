@@ -34,6 +34,24 @@ public class InputManagerScript : MonoBehaviour
     }
 
     /// <summary>
+    /// Every frame a raycast is shot out to see if a POI or button should be selected. This shows if selecting will pick this object.
+    /// </summary>
+    /// <param name="hit"></param>
+    public void HandlePOIHighlight(RaycastHit hit)
+    {
+        //If it got a POI, activate it.
+        if (hit.transform != null)
+        {
+            POIScript poi = hit.transform.gameObject.GetComponent<POIScript>();
+
+            if (poi)
+            {
+                poi.Toggle();
+            }
+        }
+    }
+
+    /// <summary>
     /// Handle hit does things that happen for all control schemes then returns the object so that device specific actions may be performed.
     /// </summary>
     /// <param name="hit">The output parameter from raycast.</param>
