@@ -5460,6 +5460,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11442db236ceb48498f638a38d63ada2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraEyeOffset: 0.6
+  leftEyeCameras:
+  - {fileID: 1000010628129114}
+  - {fileID: 1000014083115018}
+  - {fileID: 1000011902531278}
+  - {fileID: 1000011471197314}
+  - {fileID: 1000010400291726}
+  - {fileID: 1000013058804746}
+  rightEyeCameras:
+  - {fileID: 1000012865393212}
+  - {fileID: 1000013202485840}
+  - {fileID: 1000010674779006}
+  - {fileID: 1000012419041026}
+  - {fileID: 1000010308088930}
+  - {fileID: 1000011823663586}
+  is3D: 0
   defaultPOIMaterialEditor: {fileID: 0}
   highlightedPOIMaterialEditor: {fileID: 0}
   selectedPOIMaterialEditor: {fileID: 0}
@@ -12224,22 +12240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730b4bce1bf4f46aba7dc44a07eb9d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraEyeOffset: 0.6
-  leftEyeCameras:
-  - {fileID: 1000010628129114}
-  - {fileID: 1000014083115018}
-  - {fileID: 1000011902531278}
-  - {fileID: 1000011471197314}
-  - {fileID: 1000010400291726}
-  - {fileID: 1000013058804746}
-  rightEyeCameras:
-  - {fileID: 1000012865393212}
-  - {fileID: 1000013202485840}
-  - {fileID: 1000010674779006}
-  - {fileID: 1000012419041026}
-  - {fileID: 1000010308088930}
-  - {fileID: 1000011823663586}
-  is3D: 0
 --- !u!114 &114000010792813076
 MonoBehaviour:
   m_ObjectHideFlags: 1
