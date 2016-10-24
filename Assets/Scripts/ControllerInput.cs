@@ -17,12 +17,19 @@ public class ControllerInput : MonoBehaviour
     //Was the B button just hit? 
     private bool justActivatedB = false;
 
-
     //Was the DPad just used?
     private bool justActivatedDpad = false;
 
+    private bool justActivatedRightStickVertical = false;
+    private bool justActivatedRightStickHorizontal = false;
+    private bool justActivatedLeftStickVertical = false;
+    private bool justActivatedLeftStickHorizontal = false;
+
     private MonitorButtonScript currentlySelectedButton = null;
     private int selectedButtonIndex = 0;
+
+    //Allows movement while selecting a POI using the Dpad.
+    private bool advancedMode = false;
 
     public Camera raycastCam;
     // Use this for initialization
@@ -36,15 +43,45 @@ public class ControllerInput : MonoBehaviour
     {
         if (Input.GetAxis("RightStickHorizontal") != 0)
         {
-            //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
-            Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
+            //Movement allowed, no POI selected or advanced mode.
+            if (Controller.selectedPOI == null || advancedMode)
+            {
+                //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
+                Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
+            }
 
+            //POI selected and not advanced mode, stick controller POI movement.
+            else if (!justActivatedRightStickHorizontal)
+            {
+                justActivatedRightStickHorizontal = true;
+                //Debug.Log(Input.GetAxis("RightStickHorizontal"));
+                if (Input.GetAxis("RightStickHorizontal") > 0)
+                {
+                    Debug.Log(selectedButtonIndex);
+                    pickActiveButton(1);
+                }
+
+                else
+                {
+                    pickActiveButton(-1);
+                }
+
+            }
+        }
+
+        //On release of stick, allow to be used again.
+        if (Input.GetAxis("RightStickHorizontal") == 0 && justActivatedRightStickHorizontal)
+        {
+            justActivatedRightStickHorizontal = false;
         }
 
         if (Input.GetAxis("RightStickVertical") != 0)
         {
-            Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0, Space.Self);
-            //Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.transform.position, Vector3.left, Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed);
+            if (Controller.selectedPOI == null || advancedMode)
+            {
+                Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0, Space.Self);
+                //Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.transform.position, Vector3.left, Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed);
+            }
         }
 
         if (Input.GetAxis("Horizontal") != 0)
@@ -59,27 +96,15 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
         {
-            //Deselect the old button.
-            Controller.buttons[selectedButtonIndex].deselect();
-            
             if (Controller.selectedPOI != null)
             {
-                //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
-                //Adding the length of buttons in case index is 0 and moving left. Then -1 becomes length -1, going to end. All else will be handled by mod.
-                do
-                {
-                    selectedButtonIndex = (selectedButtonIndex + (int)Input.GetAxis("Xbox DpadX") + Controller.buttons.Length) % Controller.buttons.Length;
-                }
-                while (!Controller.buttons[selectedButtonIndex].activatable);
-
-                //Select this new button.
-                Controller.buttons[selectedButtonIndex].select();
+                pickActiveButton((int)Input.GetAxis("Xbox DpadX"));
                 justActivatedDpad = true;
             }
         }
 
         //On release of dpad, allow to be used again.
-        if (Input.GetAxis("Xbox DpadX") == 0 && justActivatedDpad)
+        else if (Input.GetAxis("Xbox DpadX") == 0 && justActivatedDpad)
         {
             justActivatedDpad = false;
         }
@@ -89,6 +114,7 @@ public class ControllerInput : MonoBehaviour
         {
             justActivatedA = true;
 
+            //If no POI selected, then try to select a new POI
             if (Controller.selectedPOI == null)
             {
                 RaycastHit hit;
@@ -98,26 +124,18 @@ public class ControllerInput : MonoBehaviour
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
                 if (Controller.selectedPOI != null)
-                {
-                    //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
-                    //Similar to loop in dpad, but if current button is active, then there is no change.
-                    while (!Controller.buttons[selectedButtonIndex].activatable)
-                    {
-                        selectedButtonIndex = (selectedButtonIndex + 1) % Controller.buttons.Length;
-                    }
-
-                    //Select this new button.
-                    Controller.buttons[selectedButtonIndex].select();
+                {                    
+                    pickActiveButton(0);
                 }
             }
 
-            //POI Selected, trigger it.
+            //POI Selected, trigger its buttons.
             else
             {
                 Controller.buttons[selectedButtonIndex].AttemptToggle();
             }
         }
-        
+
         //On release of button, allow to be used again.
         else if (Input.GetAxis("Xbox A") == 0)
         {
@@ -152,5 +170,40 @@ public class ControllerInput : MonoBehaviour
         {
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
+    }
+
+    /// <summary>
+    /// Sets the selectedButtonIndex to the desired value, checking for active buttons.
+    /// </summary>
+    void pickActiveButton(int offset)
+    {
+        //Saving this value to detect infinite loops.
+        int originalPosition = selectedButtonIndex;
+
+        //Deselect the old button.
+        Controller.buttons[selectedButtonIndex].deselect();
+
+        //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
+        //Adding the length of buttons in case index is 0 and moving left. Then -1 becomes length -1, going to end. All else will be handled by mod.
+        do
+        {
+            selectedButtonIndex = (selectedButtonIndex + offset + Controller.buttons.Length) % Controller.buttons.Length;
+
+            //If trying to get the first available button, offset is 0 to check current button, then 1 to check others.
+            if (offset == 0)
+            {
+                offset = 1;
+            }
+
+            //Emergency situation, no buttons are selected and we made a complete loop. Just return.
+            else if (originalPosition == selectedButtonIndex)
+            {
+                return;
+            }
+        }
+        while (!Controller.buttons[selectedButtonIndex].activatable);
+
+        //Select this new button.
+        Controller.buttons[selectedButtonIndex].select();
     }
 }
