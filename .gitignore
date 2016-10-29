@@ -19,5 +19,8 @@ Desktop.ini
 
 # Ridiculous sized data files
 *.off
+*.off.meta
 *.ply
+*.ply.meta
 *.obj
+*.obj.meta
