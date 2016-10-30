@@ -4,7 +4,7 @@ Shader "test/MyShader"
 {
 	Properties
 	{
-		_sphereRadius("Sphere Radius", Range(1, 10.0)) = 5.0
+		_sphereRadius("Sphere Radius", Range(0, 10.0)) = 5.0
 	}
 		SubShader
 	{
@@ -49,7 +49,7 @@ Shader "test/MyShader"
 		return o;
 	}
 
-	[maxvertexcount(10)]
+	[maxvertexcount(50)]
 	void geom(point v2f input[1], inout TriangleStream<v2f> OutputStream)
 	{
 
@@ -57,6 +57,7 @@ Shader "test/MyShader"
 
 		for (int i = 0; i < 1; i++)
 		{
+			//OutputStream.
 
 			//float3 normal = normalize(cross(input[1].worldPosition.xyz - input[0].worldPosition.xyz, input[2].worldPosition.xyz - input[0].worldPosition.xyz));
 
