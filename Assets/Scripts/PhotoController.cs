@@ -70,7 +70,6 @@ public class PhotoController : MonoBehaviour {
       photoHolder.transform.parent = Camera.main.transform.parent;
       photoHolder.transform.localPosition = Vector3.zero;
       photoHolder.transform.localRotation = Quaternion.identity;
-
     }
 
     if (photoCenter == null) {
@@ -129,7 +128,6 @@ public class PhotoController : MonoBehaviour {
 
     // Calculates positions on unit circle and stores them into vectors.
     // Keep in mind that in 2D, we use cos(x) and sin(y). In 3D here, we use cos(x) and sin(z)!
-    Vector3 unit0 = new Vector3(1, 0, 0);
     Vector3 unit45 = new Vector3(rad2o2, 0, rad2o2);
     Vector3 unit90 = new Vector3(0, 0, 1);
     Vector3 unit135 = new Vector3(-rad2o2, 0, rad2o2);
@@ -286,8 +284,8 @@ public class PhotoController : MonoBehaviour {
 
       }
 
-            // If this file type is not supported, print a warning and skip it.
-            else {
+      // If this file type is not supported, print a warning and skip it.
+      else {
 
         Debug.LogWarning("File extension " + Path.GetExtension(str) + " is not supported. Please convert before attempting to load.");
       }
@@ -595,6 +593,31 @@ public class PhotoController : MonoBehaviour {
       MoveDown();
 
     }
+    else if (Input.GetMouseButtonDown(0)) {
+      ActivateSelectedPhoto();
+    }
+  }
+
+  public void ActivateSelectedPhoto() {
+
+    StartCoroutine(ImageTransition());
+
+  }
+
+  public IEnumerator ImageTransition() {
+
+    movingPhotos = true;
+
+    yield return StartCoroutine(activePhoto.ImageTransition());
+
+    if (!activePhoto.IsSelected()) {
+
+      movingPhotos = false;
+
+
+    }
+
+
   }
 
   public IEnumerator Rotate(Vector3 rotationDelta, float duration) {

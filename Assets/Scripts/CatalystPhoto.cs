@@ -42,16 +42,16 @@ public class CatalystPhoto : MonoBehaviour {
   /// <summary>
   /// Moves the photo between the player and it's correct position among other pictures.
   /// </summary>
-  public void ImageTransition() {
+  public IEnumerator ImageTransition() {
 
     // If this photo was already selected, move it back to it's position
     if (selected) {
-      StartCoroutine(LerpToPosition());
+      yield return StartCoroutine(LerpToPosition());
     }
 
-        // If this photo has not been selected, lerp it in front of the camera.
-        else {
-      StartCoroutine(LerpToCam());
+    // If this photo has not been selected, lerp it in front of the camera.
+    else {
+      yield return StartCoroutine(LerpToCam());
     }
 
   }
