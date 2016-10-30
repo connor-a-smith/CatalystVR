@@ -14,11 +14,11 @@ public class PhotoComponent : POIScriptComponent     {
         loaderObj.transform.position = this.transform.position;
         loaderObj.transform.parent = this.transform;
 
-        loaderObj.AddComponent<LoadPhotos>();
-        loaderObj.GetComponent<LoadPhotos>().photoPath = dataPath;
+        loaderObj.AddComponent<PhotoController>();
+        loaderObj.GetComponent<PhotoController>().photoPath = dataPath;
 
         // Load the photos. Should only happen once on scene start.
-        loaderObj.GetComponent<LoadPhotos>().Load();
+        loaderObj.GetComponent<PhotoController>().Load();
 	}
 
     public override void Activate()
@@ -30,7 +30,7 @@ public class PhotoComponent : POIScriptComponent     {
         loaderObj.SetActive(true);
 
         // Place photos in the correct location.
-        loaderObj.GetComponent<LoadPhotos>().PlacePhotos();
+        loaderObj.GetComponent<PhotoController>().PlacePhotos();
     }
 
     public override void Deactivate()
