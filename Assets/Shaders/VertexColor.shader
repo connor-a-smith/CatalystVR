@@ -1,45 +1,37 @@
 ﻿Shader "Custom/VertexColor" {
+	SubShader{
+		Pass{
+		LOD 200
 
-  Properties{
-    _PointSize("PointSize", Float) = 10
-  }
-  SubShader{
-    Pass{
-    LOD 200
-
-    CGPROGRAM
+		CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
 
-  struct VertexInput {
-    float4 v : POSITION;
-    float4 color: COLOR;
-  };
+		struct VertexInput {
+		float4 v : POSITION;
+		float4 color: COLOR;
+	};
 
-  struct VertexOutput {
-    float4 pos : SV_POSITION;
-    float size : PSIZE;
-    float4 col : COLOR;
-  };
-  float _PointSize;
+	struct VertexOutput {
+		float4 pos : SV_POSITION;
+		float4 col : COLOR;
+	};
 
+	VertexOutput vert(VertexInput v) {
 
-  VertexOutput vert(VertexInput v) {
+		VertexOutput o;
+		o.pos = mul(UNITY_MATRIX_MVP, v.v);
+		o.col = v.color;
 
-    VertexOutput o;
-    o.pos = mul(UNITY_MATRIX_MVP, v.v);
-    o.size = _PointSize;
-    o.col = v.color;
+		return o;
+	}
 
-    return o;
-  }
+	float4 frag(VertexOutput o) : COLOR{
+		return o.col;
+	}
 
-  float4 frag(VertexOutput o) : COLOR{
-    return o.col;
-  }
-
-    ENDCG
-  }
-  }
+		ENDCG
+	}
+	}
 
 }
