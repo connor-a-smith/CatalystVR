@@ -2,43 +2,54 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PhotoComponent : POIScriptComponent     {
+public class PhotoComponent : POIScriptComponent {
 
-    public string dataPath;
+  private bool alreadyLoaded = false;
 
-    private GameObject loaderObj;
+  [SerializeField] private bool pathIsExternal = false;
 
-    // Use this for initialization
-    void Start() {
-        loaderObj = new GameObject();
-        loaderObj.transform.position = this.transform.position;
-        loaderObj.transform.parent = this.transform;
+  [SerializeField] private string photoPath;
 
-        loaderObj.AddComponent<PhotoController>();
-        loaderObj.GetComponent<PhotoController>().photoPath = dataPath;
+  [SerializeField] private int maximumNumberOfPictures = 24;
 
-        // Load the photos. Should only happen once on scene start.
-        loaderObj.GetComponent<PhotoController>().Load();
-	}
+  private GameObject loaderObj;
 
-    public override void Activate()
-    {
-        // Calls Activate on parent object.
-        base.Activate();
+  public override void Activate() {
+    
+    // Calls Activate on parent object.
+    base.Activate();
 
-        // Sets the photo loader to active.
-        loaderObj.SetActive(true);
 
-        // Place photos in the correct location.
-        loaderObj.GetComponent<PhotoController>().PlacePhotos();
+    if (alreadyLoaded) {
+      // Sets the photo loader to active.
+      loaderObj.SetActive(true);
     }
+    else {
+      
+      loaderObj = new GameObject();
+      loaderObj.transform.position = this.transform.position;
+      loaderObj.transform.parent = this.transform;
+     
 
-    public override void Deactivate()
-    {
-        base.Deactivate();
+      PhotoController componentController = loaderObj.AddComponent<PhotoController>();
 
-        // Deactivate the loader object.
-        loaderObj.SetActive(false);
+      componentController.photoPath = photoPath;
+      componentController.numPicsToLoad = maximumNumberOfPictures;
+      componentController.pathIsExteral = pathIsExternal;
 
+      // Load the photos. Should only happen once on scene start.
+      componentController.Load();
+
+      alreadyLoaded = true;
     }
+  }
+
+  public override void Deactivate() {
+    
+    base.Deactivate();
+
+    // Deactivate the loader object.
+    loaderObj.SetActive(false);
+
+  }
 }

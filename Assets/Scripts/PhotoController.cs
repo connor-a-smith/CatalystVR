@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class PhotoController : MonoBehaviour {
  
   private bool movingPhotos = false;
-
+ 
   private List<Sprite> sprites;
 
   [SerializeField] private bool debug;
@@ -26,23 +26,24 @@ public class PhotoController : MonoBehaviour {
   private float angleBetweenPhotos;
 
   // Maximum number of pictures that can be loaded. Max is 24 (3 rows of 8).
-  [SerializeField] private int numPicsToLoad = 24;
+  public int numPicsToLoad = 24;
 
   // Resolution of the image after it's created and loaded from file.
   // We use 1920x1080 for now (19.20, 10.80) for 16:9 ratio.
-  [SerializeField] private Vector2 finalImageSize = new Vector2(19.20f, 10.80f);
+  private Vector2 finalImageSize = new Vector2(19.20f, 10.80f);
 
   // Resizes the picture uniformly, so that we can make it smaller be keep easy 16:9 ration.
-  [SerializeField] private float uniformImageScale = 0.3f;
+  private float uniformImageScale = 0.3f;
 
   // How far the pictures should be from the user.
-  [SerializeField] private float spawnSphereRadius = 10.0f;
+  private float spawnSphereRadius = 10.0f;
 
   private float picHeight;
 
   // Directory to load pictures from. Will only load first numPicsToLoad amount.
-  // NOTE: This is local to the assets folder
-  public string photoPath = "/Resources/PhotosToLoad";
+  // NOTE: This is local to the assets folde
+  public bool pathIsExteral = false;
+  public string photoPath = "PhotosToLoad";
 
   // Predefined prefab for a photo.
   private Object photoPrefab;
@@ -62,6 +63,14 @@ public class PhotoController : MonoBehaviour {
   // Initialization
   void Start() {
 
+    if (photoPrefab == null) {
+
+      photoPrefab = new GameObject();
+      ((GameObject)photoPrefab).AddComponent<CatalystPhoto>();
+      ((GameObject)photoPrefab).AddComponent<SpriteRenderer>();
+      ((GameObject)photoPrefab).AddComponent<BoxCollider>();
+
+    }
 
     // Creates a photo holder if one doesn't already exist.
     if (photoHolder == null) {
@@ -79,7 +88,7 @@ public class PhotoController : MonoBehaviour {
     }
   
     // Grabs a static photo prefab from the game's controller.
-    photoPrefab = Controller.photoPrefab;
+    //photoPrefab = Controller.photoPrefab;
 
     // Actually load the pictures.
     if (loadOnStart) {
@@ -92,7 +101,7 @@ public class PhotoController : MonoBehaviour {
   /// </summary>
   public void Load() {
     // Gets path to load from.
-    photoPath = Application.dataPath + photoPath;
+    //photoPath = Application.dataPath + photoPath;
 
     // Creates a list of photos.
     photos = new List<List<CatalystPhoto>>();
@@ -260,83 +269,18 @@ public class PhotoController : MonoBehaviour {
   private IEnumerator LoadPhoto() {
 
     List<Sprite> imageSprites = new List<Sprite>();
-    List<string> imageFilePaths = new List<string>();
 
-    //directory to load files from
-    string[] files = Directory.GetFiles(photoPath);
+    if (pathIsExteral) {
 
-    //loops through all files in the directory
-    foreach (string str in files) {
+      yield return StartCoroutine(LoadImagesExtern(imageSprites));
 
-      //checks the extension on the file
-      if (Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg" || Path.GetExtension(str) == ".JPG") {
+    }
+    else {
 
-        // If the number of pictures in the directory exceeds max pictures supported
-        if (imageFilePaths.Count >= numPicsToLoad) {
+      yield return StartCoroutine(LoadImagesIntern(imageSprites));
 
-          // Log a warning and stop the loop. No point in loading more pictures at this point.
-          Debug.LogWarning("Number of pictures in directory exceeds " + numPicsToLoad + ". Only first " + numPicsToLoad + " will be used");
-          break;
-        }
-
-        // Add the image path to the list of file paths.
-        imageFilePaths.Add(str);
-
-      }
-
-      // If this file type is not supported, print a warning and skip it.
-      else {
-
-        Debug.LogWarning("File extension " + Path.GetExtension(str) + " is not supported. Please convert before attempting to load.");
-      }
     }
 
-    //Creates in-game textures for the various images
-    for (int i = 0; i < imageFilePaths.Count; i++) {
-
-      // Stores the file path
-      string str = imageFilePaths[i];
-
-      // Updates the path to load a WWW from local computer
-      string imageString = "file://" + str;
-
-      //loads the WWW (Whatever that means)
-      WWW w = new WWW(imageString);
-
-      // Waits for the WWW to finish loading
-      while (!w.isDone) {
-
-        // Waits for next frame
-        yield return null;
-
-      }
-
-      // Prints out a log to give some sense of progress for the image loading.
-      // Waiting is no fun, so at least you can see how soon it'll be ready!
-      Debug.Log("Loading Image " + i + " of " + imageFilePaths.Count);
-
-      // >>> NOTE <<< For future reference, THIS is the part that takes so long!
-      // Recommend some sort of loading bar/screen for future use.
-      // Game will be crazy laggy while this is loading.
-            
-      // Gets the audio clip from the WWW and adds to list
-      Texture2D image = new Texture2D(1, 1);
-
-      // Loads the image from file into an in-game texture.
-      w.LoadImageIntoTexture(image);
-
-      // Creates a new in-game sprite and populates it with the new texture.
-      Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
-            
-      // Add the final sprite into a texture.
-      imageSprites.Add(imageSprite);
-
-      // Wait for the next frame to load another picture.
-      // Honestly we only do this so that the Loading Image debug works.
-      // Otherwise game will freeze completely until all pictures loaded.
-      yield return null;
-    }
-      
     // Loads the picture locations for the loaded images, based on number of pictures.
     LoadPictureLocations(imageSprites.Count);
 
@@ -417,6 +361,115 @@ public class PhotoController : MonoBehaviour {
     // Do this if the pictures should load but not show immediately.
     if (!loadOnStart) {
       this.gameObject.SetActive(false);
+    }
+  }
+
+  public IEnumerator LoadImagesExtern(List<Sprite> spriteList) {
+
+    List<string> imageFilePaths = new List<string>();
+
+    //directory to load files from
+    string[] files = Directory.GetFiles(photoPath);
+   
+    //loops through all files in the directory
+    foreach (string str in files) {
+
+      //checks the extension on the file
+      if (Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg" || Path.GetExtension(str) == ".JPG") {
+
+        // If the number of pictures in the directory exceeds max pictures supported
+        if (imageFilePaths.Count >= numPicsToLoad) {
+
+          // Log a warning and stop the loop. No point in loading more pictures at this point.
+          Debug.LogWarning("Number of pictures in directory exceeds " + numPicsToLoad + ". Only first " + numPicsToLoad + " will be used");
+          break;
+        }
+
+        // Add the image path to the list of file paths.
+        imageFilePaths.Add(str);
+
+      }
+
+      // If this file type is not supported, print a warning and skip it.
+      else {
+
+        Debug.LogWarning("File extension " + Path.GetExtension(str) + " is not supported. Please convert before attempting to load.");
+      }
+    }
+
+    //Creates in-game textures for the various images
+    for (int i = 0; i < imageFilePaths.Count; i++) {
+
+      // Stores the file path
+      string str = imageFilePaths[i];
+
+      // Updates the path to load a WWW from local computer
+      string imageString = "file://" + str;
+
+      //loads the WWW (Whatever that means)
+      WWW w = new WWW(imageString);
+
+      // Waits for the WWW to finish loading
+      while (!w.isDone) {
+
+        // Waits for next frame
+        yield return null;
+
+      }
+
+      // Prints out a log to give some sense of progress for the image loading.
+      // Waiting is no fun, so at least you can see how soon it'll be ready!
+      Debug.Log("Loading Image " + i + " of " + imageFilePaths.Count);
+
+      // >>> NOTE <<< For future reference, THIS is the part that takes so long!
+      // Recommend some sort of loading bar/screen for future use.
+      // Game will be crazy laggy while this is loading.
+
+      // Gets the audio clip from the WWW and adds to list
+      Texture2D image = new Texture2D(1, 1);
+
+      // Loads the image from file into an in-game texture.
+      w.LoadImageIntoTexture(image);
+
+      // Creates a new in-game sprite and populates it with the new texture.
+      Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
+
+      // Add the final sprite into a texture.
+      spriteList.Add(imageSprite);
+
+      // Wait for the next frame to load another picture.
+      // Honestly we only do this so that the Loading Image debug works.
+      // Otherwise game will freeze completely until all pictures loaded.
+      yield return null;
+    }
+  }
+
+  public IEnumerator LoadImagesIntern(List<Sprite> spriteList) {
+
+    Object[] photoFiles = Resources.LoadAll(photoPath);
+
+    Debug.LogWarningFormat("Found {0} photos", photoFiles.Length);
+
+    foreach (Object photo in photoFiles) {
+
+      if (spriteList.Count < numPicsToLoad) {
+
+        Texture2D image = photo as Texture2D;
+
+        // Creates a new in-game sprite and populates it with the new texture.
+        Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
+
+        // Add the final sprite into a texture.
+        spriteList.Add(imageSprite);
+
+        yield return null;
+      }
+      else {
+
+        Debug.LogWarning("Number of pictures in directory exceeds " + numPicsToLoad + ". Only first " + numPicsToLoad + " will be used");
+        break;
+
+      }
     }
   }
 
@@ -528,8 +581,6 @@ public class PhotoController : MonoBehaviour {
 
       }
     }
-
-
   }
 
   public void MoveDown() {
@@ -602,11 +653,8 @@ public class PhotoController : MonoBehaviour {
     if (!activePhoto.IsSelected()) {
 
       movingPhotos = false;
-
-
+     
     }
-
-
   }
 
   public IEnumerator Rotate(Vector3 rotationDelta, float duration) {
