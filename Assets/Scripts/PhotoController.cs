@@ -63,6 +63,15 @@ public class PhotoController : MonoBehaviour {
   // Initialization
   void Start() {
 
+    if (photoPrefab == null) {
+
+      photoPrefab = new GameObject();
+      ((GameObject)photoPrefab).AddComponent<CatalystPhoto>();
+      ((GameObject)photoPrefab).AddComponent<SpriteRenderer>();
+      ((GameObject)photoPrefab).AddComponent<BoxCollider>();
+
+    }
+
     // Creates a photo holder if one doesn't already exist.
     if (photoHolder == null) {
       photoHolder = new GameObject();
@@ -79,7 +88,7 @@ public class PhotoController : MonoBehaviour {
     }
   
     // Grabs a static photo prefab from the game's controller.
-    photoPrefab = Controller.photoPrefab;
+    //photoPrefab = Controller.photoPrefab;
 
     // Actually load the pictures.
     if (loadOnStart) {
