@@ -16,6 +16,13 @@ public class MonitorButtonScript : MonoBehaviour
 
     public bool activatable = false;
 
+
+    [SerializeField]
+    [Range(0.0f, 1.0f)]
+    private float changeTime = 1.0f;
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -65,7 +72,15 @@ public class MonitorButtonScript : MonoBehaviour
     /// </summary>
     public void deselect()
     {
-        showActiveSprite();
+        if (activatable)
+        {
+            showActiveSprite();
+        }
+
+        else
+        {
+            showInactiveSprite();
+        }
     }
 
     void showSelectedSprite()
@@ -84,6 +99,21 @@ public class MonitorButtonScript : MonoBehaviour
         pressedSprite.SetActive(false);
     }
 
+    void showInactiveSprite()
+    {
+        activeSprite.SetActive(false);
+        inactiveSprite.SetActive(true);
+        selectedSprite.SetActive(false);
+        pressedSprite.SetActive(false);
+    }
+
+    void showPressedSprite()
+    {
+        activeSprite.SetActive(false);
+        inactiveSprite.SetActive(false);
+        selectedSprite.SetActive(false);
+        pressedSprite.SetActive(true);
+    }
     /// <summary>
     /// Toggle if activatable.
     /// </summary>
@@ -91,6 +121,7 @@ public class MonitorButtonScript : MonoBehaviour
     {
         if (activatable)
         {
+            //StartCoroutine(selectChangeColor());
             connectedComponent.Toggle();
         }
     }
@@ -101,15 +132,13 @@ public class MonitorButtonScript : MonoBehaviour
 
         if (connectedComponent)
         {
-            activeSprite.SetActive(true);
-            inactiveSprite.SetActive(false);
+            showActiveSprite();
             activatable = true;
         }
 
         else
         {
-            activeSprite.SetActive(false);
-            inactiveSprite.SetActive(true);
+            showInactiveSprite();
         }
     }
 
@@ -157,7 +186,7 @@ public class MonitorButtonScript : MonoBehaviour
             connectedComponent = Controller.selectedPOI.GetComponent<FocusTransformComponent>();
 
         }
-            
+
         else if (connectedType == ComponentType.Back)
         {
             //Bit sketchy, relies on back button having the deselect script.
@@ -168,5 +197,16 @@ public class MonitorButtonScript : MonoBehaviour
         {
             Debug.LogError("Component not setup in MonitorButtonScript");
         }
+    }
+
+    IEnumerator selectChangeColor()
+    {
+        for (float i = 0; i < changeTime; i += Time.deltaTime)
+        {
+            showPressedSprite();
+            yield return null;
+        }
+
+        showSelectedSprite();
     }
 }

@@ -20,6 +20,8 @@ public class ControllerInput : MonoBehaviour
     //Was the DPad just used?
     private bool justActivatedDpad = false;
 
+    private bool justActivatedStart = false;
+
     private bool justActivatedRightStickVertical = false;
     private bool justActivatedRightStickHorizontal = false;
     private bool justActivatedLeftStickVertical = false;
@@ -57,7 +59,6 @@ public class ControllerInput : MonoBehaviour
                 //Debug.Log(Input.GetAxis("RightStickHorizontal"));
                 if (Input.GetAxis("RightStickHorizontal") > 0)
                 {
-                    Debug.Log(selectedButtonIndex);
                     pickActiveButton(1);
                 }
 
@@ -70,7 +71,7 @@ public class ControllerInput : MonoBehaviour
         }
 
         //On release of stick, allow to be used again.
-        if (Input.GetAxis("RightStickHorizontal") == 0 && justActivatedRightStickHorizontal)
+        else if (Input.GetAxis("RightStickHorizontal") == 0 && justActivatedRightStickHorizontal)
         {
             justActivatedRightStickHorizontal = false;
         }
@@ -86,12 +87,43 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") != 0)
         {
-            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
+            //Movement allowed, no POI selected or advanced mode.
+            if (Controller.selectedPOI == null || advancedMode)
+            {
+                Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
+            }
+
+
+
+            //POI selected and not advanced mode, stick controller POI movement.
+            else if (!justActivatedLeftStickHorizontal)
+            {
+                justActivatedLeftStickHorizontal = true;
+                //Debug.Log(Input.GetAxis("RightStickHorizontal"));
+                if (Input.GetAxis("Horizontal") > 0)
+                {
+                    pickActiveButton(1);
+                }
+
+                else
+                {
+                    pickActiveButton(-1);
+                }
+            }
+        }
+
+        //On release of stick, allow to be used again.
+        else if (Input.GetAxis("Horizontal") == 0 && justActivatedLeftStickHorizontal)
+        {
+            justActivatedLeftStickHorizontal = false;
         }
 
         if (Input.GetAxis("Vertical") != 0)
         {
-            Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
+            if (Controller.selectedPOI == null || advancedMode)
+            {
+                Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
+            }
         }
 
         if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
@@ -124,7 +156,7 @@ public class ControllerInput : MonoBehaviour
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
                 if (Controller.selectedPOI != null)
-                {                    
+                {
                     pickActiveButton(0);
                 }
             }
@@ -156,6 +188,18 @@ public class ControllerInput : MonoBehaviour
         {
             justActivatedB = false;
         }
+
+        if (Input.GetAxis("Xbox Start") == 1)
+        {
+            justActivatedStart = true;
+            SceneManager.LoadScene("MultiDisplayPlanet");
+        }
+
+        else if (Input.GetAxis("Xbox Start") == 0)
+        {
+            justActivatedStart = false;
+        }
+
 
         //TODO Remove
         if (Input.GetKey(KeyCode.A))//else if (Input.GetButton("joystick button 0"))
