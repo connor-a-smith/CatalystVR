@@ -7,8 +7,6 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/HomePlanet.unity
-  - enabled: 0
-    path: Assets/Scenes/Sites/Mar Saba.unity
   - enabled: 1
     path: Assets/Scenes/MultiDisplayPlanet.unity
   - enabled: 1

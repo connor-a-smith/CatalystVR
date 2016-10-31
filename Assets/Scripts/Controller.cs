@@ -31,6 +31,8 @@ public class Controller : MonoBehaviour {
 
     public static Object photoPrefab;
     public Object photoPrefabEditor;
+    public Camera raycastCam;
+
 
     public static MonitorButtonScript[] buttons;
 

@@ -32,8 +32,6 @@ public class ControllerInput : MonoBehaviour
 
     //Allows movement while selecting a POI using the Dpad.
     private bool advancedMode = false;
-
-    public Camera raycastCam;
     // Use this for initialization
     void Start()
     {
@@ -49,7 +47,7 @@ public class ControllerInput : MonoBehaviour
             if (Controller.selectedPOI == null || advancedMode)
             {
                 //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
-                Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
+                Controller.playerShip.transform.RotateAround(Controller.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
             }
 
             //POI selected and not advanced mode, stick controller POI movement.
@@ -150,7 +148,7 @@ public class ControllerInput : MonoBehaviour
             if (Controller.selectedPOI == null)
             {
                 RaycastHit hit;
-                Physics.Raycast(raycastCam.transform.position, raycastCam.transform.forward, out hit, Mathf.Infinity);
+                Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity);
 
                 Controller.inputManager.HandleHit(hit);
 
