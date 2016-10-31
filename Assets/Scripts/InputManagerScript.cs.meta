@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ecde3a0b4735d5c469a28bb49fd9b65f
 timeCreated: 1476759530
 licenseType: Free
+=======
+guid: cc8da69e1c17b470eb1ee738b08ee0d5
+timeCreated: 1477789035
+licenseType: Pro
+>>>>>>> origin/PhotoLoader
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
