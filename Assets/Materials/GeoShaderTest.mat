@@ -105,7 +105,7 @@ Material:
       second: 0.02
     - first:
         name: _PointSize
-      second: 15.09
+      second: 25.8
     - first:
         name: _SmoothnessTextureChannel
       second: 0
