@@ -8,6 +8,7 @@ public class CatalystPhoto : MonoBehaviour {
 
   // Speed at which moving pictures should rotate around the player
   [SerializeField] private float rotateSpeed = 0.05f;
+  [SerializeField] private float cameraOffset = 15.0f;
 
   // Whether or not the pictures should be spinning
   public bool isSpinning = false;
@@ -70,9 +71,6 @@ public class CatalystPhoto : MonoBehaviour {
   /// <returns></returns>
   private IEnumerator LerpToCam() {
 
-    // Distance in front of the Camera that the photo should be.
-    float camOffset = 5.0f;
-
     // How long the transition should take.
     float moveDuration = 1.0f;
 
@@ -88,7 +86,7 @@ public class CatalystPhoto : MonoBehaviour {
     Vector3 startPosition = this.transform.position;
 
     // Calculates the end position of the picture for the transition.
-    Vector3 endPosition = Camera.main.transform.position + (Camera.main.transform.forward * camOffset);
+    Vector3 endPosition = Camera.main.transform.position + (Camera.main.transform.forward * cameraOffset);
 
     // Moves the photo to the camera over a period of time.
     for (float i = 0; i < moveDuration; i += Time.deltaTime) {

@@ -459,7 +459,7 @@ public class PhotoController : MonoBehaviour {
     }
   }
 
-  public void MoveLeft() {
+  public void MoveRight() {
 
     if (!movingPhotos) {
       float angleToRotate = activePhoto.angleBetweenPhotos;
@@ -481,11 +481,9 @@ public class PhotoController : MonoBehaviour {
 
       activePhoto = photos[newActiveRow][newActiveCol];
     }
-
-
   }
 
-  public void MoveRight() {
+  public void MoveLeft() {
 
     if (!movingPhotos) {
       float angleToRotate = activePhoto.angleBetweenPhotos;
@@ -512,24 +510,15 @@ public class PhotoController : MonoBehaviour {
     if (!movingPhotos) {
       Vector3 moveVector = new Vector3(0.0f, -photoYOffset, 0.0f);
    
-      Debug.Log("Active row was: " + activePhoto.row);
-
       int activePhotoNewRow = activePhoto.row - 1;
 
       if (activePhotoNewRow >= 0) {
 
         float photoFraction = activePhoto.col / (float)pictureLocations[activePhoto.row].Count;
 
-        Debug.Log("Photo Fraction Is: " + photoFraction);
-        Debug.Log("New col should be" + Mathf.Floor(pictureLocations[activePhotoNewRow].Count * photoFraction));
-
         int activePhotoNewCol = (int)Mathf.Floor(pictureLocations[activePhotoNewRow].Count * photoFraction);
         CatalystPhoto newActivePhoto = photos[activePhotoNewRow][activePhotoNewCol];
         float angleDiff = Mathf.Abs(activePhoto.angleBetweenPhotos - newActivePhoto.angleBetweenPhotos);
-
-
-        Debug.Log("Current active photo is in column " + activePhoto.col);
-        Debug.Log("New active photo is in column " + activePhotoNewCol);
 
         Vector3 rotateVector = new Vector3(0.0f, angleDiff, 0.0f);
 
