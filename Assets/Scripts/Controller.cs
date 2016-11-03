@@ -1,224 +1,209 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour {
-    //Is this running in the cave?
-    public static bool isCave = false;
+  //Is this running in the cave?
+  public static bool isCave = false;
 
-    public static Controller instance;
+  public static Controller instance;
 
-    [SerializeField] private float cameraEyeOffset = 0.6f;
-    [SerializeField] private GameObject[] leftEyeCameras;
-    [SerializeField] private GameObject[] rightEyeCameras;
+  [SerializeField] private float cameraEyeOffset = 0.6f;
+  [SerializeField] private GameObject[] leftEyeCameras;
+  [SerializeField] private GameObject[] rightEyeCameras;
 
-    [SerializeField] private bool is3D = false;
+  public List<POIScript> POIList;
 
-    public static GameObject playerShip;
-    public static MonitorScript monitor;
-    public static InputManagerScript inputManager;
+  [SerializeField] private bool is3D = false;
 
-    public static POIScript selectedPOI;
+  public static GameObject playerShip;
+  public static MonitorScript monitor;
+  public static InputManagerScript inputManager;
 
-    public static Material defaultPOIMat;
-    public static Material highlightedPOIMat;
-    public static Material selectedPOIMat;
+  public static POIScript selectedPOI;
 
-    public Material defaultPOIMaterialEditor;
-    public Material highlightedPOIMaterialEditor;
-    public Material selectedPOIMaterialEditor;
+  public static Material defaultPOIMat;
+  public static Material highlightedPOIMat;
+  public static Material selectedPOIMat;
 
-    public static Object photoPrefab;
-    public Object photoPrefabEditor;
-    public Camera raycastCam;
+  public Material defaultPOIMaterialEditor;
+  public Material highlightedPOIMaterialEditor;
+  public Material selectedPOIMaterialEditor;
+
+  public static Object photoPrefab;
+  public Object photoPrefabEditor;
+  public Camera raycastCam;
 
 
-    public static MonitorButtonScript[] buttons;
+  public static MonitorButtonScript[] buttons;
 
-    public static string instructionText = "Select a POI or grab the sphere to move. The further the sphere from the grab point, the faster you'll go in the direction you moved it.";
+  public static string instructionText = "Select a POI or grab the sphere to move. The further the sphere from the grab point, the faster you'll go in the direction you moved it.";
 
-    // Use this for initialization
-    /// <summary>
-    /// Used to set up the static variables based on the dragged in variables.
-    /// </summary>
-    void Awake () {
+  // Use this for initialization
+  /// <summary>
+  /// Used to set up the static variables based on the dragged in variables.
+  /// </summary>
+  void Awake() {
 
-        if (Controller.instance == null)
-        {
-            Controller.instance = this;
+    if (Controller.instance == null) {
+      Controller.instance = this;
 
-            GameObject topLevelParent = gameObject;
+      GameObject topLevelParent = gameObject;
 
-            while (topLevelParent.transform.parent != null)
-            {
-                topLevelParent = topLevelParent.transform.parent.gameObject;
-            }
+      while (topLevelParent.transform.parent != null) {
+        topLevelParent = topLevelParent.transform.parent.gameObject;
+      }
 
-            DontDestroyOnLoad(topLevelParent);
+      DontDestroyOnLoad(topLevelParent);
 
-            playerShip = this.gameObject;
-            monitor = GetComponentInChildren<MonitorScript>();
-            inputManager = GetComponentInChildren<InputManagerScript>();
+      playerShip = this.gameObject;
+      monitor = GetComponentInChildren<MonitorScript>();
+      inputManager = GetComponentInChildren<InputManagerScript>();
 
-            defaultPOIMat = defaultPOIMaterialEditor;
-            highlightedPOIMat = highlightedPOIMaterialEditor;
-            selectedPOIMat = selectedPOIMaterialEditor;
+      defaultPOIMat = defaultPOIMaterialEditor;
+      highlightedPOIMat = highlightedPOIMaterialEditor;
+      selectedPOIMat = selectedPOIMaterialEditor;
 
-            photoPrefab = photoPrefabEditor;
+      photoPrefab = photoPrefabEditor;
 
-            buttons = monitor.GetComponentsInChildren<MonitorButtonScript>();
+      buttons = monitor.GetComponentsInChildren<MonitorButtonScript>();
 
-            for (int i = 0; i < Controller.buttons.Length; i++)
-            {
-                Controller.buttons[i].gameObject.SetActive(false);
-            }
+      for (int i = 0; i < Controller.buttons.Length; i++) {
+        Controller.buttons[i].gameObject.SetActive(false);
+      }
 
-            Controller.monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+      Controller.monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
 
-            activateDisplays(new Scene(), LoadSceneMode.Additive);
+      activateDisplays(new Scene(), LoadSceneMode.Additive);
 
-        }
+      SceneManager.sceneLoaded += cleanPOI;
 
-        //Controller already exists, move the existing to this position and gete rid of this one.
-        else
-        {
-            GameObject instanceObject = Controller.instance.gameObject;
-            GameObject currentObject = gameObject;
-
-            while (currentObject.transform.parent != null && instanceObject.transform.parent != null)
-            {
-                instanceObject.transform.localPosition = currentObject.transform.localPosition;
-                instanceObject.transform.localRotation = currentObject.transform.localRotation;
-                instanceObject.transform.localScale = currentObject.transform.localScale;
-
-                instanceObject = instanceObject.transform.parent.gameObject;
-                currentObject = currentObject.transform.parent.gameObject;
-
-            }
-
-            instanceObject.transform.localPosition = currentObject.transform.localPosition;
-            instanceObject.transform.localRotation = currentObject.transform.localRotation;
-            instanceObject.transform.localScale = currentObject.transform.localScale;
-
-            Destroy(currentObject);
-
-        }
     }
 
-    public void Start()
-    {
+    //Controller already exists, move the existing to this position and gete rid of this one.
+    else {
+      GameObject instanceObject = Controller.instance.gameObject;
+      GameObject currentObject = gameObject;
 
+      while (currentObject.transform.parent != null && instanceObject.transform.parent != null) {
+        instanceObject.transform.localPosition = currentObject.transform.localPosition;
+        instanceObject.transform.localRotation = currentObject.transform.localRotation;
+        instanceObject.transform.localScale = currentObject.transform.localScale;
+
+        instanceObject = instanceObject.transform.parent.gameObject;
+        currentObject = currentObject.transform.parent.gameObject;
+
+      }
+
+      instanceObject.transform.localPosition = currentObject.transform.localPosition;
+      instanceObject.transform.localRotation = currentObject.transform.localRotation;
+      instanceObject.transform.localScale = currentObject.transform.localScale;
+
+      Destroy(currentObject);
+
+    }
+  }
+
+  public void Start() {
+
+    resetCameraPositions();
+
+    monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+
+  }
+
+  // Update is called once per frame
+  void Update() {
+    if (Input.GetKey(KeyCode.B)) {
+      activateDisplays(new Scene(), LoadSceneMode.Additive);
+
+    }
+
+    if (Input.GetKeyDown(KeyCode.Alpha3)) {
+      toggle3D();
+    }
+
+    if (is3D && Input.GetKey(KeyCode.Minus)) {
+      if (cameraEyeOffset > 0) {
+
+        cameraEyeOffset -= 0.01f;
         resetCameraPositions();
-
-        monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+        Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
+      }
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.B))
-        {
-            activateDisplays(new Scene(), LoadSceneMode.Additive);
+    if (is3D && Input.GetKey(KeyCode.Equals)) {
 
-        }
+      cameraEyeOffset += 0.01f;
+      resetCameraPositions();
+      Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            toggle3D();
-        }
+    }
+  }
 
-        if (is3D && Input.GetKey(KeyCode.Minus))
-        {
-            if (cameraEyeOffset > 0)
-            {
 
-                cameraEyeOffset -= 0.01f;
-                resetCameraPositions();
-                Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-            }
+  void activateDisplays(Scene scenes, LoadSceneMode mode) {
+    foreach (Display display in Display.displays) {
+      display.Activate();
+      //Debug.LogError("Display number: " + counter + "\n");
+      //counter++;
+    }
+  }
 
-        }
-
-        if (is3D && Input.GetKey(KeyCode.Equals))
-        {
-
-            cameraEyeOffset += 0.01f;
-            resetCameraPositions();
-            Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-
-        }
+  public void toggle3D() {
+    if (is3D) {
+      make2D();
+      return;
     }
 
+    make3D();
+  }
 
-    void activateDisplays(Scene scenes, LoadSceneMode mode)
-    {
-        foreach (Display display in Display.displays)
-        {
-            display.Activate();
-            //Debug.LogError("Display number: " + counter + "\n");
-            //counter++;
-        }
+  public void make2D() {
+    offsetCameras(leftEyeCameras, cameraEyeOffset / 2);
+    offsetCameras(rightEyeCameras, -cameraEyeOffset / 2);
+    is3D = false;
+  }
+
+  public void make3D() {
+    offsetCameras(leftEyeCameras, -cameraEyeOffset / 2);
+    offsetCameras(rightEyeCameras, cameraEyeOffset / 2);
+    is3D = true;
+  }
+
+  public void offsetCameras(GameObject[] cameras, float offset) {
+    foreach (GameObject camera in cameras) {
+      Vector3 newPosition = camera.transform.localPosition;
+      newPosition.x += offset;
+      camera.transform.localPosition = newPosition;
     }
+  }
 
-    public void toggle3D()
-    {
-        if (is3D)
-        {
-            make2D();
-            return;
-        }
-
-        make3D();
+  public void moveCameras(GameObject[] cameras, float xVal) {
+    foreach (GameObject camera in cameras) {
+      Vector3 newPosition = camera.transform.localPosition;
+      newPosition.x = xVal;
+      camera.transform.localPosition = newPosition;
     }
+  }
 
-    public void make2D()
-    {
-        offsetCameras(leftEyeCameras, cameraEyeOffset / 2);
-        offsetCameras(rightEyeCameras, -cameraEyeOffset / 2);
-        is3D = false;
+  private void resetCameraPositions() {
+    if (!is3D) {
+      moveCameras(leftEyeCameras, 0.0f);
+      moveCameras(rightEyeCameras, 0.0f);
     }
-
-    public void make3D()
-    {
-        offsetCameras(leftEyeCameras, -cameraEyeOffset / 2);
-        offsetCameras(rightEyeCameras, cameraEyeOffset / 2);
-        is3D = true;
+    else {
+      moveCameras(leftEyeCameras, -cameraEyeOffset / 2);
+      moveCameras(rightEyeCameras, cameraEyeOffset / 2);
     }
+  }
 
-    public void offsetCameras(GameObject[] cameras, float offset)
-    {
-        foreach (GameObject camera in cameras)
-        {
-            Vector3 newPosition = camera.transform.localPosition;
-            newPosition.x += offset;
-            camera.transform.localPosition = newPosition;
-        }
-    }
+  public void cleanPOI(Scene scene, LoadSceneMode mode) {
 
-    public void moveCameras(GameObject[] cameras, float xVal)
-    {
-        foreach (GameObject camera in cameras)
-        {
-            Vector3 newPosition = camera.transform.localPosition;
-            newPosition.x = xVal;
-            camera.transform.localPosition = newPosition;
-        }
-    }
+    POIList.Clear();
 
-    private void resetCameraPositions()
-    {
-        if (!is3D)
-        {
-            moveCameras(leftEyeCameras, 0.0f);
-            moveCameras(rightEyeCameras, 0.0f);
-        }
-        else
-        {
-            moveCameras(leftEyeCameras, -cameraEyeOffset / 2);
-            moveCameras(rightEyeCameras, cameraEyeOffset / 2);
-        }
-    }
-
+  }
 }

@@ -5,8 +5,9 @@ public enum ComponentType {Photos, Audio, Videos, Text, Scene, Zoom, Back}
 
 public abstract class POIScriptComponent : MonoBehaviour {
 
-    bool activated;
-    public bool activateImmediately = true;
+  bool activated;
+  public bool activateImmediately = true;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,29 +19,29 @@ public abstract class POIScriptComponent : MonoBehaviour {
 	
 	}
 
-    public virtual void Activate()
+  public virtual void Activate()
+  {
+      activated = true;
+  }
+
+  public virtual void Deactivate()
+  {
+      activated = false;
+  }
+
+  /// <summary>
+  /// Toggles the current state.
+  /// </summary>
+  public void Toggle()
+  {
+    if (!activated)
     {
-        activated = true;
+        Activate();
     }
 
-    public virtual void Deactivate()
+    else
     {
-        activated = false;
+        Deactivate();
     }
-
-    /// <summary>
-    /// Toggles the current state.
-    /// </summary>
-    public void Toggle()
-    {
-        if (!activated)
-        {
-            Activate();
-        }
-
-        else
-        {
-            Deactivate();
-        }
-    }
+  }
 }
