@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class ControllerInput : MonoBehaviour
 {
 
+    [SerializeField] private float maxTiltAngle = 45.0f;
+
     public float xRotationSpeed = 30;
     public float yRotationSpeed = -30;
 
@@ -79,8 +81,37 @@ public class ControllerInput : MonoBehaviour
         {
             if (Controller.selectedPOI == null || advancedMode)
             {
-                Controller.playerShip.transform.Rotate(Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed, 0, 0, Space.Self);
-                //Controller.playerShip.transform.RotateAround(raycastCam.transform.parent.transform.position, Vector3.left, Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed);
+
+                Transform shipTransform = Controller.playerShip.transform;
+
+                Vector3 beforeShipRotation = shipTransform.localRotation.eulerAngles;
+
+                float rotateAngle = Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed;
+
+                shipTransform.Rotate(rotateAngle, 0, 0, Space.Self);
+
+                Vector3 afterShipRotation = shipTransform.localRotation.eulerAngles;
+
+                if(afterShipRotation.x > 180.0f) {
+
+                    afterShipRotation.x -= 360.0f;
+
+                }
+
+                if(afterShipRotation.x < -maxTiltAngle) {
+
+                    afterShipRotation.x = -maxTiltAngle;
+
+
+                }
+                else if(afterShipRotation.x > maxTiltAngle) {
+
+                    afterShipRotation.x = maxTiltAngle;
+
+                }
+
+                afterShipRotation.z = 0.0f;
+                shipTransform.localRotation = Quaternion.Euler(afterShipRotation);
             }
         }
 
