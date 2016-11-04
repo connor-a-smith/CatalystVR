@@ -164,8 +164,6 @@ public class Controller : MonoBehaviour {
 
         float panelHeight = panelRect.height;
 
-        Debug.LogWarning("PANEL HEIGHT" + panelHeight);
-
         float buttonHeight = panelHeight / POIList.Count;
 
         float buttonPadding = buttonHeight / 4.0f;

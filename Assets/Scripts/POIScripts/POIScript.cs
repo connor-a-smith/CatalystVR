@@ -12,14 +12,27 @@ public class POIScript : MonoBehaviour {
     [SerializeField]
     private float labelSpawnHeight = 1.5f;
 
+
     void Awake() {
 
-       Controller.instance.POIList.Add(this);
+        Controller.controllerReady += AddPOI;
+
+    }
+
+    public void AddPOI() {
+
+        Controller.instance.POIList.Add(this);
+
+    }
+
+    public void OnDestroy() {
+
+        Controller.controllerReady -= AddPOI;
 
     }
 
 
-        void OnMouseDown() {
+    void OnMouseDown() {
         Toggle();
         }
 
