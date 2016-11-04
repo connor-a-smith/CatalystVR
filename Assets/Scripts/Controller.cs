@@ -56,6 +56,8 @@ public class Controller : MonoBehaviour {
     public delegate void ControllerReady();
     public static ControllerReady controllerReady;
 
+    public Object labelPrefab;
+
 
     public static MonitorButtonScript[] buttons;
 
