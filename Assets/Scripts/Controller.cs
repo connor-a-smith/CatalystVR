@@ -14,6 +14,9 @@ public class Controller : MonoBehaviour {
   [SerializeField] private GameObject[] leftEyeCameras;
   [SerializeField] private GameObject[] rightEyeCameras;
 
+  [SerializeField] public BookmarkController bookmarks;
+  [SerializeField] public InputGuideController inputGuide;
+
   public List<POIScript> POIList;
 
   [SerializeField] private bool is3D = false;

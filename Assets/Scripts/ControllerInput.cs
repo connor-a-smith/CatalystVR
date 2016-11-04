@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ControllerInput : MonoBehaviour
 {
+
     public float xRotationSpeed = 30;
     public float yRotationSpeed = -30;
 
@@ -197,6 +198,39 @@ public class ControllerInput : MonoBehaviour
         {
             justActivatedStart = false;
         }
+
+        if (Input.GetAxis("LeftTrigger") == 1) {
+
+            if (!Controller.instance.bookmarks.bookmarkPanelActivated) {
+
+                Controller.instance.bookmarks.MovePanelUp();
+            }
+
+        }
+
+        else if (Controller.instance.bookmarks.bookmarkPanelActivated) {
+
+            Controller.instance.bookmarks.MovePanelDown();
+
+        }
+
+        if (Input.GetAxis("RightTrigger") == 1) {
+
+
+            if (!Controller.instance.inputGuide.panelActive) {
+
+                Controller.instance.inputGuide.MovePanelUp();
+
+            }
+        }
+
+        else if (Controller.instance.inputGuide.panelActive) {
+
+            Controller.instance.inputGuide.MovePanelDown();
+
+        }
+
+
 
 
         //TODO Remove
