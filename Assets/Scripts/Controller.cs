@@ -56,6 +56,8 @@ public class Controller : MonoBehaviour {
         topLevelParent = topLevelParent.transform.parent.gameObject;
       }
 
+	  POIList = new List<POIScript> ();
+
       DontDestroyOnLoad(topLevelParent);
 
       playerShip = this.gameObject;

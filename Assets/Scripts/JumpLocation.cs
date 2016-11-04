@@ -12,7 +12,7 @@ public class JumpLocation : MonoBehaviour {
 
 	private Animator platformAnim;
 
-	public GameObject bookmark;
+	//public GameObject bookmark;
 	public GameObject bookmarkImagePanel;
 	public GameObject platform;
 	public bool noSelection;
