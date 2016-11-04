@@ -5,104 +5,121 @@ using UnityEngine.SceneManagement;
 
 public class POIScript : MonoBehaviour {
 
-  bool activated = false;
-  List<POIScriptComponent> components;
+    bool activated = false;
+    List<POIScriptComponent> components;
 
     void Awake() {
 
-       // SceneManager.sceneLoaded += AddTest;
-        //SceneManager.sceneUnloaded +=
+        Controller.controllerReady += AddPOI;
 
-       Controller.instance.POIList.Add(this);
+    }
 
+    public void AddPOI() {
+
+        Controller.instance.POIList.Add(this);
+
+    }
+
+    public void OnDestroy() {
+
+        Controller.controllerReady -= AddPOI;
 
     }
 
     // Use this for initialization
     void Start() {
-    components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
-  }
-
-  // Update is called once per frame
-  void Update() {
-    //No need to look at player anymore. btw messes up child objects too, such as focus positions.
-    // transform.LookAt(Controller.playerShip.transform.position);
-  }
-
-  void OnMouseDown() {
-    Toggle();
-  }
-
-  public void Activate() {
-    //If selected another node without deactivating an old one, then deactivate the old one.
-    if (Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI) {
-      Controller.selectedPOI.Deactivate();
+        components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
     }
 
-        Debug.LogWarning("ACTIVATING");
-
-    activated = true;
-    Controller.selectedPOI = this;
-    GetComponentInChildren<Renderer>().material = Controller.selectedPOIMat;
-        
-    //Tell all the buttons that a new poi was selected.
-    for (int i = 0; i < Controller.buttons.Length; i++) {
-      Controller.buttons[i].gameObject.SetActive(true);
-
-      Controller.buttons[i].OnNewNodeSelected();
+    // Update is called once per frame
+    void Update() {
+        //No need to look at player anymore. btw messes up child objects too, such as focus positions.
+        // transform.LookAt(Controller.playerShip.transform.position);
     }
 
-    //Tell all components to activate.
-    for (int i = 0; i < components.Count; i++) {
-      if (components[i].activateImmediately) {
-        components[i].Activate();
-      }
+    void OnMouseDown() {
+        Toggle();
     }
 
-  }
+    public void Activate() {
+        //If selected another node without deactivating an old one, then deactivate the old one.
+        if(Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI) {
+            Controller.selectedPOI.Deactivate();
+        }
 
-  public void Deactivate() {
-    activated = false;
-    Controller.selectedPOI = null;
-    GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
 
+        activated = true;
+        Controller.selectedPOI = this;
+        GetComponentInChildren<Renderer>().material = Controller.selectedPOIMat;
 
-    //Tell all the buttons that there is no current POI.
-    for (int i = 0; i < Controller.buttons.Length; i++) {
-      Controller.buttons[i].OnNodeDeselected();
-      Controller.buttons[i].gameObject.SetActive(false);
+        //Tell all the buttons that a new poi was selected.
+        for(int i = 0; i < Controller.buttons.Length; i++) {
+            Controller.buttons[i].gameObject.SetActive(true);
+
+            Controller.buttons[i].OnNewNodeSelected();
+        }
+
+        //Tell all components to activate.
+        for(int i = 0; i < components.Count; i++) {
+            if(components[i].activateImmediately) {
+                components[i].Activate();
+            }
+        }
+
     }
 
-    for (int i = 0; i < components.Count; i++) {
-      components[i].Deactivate();
-    }
-  }
+    public void Deactivate() {
+        activated = false;
+        Controller.selectedPOI = null;
+        GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
 
-  /// <summary>
-  /// A way to toggle the state without needing to check the current state externally.
-  /// </summary>
-  public void Toggle() {
-    if (!activated) {
-      Activate();
-    }
-    else {
-      Deactivate();
-    }
-  }
 
-  /// <summary>
-  /// Highlight the POI if it is hit in the raycast.
-  /// </summary>
-  public void Highlight() {
-    GetComponentInChildren<Renderer>().material = Controller.highlightedPOIMat;
-  }
+        //Tell all the buttons that there is no current POI.
+        for(int i = 0; i < Controller.buttons.Length; i++) {
+            Controller.buttons[i].OnNodeDeselected();
+            Controller.buttons[i].gameObject.SetActive(false);
+        }
 
-  /// <summary>
-  /// UnHighlight the POI if it is not hit in the raycast.
-  /// </summary>
-  public void UnHighlight() {
-    GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
-  }
+        for(int i = 0; i < components.Count; i++) {
+            components[i].Deactivate();
+        }
+    }
+
+    /// <summary>
+    /// A way to toggle the state without needing to check the current state externally.
+    /// </summary>
+    public void Toggle() {
+        if(!activated) {
+            Activate();
+        }
+        else {
+            Deactivate();
+        }
+    }
+
+    /// <summary>
+    /// Highlight the POI if it is hit in the raycast.
+    /// </summary>
+    public void Highlight() {
+        GetComponentInChildren<Renderer>().material = Controller.highlightedPOIMat;
+    }
+
+    /// <summary>
+    /// UnHighlight the POI if it is not hit in the raycast.
+    /// </summary>
+    public void UnHighlight() {
+        GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
+    }
+
+    public IEnumerator WaitForFirstInstance() {
+
+        while(Controller.instance == null) {
+
+            yield return null;
+
+        }
+
+
+    }
 }
 
-    

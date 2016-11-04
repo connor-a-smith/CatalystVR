@@ -53,6 +53,8 @@ public class Controller : MonoBehaviour {
     public static Object photoPrefab;
     public Object photoPrefabEditor;
     public Camera raycastCam;
+    public delegate void ControllerReady();
+    public static ControllerReady controllerReady;
 
 
     public static MonitorButtonScript[] buttons;
@@ -98,8 +100,7 @@ public class Controller : MonoBehaviour {
 
             activateDisplays(new Scene(), LoadSceneMode.Additive);
 
-            SceneManager.sceneUnloaded += cleanPOI;
-            SceneManager.sceneLoaded += FillPOIList;
+
 
 
         }
@@ -129,12 +130,26 @@ public class Controller : MonoBehaviour {
         }
     }
 
+    public void FillPOIListOnLoad(Scene scene, LoadSceneMode mode) {
+
+        controllerReady();
+
+    }
+
     public void Start() {
+
+        SceneManager.sceneUnloaded += cleanPOI;
+        SceneManager.sceneLoaded += FillPOIListOnLoad;
+        SceneManager.sceneLoaded += FillPOIList;
+
+        controllerReady();
 
         resetCameraPositions();
 
         monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
 
+
+        FillPOIList(new Scene(), LoadSceneMode.Single);
 
 
     }
@@ -288,7 +303,6 @@ public class Controller : MonoBehaviour {
 
     public void cleanPOI(Scene scene) {
 
-        Debug.LogWarning("CLEARING");
         POIList.Clear();
         bookmarks.ClearBookmarks();
 
