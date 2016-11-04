@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Controller : MonoBehaviour
-{
+public class Controller : MonoBehaviour {
     //Is this running in the cave?
     public static bool isCave = false;
 
@@ -54,8 +53,9 @@ public class Controller : MonoBehaviour
     public static Object photoPrefab;
     public Object photoPrefabEditor;
     public Camera raycastCam;
+    public delegate void ControllerReady();
+    public static ControllerReady controllerReady;
 
-    public Object labelPrefab;
 
     public static MonitorButtonScript[] buttons;
 
@@ -100,8 +100,7 @@ public class Controller : MonoBehaviour
 
             activateDisplays(new Scene(), LoadSceneMode.Additive);
 
-            SceneManager.sceneUnloaded += cleanPOI;
-            SceneManager.sceneLoaded += FillPOIList;
+
 
 
         }
@@ -131,41 +130,28 @@ public class Controller : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
+    public void FillPOIListOnLoad(Scene scene, LoadSceneMode mode) {
+
+        controllerReady();
+
+    }
+
+    public void Start() {
+
+        SceneManager.sceneUnloaded += cleanPOI;
+        SceneManager.sceneLoaded += FillPOIListOnLoad;
+        SceneManager.sceneLoaded += FillPOIList;
+
+        controllerReady();
 
         resetCameraPositions();
 
         monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
 
-    }
 
-    // Update is called once per frame
-    void Update() {
-        if(Input.GetKey(KeyCode.B)) {
-            activateDisplays(new Scene(), LoadSceneMode.Additive);
+        FillPOIList(new Scene(), LoadSceneMode.Single);
 
-        }
 
-        if(Input.GetKeyDown(KeyCode.Alpha3)) {
-            toggle3D();
-        }
-
-        if(is3D && Input.GetKey(KeyCode.Minus)) {
-            if(cameraEyeOffset > 0) {
-
-                cameraEyeOffset -= 0.01f;
-                resetCameraPositions();
-                Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-            }
-        }
-
-        if(is3D && Input.GetKey(KeyCode.Equals)) {
-
-            cameraEyeOffset += 0.01f;
-            resetCameraPositions();
-            Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-        }
     }
 
     public void FillPOIList(Scene scene, LoadSceneMode mode) {
@@ -186,7 +172,7 @@ public class Controller : MonoBehaviour
 
         float heightPilot = panelRect.yMax - (buttonHeight / 2);
 
-        for (int i = 0; i < POIList.Count; i++) {
+        for(int i = 0; i < POIList.Count; i++) {
 
             panelPositions.Add(new Vector3(0.0f, heightPilot, 0.0f));
 
@@ -195,7 +181,7 @@ public class Controller : MonoBehaviour
 
         }
 
-        for (int i = 0; i < POIList.Count; i++) {
+        for(int i = 0; i < POIList.Count; i++) {
 
             GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, bookmarkPOIPanel.transform) as GameObject;
 
@@ -216,7 +202,7 @@ public class Controller : MonoBehaviour
             RectTransform imageTransform = childImage.GetComponent<RectTransform>();
 
             Vector3 sizeDelta = imageTransform.sizeDelta;
-            sizeDelta.y = (buttonHeight * (1.0f/imageTransform.localScale.y));
+            sizeDelta.y = (buttonHeight * (1.0f / imageTransform.localScale.y));
 
             Bookmark newBookmark = newPanel.GetComponentInChildren<Bookmark>();
             newBookmark.POI = POIList[i];
@@ -226,6 +212,54 @@ public class Controller : MonoBehaviour
 
             imageTransform.sizeDelta = sizeDelta;
         }
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if(Input.GetKey(KeyCode.B)) {
+            activateDisplays(new Scene(), LoadSceneMode.Additive);
+
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha3)) {
+            toggle3D();
+        }
+
+        if(is3D && Input.GetKey(KeyCode.Minus)) {
+            if(cameraEyeOffset > 0) {
+
+                cameraEyeOffset -= 0.01f;
+                resetCameraPositions();
+                Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
+            }
+
+        }
+
+        if(is3D && Input.GetKey(KeyCode.Equals)) {
+
+            cameraEyeOffset += 0.01f;
+            resetCameraPositions();
+            Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
+
+        }
+    }
+
+
+    void activateDisplays(Scene scenes, LoadSceneMode mode) {
+        foreach(Display display in Display.displays) {
+            display.Activate();
+            //Debug.LogError("Display number: " + counter + "\n");
+            //counter++;
+        }
+    }
+
+    public void toggle3D() {
+        if(is3D) {
+            make2D();
+            return;
+        }
+
+        make3D();
     }
 
     public void make2D() {
@@ -240,48 +274,21 @@ public class Controller : MonoBehaviour
         is3D = true;
     }
 
-
-    void activateDisplays(Scene scenes, LoadSceneMode mode)
-    {
-        foreach (Display display in Display.displays)
-        {
-            display.Activate();
-            //Debug.LogError("Display number: " + counter + "\n");
-            //counter++;
-        }
-    }
-
-    public void toggle3D()
-    {
-        if (is3D)
-        {
-            make2D();
-            return;
-        }
-
-        make3D();
-    }
-
-    public void offsetCameras(GameObject[] cameras, float offset)
-    {
-        foreach (GameObject camera in cameras)
-        {
+    public void offsetCameras(GameObject[] cameras, float offset) {
+        foreach(GameObject camera in cameras) {
             Vector3 newPosition = camera.transform.localPosition;
             newPosition.x += offset;
             camera.transform.localPosition = newPosition;
         }
     }
 
-    public void moveCameras(GameObject[] cameras, float xVal)
-    {
-        foreach (GameObject camera in cameras)
-        {
+    public void moveCameras(GameObject[] cameras, float xVal) {
+        foreach(GameObject camera in cameras) {
             Vector3 newPosition = camera.transform.localPosition;
             newPosition.x = xVal;
             camera.transform.localPosition = newPosition;
         }
     }
-
 
     private void resetCameraPositions() {
         if(!is3D) {
@@ -296,9 +303,8 @@ public class Controller : MonoBehaviour
 
     public void cleanPOI(Scene scene) {
 
-        Debug.LogWarning("CLEARING");
         POIList.Clear();
         bookmarks.ClearBookmarks();
-    }
 
+    }
 }
