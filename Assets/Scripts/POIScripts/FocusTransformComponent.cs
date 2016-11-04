@@ -20,15 +20,15 @@ public class FocusTransformComponent : POIScriptComponent {
         base.Activate();
 
         //Teleport to location. Shifting down by cam height so that camera is in the correct position.
-        Controller.playerShip.transform.position = transformValueObject.transform.position - new Vector3(0,Camera.main.gameObject.transform.localPosition.y,0);
+        Controller.playerShip.transform.position = this.transform.position;
+        Controller.playerShip.transform.LookAt(this.gameObject.transform);
 
-        //Use only y component.
-        Vector3 angles = transformValueObject.transform.rotation.eulerAngles;
+        Vector3 newRotation = Controller.playerShip.transform.rotation.eulerAngles;
+        newRotation.z = 0;
+        Controller.playerShip.transform.rotation = Quaternion.Euler(newRotation);
 
-        angles.x = 0;
-        angles.z = 0;
-
-        Controller.playerShip.transform.rotation = Quaternion.Euler(angles);
+        Controller.playerShip.transform.position += (-Controller.playerShip.transform.forward * 50.0f);
+        Controller.playerShip.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         //Lerp to location. Need to implement
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI; //to enable getComponent<Text>();
 
 public class BookmarkController : MonoBehaviour {
@@ -16,28 +17,27 @@ public class BookmarkController : MonoBehaviour {
 
 	//public GameObject bookmark;
 	public GameObject bookmarkImagePanel;
-	public GameObject platform;
 	public bool noSelection;
 
-	private GameObject[] locations;
-	private JumpIcon[] locationPanels;
+	public List<Bookmark> bookmarks;
 
-	private int locationSelector;
+	private int bookmarkIndex;
 
-	// Use this for initialization
-	void Start () {
+    void Awake() {
 
-		locationSelector = 0;
-		createArray ();
-		platformAnim = platform.GetComponent<Animator> ();
+        bookmarks = new List<Bookmark>();
+
+
+    }
+
+    // Use this for initialization
+    void Start () {
+
+		bookmarkIndex = 0;
+
+		platformAnim = Controller.playerShip.GetComponent<Animator> ();
 		initActivate = true;
 		initDeactivate = false;
-	}
-
-	void createArray() {
-
-		locationPanels = bookmarkImagePanel.GetComponentsInChildren<JumpIcon> ();
-
 	}
 
 	/// <summary>
@@ -45,6 +45,8 @@ public class BookmarkController : MonoBehaviour {
 	/// </summary>
 	public void MovePanelUp() {
         //for the initial idle animation
+
+        ChangeColor(0, selectionColor);
 
         float animationStartTime = 0.0f;
 	
@@ -66,7 +68,7 @@ public class BookmarkController : MonoBehaviour {
     /// </summary>
     public void MovePanelDown() {
 
-		RevertColor (locationSelector);
+		RevertColor (bookmarkIndex);
         platformAnim.StopPlayback();
 
         if (platformAnim.GetCurrentAnimatorStateInfo (0).IsName ("BookmarkFloaty")) {
@@ -77,7 +79,7 @@ public class BookmarkController : MonoBehaviour {
 
 		}
 
-		locationSelector = 0; //reset the selection to the first index
+		bookmarkIndex = 0; //reset the selection to the first index
 
         bookmarkPanelActivated = false;
 
@@ -93,65 +95,78 @@ public class BookmarkController : MonoBehaviour {
 
 	void ChangeColor(int index, Color color) {
 
-        Image panelImage = locationPanels[index].GetComponent<Image>();
+        Image panelImage = bookmarks[index].GetComponent<Image>();
         panelImage.color = color;
 
 	}
 
 	void Jump(int index) {
 
-        JumpIcon loc = locationPanels [index].GetComponent<JumpIcon> ();
-		GameObject jumpLocation = loc.icon;
+        Bookmark loc = bookmarks [index].GetComponent<Bookmark> ();
 
+        loc.focusComponent.Activate();
 
-		//Teleport to location. Shifting down by cam height so that camera is in the correct position.
-		platform.transform.position = jumpLocation.transform.position - new Vector3(0, Camera.main.gameObject.transform.localPosition.y, 0);
-		Vector3 angles = jumpLocation.transform.rotation.eulerAngles;
-		angles.x = 0;
-		angles.z = 0;
-		platform.transform.rotation = Quaternion.Euler (angles);
-	}
+        if (Controller.selectedPOI != null) {
 
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    public void MoveSelectorUp() {
-
-        RevertColor(locationSelector);
-
-        locationSelector--;
-
-        if (locationSelector < 0) {
-
-            locationSelector = locations.Length - 1;
+            Controller.selectedPOI.Deactivate();
 
         }
 
-        ChangeColor(locationSelector, selectionColor);
+        Controller.selectedPOI = null;
+
+        loc.POI.Activate();
+
+	}
+
+    public void MoveSelectorUp() {
+
+        RevertColor(bookmarkIndex);
+
+        bookmarkIndex--;
+
+        if (bookmarkIndex < 0) {
+
+            bookmarkIndex = bookmarks.Count - 1;
+
+        }
+
+        ChangeColor(bookmarkIndex, selectionColor);
 
     }
 
     public void MoveSelectorDown() {
 
-        RevertColor(locationSelector);
+        RevertColor(bookmarkIndex);
 
-        locationSelector++;
+        bookmarkIndex++;
 
-        if (locationSelector > locations.Length - 1) {
+        if (bookmarkIndex > bookmarks.Count - 1) {
 
-            locationSelector = 0;
+            bookmarkIndex = 0;
 
         }
         
-        ChangeColor(locationSelector, selectionColor);
+        ChangeColor(bookmarkIndex, selectionColor);
     }
 
     public void SelectBookmark() {
     
-        Jump( locationSelector);
+        Jump( bookmarkIndex);
 
    }
+
+    public void ClearBookmarks() {
+
+        bookmarkIndex = 0;
+       
+        foreach (Bookmark bookmark in bookmarks) {
+
+            GameObject.Destroy(bookmark.transform.parent.gameObject);
+
+        }
+
+        bookmarks.Clear();
+
+
+    }
 }

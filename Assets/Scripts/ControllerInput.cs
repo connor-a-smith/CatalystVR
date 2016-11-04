@@ -33,6 +33,8 @@ public class ControllerInput : MonoBehaviour
     private MonitorButtonScript currentlySelectedButton = null;
     private int selectedButtonIndex = 0;
 
+    private bool verticalDown = false;
+
     //Allows movement while selecting a POI using the Dpad.
     private bool advancedMode = false;
     // Use this for initialization
@@ -47,7 +49,7 @@ public class ControllerInput : MonoBehaviour
         if (Input.GetAxis("RightStickHorizontal") != 0)
         {
             //Movement allowed, no POI selected or advanced mode.
-            if (Controller.selectedPOI == null || advancedMode)
+            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
             {
                 //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
                 Controller.playerShip.transform.RotateAround(Controller.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
@@ -79,7 +81,7 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("RightStickVertical") != 0)
         {
-            if (Controller.selectedPOI == null || advancedMode)
+            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
             {
 
                 Transform shipTransform = Controller.playerShip.transform;
@@ -118,15 +120,13 @@ public class ControllerInput : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0)
         {
             //Movement allowed, no POI selected or advanced mode.
-            if (Controller.selectedPOI == null || advancedMode)
+            if ((Controller.selectedPOI == null  && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
             {
                 Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
             }
 
-
-
             //POI selected and not advanced mode, stick controller POI movement.
-            else if (!justActivatedLeftStickHorizontal)
+            else if (!Controller.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal)
             {
                 justActivatedLeftStickHorizontal = true;
                 //Debug.Log(Input.GetAxis("RightStickHorizontal"));
@@ -150,10 +150,38 @@ public class ControllerInput : MonoBehaviour
 
         if (Input.GetAxis("Vertical") != 0)
         {
-            if (Controller.selectedPOI == null || advancedMode)
+
+            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
             {
                 Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
             }
+
+            else if (Controller.instance.bookmarks.bookmarkPanelActivated && !verticalDown) {
+
+                verticalDown = true;
+
+                Debug.LogWarning("HERE");
+
+                if (Input.GetAxis("Vertical") < 0) {
+
+                    Controller.instance.bookmarks.MoveSelectorDown();
+
+
+                }
+
+                else {
+
+                    Controller.instance.bookmarks.MoveSelectorUp();
+
+                }
+            }
+        }
+
+        else {
+
+            verticalDown = false;
+
+
         }
 
         if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
@@ -176,8 +204,14 @@ public class ControllerInput : MonoBehaviour
         {
             justActivatedA = true;
 
+            if (Controller.instance.bookmarks.bookmarkPanelActivated) {
+
+                Controller.instance.bookmarks.SelectBookmark();
+
+            }
+
             //If no POI selected, then try to select a new POI
-            if (Controller.selectedPOI == null)
+            else if (Controller.selectedPOI == null)
             {
                 RaycastHit hit;
                 Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity);
@@ -190,6 +224,7 @@ public class ControllerInput : MonoBehaviour
                     pickActiveButton(0);
                 }
             }
+
 
             //POI Selected, trigger its buttons.
             else

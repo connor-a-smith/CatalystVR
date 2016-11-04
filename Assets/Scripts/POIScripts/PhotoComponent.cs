@@ -48,9 +48,16 @@ public class PhotoComponent : POIScriptComponent {
   public override void Deactivate() {
 
     base.Deactivate();
-    // Deactivate the loader object.
-    loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(false);
-    loaderObj.SetActive(false);
+    // Deactivate the loader object
+
+        if (loaderObj != null) {
+
+            loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(false);
+            loaderObj.SetActive(false);
+
+        }
+
+
 
   }
 }

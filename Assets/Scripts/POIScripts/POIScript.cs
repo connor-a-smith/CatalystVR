@@ -1,16 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class POIScript : MonoBehaviour {
 
   bool activated = false;
   List<POIScriptComponent> components;
 
-  // Use this for initialization
-  void Start() {
+    void Awake() {
+
+       // SceneManager.sceneLoaded += AddTest;
+        //SceneManager.sceneUnloaded +=
+
+       Controller.instance.POIList.Add(this);
+
+
+    }
+
+    // Use this for initialization
+    void Start() {
     components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
-    Controller.instance.POIList.Add(this);
   }
 
   // Update is called once per frame
@@ -28,6 +38,8 @@ public class POIScript : MonoBehaviour {
     if (Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI) {
       Controller.selectedPOI.Deactivate();
     }
+
+        Debug.LogWarning("ACTIVATING");
 
     activated = true;
     Controller.selectedPOI = this;
