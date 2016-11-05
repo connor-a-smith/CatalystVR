@@ -14,10 +14,10 @@ public class Controller : MonoBehaviour {
   private float cameraEyeOffset = 0.6f;
 
   [SerializeField]
-  private GameObject[] leftEyeCameras;
+  public GameObject[] leftEyeCameras;
 
   [SerializeField]
-  private GameObject[] rightEyeCameras;
+  public GameObject[] rightEyeCameras;
 
   [SerializeField]
   public BookmarkController bookmarks;
@@ -34,7 +34,7 @@ public class Controller : MonoBehaviour {
   public List<POIScript> POIList;
 
   [SerializeField]
-  private bool is3D = false;
+  public bool is3D = false;
 
   public static GameObject playerShip;
   public static MonitorScript monitor;
@@ -60,10 +60,13 @@ public class Controller : MonoBehaviour {
 
   public Object labelPrefab;
 
-
   public static MonitorButtonScript[] buttons;
 
   public static string instructionText = "Select a POI or grab the sphere to move. The further the sphere from the grab point, the faster you'll go in the direction you moved it.";
+
+  public delegate void Toggle3DController();
+
+  public Toggle3DController Toggle3DDelegate;
 
   // Use this for initialization
   /// <summary>
@@ -146,7 +149,9 @@ public class Controller : MonoBehaviour {
     SceneManager.sceneLoaded += FillPOIListOnLoad;
     SceneManager.sceneLoaded += FillPOIList;
 
-    controllerReady();
+    if (controllerReady != null) {
+      controllerReady();
+    }
 
     ResetCameraPositions();
 
@@ -154,7 +159,6 @@ public class Controller : MonoBehaviour {
 
 
     FillPOIList(new Scene(), LoadSceneMode.Single);
-
 
   }
 
@@ -256,12 +260,17 @@ public class Controller : MonoBehaviour {
   }
 
   public void Toggle3D() {
+
+
     if (is3D) {
       Make2D();
-      return;
+    }
+    else {
+      Make3D();
     }
 
-    Make3D();
+    Toggle3DDelegate();
+
   }
 
   public void Make2D() {
