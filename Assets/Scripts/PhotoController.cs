@@ -474,13 +474,16 @@ public class PhotoController : MonoBehaviour {
 
         Texture2D image = photo as Texture2D;
 
-        // Creates a new in-game sprite and populates it with the new texture.
-        Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
+        if (image != null) {
 
-        // Add the final sprite into a texture.
-        spriteList.Add(imageSprite);
+          // Creates a new in-game sprite and populates it with the new texture.
+          Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
 
-        yield return null;
+          // Add the final sprite into a texture.
+          spriteList.Add(imageSprite);
+
+          yield return null;
+        }
       }
       else {
 
