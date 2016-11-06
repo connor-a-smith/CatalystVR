@@ -194,11 +194,11 @@ public class Controller : MonoBehaviour {
 
       newTransform.localPosition = panelPositions[i];
 
-      newPanel.name = POIList[i].name;
+      newPanel.name = POIList[i].POIName;
 
       Text panelText = newPanel.GetComponentInChildren<Text>();
 
-      panelText.text = POIList[i].name;
+      panelText.text = POIList[i].POIName;
 
       Image childImage = newTransform.GetComponentInChildren<Image>();
       RectTransform imageTransform = childImage.GetComponent<RectTransform>();
