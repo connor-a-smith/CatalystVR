@@ -63,7 +63,7 @@ public class ControllerInput : MonoBehaviour {
 
         PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-        if (POIPhotos != null && POIPhotos.loaderObj.activeSelf) {
+        if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
           if (Input.GetAxis("RightStickHorizontal") > 0) {
 
@@ -132,7 +132,7 @@ public class ControllerInput : MonoBehaviour {
 
         PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-        if (POIPhotos != null && POIPhotos.loaderObj.activeSelf) {
+        if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
           if (Input.GetAxis("RightStickVertical") > 0) {
 
@@ -160,7 +160,7 @@ public class ControllerInput : MonoBehaviour {
 
         PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-        if (POIPhotos != null && POIPhotos.loaderObj.activeSelf) {
+        if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
           if (Input.GetAxis("Horizontal") > 0) {
 
@@ -221,7 +221,7 @@ public class ControllerInput : MonoBehaviour {
 
           PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-          if (POIPhotos != null && POIPhotos.loaderObj.activeSelf) {
+          if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
             if (Input.GetAxis("Vertical") > 0) {
 
