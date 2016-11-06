@@ -23,12 +23,13 @@ public class ControllerInput : MonoBehaviour
     //Was the DPad just used?
     private bool justActivatedDpad = false;
 
-    private bool justActivatedStart = false;
 
     private bool justActivatedRightStickVertical = false;
     private bool justActivatedRightStickHorizontal = false;
     private bool justActivatedLeftStickVertical = false;
     private bool justActivatedLeftStickHorizontal = false;
+    private bool justActivatedStart = false;
+    private bool justActivatedBack = false;
 
     private MonitorButtonScript currentlySelectedButton = null;
     private int selectedButtonIndex = 0;
@@ -254,13 +255,24 @@ public class ControllerInput : MonoBehaviour
             justActivatedB = false;
         }
 
-        if (Input.GetAxis("Xbox Start") == 1)
+        if (Input.GetAxis("Xbox Back") == 1 && !justActivatedBack)
         {
             justActivatedStart = true;
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
 
-        else if (Input.GetAxis("Xbox Start") == 0)
+        else if (Input.GetAxis("Xbox Back") == 0 && justActivatedBack)
+        {
+            justActivatedBack = false;
+        }
+
+        if (Input.GetAxis("Xbox Start") == 1 && !justActivatedStart)
+        {
+            justActivatedStart = true;
+            Controller.instance.Toggle3D();
+        }
+
+        else if (Input.GetAxis("Xbox Start") == 0 && justActivatedStart)
         {
             justActivatedStart = false;
         }

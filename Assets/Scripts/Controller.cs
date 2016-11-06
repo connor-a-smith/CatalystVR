@@ -224,7 +224,7 @@ public class Controller : MonoBehaviour {
     }
 
     if (Input.GetKeyDown(KeyCode.Alpha3)) {
-      Toggle2D();
+      Toggle3D();
     }
 
     if (is3D && Input.GetKey(KeyCode.Minus)) {
@@ -255,7 +255,7 @@ public class Controller : MonoBehaviour {
     }
   }
 
-  public void Toggle2D() {
+  public void Toggle3D() {
     if (is3D) {
       Make2D();
       return;
