@@ -12,7 +12,7 @@ public class PhotoComponent : POIScriptComponent {
 
   [SerializeField] private int maximumNumberOfPictures = 24;
 
-  private GameObject loaderObj;
+  public GameObject loaderObj;
 
   public override void Activate() {
 
@@ -50,12 +50,12 @@ public class PhotoComponent : POIScriptComponent {
     base.Deactivate();
     // Deactivate the loader object
 
-        if (loaderObj != null) {
+    if (loaderObj != null) {
 
-            loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(false);
-            loaderObj.SetActive(false);
+      loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(false);
+      loaderObj.SetActive(false);
 
-        }
+    }
 
 
 
