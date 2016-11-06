@@ -38,10 +38,15 @@ public class ControllerInput : MonoBehaviour
 
     //Allows movement while selecting a POI using the Dpad.
     private bool advancedMode = false;
+
+
+    private int POILayerMask;
+    
     // Use this for initialization
     void Start()
     {
-
+        //Set raycast to hit everything except Ignore Raycast.
+        POILayerMask = ~(1<<LayerMask.NameToLayer("Ignore Raycast"));
     }
 
     // Update is called once per frame
@@ -181,8 +186,6 @@ public class ControllerInput : MonoBehaviour
         else {
 
             verticalDown = false;
-
-
         }
 
         if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
@@ -215,7 +218,7 @@ public class ControllerInput : MonoBehaviour
             else if (Controller.selectedPOI == null)
             {
                 RaycastHit hit;
-                Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity);
+                Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity, POILayerMask, QueryTriggerInteraction.Collide);
                 Controller.inputManager.HandleHit(hit);
 
 
