@@ -13,6 +13,10 @@ public class CaveCamLoader : MonoBehaviour {
 
     leftEyeCameras = Controller.instance.leftEyeCameras;
     rightEyeCameras = Controller.instance.rightEyeCameras;
+
+    Controller.instance.platformMonitor.SetActive(false);
+    Controller.instance.platformModel.SetActive(false);
+    Controller.instance.bookmarks.gameObject.SetActive(false);
 	
     Controller.instance.Toggle3DDelegate += Toggle3D;
 
@@ -105,5 +109,11 @@ public class CaveCamLoader : MonoBehaviour {
       Destroy(camera.GetComponent<Skybox>());
 
     }
+
+
+    Controller.instance.platformMonitor.SetActive(true);
+    Controller.instance.platformModel.SetActive(true);
+    Controller.instance.bookmarks.gameObject.SetActive(true);
+
   }
 }
