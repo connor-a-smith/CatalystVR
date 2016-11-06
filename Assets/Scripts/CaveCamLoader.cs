@@ -124,13 +124,7 @@ public class CaveCamLoader : MonoBehaviour {
 
     SetSkyboxCamerasActive(false);
 
-<<<<<<< HEAD:Assets/CaveCamLoader.cs
     Destroy(skyboxCameras);
-=======
-    Controller.instance.platformMonitor.SetActive(true);
-    Controller.instance.platformModel.SetActive(true);
-    Controller.instance.bookmarks.transform.parent.gameObject.SetActive(true);
->>>>>>> master:Assets/Scripts/CaveCamLoader.cs
 
   }
 }

@@ -1002,7 +1002,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 89.546974
+  field of view: 107.06167
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2149,7 +2149,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 81.20637
+  field of view: 97.08971
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3084,7 +3084,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 81.20637
+  field of view: 97.08971
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3820,7 +3820,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 75.77662
+  field of view: 90.597946
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4428,7 +4428,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 70.67893
+  field of view: 84.50319
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4709,7 +4709,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 89.546974
+  field of view: 107.06167
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6225,6 +6225,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  platformMonitor: {fileID: 1950079149}
+  platformModel: {fileID: 872659283}
   is3D: 0
   defaultPOIMaterialEditor: {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6,
     type: 2}
@@ -6612,7 +6614,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 75.77662
+  field of view: 90.597946
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -9318,7 +9320,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 76.44038
+  field of view: 91.391525
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -12582,7 +12584,6 @@ GameObject:
   - 92: {fileID: 1729989698}
   - 81: {fileID: 1729989697}
   - 114: {fileID: 1729989696}
-  - 45: {fileID: 1729989695}
   m_Layer: 0
   m_Name: TopMiddleL
   m_TagString: MainCamera
@@ -12609,7 +12610,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 90.31034
+  field of view: 107.97434
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -12641,14 +12642,6 @@ Transform:
   - {fileID: 1045314019}
   m_Father: {fileID: 1256400623}
   m_RootOrder: 2
---- !u!45 &1729989695
-Skybox:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729989692}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 0}
 --- !u!114 &1729989696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12869,7 +12862,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 76.44038
+  field of view: 91.391525
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -13000,7 +12993,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 70.67893
+  field of view: 84.50319
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -13971,7 +13964,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 90.31034
+  field of view: 107.97434
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
