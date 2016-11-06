@@ -388,84 +388,85 @@ public class PhotoController : MonoBehaviour {
     //directory to load files from
     string[] files = Directory.GetFiles(photoPath);
 
-    //loops through all files in the directory
-    foreach (string str in files) {
+    if (files != null && files.Length > 0) {
+      
+      //loops through all files in the directory
+      foreach (string str in files) {
 
-      //checks the extension on the file
-      if (Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg" || Path.GetExtension(str) == ".JPG") {
+        //checks the extension on the file
+        if (Path.GetExtension(str) == ".png" || Path.GetExtension(str) == ".jpg" || Path.GetExtension(str) == ".JPG") {
 
-        // If the number of pictures in the directory exceeds max pictures supported
-        if (imageFilePaths.Count >= numPicsToLoad) {
+          // If the number of pictures in the directory exceeds max pictures supported
+          if (imageFilePaths.Count >= numPicsToLoad) {
 
-          // Log a warning and stop the loop. No point in loading more pictures at this point.
-          Debug.LogWarning("Number of pictures in directory exceeds " + numPicsToLoad + ". Only first " + numPicsToLoad + " will be used");
-          break;
+            // Log a warning and stop the loop. No point in loading more pictures at this point.
+            Debug.LogWarning("Number of pictures in directory exceeds " + numPicsToLoad + ". Only first " + numPicsToLoad + " will be used");
+            break;
+          }
+
+          // Add the image path to the list of file paths.
+          imageFilePaths.Add(str);
+
         }
-
-        // Add the image path to the list of file paths.
-        imageFilePaths.Add(str);
-
-      }
 
             // If this file type is not supported, print a warning and skip it.
             else {
 
-        Debug.LogWarning("File extension " + Path.GetExtension(str) + " is not supported. Please convert before attempting to load.");
+          Debug.LogWarning("File extension " + Path.GetExtension(str) + " is not supported. Please convert before attempting to load.");
+        }
       }
-    }
 
-    //Creates in-game textures for the various images
-    for (int i = 0; i < imageFilePaths.Count; i++) {
+      //Creates in-game textures for the various images
+      for (int i = 0; i < imageFilePaths.Count; i++) {
 
-      // Stores the file path
-      string str = imageFilePaths[i];
+        // Stores the file path
+        string str = imageFilePaths[i];
 
-      // Updates the path to load a WWW from local computer
-      string imageString = "file://" + str;
+        // Updates the path to load a WWW from local computer
+        string imageString = "file://" + str;
 
-      //loads the WWW (Whatever that means)
-      WWW w = new WWW(imageString);
+        //loads the WWW (Whatever that means)
+        WWW w = new WWW(imageString);
 
-      // Waits for the WWW to finish loading
-      while (!w.isDone) {
+        // Waits for the WWW to finish loading
+        while (!w.isDone) {
 
-        // Waits for next frame
+          // Waits for next frame
+          yield return null;
+
+        }
+
+        // Prints out a log to give some sense of progress for the image loading.
+        // Waiting is no fun, so at least you can see how soon it'll be ready!
+        Debug.Log("Loading Image " + i + " of " + imageFilePaths.Count);
+
+        // >>> NOTE <<< For future reference, THIS is the part that takes so long!
+        // Recommend some sort of loading bar/screen for future use.
+        // Game will be crazy laggy while this is loading.
+
+        // Gets the audio clip from the WWW and adds to list
+        Texture2D image = new Texture2D(1, 1);
+
+        // Loads the image from file into an in-game texture.
+        w.LoadImageIntoTexture(image);
+
+        // Creates a new in-game sprite and populates it with the new texture.
+        Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
+
+        // Add the final sprite into a texture.
+        spriteList.Add(imageSprite);
+
+        // Wait for the next frame to load another picture.
+        // Honestly we only do this so that the Loading Image debug works.
+        // Otherwise game will freeze completely until all pictures loaded.
         yield return null;
-
       }
-
-      // Prints out a log to give some sense of progress for the image loading.
-      // Waiting is no fun, so at least you can see how soon it'll be ready!
-      Debug.Log("Loading Image " + i + " of " + imageFilePaths.Count);
-
-      // >>> NOTE <<< For future reference, THIS is the part that takes so long!
-      // Recommend some sort of loading bar/screen for future use.
-      // Game will be crazy laggy while this is loading.
-
-      // Gets the audio clip from the WWW and adds to list
-      Texture2D image = new Texture2D(1, 1);
-
-      // Loads the image from file into an in-game texture.
-      w.LoadImageIntoTexture(image);
-
-      // Creates a new in-game sprite and populates it with the new texture.
-      Sprite imageSprite = Sprite.Create(image, new Rect(0, 0, image.width, image.height), new Vector2(0.5f, 0.5f));
-
-      // Add the final sprite into a texture.
-      spriteList.Add(imageSprite);
-
-      // Wait for the next frame to load another picture.
-      // Honestly we only do this so that the Loading Image debug works.
-      // Otherwise game will freeze completely until all pictures loaded.
-      yield return null;
     }
   }
 
   public IEnumerator LoadImagesIntern(List<Sprite> spriteList) {
 
     Object[] photoFiles = Resources.LoadAll(photoPath);
-
-    Debug.LogWarningFormat("Found {0} photos", photoFiles.Length);
 
     foreach (Object photo in photoFiles) {
 
