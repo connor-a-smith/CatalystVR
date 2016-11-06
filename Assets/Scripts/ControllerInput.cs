@@ -223,7 +223,7 @@ public class ControllerInput : MonoBehaviour {
 
           if (POIPhotos != null && POIPhotos.loaderObj.activeSelf) {
 
-            if (Input.GetAxis("RightStickVertical") > 0) {
+            if (Input.GetAxis("Vertical") > 0) {
 
               POIPhotos.loaderObj.GetComponent<PhotoController>().MoveUp();
 
