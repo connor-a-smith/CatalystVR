@@ -1,38 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FocusTransformComponent : POIScriptComponent {
+public class FocusTransformComponent : POIScriptComponent
+{
+    // Use this for initialization
+    void Start()
+    {
 
-    public GameObject transformValueObject;
+    }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public override void Activate()
     {
         base.Activate();
 
-        //Teleport to location. Shifting down by cam height so that camera is in the correct position.
-        Controller.playerShip.transform.position = this.transform.position;
-        Controller.playerShip.transform.LookAt(this.gameObject.transform);
+        //Want the raycast cam to look at the POI. So we get the rotation needed for the cam to see it and we apply to the entire platform.
+        Quaternion oldRot = Controller.instance.raycastCam.transform.localRotation;
+        Controller.instance.raycastCam.transform.LookAt(this.transform.position);
+        Quaternion newRot = Controller.instance.raycastCam.transform.localRotation;
 
-        Vector3 newRotation = Controller.playerShip.transform.rotation.eulerAngles;
-        newRotation.z = 0;
-        Controller.playerShip.transform.rotation = Quaternion.Euler(newRotation);
+        //Apply to platform, and reset raycastCam pos.
 
-        Controller.playerShip.transform.position += (-Controller.playerShip.transform.forward * 50.0f);
-        Controller.playerShip.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Controller.playerShip.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
+        Controller.instance.raycastCam.transform.localRotation = oldRot;
+        
+        //
+        Controller.playerShip.transform.position = this.transform.position - Controller.instance.raycastCam.transform.forward * 50.0f;
 
-        //Lerp to location. Need to implement
-
-        //Accelerate to location. Need to implement.
+        //Teleport to location.
     }
 
     public override void Deactivate()
