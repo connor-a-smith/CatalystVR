@@ -583,7 +583,7 @@ GameObject:
   - 224: {fileID: 224000012245197158}
   - 222: {fileID: 222000011875339708}
   - 114: {fileID: 114000013509924874}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Panel Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   - 223: {fileID: 223000012163288690}
   - 114: {fileID: 114000012752991442}
   - 114: {fileID: 114000010295489156}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   - 223: {fileID: 223000013474328872}
   - 114: {fileID: 114000011990375526}
   - 114: {fileID: 114000012221264332}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -999,7 +999,7 @@ GameObject:
   - 224: {fileID: 224000014133851324}
   - 222: {fileID: 222000012722747078}
   - 114: {fileID: 114000010497805148}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1233,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 224000011378646124}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ListPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1295,7 @@ GameObject:
   - 224: {fileID: 224000013749662968}
   - 222: {fileID: 222000013242601036}
   - 114: {fileID: 114000010461693108}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ListPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2791,7 +2791,7 @@ GameObject:
   - 222: {fileID: 222000010654699584}
   - 114: {fileID: 114000013146585962}
   - 114: {fileID: 114000012293920172}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2907,7 +2907,7 @@ GameObject:
   - 222: {fileID: 222000010465806218}
   - 114: {fileID: 114000013741177138}
   - 114: {fileID: 114000011387117464}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6303,7 +6303,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 55.100742
+  field of view: 191.38632
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6337,7 +6337,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 43.49071
+  field of view: 151.06017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6371,7 +6371,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 49.968533
+  field of view: 173.56017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6405,7 +6405,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 49.968533
+  field of view: 173.56017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6439,7 +6439,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 47.03589
+  field of view: 163.37395
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6473,7 +6473,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 47.03589
+  field of view: 163.37395
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6507,7 +6507,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 55.57046
+  field of view: 193.01785
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6541,7 +6541,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 43.49071
+  field of view: 151.06017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6575,7 +6575,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 55.57046
+  field of view: 193.01785
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6609,7 +6609,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 55.100742
+  field of view: 191.38632
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6643,7 +6643,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 46.62746
+  field of view: 161.95532
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6677,7 +6677,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 46.62746
+  field of view: 161.95532
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -10171,6 +10171,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  platformMonitor: {fileID: 1000012776480648}
+  platformModel: {fileID: 1000012692714682}
   is3D: 0
   defaultPOIMaterialEditor: {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6,
     type: 2}
