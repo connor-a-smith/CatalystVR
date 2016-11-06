@@ -33,6 +33,9 @@ public class Controller : MonoBehaviour {
 
   public List<POIScript> POIList;
 
+  public GameObject platformMonitor;
+  public GameObject platformModel;
+
   [SerializeField]
   public bool is3D = false;
 
