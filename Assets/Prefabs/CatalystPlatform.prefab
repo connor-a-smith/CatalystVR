@@ -1963,7 +1963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012153630144
 GameObject:
   m_ObjectHideFlags: 1
@@ -2029,7 +2029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012256954300
 GameObject:
   m_ObjectHideFlags: 1
@@ -2945,7 +2945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013223522832
 GameObject:
   m_ObjectHideFlags: 1
@@ -3102,7 +3102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013402379084
 GameObject:
   m_ObjectHideFlags: 1
@@ -3276,7 +3276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013638520310
 GameObject:
   m_ObjectHideFlags: 1
@@ -3456,7 +3456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013769142022
 GameObject:
   m_ObjectHideFlags: 1
@@ -3731,7 +3731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000014263298516
 GameObject:
   m_ObjectHideFlags: 1
@@ -6303,7 +6303,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.284256
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6337,7 +6337,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.10709
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6371,7 +6371,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 61.017277
+  field of view: 48.813824
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6405,7 +6405,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 61.017277
+  field of view: 48.813824
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6439,7 +6439,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 57.436153
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6473,7 +6473,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 57.436153
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6507,7 +6507,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.857834
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6541,7 +6541,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.10709
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6575,7 +6575,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.857834
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6609,7 +6609,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.284256
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6643,7 +6643,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 56.93742
+  field of view: 45.54994
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6677,7 +6677,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 56.93742
+  field of view: 45.54994
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -9758,7 +9758,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013350153970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd0764eadb8a5846b6e9204df957859, type: 3}
+  m_Script: {fileID: 11500000, guid: ecde3a0b4735d5c469a28bb49fd9b65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000011483226268

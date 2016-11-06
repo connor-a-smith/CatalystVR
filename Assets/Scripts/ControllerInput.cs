@@ -215,8 +215,8 @@ public class ControllerInput : MonoBehaviour
             {
                 RaycastHit hit;
                 Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity);
-
                 Controller.inputManager.HandleHit(hit);
+
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
                 if (Controller.selectedPOI != null)
