@@ -18,7 +18,7 @@ public class FocusTransformComponent : POIScriptComponent
     public override void Activate()
     {
         base.Activate();
-
+        /*
         //Want the raycast cam to look at the POI. So we get the rotation needed for the cam to see it and we apply to the entire platform.
         Quaternion oldRot = Controller.instance.raycastCam.transform.localRotation;
         Controller.instance.raycastCam.transform.LookAt(this.transform.position);
@@ -31,8 +31,19 @@ public class FocusTransformComponent : POIScriptComponent
         
         //
         Controller.playerShip.transform.position = this.transform.position - Controller.instance.raycastCam.transform.forward * 50.0f;
-
+        */
         //Teleport to location.
+
+        Controller.playerShip.transform.position = this.transform.position + 50 * this.transform.forward + 50 * this.transform.up;
+
+        Quaternion oldRot = Controller.instance.raycastCam.transform.localRotation;
+        Controller.instance.raycastCam.transform.LookAt(this.transform.position);
+        Quaternion newRot = Controller.instance.raycastCam.transform.localRotation;
+
+        //Apply to platform, and reset raycastCam pos.
+
+        Controller.playerShip.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
+        Controller.instance.raycastCam.transform.localRotation = oldRot;
     }
 
     public override void Deactivate()
