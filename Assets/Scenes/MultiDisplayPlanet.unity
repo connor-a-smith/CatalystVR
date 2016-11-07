@@ -337,6 +337,11 @@ Prefab:
       value: Luxor, Egypt is the home of the royal tombs and the ancient capital of
         the pharaohs.
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013285437262, guid: c2e22098ce7c8da4590cceb5113bd50e,
+        type: 2}
+      propertyPath: sentence
+      value: St. Elijah's Monastery in Iraq was destroyed by Isis
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
