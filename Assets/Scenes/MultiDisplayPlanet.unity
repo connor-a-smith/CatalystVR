@@ -90,6 +90,334 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13949256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000012715246720, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 13949257}
+  - 95: {fileID: 13949265}
+  - 114: {fileID: 13949264}
+  - 114: {fileID: 13949263}
+  - 114: {fileID: 13949262}
+  - 114: {fileID: 13949261}
+  - 23: {fileID: 13949260}
+  - 33: {fileID: 13949259}
+  - 65: {fileID: 13949258}
+  m_Layer: 0
+  m_Name: POI- Madain Saleh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13949257
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013083336686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_LocalRotation: {x: -0.17818867, y: -0.4794057, z: -0.47376502, w: -0.716914}
+  m_LocalPosition: {x: -12.09, y: 9.63, z: 14.65}
+  m_LocalScale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
+  m_LocalEulerAnglesHint: {x: -11.408001, y: 161.18102, z: 60.155003}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 3
+--- !u!65 &13949258
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000012730462078, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400001, y: 2.5617914, z: 1.2400006}
+  m_Center: {x: 0.0000076293945, y: 0, z: 0}
+--- !u!33 &13949259
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000010375110968, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &13949260
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000010476382202, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &13949261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012855730342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Mada'in Saleh
+  labelSpawnHeight: 1.5
+--- !u!114 &13949262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011562762722, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Mada'in Saleh in Saudi Arabia contains tombs carved of sandstone from
+    the 1st century.
+--- !u!114 &13949263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011874826342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Mar Saba
+--- !u!114 &13949264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013754231790, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &13949265
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000012949545760, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 13949256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &184330151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 184330152}
+  - 95: {fileID: 184330160}
+  - 114: {fileID: 184330159}
+  - 114: {fileID: 184330158}
+  - 114: {fileID: 184330157}
+  - 114: {fileID: 184330156}
+  - 23: {fileID: 184330155}
+  - 33: {fileID: 184330154}
+  - 65: {fileID: 184330153}
+  m_Layer: 0
+  m_Name: POI- Copper Mine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184330152
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013864975016, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_LocalRotation: {x: -0.17818867, y: -0.4794057, z: -0.47376502, w: -0.716914}
+  m_LocalPosition: {x: -13.1, y: 8.63, z: 14.22}
+  m_LocalScale: {x: 1.000002, y: 1.0000007, z: 1.0000005}
+  m_LocalEulerAnglesHint: {x: -11.408001, y: 161.18102, z: 60.155003}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 6
+--- !u!65 &184330153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000011787455892, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400004, y: 2.5617914, z: 1.2400008}
+  m_Center: {x: 0, y: -0.0000038146973, z: 0}
+--- !u!33 &184330154
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000013995202414, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &184330155
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000012155161460, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &184330156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013096624112, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Copper Mine
+  labelSpawnHeight: 1.5
+--- !u!114 &184330157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012109721388, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Site of an ancient copper mine about 25km from the gold mine Mahd Ad-Dahab
+    in Saudi Arabia.
+--- !u!114 &184330158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000010434631686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Copper Mine
+--- !u!114 &184330159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011853372474, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &184330160
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000010358328194, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184330151}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!43 &211982235
 Mesh:
   m_ObjectHideFlags: 0
@@ -346,6 +674,336 @@ Prefab:
     - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &459647180 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 431172, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+  m_PrefabInternal: {fileID: 459647179}
+--- !u!1 &768621614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000012715246720, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 768621615}
+  - 95: {fileID: 768621623}
+  - 114: {fileID: 768621622}
+  - 114: {fileID: 768621621}
+  - 114: {fileID: 768621620}
+  - 114: {fileID: 768621619}
+  - 23: {fileID: 768621618}
+  - 33: {fileID: 768621617}
+  - 65: {fileID: 768621616}
+  m_Layer: 0
+  m_Name: POI- Geisel Library
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &768621615
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013083336686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_LocalRotation: {x: 0.029046264, y: -0.22741595, z: 0.41440123, w: -0.8807439}
+  m_LocalPosition: {x: 15.929964, y: 11.409999, z: -7.850009}
+  m_LocalScale: {x: 1.0000012, y: 1.0000007, z: 1.0000005}
+  m_LocalEulerAnglesHint: {x: 7.84, y: 25.229002, z: -48.428}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 7
+--- !u!65 &768621616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000012730462078, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400001, y: 2.5617914, z: 1.2400006}
+  m_Center: {x: 0.0000076293945, y: 0, z: 0}
+--- !u!33 &768621617
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000010375110968, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &768621618
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000010476382202, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &768621619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012855730342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Geisel Library
+  labelSpawnHeight: 1.5
+--- !u!114 &768621620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011562762722, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Geisel Library is located at UC San Diego and is named after Dr. Seuss.
+--- !u!114 &768621621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011874826342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Geisel Library
+--- !u!114 &768621622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013754231790, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &768621623
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000012949545760, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768621614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &811884802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000012715246720, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 811884803}
+  - 95: {fileID: 811884811}
+  - 114: {fileID: 811884810}
+  - 114: {fileID: 811884809}
+  - 114: {fileID: 811884808}
+  - 114: {fileID: 811884807}
+  - 23: {fileID: 811884806}
+  - 33: {fileID: 811884805}
+  - 65: {fileID: 811884804}
+  m_Layer: 0
+  m_Name: POI- Melbourne
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &811884803
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013083336686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_LocalRotation: {x: 0.8872038, y: -0.37557313, z: 0.042425364, w: -0.26460227}
+  m_LocalPosition: {x: -9.99, y: -13.08, z: -13.44}
+  m_LocalScale: {x: 1.0000011, y: 1.0000007, z: 1.0000001}
+  m_LocalEulerAnglesHint: {x: -25.928001, y: 162.561, z: -130.238}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 8
+--- !u!65 &811884804
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000012730462078, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400001, y: 2.5617914, z: 1.2400006}
+  m_Center: {x: 0.0000076293945, y: 0, z: 0}
+--- !u!33 &811884805
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000010375110968, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &811884806
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000010476382202, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &811884807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012855730342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Melbourne
+  labelSpawnHeight: 1.5
+--- !u!114 &811884808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011562762722, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: This site is a botanical garden pavillion located in Melbourne, Australia.
+--- !u!114 &811884809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011874826342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Melbourne
+--- !u!114 &811884810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013754231790, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &811884811
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000012949545760, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811884802}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!43 &866854662
 Mesh:
   m_ObjectHideFlags: 0
@@ -537,6 +1195,334 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!1 &1271655597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1271655598}
+  - 95: {fileID: 1271655606}
+  - 114: {fileID: 1271655605}
+  - 114: {fileID: 1271655604}
+  - 114: {fileID: 1271655603}
+  - 114: {fileID: 1271655602}
+  - 23: {fileID: 1271655601}
+  - 33: {fileID: 1271655600}
+  - 65: {fileID: 1271655599}
+  m_Layer: 0
+  m_Name: POI- Ushaiger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271655598
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013864975016, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_LocalRotation: {x: -0.17818867, y: -0.4794057, z: -0.47376502, w: -0.716914}
+  m_LocalPosition: {x: -13.78, y: 9.6, z: 13.4}
+  m_LocalScale: {x: 1.0000006, y: 1.0000001, z: 1.0000001}
+  m_LocalEulerAnglesHint: {x: -11.408001, y: 161.18102, z: 60.155003}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 4
+--- !u!65 &1271655599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000011787455892, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400004, y: 2.5617914, z: 1.2400008}
+  m_Center: {x: 0, y: -0.0000038146973, z: 0}
+--- !u!33 &1271655600
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000013995202414, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &1271655601
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000012155161460, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1271655602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013096624112, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Ushaiger
+  labelSpawnHeight: 1.5
+--- !u!114 &1271655603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012109721388, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Ushaiger in Saudi Arabia was a major stopping point for pilgrams from
+    Iraq and Iran and is currently being reconstructed.
+--- !u!114 &1271655604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000010434631686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Luxor
+--- !u!114 &1271655605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011853372474, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &1271655606
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000010358328194, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1271655597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1474419308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000012715246720, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1474419309}
+  - 95: {fileID: 1474419317}
+  - 114: {fileID: 1474419316}
+  - 114: {fileID: 1474419315}
+  - 114: {fileID: 1474419314}
+  - 114: {fileID: 1474419313}
+  - 23: {fileID: 1474419312}
+  - 33: {fileID: 1474419311}
+  - 65: {fileID: 1474419310}
+  m_Layer: 0
+  m_Name: POI- Stone Bear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474419309
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013083336686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_LocalRotation: {x: 0.02904627, y: -0.22741601, z: 0.41440126, w: -0.8807439}
+  m_LocalPosition: {x: 15.69, y: 12.07, z: -6.74}
+  m_LocalScale: {x: 1.0000011, y: 1.0000007, z: 1.0000001}
+  m_LocalEulerAnglesHint: {x: 7.84, y: 25.229002, z: -48.428}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 9
+--- !u!65 &1474419310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000012730462078, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400001, y: 2.5617914, z: 1.2400006}
+  m_Center: {x: 0.0000076293945, y: 0, z: 0}
+--- !u!33 &1474419311
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000010375110968, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &1474419312
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000010476382202, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1474419313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012855730342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Stone Bear
+  labelSpawnHeight: 1.5
+--- !u!114 &1474419314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011562762722, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: The Warren Stone Bear is located at UC San Diego and is part of the Stuart
+    Art Collection.
+--- !u!114 &1474419315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011874826342, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Stone Bear
+--- !u!114 &1474419316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013754231790, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &1474419317
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000012949545760, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474419308}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1527960358
 Prefab:
   m_ObjectHideFlags: 0
@@ -581,9 +1567,233 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e71005f975f6f80498e69894d2cb01e3, type: 2}
+    - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 210.4407
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 210.4407
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 248.6826
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 250.80257
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 196.28381
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 250.80257
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 212.28403
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 212.28403
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 225.51974
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 225.51974
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 196.28381
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 248.6826
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1649913293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1649913294}
+  - 95: {fileID: 1649913302}
+  - 114: {fileID: 1649913301}
+  - 114: {fileID: 1649913300}
+  - 114: {fileID: 1649913299}
+  - 114: {fileID: 1649913298}
+  - 23: {fileID: 1649913297}
+  - 33: {fileID: 1649913296}
+  - 65: {fileID: 1649913295}
+  m_Layer: 0
+  m_Name: POI- Al-Samlagi Dam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1649913294
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013864975016, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_LocalRotation: {x: -0.17818868, y: -0.47940573, z: -0.473765, w: -0.716914}
+  m_LocalPosition: {x: -12.99, y: 7.54, z: 15.05}
+  m_LocalScale: {x: 1.0000017, y: 1.0000005, z: 1.0000005}
+  m_LocalEulerAnglesHint: {x: -11.408001, y: 161.18102, z: 60.155003}
+  m_Children: []
+  m_Father: {fileID: 459647180}
+  m_RootOrder: 5
+--- !u!65 &1649913295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000011787455892, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400004, y: 2.5617914, z: 1.2400008}
+  m_Center: {x: 0, y: -0.0000038146973, z: 0}
+--- !u!33 &1649913296
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000013995202414, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &1649913297
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000012155161460, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1649913298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013096624112, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Al-Samlagi Dam
+  labelSpawnHeight: 1.5
+--- !u!114 &1649913299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012109721388, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: Al-Samlagi Dam is an ancient heritage dam in Saudi Arabia likely built
+    prior to the rise of Islam.
+--- !u!114 &1649913300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000010434631686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Al-Samlagi Dam
+--- !u!114 &1649913301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000011853372474, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7162e4bc0eaa148bb57c34dd36dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+--- !u!95 &1649913302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000010358328194, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1649913293}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1920477077
 GameObject:
   m_ObjectHideFlags: 0
