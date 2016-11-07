@@ -287,7 +287,6 @@ GameObject:
   - 95: {fileID: 95000010358328194}
   - 114: {fileID: 114000011853372474}
   - 114: {fileID: 114000010434631686}
-  - 114: {fileID: 114000012365131946}
   - 114: {fileID: 114000012109721388}
   - 114: {fileID: 114000013096624112}
   - 23: {fileID: 23000012155161460}
@@ -517,7 +516,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010693728702}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2400004, y: 2.5617914, z: 1.2400008}
@@ -529,7 +528,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012418325912}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2400002, y: 2.5617914, z: 1.2400007}
@@ -541,7 +540,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012715246720}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2400001, y: 2.5617914, z: 1.2400006}
@@ -634,9 +633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateImmediately: 0
-  sentence: Mar Saba in Israel/Palestine is the second oldest Greek orthodox monastery
-    in the world.
+  activateImmediately: 1
+  sentence: Mar Saba is a Greek Orthodox monastery located in the Judean desert. It
+    dates back to the 5th centry A.D.
 --- !u!114 &114000011853372474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -649,7 +648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  transformValueObject: {fileID: 0}
 --- !u!114 &114000011874826342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,8 +673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 1
-  sentence: Luxor, Egypt is the home of the royal tombs and the acient capitol of
-    the pharaoh's.
+  sentence: Luxor, located in Egypt, is the site of the ancient Pharaohs' capital,
+    Thebes.
 --- !u!114 &114000012350185698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -692,21 +690,7 @@ MonoBehaviour:
   pathIsExternal: 0
   photoPath: MarSabaWorld
   maximumNumberOfPictures: 24
---- !u!114 &114000012365131946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010693728702}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activateImmediately: 0
-  pathIsExternal: 0
-  photoPath: 
-  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!114 &114000012449606644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -722,6 +706,7 @@ MonoBehaviour:
   pathIsExternal: 0
   photoPath: IraqWorld
   maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!114 &114000012553392924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -733,6 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  components: []
   POIName: Iraq
   labelSpawnHeight: 1.5
 --- !u!114 &114000012855730342
@@ -746,6 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  components: []
   POIName: Mar Saba
   labelSpawnHeight: 1.5
 --- !u!114 &114000013096624112
@@ -759,6 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  components: []
   POIName: Luxor
   labelSpawnHeight: 1.5
 --- !u!114 &114000013285437262
@@ -773,7 +761,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 1
-  sentence: Ancient Iraq monastery destroyed by Isis
+  sentence: St. Elijah's Monastery, the oldest Christian monastery in Iraq, was destroyed
+    by Isis in 2011. The site was 1,400 years old.
 --- !u!114 &114000013651647110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -786,7 +775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  transformValueObject: {fileID: 0}
 --- !u!114 &114000013754231790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -799,7 +787,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  transformValueObject: {fileID: 0}
 --- !u!135 &135000013020750258
 SphereCollider:
   m_ObjectHideFlags: 1

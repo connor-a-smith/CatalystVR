@@ -65,7 +65,7 @@ public class Controller : MonoBehaviour {
 
   public static MonitorButtonScript[] buttons;
 
-  public static string instructionText = "Welcome to the CAVEkiosk! Select a point of interest (POI) to begin.";
+  public static string instructionText = "Welcome to the CAVEkiosk!\n\nUse the Xbox controller to interact with this exhibit, and hold the Right Trigger for a list of detailed controls.";
 
   public delegate void Toggle3DController();
 
