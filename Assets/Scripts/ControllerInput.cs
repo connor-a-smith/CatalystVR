@@ -7,6 +7,10 @@ public class ControllerInput : MonoBehaviour {
 
   [SerializeField] private float maxTiltAngle = 45.0f;
 
+  private float timeSinceLastInput = 0.0f;
+
+  [SerializeField] private float minutesUntilReset = 5.0f;
+
   public float xRotationSpeed = 30;
   public float yRotationSpeed = -30;
 
@@ -48,6 +52,9 @@ public class ControllerInput : MonoBehaviour {
   void Update() { 
 
     if (Input.GetAxis("RightStickHorizontal") != 0) {
+
+      timeSinceLastInput = 0.0f;
+
       //Movement allowed, no POI selected or advanced mode.
       if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
         //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
@@ -92,6 +99,8 @@ public class ControllerInput : MonoBehaviour {
     }
 
     if (Input.GetAxis("RightStickVertical") != 0) {
+
+      timeSinceLastInput = 0.0f;
 
       if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
 
@@ -147,6 +156,9 @@ public class ControllerInput : MonoBehaviour {
     }
 
     if (Input.GetAxis("Horizontal") != 0) {
+
+      timeSinceLastInput = 0.0f;
+
       //Movement allowed, no POI selected or advanced mode.
       if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
         Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
@@ -191,6 +203,8 @@ public class ControllerInput : MonoBehaviour {
     }
 
     if (Input.GetAxis("Vertical") != 0) {
+
+      timeSinceLastInput = 0.0f;
 
       if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
         Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
@@ -247,6 +261,8 @@ public class ControllerInput : MonoBehaviour {
       if (Controller.selectedPOI != null) {
         pickActiveButton((int)Input.GetAxis("Xbox DpadX"));
         justActivatedDpad = true;
+        timeSinceLastInput = 0.0f;
+
       }
     }
 
@@ -258,6 +274,8 @@ public class ControllerInput : MonoBehaviour {
     //On a press, activate
     if (Input.GetAxis("Xbox A") != 0 && !justActivatedA) {
       justActivatedA = true;
+      timeSinceLastInput = 0.0f;
+
 
       if (Controller.instance.bookmarks.bookmarkPanelActivated) {
 
@@ -292,17 +310,23 @@ public class ControllerInput : MonoBehaviour {
 
     //On b press, deactvate selected POI.
     if (Input.GetAxis("Xbox B") != 0 && !justActivatedA) {
+
+      timeSinceLastInput = 0.0f;
+
       if (Controller.selectedPOI != null) {
         Controller.selectedPOI.Deactivate();
       }
     }
 
-        //On release of button, allow to be used again.
-        else if (Input.GetAxis("Xbox B") == 0) {
+    //On release of button, allow to be used again.
+    else if (Input.GetAxis("Xbox B") == 0) {
       justActivatedB = false;
     }
 
     if (Input.GetAxis("Xbox Back") == 1 && !justActivatedBack) {
+
+      timeSinceLastInput = 0.0f;
+
       justActivatedStart = true;
       SceneManager.LoadScene("MultiDisplayPlanet");
     }
@@ -311,6 +335,9 @@ public class ControllerInput : MonoBehaviour {
     }
 
     if (Input.GetAxis("Xbox Start") == 1 && !justActivatedStart) {
+
+      timeSinceLastInput = 0.0f;
+
       justActivatedStart = true;
       Controller.instance.Toggle3D();
     }
@@ -319,6 +346,8 @@ public class ControllerInput : MonoBehaviour {
     }
 
     if (Input.GetAxis("LeftTrigger") == 1) {
+
+      timeSinceLastInput = 0.0f;
 
       if (!Controller.instance.bookmarks.bookmarkPanelActivated) {
 
@@ -334,6 +363,7 @@ public class ControllerInput : MonoBehaviour {
 
     if (Input.GetAxis("RightTrigger") == 1) {
 
+      timeSinceLastInput = 0.0f;
 
       if (!Controller.instance.inputGuide.panelActive) {
 
@@ -346,10 +376,7 @@ public class ControllerInput : MonoBehaviour {
       Controller.instance.inputGuide.MovePanelDown();
 
     }
-
-
-
-
+      
     //TODO Remove
     if (Input.GetKey(KeyCode.A)) {//else if (Input.GetButton("joystick button 0"))
       SceneManager.LoadScene("Mar Saba");
@@ -390,5 +417,33 @@ public class ControllerInput : MonoBehaviour {
 
     //Select this new button.
     Controller.buttons[selectedButtonIndex].select();
+  }
+
+
+  public IEnumerator CheckForInput() {
+
+    while (true) {
+
+      if (timeSinceLastInput >= 0) {
+        timeSinceLastInput += Time.deltaTime;
+      }
+
+      if (timeSinceLastInput > (minutesUntilReset * 60.0f)) {
+
+        if (Controller.instance.is3D) {
+          
+          Controller.instance.Toggle3D();
+
+        }
+
+        SceneManager.LoadScene(0);
+
+        timeSinceLastInput = -1.0f;
+
+      }
+
+      yield return null;
+
+    }
   }
 }
