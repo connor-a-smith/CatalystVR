@@ -37,7 +37,6 @@ public class CatalystPhoto : MonoBehaviour {
     this.row = row;
     this.col = col;
     this.angleBetweenPhotos = angleBetweenPhotos;
-
   }
 
   /// <summary>
