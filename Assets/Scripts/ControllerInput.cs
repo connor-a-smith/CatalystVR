@@ -38,8 +38,7 @@ public class ControllerInput : MonoBehaviour
 
     //Allows movement while selecting a POI using the Dpad.
     private bool advancedMode = false;
-
-
+    
     private int POILayerMask;
     
     // Use this for initialization

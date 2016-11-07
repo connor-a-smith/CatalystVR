@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: VertexColor
-  m_Shader: {fileID: 4800000, guid: 4187d88c481285e4e87b62b3f5887fb2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 57fbeb7ed4c036f408b5560e20dd52e5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -21,6 +21,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _SpriteTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
         name: _PointSize
@@ -28,6 +34,9 @@ Material:
     - first:
         name: _Shininess
       second: 1
+    - first:
+        name: _Size
+      second: 0.35
     m_Colors:
     - first:
         name: _Color

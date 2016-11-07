@@ -3838,8 +3838,8 @@ Transform:
   m_GameObject: {fileID: 1000012644848984}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: -23.9, y: 65.9, z: -340.8}
-  m_LocalScale: {x: 0.28394473, y: 0.28394473, z: 0.28394473}
-  m_LocalEulerAnglesHint: {x: 0, y: -29.272, z: 0}
+  m_LocalScale: {x: 0.28394473, y: 0.28394473, z: 0.2839448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000012280243694}
   - {fileID: 4000012293728394}
@@ -3934,7 +3934,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 290, z: 0}
   m_Children:
   - {fileID: 4000013405482640}
-  - {fileID: 4000011917750558}
   m_Father: {fileID: 4000010041021936}
   m_RootOrder: 8
 --- !u!4 &4000010308256594
@@ -4167,7 +4166,7 @@ Transform:
   - {fileID: 224000013284767606}
   - {fileID: 4000010739197742}
   m_Father: {fileID: 4000013405482640}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!4 &4000010609431778
 Transform:
   m_ObjectHideFlags: 1
@@ -4808,11 +4807,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012559478812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00022705997, y: 449.99994, z: -0.00008264304}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 4000010259937944}
+  m_Father: {fileID: 4000013405482640}
   m_RootOrder: 1
 --- !u!4 &4000011918199960
 Transform:
@@ -5440,7 +5439,7 @@ Transform:
   - {fileID: 4000010646759428}
   - {fileID: 4000013642680228}
   m_Father: {fileID: 4000013405482640}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &4000012805285596
 Transform:
   m_ObjectHideFlags: 1
@@ -5798,8 +5797,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4000010581803428}
   - {fileID: 4000012748129034}
+  - {fileID: 4000011917750558}
+  - {fileID: 4000010581803428}
   m_Father: {fileID: 4000010259937944}
   m_RootOrder: 0
 --- !u!4 &4000013505358670
@@ -9277,7 +9277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.323}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13281,7 +13281,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &224000010136973920
 RectTransform:
