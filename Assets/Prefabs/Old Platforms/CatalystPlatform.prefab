@@ -6348,7 +6348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 191.38632
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6382,7 +6382,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 151.06017
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6416,7 +6416,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 173.56017
+  field of view: 48.813797
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6450,7 +6450,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 173.56017
+  field of view: 48.813797
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6484,7 +6484,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 163.37395
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6518,7 +6518,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 163.37395
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6552,7 +6552,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 193.01785
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6586,7 +6586,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 151.06017
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6620,7 +6620,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 193.01785
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6654,7 +6654,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 191.38632
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6688,7 +6688,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 161.95532
+  field of view: 45.549934
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6722,7 +6722,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 161.95532
+  field of view: 45.549934
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -10697,6 +10697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTiltAngle: 45
+  minutesUntilReset: 5
   xRotationSpeed: 30
   yRotationSpeed: -30
   forwardSpeed: 30

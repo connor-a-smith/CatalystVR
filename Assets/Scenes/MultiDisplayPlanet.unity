@@ -404,7 +404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 623172272}
   m_LocalRotation: {x: 0.029046297, y: -0.22741601, z: 0.4144013, w: -0.880744}
-  m_LocalPosition: {x: 15.689997, y: 12.069999, z: -6.74}
+  m_LocalPosition: {x: 14.99, y: 12.29, z: -8.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 7.84, y: 25.229002, z: -48.428}
   m_Children: []
@@ -1115,66 +1115,6 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e71005f975f6f80498e69894d2cb01e3, type: 2}
-    - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.549934
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 54.28627
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.948925
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 53.827404
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 48.813797
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 48.813797
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 53.827404
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 42.485672
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.948925
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.549934
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 42.485672
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 54.28627
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
