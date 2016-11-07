@@ -3929,8 +3929,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013746794530}
   m_LocalRotation: {x: 0, y: 0.57357657, z: -0, w: -0.81915194}
-  m_LocalPosition: {x: 45.4, y: -20.1, z: 101}
-  m_LocalScale: {x: 0.1578721, y: 0.157872, z: 0.157872}
+  m_LocalPosition: {x: 56.1, y: -29.937, z: 97.1}
+  m_LocalScale: {x: 0.13594942, y: 0.13594934, z: 0.13594934}
   m_LocalEulerAnglesHint: {x: 0, y: 290, z: 0}
   m_Children:
   - {fileID: 4000013405482640}
@@ -5602,7 +5602,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011491275932}
   m_LocalRotation: {x: 0, y: 0.8191521, z: -0, w: -0.5735764}
-  m_LocalPosition: {x: -45.4, y: -95.1, z: 101}
+  m_LocalPosition: {x: -51.5, y: -95.1, z: 98.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 250, z: 0}
   m_Children:
@@ -10451,8 +10451,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select a POI or grab the sphere to move. The further the sphere from the
-    grab point, the faster you'll go in the direction you moved it.
+  m_Text: 
 --- !u!114 &114000012187666174
 MonoBehaviour:
   m_ObjectHideFlags: 1

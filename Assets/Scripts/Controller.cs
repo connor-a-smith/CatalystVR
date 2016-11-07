@@ -65,7 +65,7 @@ public class Controller : MonoBehaviour {
 
   public static MonitorButtonScript[] buttons;
 
-  public static string instructionText = "Select a POI or grab the sphere to move. The further the sphere from the grab point, the faster you'll go in the direction you moved it.";
+  public static string instructionText = "Welcome to the CAVEkiosk! Select a point of interest (POI) to begin.";
 
   public delegate void Toggle3DController();
 

@@ -331,7 +331,14 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000012109721388, guid: c2e22098ce7c8da4590cceb5113bd50e,
+        type: 2}
+      propertyPath: sentence
+      value: Luxor, Egypt is the home of the royal tombs and the ancient capital of
+        the pharaohs.
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_IsPrefabParent: 0
 --- !u!43 &866854662
@@ -569,98 +576,6 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e71005f975f6f80498e69894d2cb01e3, type: 2}
-    - target: {fileID: 4000013048786538, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -51.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013048786538, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 98.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 42.485672
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 48.813797
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 42.485672
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 53.827404
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 48.813797
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 53.827404
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.948925
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.549934
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 54.28627
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 54.28627
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.549934
-      objectReference: {fileID: 0}
-    - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
-        type: 2}
-      propertyPath: field of view
-      value: 45.948925
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 56.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 97.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -29.937
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.13594942
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.13594934
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010259937944, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.13594934
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
