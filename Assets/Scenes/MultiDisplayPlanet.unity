@@ -264,6 +264,27 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 808b2784203ff7c449311585d3d42724, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &408383647 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 459647179}
+--- !u!114 &408383657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 408383647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  pathIsExternal: 0
+  photoPath: Luxor
+  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!1001 &459647179
 Prefab:
   m_ObjectHideFlags: 0
@@ -367,6 +388,7 @@ GameObject:
   - 23: {fileID: 623172276}
   - 33: {fileID: 623172275}
   - 65: {fileID: 623172274}
+  - 114: {fileID: 623172282}
   m_Layer: 0
   m_Name: POI- Stone Bear
   m_TagString: Untagged
@@ -514,6 +536,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &623172282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 623172272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  pathIsExternal: 0
+  photoPath: Bear
+  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!43 &866854662
 Mesh:
   m_ObjectHideFlags: 0
@@ -1077,6 +1115,66 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e71005f975f6f80498e69894d2cb01e3, type: 2}
+    - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 45.549934
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 54.28627
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 45.948925
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 53.827404
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 48.813797
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 48.813797
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 53.827404
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 42.485672
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 45.948925
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 45.549934
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 42.485672
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 54.28627
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
@@ -1097,6 +1195,7 @@ GameObject:
   - 23: {fileID: 1523385442}
   - 33: {fileID: 1523385441}
   - 65: {fileID: 1523385440}
+  - 114: {fileID: 1523385448}
   m_Layer: 0
   m_Name: POI- Ushaiger
   m_TagString: Untagged
@@ -1244,6 +1343,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1523385448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1523385438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  pathIsExternal: 0
+  photoPath: Ushaiger
+  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!1 &1532695524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1376,7 @@ GameObject:
   - 23: {fileID: 1532695528}
   - 33: {fileID: 1532695527}
   - 65: {fileID: 1532695526}
+  - 114: {fileID: 1532695534}
   m_Layer: 0
   m_Name: POI- Madain Saleh
   m_TagString: Untagged
@@ -1408,6 +1524,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1532695534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532695524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  pathIsExternal: 0
+  photoPath: Tomb
+  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
 --- !u!1 &1665948536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1782,7 @@ GameObject:
   - 23: {fileID: 2001930011}
   - 33: {fileID: 2001930010}
   - 65: {fileID: 2001930009}
+  - 114: {fileID: 2001930017}
   m_Layer: 0
   m_Name: POI- Melbourne
   m_TagString: Untagged
@@ -1796,3 +1929,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &2001930017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2001930007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34926294506b44bb8c578b3ff4c1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  pathIsExternal: 0
+  photoPath: Garden
+  maximumNumberOfPictures: 24
+  loaderObj: {fileID: 0}
