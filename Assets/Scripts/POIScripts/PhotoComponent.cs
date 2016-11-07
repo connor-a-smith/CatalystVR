@@ -21,6 +21,7 @@ public class PhotoComponent : POIScriptComponent {
 
     if (alreadyLoaded) {
       // Sets the photo loader to active.
+      loaderObj.GetComponent<PhotoController>().photoHolder.transform.localRotation = Quaternion.identity;
       loaderObj.SetActive(true);
       loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(true);
 
@@ -52,12 +53,10 @@ public class PhotoComponent : POIScriptComponent {
 
     if (loaderObj != null) {
 
+      loaderObj.GetComponent<PhotoController>().movingPhotos = false;
       loaderObj.GetComponent<PhotoController>().photoHolder.SetActive(false);
       loaderObj.SetActive(false);
 
     }
-
-
-
   }
 }
