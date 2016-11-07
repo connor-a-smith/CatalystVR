@@ -420,22 +420,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000010313942832
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000011235766684}
-  - 108: {fileID: 108000014026811474}
-  m_Layer: 0
-  m_Name: Monitor Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000010321598878
 GameObject:
   m_ObjectHideFlags: 1
@@ -2024,6 +2008,22 @@ GameObject:
   - 4: {fileID: 4000011590684540}
   m_Layer: 0
   m_Name: HydraObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000012220842056
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010976995764}
+  - 108: {fileID: 108000012956354682}
+  m_Layer: 0
+  m_Name: Monitor Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4358,6 +4358,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000013700410682}
   m_RootOrder: 0
+--- !u!4 &4000010976995764
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012220842056}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 31.7, z: 2.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000012293728394}
+  m_RootOrder: 9
 --- !u!4 &4000010988560646
 Transform:
   m_ObjectHideFlags: 1
@@ -4485,19 +4498,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012748129034}
   m_RootOrder: 1
---- !u!4 &4000011235766684
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010313942832}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 31.7, z: 2.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000012293728394}
-  m_RootOrder: 9
 --- !u!4 &4000011294525688
 Transform:
   m_ObjectHideFlags: 1
@@ -5124,7 +5124,7 @@ Transform:
   - {fileID: 4000010308256594}
   - {fileID: 4000011653656254}
   - {fileID: 4000014074039478}
-  - {fileID: 4000011235766684}
+  - {fileID: 4000010976995764}
   m_Father: {fileID: 4000010041021936}
   m_RootOrder: 1
 --- !u!4 &4000012295059860
@@ -5333,7 +5333,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014270739998}
-  m_LocalRotation: {x: 0.19226101, y: -0.2363893, z: 0.047777686, w: 0.9512482}
+  m_LocalRotation: {x: 0.19226101, y: -0.23638928, z: 0.047777686, w: 0.95124817}
   m_LocalPosition: {x: 0, y: -0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 2.743, y: -14.749001, z: -0.80200005}
@@ -6296,7 +6296,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011265167924}
-  m_LocalRotation: {x: 0.19226101, y: -0.2363893, z: 0.047777686, w: 0.9512482}
+  m_LocalRotation: {x: 0.19226101, y: -0.23638928, z: 0.047777686, w: 0.95124817}
   m_LocalPosition: {x: 0, y: -0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 2.743, y: -14.749001, z: -0.80200005}
@@ -6348,7 +6348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 121.11166
+  field of view: 191.38632
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6382,7 +6382,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 95.592766
+  field of view: 151.06017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6416,7 +6416,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 109.83105
+  field of view: 173.56017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6450,7 +6450,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 109.83105
+  field of view: 173.56017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6484,7 +6484,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 103.38508
+  field of view: 163.37395
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6518,7 +6518,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 103.38508
+  field of view: 163.37395
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6552,7 +6552,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 122.144104
+  field of view: 193.01785
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6586,7 +6586,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 95.592766
+  field of view: 151.06017
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6620,7 +6620,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 122.144104
+  field of view: 193.01785
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6654,7 +6654,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 121.11166
+  field of view: 191.38632
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6688,7 +6688,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 102.48735
+  field of view: 161.95532
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6722,7 +6722,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 102.48735
+  field of view: 161.95532
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -8862,6 +8862,40 @@ Light:
   m_BounceIntensity: 1.26
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!108 &108000012956354682
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012220842056}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 4
+  m_Range: 7
+  m_SpotAngle: 61.88124
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!108 &108000013079298226
 Light:
   m_ObjectHideFlags: 1
@@ -9098,40 +9132,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1.26
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!108 &108000014026811474
-Light:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010313942832}
-  m_Enabled: 1
-  serializedVersion: 7
-  m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4
-  m_Range: 7
-  m_SpotAngle: 61.88124
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 4
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!108 &108000014206910954
@@ -10260,6 +10260,7 @@ MonoBehaviour:
     type: 2}
   photoPrefabEditor: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
   raycastCam: {fileID: 20000013315945992}
+  monitorText: {fileID: 114000012177379744}
   labelPrefab: {fileID: 1000010527999220, guid: 2564fd42a20e524449a2db37676b5842,
     type: 2}
 --- !u!114 &114000011947505052

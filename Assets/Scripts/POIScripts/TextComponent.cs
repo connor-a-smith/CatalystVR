@@ -19,13 +19,13 @@ public class TextComponent : POIScriptComponent {
     public override void Activate()
     {
         base.Activate();
-        Controller.monitor.GetComponentInChildren<Text>().text = sentence;
+        Controller.instance.monitorText.text = sentence;
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        Controller.monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+        Controller.instance.monitorText.text = Controller.instructionText;
 
     }
 }
