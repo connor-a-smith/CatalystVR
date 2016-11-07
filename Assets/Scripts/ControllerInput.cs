@@ -36,8 +36,6 @@ public class ControllerInput : MonoBehaviour {
 
   //Allows movement while selecting a POI using the Dpad.
   private bool advancedMode = false;
-
-
   private int POILayerMask;
     
   // Use this for initialization
@@ -47,7 +45,7 @@ public class ControllerInput : MonoBehaviour {
   }
 
   // Update is called once per frame
-  void Update() {
+  void Update() { 
 
     if (Input.GetAxis("RightStickHorizontal") != 0) {
       //Movement allowed, no POI selected or advanced mode.

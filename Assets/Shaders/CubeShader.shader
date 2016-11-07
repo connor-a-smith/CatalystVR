@@ -23,7 +23,7 @@
 #pragma geometry myGeometryShader
 #pragma fragment myFragmentShader
 
-#define TAM 36
+#define TAM 6
 
 		struct vIn // Into the vertex shader
 	{
@@ -66,17 +66,34 @@
 	// Using "point" type as input, not "triangle"
 	void myGeometryShader(point gIn vert[1], inout TriangleStream<v2f> triStream)
 	{
+		float3 camUp = float3(0, 1, 0);
+		float3 look = _WorldSpaceCameraPos - vert[0].pos;
+		look.y = 0;
+		look = normalize(look);
+		float3 camRight = cross(camUp, look);
+
+		//float3 camRight = UNITY_MATRIX_V[0].xyz;
+		//float3 camUp = UNITY_MATRIX_V[0].xyz;
+		//float3 camForward = UNITY_MATRIX_V[0].xyz;
+
 		float f = _PointSize / 20.0f; //half size
 
-		const float4 vc[TAM] = { float4(-f,  f,  f, 0.0f), float4(f,  f,  f, 0.0f), float4(f,  f, -f, 0.0f),    //Top                                 
+		const float4 vc[TAM] = 
+
+			
+			/*{ float4(-f,  f,  f, 0.0f), float4(f,  f,  f, 0.0f), float4(f,  f, -f, 0.0f),    //Top                                 
 			float4(f,  f, -f, 0.0f), float4(-f,  f, -f, 0.0f), float4(-f,  f,  f, 0.0f),    //Top
 
 			float4(f,  f, -f, 0.0f), float4(f,  f,  f, 0.0f), float4(f, -f,  f, 0.0f),     //Right
-			float4(f, -f,  f, 0.0f), float4(f, -f, -f, 0.0f), float4(f,  f, -f, 0.0f),     //Right
+			float4(f, -f,  f, 0.0f), float4(f, -f, -f, 0.0f), float4(f,  f, -f, 0.0f),     //Right*/
 
-			float4(-f,  f, -f, 0.0f), float4(f,  f, -f, 0.0f), float4(f, -f, -f, 0.0f),     //Front
-			float4(f, -f, -f, 0.0f), float4(-f, -f, -f, 0.0f), float4(-f,  f, -f, 0.0f),     //Front
+		{ f* float4(- camRight + camUp, 0.0f), f*  float4(camRight+ camUp, 0.0f),  f* float4(camRight - camUp, 0.0f),     //Front
+			f* float4(camRight - camUp, 0.0f),  f* float4(-camRight - camUp, 0.0f),  f* float4(-camRight + camUp, 0.0f),     //Front*/
 
+		/*{ f* float4(camRight - camUp, 0.0f), f*  float4(camRight + camUp, 0.0f), f* float4(-camRight + camUp, 0.0f),     //Front
+			f* float4(camRight - camUp, 0.0f),  f* float4(-camRight - camUp, 0.0f),  f* float4(-camRight + camUp, 0.0f),     //Front*/
+			
+			/*
 			float4(-f, -f, -f, 0.0f), float4(f, -f, -f, 0.0f), float4(f, -f,  f, 0.0f),    //Bottom                                         
 			float4(f, -f,  f, 0.0f), float4(-f, -f,  f, 0.0f), float4(-f, -f, -f, 0.0f),     //Bottom
 
@@ -84,35 +101,35 @@
 			float4(-f, -f, -f, 0.0f), float4(-f, -f,  f, 0.0f), float4(-f,  f,  f, 0.0f),    //Left
 
 			float4(-f,  f,  f, 0.0f), float4(-f, -f,  f, 0.0f), float4(f, -f,  f, 0.0f),    //Back
-			float4(f, -f,  f, 0.0f), float4(f,  f,  f, 0.0f), float4(-f,  f,  f, 0.0f)     //Back
+			float4(f, -f,  f, 0.0f), float4(f,  f,  f, 0.0f), float4(-f,  f,  f, 0.0f)     //Back*/
 		};
 
 
 		const float2 UV1[TAM] = { float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),         //Esta em uma ordem
 			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),         //aleatoria qualquer.
 
+			/*float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
+			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
+
 			float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
+			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),*/
+
+			/*float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
 			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
 
 			float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
 			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
 
 			float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
-			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
-
-			float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
-			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
-
-			float2(0.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f),
-			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f)
+			float2(1.0f,    0.0f), float2(1.0f,    0.0f), float2(1.0f,    0.0f)*/
 		};
 
 		const int TRI_STRIP[TAM] = { 0, 1, 2,  3, 4, 5,
-			6, 7, 8,  9,10,11,
-			12,13,14, 15,16,17,
-			18,19,20, 21,22,23,
+			/*6, 7, 8,  9,10,11,
+			12,13,14, 15,16,17,*/
+/*			18,19,20, 21,22,23,
 			24,25,26, 27,28,29,
-			30,31,32, 33,34,35
+			30,31,32, 33,34,35*/
 		};
 
 		v2f v[TAM];
