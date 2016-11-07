@@ -490,6 +490,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1000010411817290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010768157510}
+  - 20: {fileID: 20000011091197722}
+  - 124: {fileID: 124000012508259610}
+  - 92: {fileID: 92000014219094864}
+  - 81: {fileID: 81000010046676054}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000010421670822
 GameObject:
   m_ObjectHideFlags: 1
@@ -2295,7 +2314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000012559478812
 GameObject:
   m_ObjectHideFlags: 1
@@ -3872,6 +3891,7 @@ Transform:
   m_LocalScale: {x: 0.28394473, y: 0.28394473, z: 0.2839448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 4000010768157510}
   - {fileID: 4000012280243694}
   - {fileID: 4000012293728394}
   - {fileID: 224000010885972528}
@@ -3966,7 +3986,7 @@ Transform:
   m_Children:
   - {fileID: 4000013405482640}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &4000010308256594
 Transform:
   m_ObjectHideFlags: 1
@@ -4319,6 +4339,19 @@ Transform:
   - {fileID: 4000012729421502}
   m_Father: {fileID: 4000013082195926}
   m_RootOrder: 0
+--- !u!4 &4000010768157510
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010411817290}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010041021936}
+  m_RootOrder: 0
 --- !u!4 &4000010871772530
 Transform:
   m_ObjectHideFlags: 1
@@ -4429,7 +4462,7 @@ Transform:
   - {fileID: 4000010988560646}
   - {fileID: 4000010101311914}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &4000011125546144
 Transform:
   m_ObjectHideFlags: 1
@@ -4605,7 +4638,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &4000011531387726
 Transform:
   m_ObjectHideFlags: 1
@@ -5103,7 +5136,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &4000012293728394
 Transform:
   m_ObjectHideFlags: 1
@@ -5126,7 +5159,7 @@ Transform:
   - {fileID: 4000014074039478}
   - {fileID: 4000010976995764}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &4000012295059860
 Transform:
   m_ObjectHideFlags: 1
@@ -5326,7 +5359,7 @@ Transform:
   - {fileID: 4000012401191940}
   - {fileID: 4000010346811780}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &4000012594704460
 Transform:
   m_ObjectHideFlags: 1
@@ -5653,7 +5686,7 @@ Transform:
   m_Children:
   - {fileID: 4000011125546144}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &4000013079737140
 Transform:
   m_ObjectHideFlags: 1
@@ -6154,7 +6187,7 @@ Transform:
   m_Children:
   - {fileID: 4000014197021078}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &4000014084790452
 Transform:
   m_ObjectHideFlags: 1
@@ -6348,7 +6381,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.827404
+  field of view: 67.284256
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6382,7 +6415,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 42.485672
+  field of view: 53.10709
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6416,7 +6449,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 48.813797
+  field of view: 61.017246
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6427,6 +6460,40 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
   m_TargetEye: 1
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!20 &20000011091197722
+Camera:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010411817290}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -6450,7 +6517,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 48.813797
+  field of view: 61.017246
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6484,7 +6551,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 45.948925
+  field of view: 57.436153
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6518,7 +6585,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 45.948925
+  field of view: 57.436153
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6552,7 +6619,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 54.28627
+  field of view: 67.857834
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6586,7 +6653,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 42.485672
+  field of view: 53.10709
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6620,7 +6687,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 54.28627
+  field of view: 67.857834
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6654,7 +6721,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.827404
+  field of view: 67.284256
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6688,7 +6755,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 45.549934
+  field of view: 56.937416
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6722,7 +6789,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 45.549934
+  field of view: 56.937416
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -8221,6 +8288,13 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 66.27, y: 144.4, z: 1}
   m_Center: {x: -38.16, y: -3.9, z: 0}
+--- !u!81 &81000010046676054
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010411817290}
+  m_Enabled: 1
 --- !u!81 &81000013185195984
 AudioListener:
   m_ObjectHideFlags: 1
@@ -8385,6 +8459,13 @@ Behaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014270739998}
+  m_Enabled: 1
+--- !u!92 &92000014219094864
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010411817290}
   m_Enabled: 1
 --- !u!95 &95000010603047784
 Animator:
@@ -10259,7 +10340,7 @@ MonoBehaviour:
   selectedPOIMaterialEditor: {fileID: 2100000, guid: 7b49bcd289d853e4b8f870b6fdd31615,
     type: 2}
   photoPrefabEditor: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
-  raycastCam: {fileID: 20000013315945992}
+  raycastCam: {fileID: 20000011091197722}
   monitorText: {fileID: 114000012177379744}
   labelPrefab: {fileID: 1000010527999220, guid: 2564fd42a20e524449a2db37676b5842,
     type: 2}
@@ -12447,6 +12528,13 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014270739998}
   m_Enabled: 1
+--- !u!124 &124000012508259610
+Behaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010411817290}
+  m_Enabled: 1
 --- !u!124 &124000012713241974
 Behaviour:
   m_ObjectHideFlags: 1
@@ -13548,7 +13636,7 @@ RectTransform:
   m_Children:
   - {fileID: 224000011652804022}
   m_Father: {fileID: 4000010041021936}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.09, y: -19.1}
