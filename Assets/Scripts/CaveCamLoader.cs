@@ -113,7 +113,7 @@ public class CaveCamLoader : MonoBehaviour {
 
     Controller.instance.platformMonitor.SetActive(true);
     Controller.instance.platformModel.SetActive(true);
-    Controller.instance.bookmarks.gameObject.SetActive(true);
+    Controller.instance.bookmarks.transform.parent.gameObject.SetActive(true);
 
   }
 }

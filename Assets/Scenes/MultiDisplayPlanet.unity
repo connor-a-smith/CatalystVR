@@ -391,62 +391,62 @@ Prefab:
     - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 165.92255
+      value: 161.21397
       objectReference: {fileID: 0}
     - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 210.21628
+      value: 204.25073
       objectReference: {fileID: 0}
     - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 212.00832
+      value: 205.99191
       objectReference: {fileID: 0}
     - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 165.92255
+      value: 161.21397
       objectReference: {fileID: 0}
     - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 177.88965
+      value: 172.84146
       objectReference: {fileID: 0}
     - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 179.44785
+      value: 174.35545
       objectReference: {fileID: 0}
     - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 177.88965
+      value: 172.84146
       objectReference: {fileID: 0}
     - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 179.44785
+      value: 174.35545
       objectReference: {fileID: 0}
     - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 190.63626
+      value: 185.22636
       objectReference: {fileID: 0}
     - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 210.21628
+      value: 204.25073
       objectReference: {fileID: 0}
     - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 190.63626
+      value: 185.22636
       objectReference: {fileID: 0}
     - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: field of view
-      value: 212.00832
+      value: 205.99191
       objectReference: {fileID: 0}
     - target: {fileID: 23000013849414590, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
@@ -670,9 +670,29 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.97593635
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011899572966, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: platformModel
+      value: 
+      objectReference: {fileID: 459496280}
+    - target: {fileID: 114000011899572966, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: platformMonitor
+      value: 
+      objectReference: {fileID: 459496281}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &459496280 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012692714682, guid: 476fdf3d3ff49469ea2292977124dda1,
+    type: 2}
+  m_PrefabInternal: {fileID: 459496279}
+--- !u!1 &459496281 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012776480648, guid: 476fdf3d3ff49469ea2292977124dda1,
+    type: 2}
+  m_PrefabInternal: {fileID: 459496279}
 --- !u!1001 &459647179
 Prefab:
   m_ObjectHideFlags: 0
