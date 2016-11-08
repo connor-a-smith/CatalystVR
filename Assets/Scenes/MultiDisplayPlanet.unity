@@ -363,6 +363,12 @@ Prefab:
       propertyPath: sentence
       value: St. Elijah's Monastery in Iraq was destroyed by Isis
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011562762722, guid: c2e22098ce7c8da4590cceb5113bd50e,
+        type: 2}
+      propertyPath: sentence
+      value: Mar Saba is a Greek Orthodox monastery located in the Judean desert.
+        It dates back to the 5th century A.D.
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
@@ -1115,6 +1121,66 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e71005f975f6f80498e69894d2cb01e3, type: 2}
+    - target: {fileID: 20000013564342824, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 191.38632
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011599104902, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 163.37395
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000014121455378, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 161.95532
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010194214206, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 191.38632
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011785390562, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 163.37395
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012061813010, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 193.01785
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000012677378272, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 151.06017
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000011113661634, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 173.56017
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010258438638, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 151.06017
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013846364810, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 161.95532
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000010896284168, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 173.56017
+      objectReference: {fileID: 0}
+    - target: {fileID: 20000013315945992, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: field of view
+      value: 193.01785
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
