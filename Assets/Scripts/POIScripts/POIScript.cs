@@ -25,13 +25,12 @@ public class POIScript : MonoBehaviour {
   }
 
   public void OnDestroy() {
-
     Controller.controllerReady -= AddPOI;
+        Deactivate();
+    }
 
-  }
 
-
-  void OnMouseDown() {
+    void OnMouseDown() {
     Toggle();
   }
 
@@ -43,14 +42,6 @@ public class POIScript : MonoBehaviour {
     newPosition.y += labelSpawnHeight;
     label.transform.localPosition = newPosition;
     label.GetComponentInChildren<Text>().text = POIName;
-
-    SceneManager.sceneUnloaded += DeactivateOnSceneUnload;
-  }
-
-  public void OnDestroy() {
-
-    SceneManager.sceneUnloaded -= DeactivateOnSceneUnload;
-
   }
 
   // Update is called once per frame
@@ -87,6 +78,7 @@ public class POIScript : MonoBehaviour {
   public void DeactivateOnSceneUnload(Scene scene) {
 
     Deactivate();
+        SceneManager.sceneUnloaded -= DeactivateOnSceneUnload;
 
   }
 
