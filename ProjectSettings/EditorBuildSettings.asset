@@ -17,15 +17,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MeshScene.unity
   - enabled: 0
     path: Assets/Scenes/POI Test Scene.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Botanical Garden.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Dr Seuss.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Madain Saleh Tomb.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Stone Bear.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Taif Dam.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sites/Ushaiger.unity

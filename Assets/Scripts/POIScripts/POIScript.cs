@@ -27,12 +27,15 @@ public class POIScript : MonoBehaviour {
   public void OnDestroy() {
 
     Controller.controllerReady -= AddPOI;
+    SceneManager.sceneUnloaded -= DeactivateOnSceneUnload;
 
-  }
+    }
 
 
-  void OnMouseDown() {
+    void OnMouseDown() {
+
     Toggle();
+
   }
 
   // Use this for initialization
@@ -45,11 +48,6 @@ public class POIScript : MonoBehaviour {
     label.GetComponentInChildren<Text>().text = POIName;
 
     SceneManager.sceneUnloaded += DeactivateOnSceneUnload;
-  }
-
-  public void OnDestroy() {
-
-    SceneManager.sceneUnloaded -= DeactivateOnSceneUnload;
 
   }
 

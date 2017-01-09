@@ -3,13 +3,18 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class ControllerInput : MonoBehaviour
-{
+public class ControllerInput : MonoBehaviour {
 
     [SerializeField]
     private float maxTiltAngle = 45.0f;
 
-    private float timeSinceLastInput = -1.0f;
+    private float timeSinceLastInput = 1.0f;
+
+    [SerializeField]
+    private float timeBetweenSceneCycles = 10.0f;
+
+    [SerializeField]
+    private float fadeTime = 2.0f;
 
     [SerializeField]
     private float minutesUntilReset = 5.0f;
@@ -46,62 +51,52 @@ public class ControllerInput : MonoBehaviour
     private int POILayerMask;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
+
         //Set raycast to hit everything except Ignore Raycast.
         POILayerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
         StartCoroutine(CheckForInput());
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
-        if (Input.GetAxis("RightStickHorizontal") != 0)
-        {
+        if(Input.GetAxis("RightStickHorizontal") != 0) {
 
             timeSinceLastInput = 0.0f;
 
             //Movement allowed, no POI selected or advanced mode.
-            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
-            {
+            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
                 //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
                 Controller.playerShip.transform.RotateAround(Controller.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
             }
 
             //POI selected and not advanced mode, stick controller POI movement.
-            else if (!justActivatedRightStickHorizontal)
-            {
+            else if(!justActivatedRightStickHorizontal) {
 
                 justActivatedRightStickHorizontal = true;
 
                 PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-                if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf)
-                {
+                if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
-                    if (Input.GetAxis("RightStickHorizontal") > 0)
-                    {
+                    if(Input.GetAxis("RightStickHorizontal") > 0) {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveRight();
 
 
                     }
-                    else
-                    {
+                    else {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveLeft();
                     }
                 }
-                else
-                {
+                else {
                     //Debug.Log(Input.GetAxis("RightStickHorizontal"));
-                    if (Input.GetAxis("RightStickHorizontal") > 0)
-                    {
+                    if(Input.GetAxis("RightStickHorizontal") > 0) {
                         pickActiveButton(1);
                     }
-                    else
-                    {
+                    else {
                         pickActiveButton(-1);
                     }
                 }
@@ -109,18 +104,15 @@ public class ControllerInput : MonoBehaviour
         }
 
         //On release of stick, allow to be used again.
-        else if (Input.GetAxis("RightStickHorizontal") == 0 && justActivatedRightStickHorizontal)
-        {
+        else if(Input.GetAxis("RightStickHorizontal") == 0 && justActivatedRightStickHorizontal) {
             justActivatedRightStickHorizontal = false;
         }
 
-        if (Input.GetAxis("RightStickVertical") != 0)
-        {
+        if(Input.GetAxis("RightStickVertical") != 0) {
 
             timeSinceLastInput = 0.0f;
 
-            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
-            {
+            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
 
                 Transform shipTransform = Controller.playerShip.transform;
 
@@ -132,22 +124,19 @@ public class ControllerInput : MonoBehaviour
 
                 Vector3 afterShipRotation = shipTransform.localRotation.eulerAngles;
 
-                if (afterShipRotation.x > 180.0f)
-                {
+                if(afterShipRotation.x > 180.0f) {
 
                     afterShipRotation.x -= 360.0f;
 
                 }
 
-                if (afterShipRotation.x < -maxTiltAngle)
-                {
+                if(afterShipRotation.x < -maxTiltAngle) {
 
                     afterShipRotation.x = -maxTiltAngle;
 
 
                 }
-                else if (afterShipRotation.x > maxTiltAngle)
-                {
+                else if(afterShipRotation.x > maxTiltAngle) {
 
                     afterShipRotation.x = maxTiltAngle;
 
@@ -156,23 +145,19 @@ public class ControllerInput : MonoBehaviour
                 afterShipRotation.z = 0.0f;
                 shipTransform.localRotation = Quaternion.Euler(afterShipRotation);
             }
-            else if (Controller.selectedPOI != null && !justActivatedRightStickHorizontal)
-            {
+            else if(Controller.selectedPOI != null && !justActivatedRightStickHorizontal) {
 
                 PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-                if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf)
-                {
+                if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
-                    if (Input.GetAxis("RightStickVertical") > 0)
-                    {
+                    if(Input.GetAxis("RightStickVertical") > 0) {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveUp();
 
 
                     }
-                    else
-                    {
+                    else {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveDown();
                     }
@@ -180,51 +165,42 @@ public class ControllerInput : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Horizontal") != 0)
-        {
+        if(Input.GetAxis("Horizontal") != 0) {
 
             timeSinceLastInput = 0.0f;
 
             //Movement allowed, no POI selected or advanced mode.
-            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
-            {
+            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
                 Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
             }
 
             //POI selected and not advanced mode, stick controller POI movement.
-            else if (!Controller.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal)
-            {
+            else if(!Controller.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal) {
                 justActivatedLeftStickHorizontal = true;
 
                 PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-                if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf)
-                {
+                if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
-                    if (Input.GetAxis("Horizontal") > 0)
-                    {
+                    if(Input.GetAxis("Horizontal") > 0) {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveRight();
 
 
                     }
-                    else
-                    {
+                    else {
 
                         POIPhotos.loaderObj.GetComponent<PhotoController>().MoveLeft();
                     }
                 }
-                else
-                {
+                else {
 
 
                     //Debug.Log(Input.GetAxis("RightStickHorizontal"));
-                    if (Input.GetAxis("Horizontal") > 0)
-                    {
+                    if(Input.GetAxis("Horizontal") > 0) {
                         pickActiveButton(1);
                     }
-                    else
-                    {
+                    else {
                         pickActiveButton(-1);
                     }
                 }
@@ -232,61 +208,50 @@ public class ControllerInput : MonoBehaviour
         }
 
         //On release of stick, allow to be used again.
-        else if (Input.GetAxis("Horizontal") == 0 && justActivatedLeftStickHorizontal)
-        {
+        else if(Input.GetAxis("Horizontal") == 0 && justActivatedLeftStickHorizontal) {
             justActivatedLeftStickHorizontal = false;
         }
 
-        if (Input.GetAxis("Vertical") != 0)
-        {
+        if(Input.GetAxis("Vertical") != 0) {
 
             timeSinceLastInput = 0.0f;
 
-            if ((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode)
-            {
+            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
                 Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
             }
-            else if (!justActivatedLeftStickVertical)
-            {
+            else if(!justActivatedLeftStickVertical) {
 
                 justActivatedLeftStickVertical = true;
 
-                if (Controller.instance.bookmarks.bookmarkPanelActivated)
-                {
+                if(Controller.instance.bookmarks.bookmarkPanelActivated) {
 
 
-                    if (Input.GetAxis("Vertical") < 0)
-                    {
+                    if(Input.GetAxis("Vertical") < 0) {
 
                         Controller.instance.bookmarks.MoveSelectorDown();
 
 
                     }
-                    else
-                    {
+                    else {
 
                         Controller.instance.bookmarks.MoveSelectorUp();
 
                     }
 
                 }
-                else if (Controller.selectedPOI != null)
-                {
+                else if(Controller.selectedPOI != null) {
 
                     PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
 
-                    if (POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf)
-                    {
+                    if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
-                        if (Input.GetAxis("Vertical") > 0)
-                        {
+                        if(Input.GetAxis("Vertical") > 0) {
 
                             POIPhotos.loaderObj.GetComponent<PhotoController>().MoveUp();
 
 
                         }
-                        else
-                        {
+                        else {
 
                             POIPhotos.loaderObj.GetComponent<PhotoController>().MoveDown();
 
@@ -295,18 +260,15 @@ public class ControllerInput : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetAxis("Vertical") == 0 && justActivatedLeftStickVertical)
-        {
+        else if(Input.GetAxis("Vertical") == 0 && justActivatedLeftStickVertical) {
 
             justActivatedLeftStickVertical = false;
 
         }
 
 
-        if (Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad)
-        {
-            if (Controller.selectedPOI != null)
-            {
+        if(Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad) {
+            if(Controller.selectedPOI != null) {
                 pickActiveButton((int)Input.GetAxis("Xbox DpadX"));
                 justActivatedDpad = true;
                 timeSinceLastInput = 0.0f;
@@ -315,20 +277,17 @@ public class ControllerInput : MonoBehaviour
         }
 
         //On release of dpad, allow to be used again.
-        else if (Input.GetAxis("Xbox DpadX") == 0 && justActivatedDpad)
-        {
+        else if(Input.GetAxis("Xbox DpadX") == 0 && justActivatedDpad) {
             justActivatedDpad = false;
         }
 
         //On a press, activate
-        if (Input.GetAxis("Xbox A") != 0 && !justActivatedA)
-        {
+        if(Input.GetAxis("Xbox A") != 0 && !justActivatedA) {
             justActivatedA = true;
             timeSinceLastInput = 0.0f;
 
 
-            if (Controller.instance.bookmarks.bookmarkPanelActivated)
-            {
+            if(Controller.instance.bookmarks.bookmarkPanelActivated) {
 
                 Controller.instance.bookmarks.SelectBookmark();
                 pickActiveButton(0);
@@ -336,127 +295,107 @@ public class ControllerInput : MonoBehaviour
             }
 
             //If no POI selected, then try to select a new POI
-            else if (Controller.selectedPOI == null)
-            {
+            else if(Controller.selectedPOI == null) {
                 RaycastHit hit;
                 Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity, POILayerMask, QueryTriggerInteraction.Collide);
                 Controller.inputManager.HandleHit(hit);
 
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
-                if (Controller.selectedPOI != null)
-                {
+                if(Controller.selectedPOI != null) {
                     pickActiveButton(0);
                 }
             }
 
 
             //POI Selected, trigger its buttons.
-            else
-            {
+            else {
                 Controller.buttons[selectedButtonIndex].AttemptToggle();
             }
         }
 
         //On release of button, allow to be used again.
-        else if (Input.GetAxis("Xbox A") == 0)
-        {
+        else if(Input.GetAxis("Xbox A") == 0) {
             justActivatedA = false;
         }
 
         //On b press, deactvate selected POI.
-        if (Input.GetAxis("Xbox B") != 0 && !justActivatedA)
-        {
+        if(Input.GetAxis("Xbox B") != 0 && !justActivatedA) {
 
             timeSinceLastInput = 0.0f;
 
-            if (Controller.selectedPOI != null)
-            {
+            if(Controller.selectedPOI != null) {
                 Controller.selectedPOI.Deactivate();
             }
         }
 
         //On release of button, allow to be used again.
-        else if (Input.GetAxis("Xbox B") == 0)
-        {
+        else if(Input.GetAxis("Xbox B") == 0) {
             justActivatedB = false;
         }
 
-        if (Input.GetAxis("Xbox Back") == 1 && !justActivatedBack)
-        {
+        if(Input.GetAxis("Xbox Back") == 1 && !justActivatedBack) {
 
             timeSinceLastInput = 0.0f;
 
             justActivatedStart = true;
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
-        else if (Input.GetAxis("Xbox Back") == 0 && justActivatedBack)
-        {
+        else if(Input.GetAxis("Xbox Back") == 0 && justActivatedBack) {
             justActivatedBack = false;
         }
 
-        if (Input.GetAxis("Xbox Start") == 1 && !justActivatedStart)
-        {
+        if(Input.GetAxis("Xbox Start") == 1 && !justActivatedStart) {
 
             timeSinceLastInput = 0.0f;
 
             justActivatedStart = true;
             Controller.instance.Toggle3D();
         }
-        else if (Input.GetAxis("Xbox Start") == 0 && justActivatedStart)
-        {
+        else if(Input.GetAxis("Xbox Start") == 0 && justActivatedStart) {
             justActivatedStart = false;
         }
 
-        if (Input.GetAxis("LeftTrigger") == 1)
-        {
+        if(Input.GetAxis("LeftTrigger") == 1) {
 
             timeSinceLastInput = 0.0f;
 
-            if (!Controller.instance.bookmarks.bookmarkPanelActivated)
-            {
+            if(!Controller.instance.bookmarks.bookmarkPanelActivated) {
 
                 Controller.instance.bookmarks.MovePanelUp();
             }
 
         }
-        else if (Controller.instance.bookmarks.bookmarkPanelActivated)
-        {
+        else if(Controller.instance.bookmarks.bookmarkPanelActivated) {
 
             Controller.instance.bookmarks.MovePanelDown();
 
         }
 
-        if (Input.GetAxis("RightTrigger") == 1)
-        {
+        if(Input.GetAxis("RightTrigger") == 1) {
 
             timeSinceLastInput = 0.0f;
 
-            if (!Controller.instance.inputGuide.panelActive)
-            {
+            if(!Controller.instance.inputGuide.panelActive) {
 
                 Controller.instance.inputGuide.MovePanelUp();
 
             }
         }
-        else if (Controller.instance.inputGuide.panelActive)
-        {
+        else if(Controller.instance.inputGuide.panelActive) {
 
             Controller.instance.inputGuide.MovePanelDown();
 
         }
 
         //TODO Remove
-        if (Input.GetKey(KeyCode.A))
-        {//else if (Input.GetButton("joystick button 0"))
+        if(Input.GetKey(KeyCode.A)) {//else if (Input.GetButton("joystick button 0"))
             SceneManager.LoadScene("Mar Saba");
         }
-        if (Input.GetKey(KeyCode.S))
-        {//else if (Input.GetButton("joystick button 0"))
+        if(Input.GetKey(KeyCode.S)) {//else if (Input.GetButton("joystick button 0"))
             SceneManager.LoadScene("Luxor");
         }
-        if (Input.GetKey(KeyCode.D))
-        {//else if (Input.GetButton("joystick button 0"))
+        if(Input.GetKey(KeyCode.D)) {//else if (Input.GetButton("joystick button 0"))
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
     }
@@ -464,8 +403,7 @@ public class ControllerInput : MonoBehaviour
     /// <summary>
     /// Sets the selectedButtonIndex to the desired value, checking for active buttons.
     /// </summary>
-    void pickActiveButton(int offset)
-    {
+    void pickActiveButton(int offset) {
         //Saving this value to detect infinite loops.
         int originalPosition = selectedButtonIndex;
 
@@ -474,56 +412,162 @@ public class ControllerInput : MonoBehaviour
 
         //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
         //Adding the length of buttons in case index is 0 and moving left. Then -1 becomes length -1, going to end. All else will be handled by mod.
-        do
-        {
+        do {
             selectedButtonIndex = (selectedButtonIndex + offset + Controller.buttons.Length) % Controller.buttons.Length;
 
             //If trying to get the first available button, offset is 0 to check current button, then 1 to check others.
-            if (offset == 0)
-            {
+            if(offset == 0) {
                 offset = 1;
             }
 
             //Emergency situation, no buttons are selected and we made a complete loop. Just return.
-            else if (originalPosition == selectedButtonIndex)
-            {
+            else if(originalPosition == selectedButtonIndex) {
                 return;
             }
-        } while (!Controller.buttons[selectedButtonIndex].activatable);
+        } while(!Controller.buttons[selectedButtonIndex].activatable);
 
         //Select this new button.
         Controller.buttons[selectedButtonIndex].select();
     }
 
 
-    public IEnumerator CheckForInput()
-    {
+    public IEnumerator CheckForInput() {
 
-        while (true)
-        {
+        while(true) {
 
-            if (timeSinceLastInput >= 0)
-            {
+            if(timeSinceLastInput >= 0) {
                 timeSinceLastInput += Time.deltaTime;
+
             }
 
-            if (timeSinceLastInput > (minutesUntilReset * 60.0f))
-            {
+            if(timeSinceLastInput > (minutesUntilReset * 60.0f)) {
 
-                if (Controller.instance.is3D)
-                {
+                if(Controller.instance.is3D) {
 
                     Controller.instance.Toggle3D();
 
                 }
 
-                SceneManager.LoadScene(0);
-
                 timeSinceLastInput = -1.0f;
+
+                Debug.LogWarning("No input");
+
+                StartCoroutine(CycleScenes());
 
             }
 
             yield return null;
+
+        }
+    }
+
+    public IEnumerator CycleScenes() {
+
+        Debug.LogWarning("Cycling");
+
+        yield return StartCoroutine(FadePlane(true, fadeTime));
+
+        SetPlatformVisible(false);
+
+        Coroutine rotationRoutine = StartCoroutine(Controller.instance.SetIdleRotatePlatform());
+
+        Coroutine cyclingCoroutine = StartCoroutine(CycleSceneTransition());
+
+        yield return StartCoroutine(WatchForControllerInput(cyclingCoroutine));
+
+        yield return StartCoroutine(FadePlane(true, 0.01f));
+
+        Debug.LogWarning("Stopping");
+
+        SetPlatformVisible(true);
+
+        StopCoroutine(rotationRoutine);
+
+        SceneManager.LoadScene(0);
+
+        yield return StartCoroutine(FadePlane(false, fadeTime/2));
+
+    }
+
+    public IEnumerator CycleSceneTransition() {
+
+        while(true) {
+
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+            if(sceneIndex >= SceneManager.sceneCountInBuildSettings) {
+
+                sceneIndex = 1;
+
+            }
+
+            yield return StartCoroutine(FadePlane(true, fadeTime));
+
+            SceneManager.LoadScene(sceneIndex);
+
+            yield return StartCoroutine(FadePlane(false, fadeTime));
+
+            yield return new WaitForSeconds(timeBetweenSceneCycles);
+
+        }
+    }
+
+    public IEnumerator WatchForControllerInput(Coroutine coroutineToStop) {
+
+        while(true) {
+
+            if(timeSinceLastInput >= 0) {
+
+                Debug.LogWarning("Stopping");
+                StopCoroutine(coroutineToStop);
+                break;
+
+            }
+
+            yield return null;
+        }
+    }
+
+    public void SetPlatformVisible(bool visible) {
+
+        Controller.instance.platformMonitor.SetActive(visible);
+        Controller.instance.platformModel.SetActive(visible);
+        Controller.instance.bookmarkPanel.SetActive(visible);
+        Controller.instance.controllerPanel.SetActive(visible);
+
+    }
+
+    public IEnumerator FadePlane(bool fadeIn, float newFadeTime) {
+
+        GameObject plane = Controller.instance.fadePlane;
+
+        MeshRenderer renderer = plane.GetComponent<MeshRenderer>();
+
+        Color startColor = renderer.material.color;
+        Color endColor = startColor;
+
+
+        if(fadeIn) {
+
+            endColor.a = 1.0f;
+
+        }
+        else {
+
+            endColor.a = 0.0f;
+        }
+    
+        if(startColor.a != endColor.a) {
+
+            for(float i = 0; i < fadeTime; i += Time.deltaTime) {
+
+                renderer.material.SetColor("_Color", Color.Lerp(startColor, endColor, i / newFadeTime));
+
+                yield return null;
+
+            }
+
+            renderer.material.SetColor("_Color", endColor);
 
         }
     }
