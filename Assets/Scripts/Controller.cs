@@ -24,13 +24,22 @@ public class Controller : MonoBehaviour
     public BookmarkController bookmarks;
 
     [SerializeField]
-    public GameObject bookmarkPOIPanel;
+    public GameObject bookmarkPOIList;
 
     [SerializeField]
     public Object bookmarkPrefab;
 
     [SerializeField]
     public InputGuideController inputGuide;
+
+    [SerializeField]
+    public GameObject bookmarkPanel;
+
+    [SerializeField]
+    public GameObject controllerPanel;
+
+    [SerializeField]
+    public GameObject fadePlane;
 
     [HideInInspector]
     public List<POIScript> POIList;
@@ -118,8 +127,6 @@ public class Controller : MonoBehaviour
             ActivateDisplays(new Scene(), LoadSceneMode.Additive);
 
 
-
-
         }
 
         //Controller already exists, move the existing to this position and gete rid of this one.
@@ -182,7 +189,7 @@ public class Controller : MonoBehaviour
 
         List<Vector3> panelPositions = new List<Vector3>();
 
-        Rect panelRect = bookmarkPOIPanel.GetComponent<RectTransform>().rect;
+        Rect panelRect = bookmarkPOIList.GetComponent<RectTransform>().rect;
 
         float panelHeight = panelRect.height;
 
@@ -207,7 +214,7 @@ public class Controller : MonoBehaviour
         for (int i = 0; i < POIList.Count; i++)
         {
 
-            GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, bookmarkPOIPanel.transform) as GameObject;
+            GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, bookmarkPOIList.transform) as GameObject;
 
             RectTransform newTransform = newPanel.GetComponent<RectTransform>();
             newTransform.localPosition = Vector3.zero;
@@ -357,5 +364,18 @@ public class Controller : MonoBehaviour
         POIList.Clear();
         bookmarks.ClearBookmarks();
 
+    }
+
+    public IEnumerator SetIdleRotatePlatform() {
+
+        while(true) {
+
+            float rotateAngle = Time.deltaTime * 5.0f;
+
+            playerShip.transform.Rotate(0, rotateAngle, 0, Space.Self);
+
+            yield return null;
+
+        }
     }
 }
