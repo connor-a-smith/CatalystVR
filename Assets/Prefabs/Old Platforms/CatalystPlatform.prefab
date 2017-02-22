@@ -3842,9 +3842,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4166024658661636}
   - component: {fileID: 33055751471089512}
-  - component: {fileID: 64397854935319848}
   - component: {fileID: 23779125835129122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FadePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6380,7 +6379,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.284256
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6414,7 +6413,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.10709
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6448,7 +6447,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 61.017246
+  field of view: 48.813797
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6482,7 +6481,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 61.017246
+  field of view: 48.813797
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6516,7 +6515,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 57.436153
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6550,7 +6549,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 57.436153
+  field of view: 45.948925
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6584,7 +6583,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.857834
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6618,7 +6617,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 53.10709
+  field of view: 42.485672
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6652,7 +6651,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.857834
+  field of view: 54.28627
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6686,7 +6685,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 67.284256
+  field of view: 53.827404
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6720,7 +6719,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 56.937416
+  field of view: 45.549934
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -6754,7 +6753,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 2000
-  field of view: 56.937416
+  field of view: 45.549934
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -8157,20 +8156,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!64 &64397854935319848
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1360865640107010}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65000010332094970
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -9997,7 +9982,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013350153970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebd0764eadb8a5846b6e9204df957859, type: 3}
+  m_Script: {fileID: 11500000, guid: ecde3a0b4735d5c469a28bb49fd9b65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114000011483226268
@@ -10862,7 +10847,7 @@ MonoBehaviour:
   maxTiltAngle: 45
   timeBetweenSceneCycles: 10
   fadeTime: 2
-  minutesUntilReset: 0.1
+  minutesUntilReset: 5
   xRotationSpeed: 30
   yRotationSpeed: -30
   forwardSpeed: 30
