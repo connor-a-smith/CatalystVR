@@ -24,3 +24,10 @@ Desktop.ini
 *.ply.meta
 *.obj
 *.obj.meta
+
+# No Catalyst Scenes since they're too big
+/Assets/Scenes/Sites
+
+# Resources contains tons of large files. Also too big.
+/Assets/Resources
+
