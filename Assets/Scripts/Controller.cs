@@ -15,6 +15,9 @@ public class Controller : MonoBehaviour
     private float cameraEyeOffset = 0.6f;
 
     [SerializeField]
+    private bool autoloadCameras = false;
+
+    [SerializeField]
     public GameObject[] leftEyeCameras;
 
     [SerializeField]
@@ -101,6 +104,11 @@ public class Controller : MonoBehaviour
                 topLevelParent = topLevelParent.transform.parent.gameObject;
             }
 
+            if (autoloadCameras)
+            {
+                InitializeCameras();
+            }
+
             POIList = new List<POIScript>();
 
             DontDestroyOnLoad(topLevelParent);
@@ -160,6 +168,34 @@ public class Controller : MonoBehaviour
     {
 
         controllerReady();
+
+    }
+
+    public void InitializeCameras()
+    {
+
+        List<GameObject> leftCameras = new List<GameObject>();
+        List<GameObject> rightCameras = new List<GameObject>();
+
+        foreach (Camera cam in GetComponentsInChildren<Camera>())
+        {
+
+            if (cam.stereoTargetEye == StereoTargetEyeMask.Left)
+            {
+
+                leftCameras.Add(cam.gameObject);
+
+            }
+            else if (cam.stereoTargetEye == StereoTargetEyeMask.Right)
+            {
+
+                rightCameras.Add(cam.gameObject);
+
+            }
+
+
+        }
+
 
     }
 
