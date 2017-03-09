@@ -112,6 +112,7 @@ public class UserMetrics : MonoBehaviour
 
     public void SaveUserMetrics()
     {
+        Debug.Log("Saving");
 
         SaveDailySummary();
         SaveOverallSummary();
@@ -190,6 +191,8 @@ public class UserMetrics : MonoBehaviour
         AddUptime(0.0f, false);
         SaveUserMetrics();
 
+        bool saved = false;
+
         while (true)
         {
 
@@ -200,9 +203,18 @@ public class UserMetrics : MonoBehaviour
             }
 
             // Save frequently
-            if (System.DateTime.Now.Minute % minutesBetweenAutoSaves == 0)
+            if (System.DateTime.Now.Minute % minutesBetweenAutoSaves == 0 && System.DateTime.Now.Second == 0)
             {
-                SaveUserMetrics();
+                if (!saved)
+                {
+                    SaveUserMetrics();
+                    saved = true;
+                }
+    
+            }
+            else
+            {
+                saved = false;
             }
 
             previouslyLoggedTime = System.DateTime.Now;
