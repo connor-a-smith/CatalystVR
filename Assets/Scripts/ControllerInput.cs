@@ -436,6 +436,7 @@ public class ControllerInput : MonoBehaviour {
         while(true) {
 
             if(timeSinceLastInput >= 0) {
+
                 timeSinceLastInput += Time.deltaTime;
 
             }
@@ -453,6 +454,8 @@ public class ControllerInput : MonoBehaviour {
                 Debug.LogWarning("No input");
 
                 StartCoroutine(CycleScenes());
+
+                Controller.gameState = Controller.State.IDLE;
 
             }
 
@@ -483,6 +486,7 @@ public class ControllerInput : MonoBehaviour {
 
         StopCoroutine(rotationRoutine);
 
+        // NOTE: This line resets the user back to the Earth scene. May want to change later.
         SceneManager.LoadScene(0);
 
         yield return StartCoroutine(FadePlane(false, fadeTime/2));
@@ -520,6 +524,7 @@ public class ControllerInput : MonoBehaviour {
 
                 Debug.LogWarning("Stopping");
                 StopCoroutine(coroutineToStop);
+                Controller.gameState = Controller.State.ACTIVE;
                 break;
 
             }

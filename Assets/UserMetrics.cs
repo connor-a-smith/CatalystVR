@@ -6,8 +6,17 @@ using System.IO;
 public class UserMetrics : MonoBehaviour
 {
 
-    [SerializeField] private string saveLocationPath;
-    [SerializeField] private float minutesBetweenAutoSaves = 60.0f;
+    private string dateFormat = "MM.dd.yyyy";
+    private string timeFormat = "HH:mm:ss";
+
+
+    [SerializeField]
+    private System.Environment.SpecialFolder saveLocationFolder;
+
+    private string saveLocationPath;
+
+    [SerializeField]
+    private int minutesBetweenAutoSaves = 60;
 
     const string DIR_NAME = "CAVEkiosk User Metrics";
     const string DAILY_DIR_NAME = "Daily Summaries";
@@ -24,13 +33,63 @@ public class UserMetrics : MonoBehaviour
 
     private System.DateTime previouslyLoggedTime;
 
+    private Controller.State prevState;
+
     // Use this for initialization
     void Start()
     {
+        prevState = Controller.gameState;
+
+        saveLocationPath = System.Environment.GetFolderPath(saveLocationFolder);
 
         InitializeDirectories();
+        LoadUserMetrics();
         StartCoroutine(SaveRegularly());
 
+    }
+
+    private void Update()
+    {
+        Controller.State gameState = Controller.gameState;
+
+        if (gameState != prevState && gameState == Controller.State.ACTIVE)
+        {
+
+            AddUserActivity();
+
+        }
+
+        if (gameState == Controller.State.IDLE)
+        {
+
+            AddUptime(Time.deltaTime, false);
+
+        }
+        else
+        {
+
+            AddUptime(Time.deltaTime, true);
+
+        }
+
+        prevState = gameState;
+
+
+    }
+
+    public void AddUptime(float deltaTime, bool isActiveTime)
+    {
+
+        dailySummary.AddUptime(deltaTime, isActiveTime);
+        overallSummary.AddUptime(deltaTime, isActiveTime);
+
+    }
+
+    public void AddUserActivity()
+    {
+
+        dailySummary.AddTimeActivated();
+        overallSummary.AddTimeActivated();
     }
 
     public void InitializeDirectories()
@@ -42,6 +101,7 @@ public class UserMetrics : MonoBehaviour
         if (!Directory.Exists(topLevelDirectoryPath))
         {
             Directory.CreateDirectory(topLevelDirectoryPath);
+            Debug.Log("Creating directory at " + topLevelDirectoryPath);
         }
 
         if (!Directory.Exists(dailySummaryDirectoryPath))
@@ -58,9 +118,17 @@ public class UserMetrics : MonoBehaviour
 
     }
 
+    public void LoadUserMetrics()
+    {
+
+        LoadDailySummary();
+        LoadOverallSummary();
+
+    }
+
     public string GetDailySummaryPath()
     {
-        return dailySummaryDirectoryPath + "/" + System.DateTime.Now.ToShortDateString() + ".json";
+        return dailySummaryDirectoryPath + "/" + System.DateTime.Now.ToString(dateFormat) + ".json";
 
     }
 
@@ -69,7 +137,8 @@ public class UserMetrics : MonoBehaviour
         string serializedMetrics = JsonUtility.ToJson(dailySummary);
         string filePath = GetDailySummaryPath();
 
-        File.WriteAllText(filePath, serializedMetrics);        
+        File.WriteAllText(filePath, serializedMetrics);
+
     }
 
     private void SaveOverallSummary()
@@ -118,18 +187,20 @@ public class UserMetrics : MonoBehaviour
     {
 
         previouslyLoggedTime = System.DateTime.Now;
+        AddUptime(0.0f, false);
+        SaveUserMetrics();
 
         while (true)
         {
-            
+
             if (previouslyLoggedTime.Day != System.DateTime.Now.Day)
             {
                 SaveDailySummary();
                 dailySummary = new SerializeableUserMetrics();
             }
 
-            // Save every hour, when the minutes are 0.
-            if (System.DateTime.Now.Minute == 0)
+            // Save frequently
+            if (System.DateTime.Now.Minute % minutesBetweenAutoSaves == 0)
             {
                 SaveUserMetrics();
             }
@@ -146,9 +217,84 @@ public class UserMetrics : MonoBehaviour
     private class SerializeableUserMetrics
     {
 
+        public int timesActivated = 1;
+        public float averageSessionLength;
+
         public string totalUptime;
         public string userActivityTime;
         public string idleTime;
 
+        public float uptimeInSeconds;
+        public float userActivityTimeInSeconds;
+        public float idleTimeInSeconds;
+
+        private string[] userActivityTimeList;
+
+        public void AddTimeActivated()
+        {
+            timesActivated++;
+
+            string[] newTimeList = new string[userActivityTimeList.Length + 1];
+            for (int i = 0; i < userActivityTimeList.Length; i++)
+            {
+                newTimeList[i] = userActivityTimeList[i];
+            }
+
+            newTimeList[newTimeList.Length - 1] = System.DateTime.Now.ToString();
+
+        }
+
+        public void AddUptime(float time, bool isActiveTime)
+        {
+
+            uptimeInSeconds += time;
+            totalUptime = SecondsToReadableTime(uptimeInSeconds);
+
+            if (isActiveTime)
+            {
+                userActivityTimeInSeconds += time;
+                userActivityTime = SecondsToReadableTime(userActivityTimeInSeconds);
+
+            }
+            else
+            {
+                idleTimeInSeconds += time;
+                idleTime = SecondsToReadableTime(idleTimeInSeconds);
+            }
+
+            if (timesActivated < 1)
+            {
+                timesActivated = 1;
+            }
+
+            averageSessionLength = userActivityTimeInSeconds / timesActivated;
+
+        }
+
+        public string SecondsToReadableTime(float seconds)
+        {
+
+            int hours = 0;
+            int minutes = 0;
+
+            if (seconds > 60.0)
+            {
+                minutes = Mathf.FloorToInt(seconds / 60.0f);
+                seconds %= 60.0f;
+               
+            }
+
+            if (minutes > 60)
+            {
+
+                hours = minutes / 60;
+                minutes %= 60;
+
+            }
+
+            string readableTime = string.Format("{0}h:{1}m:{2}s", hours, minutes, seconds);
+
+            return readableTime;
+        }
     }
 }

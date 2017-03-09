@@ -86,6 +86,16 @@ public class Controller : MonoBehaviour
 
     public Toggle3DController Toggle3DDelegate;
 
+    public enum State
+    {
+
+        IDLE,
+        ACTIVE
+
+    }
+
+    public static State gameState = State.ACTIVE;
+
     // Use this for initialization
     /// <summary>
     /// Used to set up the static variables based on the dragged in variables.
