@@ -34,16 +34,16 @@ public class FocusTransformComponent : POIScriptComponent
         */
         //Teleport to location.
 
-        Controller.playerShip.transform.position = this.transform.position + 50 * this.transform.forward + 50 * this.transform.up;
+        GameManager.playerShip.transform.position = this.transform.position + 50 * this.transform.forward + 50 * this.transform.up;
 
-        Quaternion oldRot = Controller.instance.raycastCam.transform.localRotation;
-        Controller.instance.raycastCam.transform.LookAt(this.transform.position);
-        Quaternion newRot = Controller.instance.raycastCam.transform.localRotation;
+        Quaternion oldRot = GameManager.instance.raycastCam.transform.localRotation;
+        GameManager.instance.raycastCam.transform.LookAt(this.transform.position);
+        Quaternion newRot = GameManager.instance.raycastCam.transform.localRotation;
 
         //Apply to platform, and reset raycastCam pos.
 
-        Controller.playerShip.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
-        Controller.instance.raycastCam.transform.localRotation = oldRot;
+        GameManager.playerShip.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
+        GameManager.instance.raycastCam.transform.localRotation = oldRot;
     }
 
     public override void Deactivate()

@@ -16,7 +16,7 @@ public class InputManagerScript : MonoBehaviour
             {
                 //If this is the controller, then set all gamepadObjects active.
                 GetComponentInChildren<ControllerInput>(true).transform.parent.gameObject.SetActive(true);
-                Controller.isCave = true;
+                GameManager.isCave = true;
             }
 
             //TODO test with hydra

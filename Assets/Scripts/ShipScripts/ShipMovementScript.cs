@@ -36,7 +36,7 @@ public class ShipMovementScript : MonoBehaviour {
         //Want to get local values relative to old parent. Thus resetting parent for the local values.
 
         Transform oldParent = transform.parent;
-        transform.parent = Controller.playerShip.transform;
+        transform.parent = GameManager.playerShip.transform;
 
         Vector3 deltaPosition = transform.localPosition - targetLocalPoint;
         Vector3 deltaRotation = transform.localRotation.eulerAngles - targetLocalRotation;
@@ -65,13 +65,13 @@ public class ShipMovementScript : MonoBehaviour {
         if (Vector3.Magnitude(deltaPosition) > threshold)
         {
             //Note moving in self space to account for rotations.
-            Controller.playerShip.transform.Translate(deltaPosition * transformScale * Time.deltaTime, Space.Self);
+            GameManager.playerShip.transform.Translate(deltaPosition * transformScale * Time.deltaTime, Space.Self);
         }
 
         if (Vector3.Magnitude(deltaRotation) > threshold)
         {
             //Change this to modify other axis too. Currently only changing y axis.
-            Controller.playerShip.transform.Rotate(new Vector3(0, deltaRotation.y, 0) * rotateScale * Time.deltaTime);
+            GameManager.playerShip.transform.Rotate(new Vector3(0, deltaRotation.y, 0) * rotateScale * Time.deltaTime);
         }
     }
 
@@ -83,7 +83,7 @@ public class ShipMovementScript : MonoBehaviour {
 
     public void returnToStart()
     {
-        transform.parent = Controller.playerShip.transform;
+        transform.parent = GameManager.playerShip.transform;
 
         transform.localPosition = startPoint;
         transform.localRotation = Quaternion.Euler(startRotation);

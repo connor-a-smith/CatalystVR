@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ControllerInput : MonoBehaviour {
 
+    private GameManager gameManager;
+
     [SerializeField]
     private float maxTiltAngle = 45.0f;
 
@@ -50,6 +52,13 @@ public class ControllerInput : MonoBehaviour {
     private bool advancedMode = false;
     private int POILayerMask;
 
+    private void Awake()
+    {
+
+        gameManager = GetComponentInParent<GameManager>();
+
+    }
+
     // Use this for initialization
     void Start() {
 
@@ -66,9 +75,9 @@ public class ControllerInput : MonoBehaviour {
             timeSinceLastInput = 0.0f;
 
             //Movement allowed, no POI selected or advanced mode.
-            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
+            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
                 //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
-                Controller.playerShip.transform.RotateAround(Controller.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
+                GameManager.playerShip.transform.RotateAround(GameManager.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
             }
 
             //POI selected and not advanced mode, stick controller POI movement.
@@ -76,7 +85,7 @@ public class ControllerInput : MonoBehaviour {
 
                 justActivatedRightStickHorizontal = true;
 
-                PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -112,9 +121,9 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
+            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
 
-                Transform shipTransform = Controller.playerShip.transform;
+                Transform shipTransform = GameManager.playerShip.transform;
 
                 Vector3 beforeShipRotation = shipTransform.localRotation.eulerAngles;
 
@@ -145,9 +154,9 @@ public class ControllerInput : MonoBehaviour {
                 afterShipRotation.z = 0.0f;
                 shipTransform.localRotation = Quaternion.Euler(afterShipRotation);
             }
-            else if(Controller.selectedPOI != null && !justActivatedRightStickHorizontal) {
+            else if(GameManager.selectedPOI != null && !justActivatedRightStickHorizontal) {
 
-                PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -170,15 +179,15 @@ public class ControllerInput : MonoBehaviour {
             timeSinceLastInput = 0.0f;
 
             //Movement allowed, no POI selected or advanced mode.
-            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
-                Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * Controller.playerShip.transform.right);
+            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
+                GameManager.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * GameManager.playerShip.transform.right);
             }
 
             //POI selected and not advanced mode, stick controller POI movement.
-            else if(!Controller.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal) {
+            else if(!GameManager.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal) {
                 justActivatedLeftStickHorizontal = true;
 
-                PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -216,32 +225,32 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if((Controller.selectedPOI == null && !Controller.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
-                Controller.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * Controller.playerShip.transform.forward);
+            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
+                GameManager.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * GameManager.playerShip.transform.forward);
             }
             else if(!justActivatedLeftStickVertical) {
 
                 justActivatedLeftStickVertical = true;
 
-                if(Controller.instance.bookmarks.bookmarkPanelActivated) {
+                if(GameManager.instance.bookmarks.bookmarkPanelActivated) {
 
 
                     if(Input.GetAxis("Vertical") < 0) {
 
-                        Controller.instance.bookmarks.MoveSelectorDown();
+                        GameManager.instance.bookmarks.MoveSelectorDown();
 
 
                     }
                     else {
 
-                        Controller.instance.bookmarks.MoveSelectorUp();
+                        GameManager.instance.bookmarks.MoveSelectorUp();
 
                     }
 
                 }
-                else if(Controller.selectedPOI != null) {
+                else if(GameManager.selectedPOI != null) {
 
-                    PhotoComponent POIPhotos = Controller.selectedPOI.GetComponent<PhotoComponent>();
+                    PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
 
                     if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -268,7 +277,7 @@ public class ControllerInput : MonoBehaviour {
 
 
         if(Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad) {
-            if(Controller.selectedPOI != null) {
+            if(GameManager.selectedPOI != null) {
                 pickActiveButton((int)Input.GetAxis("Xbox DpadX"));
                 justActivatedDpad = true;
                 timeSinceLastInput = 0.0f;
@@ -287,22 +296,22 @@ public class ControllerInput : MonoBehaviour {
             timeSinceLastInput = 0.0f;
 
 
-            if(Controller.instance.bookmarks.bookmarkPanelActivated) {
+            if(GameManager.instance.bookmarks.bookmarkPanelActivated) {
 
-                Controller.instance.bookmarks.SelectBookmark();
+                GameManager.instance.bookmarks.SelectBookmark();
                 pickActiveButton(0);
 
             }
 
             //If no POI selected, then try to select a new POI
-            else if(Controller.selectedPOI == null) {
+            else if(GameManager.selectedPOI == null) {
                 RaycastHit hit;
-                Physics.Raycast(Controller.instance.raycastCam.transform.position, Controller.instance.raycastCam.transform.forward, out hit, Mathf.Infinity, POILayerMask, QueryTriggerInteraction.Collide);
-                Controller.inputManager.HandleHit(hit);
+                Physics.Raycast(GameManager.instance.raycastCam.transform.position, GameManager.instance.raycastCam.transform.forward, out hit, Mathf.Infinity, POILayerMask, QueryTriggerInteraction.Collide);
+                GameManager.inputManager.HandleHit(hit);
 
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
-                if(Controller.selectedPOI != null) {
+                if(GameManager.selectedPOI != null) {
                     pickActiveButton(0);
                 }
             }
@@ -310,7 +319,7 @@ public class ControllerInput : MonoBehaviour {
 
             //POI Selected, trigger its buttons.
             else {
-                Controller.buttons[selectedButtonIndex].AttemptToggle();
+                GameManager.buttons[selectedButtonIndex].AttemptToggle();
             }
         }
 
@@ -324,8 +333,8 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if(Controller.selectedPOI != null) {
-                Controller.selectedPOI.Deactivate();
+            if(GameManager.selectedPOI != null) {
+                GameManager.selectedPOI.Deactivate();
             }
         }
 
@@ -350,7 +359,8 @@ public class ControllerInput : MonoBehaviour {
             timeSinceLastInput = 0.0f;
 
             justActivatedStart = true;
-            Controller.instance.Toggle3D();
+
+            gameManager.cameraRig.Toggle3D();
         }
         else if(Input.GetAxis("Xbox Start") == 0 && justActivatedStart) {
             justActivatedStart = false;
@@ -360,15 +370,15 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if(!Controller.instance.bookmarks.bookmarkPanelActivated) {
+            if(!GameManager.instance.bookmarks.bookmarkPanelActivated) {
 
-                Controller.instance.bookmarks.MovePanelUp();
+                GameManager.instance.bookmarks.MovePanelUp();
             }
 
         }
-        else if(Controller.instance.bookmarks.bookmarkPanelActivated) {
+        else if(GameManager.instance.bookmarks.bookmarkPanelActivated) {
 
-            Controller.instance.bookmarks.MovePanelDown();
+            GameManager.instance.bookmarks.MovePanelDown();
 
         }
 
@@ -376,15 +386,15 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if(!Controller.instance.inputGuide.panelActive) {
+            if(!GameManager.instance.inputGuide.panelActive) {
 
-                Controller.instance.inputGuide.MovePanelUp();
+                GameManager.instance.inputGuide.MovePanelUp();
 
             }
         }
-        else if(Controller.instance.inputGuide.panelActive) {
+        else if(GameManager.instance.inputGuide.panelActive) {
 
-            Controller.instance.inputGuide.MovePanelDown();
+            GameManager.instance.inputGuide.MovePanelDown();
 
         }
 
@@ -408,12 +418,12 @@ public class ControllerInput : MonoBehaviour {
         int originalPosition = selectedButtonIndex;
 
         //Deselect the old button.
-        Controller.buttons[selectedButtonIndex].deselect();
+        GameManager.buttons[selectedButtonIndex].deselect();
 
         //Increment the button index while the button is not active. Loops due to the mod. Guaranteed to be at least one active button, the back button.
         //Adding the length of buttons in case index is 0 and moving left. Then -1 becomes length -1, going to end. All else will be handled by mod.
         do {
-            selectedButtonIndex = (selectedButtonIndex + offset + Controller.buttons.Length) % Controller.buttons.Length;
+            selectedButtonIndex = (selectedButtonIndex + offset + GameManager.buttons.Length) % GameManager.buttons.Length;
 
             //If trying to get the first available button, offset is 0 to check current button, then 1 to check others.
             if(offset == 0) {
@@ -424,10 +434,10 @@ public class ControllerInput : MonoBehaviour {
             else if(originalPosition == selectedButtonIndex) {
                 return;
             }
-        } while(!Controller.buttons[selectedButtonIndex].activatable);
+        } while(!GameManager.buttons[selectedButtonIndex].activatable);
 
         //Select this new button.
-        Controller.buttons[selectedButtonIndex].select();
+        GameManager.buttons[selectedButtonIndex].select();
     }
 
 
@@ -443,19 +453,13 @@ public class ControllerInput : MonoBehaviour {
 
             if(timeSinceLastInput > (minutesUntilReset * 60.0f)) {
 
-                if(Controller.instance.is3D) {
-
-                    Controller.instance.Toggle3D();
-
-                }
+                gameManager.cameraRig.Set3D(false);
 
                 timeSinceLastInput = -1.0f;
 
-                Debug.LogWarning("No input");
-
                 StartCoroutine(CycleScenes());
 
-                Controller.gameState = Controller.State.IDLE;
+                GameManager.gameState = GameManager.State.IDLE;
 
             }
 
@@ -466,21 +470,17 @@ public class ControllerInput : MonoBehaviour {
 
     public IEnumerator CycleScenes() {
 
-        Debug.LogWarning("Cycling");
-
         yield return StartCoroutine(FadePlane(true, fadeTime));
 
         SetPlatformVisible(false);
 
-        Coroutine rotationRoutine = StartCoroutine(Controller.instance.SetIdleRotatePlatform());
+        Coroutine rotationRoutine = StartCoroutine(GameManager.instance.SetIdleRotatePlatform());
 
         Coroutine cyclingCoroutine = StartCoroutine(CycleSceneTransition());
 
         yield return StartCoroutine(WatchForControllerInput(cyclingCoroutine));
 
         yield return StartCoroutine(FadePlane(true, 0.01f));
-
-        Debug.LogWarning("Stopping");
 
         SetPlatformVisible(true);
 
@@ -524,7 +524,7 @@ public class ControllerInput : MonoBehaviour {
 
                 Debug.LogWarning("Stopping");
                 StopCoroutine(coroutineToStop);
-                Controller.gameState = Controller.State.ACTIVE;
+                GameManager.gameState = GameManager.State.ACTIVE;
                 break;
 
             }
@@ -535,16 +535,16 @@ public class ControllerInput : MonoBehaviour {
 
     public void SetPlatformVisible(bool visible) {
 
-        Controller.instance.platformMonitor.SetActive(visible);
-        Controller.instance.platformModel.SetActive(visible);
-        Controller.instance.bookmarkPanel.SetActive(visible);
-        Controller.instance.controllerPanel.SetActive(visible);
+        GameManager.instance.platformMonitor.SetActive(visible);
+        GameManager.instance.platformModel.SetActive(visible);
+        GameManager.instance.bookmarkPanel.SetActive(visible);
+        GameManager.instance.controllerPanel.SetActive(visible);
 
     }
 
     public IEnumerator FadePlane(bool fadeIn, float newFadeTime) {
 
-        GameObject plane = Controller.instance.fadePlane;
+        GameObject plane = GameManager.instance.fadePlane;
 
         MeshRenderer renderer = plane.GetComponent<MeshRenderer>();
 

@@ -78,7 +78,7 @@ public class PhotoController : MonoBehaviour {
 
     if (photoCenter == null) {
 
-      photoCenter = Controller.instance.raycastCam.gameObject;
+      photoCenter = GameManager.instance.raycastCam.gameObject;
 
     }
 

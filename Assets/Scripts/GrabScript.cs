@@ -68,7 +68,7 @@ public class GrabScript : MonoBehaviour {
                 //RaycastHit hit;
                 Physics.Raycast(grabPoints[i].position, grabPoints[i].forward, out hit, Mathf.Infinity);
 
-                GameObject hitObject = Controller.inputManager.HandleHit(hit);
+                GameObject hitObject = GameManager.inputManager.HandleHit(hit);
 
                 ShipMovementScript mover = hit.transform.gameObject.GetComponent<ShipMovementScript>();
 

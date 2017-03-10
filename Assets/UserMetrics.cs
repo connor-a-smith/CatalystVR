@@ -33,12 +33,12 @@ public class UserMetrics : MonoBehaviour
 
     private System.DateTime previouslyLoggedTime;
 
-    private Controller.State prevState;
+    private GameManager.State prevState;
 
     // Use this for initialization
     void Start()
     {
-        prevState = Controller.gameState;
+        prevState = GameManager.gameState;
 
         saveLocationPath = System.Environment.GetFolderPath(saveLocationFolder);
 
@@ -50,16 +50,16 @@ public class UserMetrics : MonoBehaviour
 
     private void Update()
     {
-        Controller.State gameState = Controller.gameState;
+        GameManager.State gameState = GameManager.gameState;
 
-        if (gameState != prevState && gameState == Controller.State.ACTIVE)
+        if (gameState != prevState && gameState == GameManager.State.ACTIVE)
         {
 
             AddUserActivity();
 
         }
 
-        if (gameState == Controller.State.IDLE)
+        if (gameState == GameManager.State.IDLE)
         {
 
             AddUptime(Time.deltaTime, false);

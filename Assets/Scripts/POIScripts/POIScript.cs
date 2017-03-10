@@ -14,18 +14,18 @@ public class POIScript : MonoBehaviour {
 
   void Awake() {
 
-    Controller.controllerReady += AddPOI;
+    GameManager.controllerReady += AddPOI;
 
   }
 
   public void AddPOI() {
 
-    Controller.instance.POIList.Add(this);
+    GameManager.instance.POIList.Add(this);
 
   }
 
   public void OnDestroy() {
-    Controller.controllerReady -= AddPOI;
+    GameManager.controllerReady -= AddPOI;
         Deactivate();
     }
 
@@ -37,7 +37,7 @@ public class POIScript : MonoBehaviour {
   // Use this for initialization
   void Start() {
     components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
-    GameObject label = GameObject.Instantiate(Controller.instance.labelPrefab, this.transform, false) as GameObject;
+    GameObject label = GameObject.Instantiate(GameManager.instance.labelPrefab, this.transform, false) as GameObject;
     Vector3 newPosition = label.transform.localPosition;
     newPosition.y += labelSpawnHeight;
     label.transform.localPosition = newPosition;
@@ -52,19 +52,19 @@ public class POIScript : MonoBehaviour {
 
   public void Activate() {
     //If selected another node without deactivating an old one, then deactivate the old one.
-    if (Controller.selectedPOI != null && Controller.selectedPOI != this && Controller.selectedPOI) {
-      Controller.selectedPOI.Deactivate();
+    if (GameManager.selectedPOI != null && GameManager.selectedPOI != this && GameManager.selectedPOI) {
+      GameManager.selectedPOI.Deactivate();
     }
 
     activated = true;
-    Controller.selectedPOI = this;
-    GetComponentInChildren<Renderer>().material = Controller.selectedPOIMat;
+    GameManager.selectedPOI = this;
+    GetComponentInChildren<Renderer>().material = GameManager.selectedPOIMat;
 
     //Tell all the buttons that a new poi was selected.
-    for (int i = 0; i < Controller.buttons.Length; i++) {
-      Controller.buttons[i].gameObject.SetActive(true);
+    for (int i = 0; i < GameManager.buttons.Length; i++) {
+      GameManager.buttons[i].gameObject.SetActive(true);
 
-      Controller.buttons[i].OnNewNodeSelected();
+      GameManager.buttons[i].OnNewNodeSelected();
     }
 
     //Tell all components to activate.
@@ -84,14 +84,14 @@ public class POIScript : MonoBehaviour {
 
   public void Deactivate() {
     activated = false;
-    Controller.selectedPOI = null;
-    GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
+    GameManager.selectedPOI = null;
+    GetComponentInChildren<Renderer>().material = GameManager.defaultPOIMat;
 
 
     //Tell all the buttons that there is no current POI.
-    for (int i = 0; i < Controller.buttons.Length; i++) {
-      Controller.buttons[i].OnNodeDeselected();
-      Controller.buttons[i].gameObject.SetActive(false);
+    for (int i = 0; i < GameManager.buttons.Length; i++) {
+      GameManager.buttons[i].OnNodeDeselected();
+      GameManager.buttons[i].gameObject.SetActive(false);
     }
 
     for (int i = 0; i < components.Count; i++) {
@@ -115,14 +115,14 @@ public class POIScript : MonoBehaviour {
   /// Highlight the POI if it is hit in the raycast.
   /// </summary>
   public void Highlight() {
-    GetComponentInChildren<Renderer>().material = Controller.highlightedPOIMat;
+    GetComponentInChildren<Renderer>().material = GameManager.highlightedPOIMat;
   }
 
   /// <summary>
   /// UnHighlight the POI if it is not hit in the raycast.
   /// </summary>
   public void UnHighlight() {
-    GetComponentInChildren<Renderer>().material = Controller.defaultPOIMat;
+    GetComponentInChildren<Renderer>().material = GameManager.defaultPOIMat;
   }
 }
 

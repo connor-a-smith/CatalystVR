@@ -19,13 +19,13 @@ public class TextComponent : POIScriptComponent {
     public override void Activate()
     {
         base.Activate();
-        Controller.instance.monitorText.text = sentence;
+        GameManager.instance.monitorText.text = sentence;
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
-        Controller.instance.monitorText.text = Controller.instructionText;
+        GameManager.instance.monitorText.text = GameManager.instructionText;
 
     }
 }

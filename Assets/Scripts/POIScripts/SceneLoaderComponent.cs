@@ -19,7 +19,7 @@ public class SceneLoaderComponent : POIScriptComponent {
     public override void Activate()
     {
         base.Activate();
-        Controller.selectedPOI.Deactivate();
+        GameManager.selectedPOI.Deactivate();
 
         SceneManager.LoadSceneAsync(sceneName);
     }

@@ -1,62 +1,123 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CaveCamLoader : MonoBehaviour
 {
 
     [SerializeField]
     private Material leftEyeCubemap;
+    
     [SerializeField]
     private Material rightEyeCubemap;
-    private GameObject[] leftEyeCameras;
-    private GameObject[] rightEyeCameras;
+
+    private List<Camera> leftEyeCameras;
+    private List<Camera> rightEyeCameras;
+
+    [System.Obsolete]
     private GameObject skyboxCameras;
 
     // Use this for initialization
     void Start()
     {
 
-        leftEyeCameras = Controller.instance.leftEyeCameras;
-        rightEyeCameras = Controller.instance.rightEyeCameras;
+        leftEyeCameras = CAVECameraRig.leftEyeCameras;
+        rightEyeCameras = CAVECameraRig.rightEyeCameras;
 
-        Controller.instance.Toggle3DDelegate += Toggle3D;
+        CAVECameraRig.on3DToggled += Set3D;
 
-        CreateSkyboxCameras();
+        SetupCubemapOnCameras();
 
-
-        Toggle3D();
+        Set3D(CAVECameraRig.is3D);
 
     }
 
-    public void CreateSkyboxCameras()
+
+    private void SetupCubemapOnCameras()
     {
 
+        foreach (Camera cam in CAVECameraRig.allCameras)
+        {
+
+            StereoTargetEyeMask targetEye = cam.stereoTargetEye;
+            Material skyboxMaterial = rightEyeCubemap;
+
+            if (targetEye == StereoTargetEyeMask.Left)
+            {
+                skyboxMaterial = leftEyeCubemap;
+            }
+
+            Skybox camSkybox = cam.gameObject.AddComponent<Skybox>();
+            camSkybox.material = skyboxMaterial;
+
+        }
+    }
+
+    private void RemoveCubemapFromCameras()
+    {
+        foreach (Camera cam in CAVECameraRig.allCameras)
+        {
+            Destroy(cam.GetComponent<Skybox>());
+        }
+    }
+
+    public void Set3D(bool is3D)
+    {
+        foreach (Camera cam in leftEyeCameras)
+        {
+
+            Skybox camSkybox = cam.GetComponent<Skybox>();
+
+            if (is3D)
+            {
+                camSkybox.material = leftEyeCubemap;
+            }
+
+            else
+            {
+                camSkybox.material = rightEyeCubemap;
+            }
+        }
+    }
+
+    public void OnDestroy()
+    {
+
+        CAVECameraRig.on3DToggled -= Set3D;
+
+        RemoveCubemapFromCameras();
+
+    }
+
+    [System.Obsolete]
+    public void CreateSkyboxCameras()
+    {
         skyboxCameras = new GameObject();
         skyboxCameras.transform.parent = leftEyeCameras[0].transform.parent;
         skyboxCameras.name = "Skybox Cameras";
 
-        foreach (GameObject camera in leftEyeCameras)
+        foreach (Camera camera in leftEyeCameras)
         {
 
             // First, add the right eye to this camera for non-3D mode.
-            camera.AddComponent<Skybox>().material = rightEyeCubemap;
+            camera.gameObject.AddComponent<Skybox>().material = rightEyeCubemap;
 
             // Then, create a new skybox camera that uses the correct cubemap.
-            GameObject newCamera = GameObject.Instantiate(camera, camera.transform.position, camera.transform.rotation) as GameObject;
+            GameObject newCamera = GameObject.Instantiate(camera.gameObject, camera.transform.position, camera.transform.rotation) as GameObject;
             newCamera.transform.parent = skyboxCameras.transform;
             newCamera.GetComponent<Camera>().cullingMask = 0;
             newCamera.GetComponent<Skybox>().material = leftEyeCubemap;
             newCamera.GetComponent<Camera>().depth = -1;
         }
 
-        foreach (GameObject camera in rightEyeCameras)
+        foreach (Camera camera in rightEyeCameras)
         {
 
             // First, add the right eye to this camera for non-3D mode.
-            camera.AddComponent<Skybox>().material = rightEyeCubemap;
+            camera.gameObject.AddComponent<Skybox>().material = rightEyeCubemap;
 
             // Then, create a new skybox camera that uses the correct cubemap.
-            GameObject newCamera = GameObject.Instantiate(camera, camera.transform.position, camera.transform.rotation) as GameObject;
+            GameObject newCamera = GameObject.Instantiate(camera.gameObject, camera.transform.position, camera.transform.rotation) as GameObject;
             newCamera.transform.parent = skyboxCameras.transform;
             newCamera.GetComponent<Camera>().cullingMask = 0;
             newCamera.GetComponent<Skybox>().material = rightEyeCubemap;
@@ -67,19 +128,17 @@ public class CaveCamLoader : MonoBehaviour
         // Initially deactivate the skybox cameras.
         SetSkyboxCamerasActive(false);
 
+
     }
 
-    /// <summary>
-    /// Sets the skybox cameras active and disables the other cameras.
-    /// </summary>
-    /// <param name="active">If set to <c>true</c> active.</param>
+    [System.Obsolete]
     public void SetSkyboxCamerasActive(bool active)
     {
 
         // Sets the skybox cameras to their respective active state.
         skyboxCameras.SetActive(active);
 
-        foreach (GameObject camera in leftEyeCameras)
+        foreach (Camera camera in leftEyeCameras)
         {
 
             if (active)
@@ -93,7 +152,7 @@ public class CaveCamLoader : MonoBehaviour
             }
         }
 
-        foreach (GameObject camera in rightEyeCameras)
+        foreach (Camera camera in rightEyeCameras)
         {
 
             if (active)
@@ -106,46 +165,5 @@ public class CaveCamLoader : MonoBehaviour
                 camera.GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             }
         }
-    }
-
-    public void Toggle3D()
-    {
-
-        if (Controller.instance.is3D)
-        {
-
-            SetSkyboxCamerasActive(true);
-
-        }
-        else
-        {
-
-            SetSkyboxCamerasActive(false);
-        }
-    }
-
-    public void OnDestroy()
-    {
-
-        Controller.instance.Toggle3DDelegate -= Toggle3D;
-
-        foreach (GameObject camera in leftEyeCameras)
-        {
-
-            Destroy(camera.GetComponent<Skybox>());
-
-        }
-
-        foreach (GameObject camera in rightEyeCameras)
-        {
-
-            Destroy(camera.GetComponent<Skybox>());
-
-        }
-
-        SetSkyboxCamerasActive(false);
-
-        Destroy(skyboxCameras);
-
     }
 }

@@ -35,7 +35,7 @@ public class BookmarkController : MonoBehaviour {
 
 		bookmarkIndex = 0;
 
-		platformAnim = Controller.playerShip.GetComponent<Animator> ();
+		platformAnim = GameManager.playerShip.GetComponent<Animator> ();
 		initActivate = true;
 		initDeactivate = false;
 	}
@@ -106,13 +106,13 @@ public class BookmarkController : MonoBehaviour {
 
         loc.focusComponent.Activate();
 
-        if (Controller.selectedPOI != null) {
+        if (GameManager.selectedPOI != null) {
 
-            Controller.selectedPOI.Deactivate();
+            GameManager.selectedPOI.Deactivate();
 
         }
 
-        Controller.selectedPOI = null;
+        GameManager.selectedPOI = null;
 
         loc.POI.Activate();
 

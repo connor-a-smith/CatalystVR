@@ -16,7 +16,7 @@ public class InputGuideController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		platformAnim = Controller.playerShip.GetComponent<Animator> ();
+		platformAnim = GameManager.playerShip.GetComponent<Animator> ();
 
         MovePanelUp();
 

@@ -21,7 +21,7 @@ public class AudioComponent : POIScriptComponent
 
         base.Activate();
 
-        AudioSource source = Controller.monitor.GetComponentInChildren<AudioSource>();
+        AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
         source.clip= soundClip;
         source.Play();
 
@@ -30,7 +30,7 @@ public class AudioComponent : POIScriptComponent
     public override void Deactivate()
     {
         base.Activate();
-        AudioSource source = Controller.monitor.GetComponentInChildren<AudioSource>();
+        AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
         source.Stop();
     }
 }

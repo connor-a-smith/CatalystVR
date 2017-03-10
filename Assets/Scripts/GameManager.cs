@@ -4,24 +4,15 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Controller : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     //Is this running in the cave?
     public static bool isCave = false;
 
-    public static Controller instance;
+    public static GameManager instance;
 
     [SerializeField]
-    private float cameraEyeOffset = 0.6f;
-
-    [SerializeField]
-    private bool autoloadCameras = false;
-
-    [SerializeField]
-    public GameObject[] leftEyeCameras;
-
-    [SerializeField]
-    public GameObject[] rightEyeCameras;
+    public CAVECameraRig cameraRig;
 
     [SerializeField]
     public BookmarkController bookmarks;
@@ -49,9 +40,6 @@ public class Controller : MonoBehaviour
 
     public GameObject platformMonitor;
     public GameObject platformModel;
-
-    [SerializeField]
-    public bool is3D = false;
 
     public static GameObject playerShip;
     public static MonitorScript monitor;
@@ -82,9 +70,6 @@ public class Controller : MonoBehaviour
 
     public static string instructionText = "Welcome to the CAVEkiosk!\n\nUse the Xbox controller to interact with this exhibit, and hold the Right Trigger for a list of detailed controls.";
 
-    public delegate void Toggle3DController();
-
-    public Toggle3DController Toggle3DDelegate;
 
     public enum State
     {
@@ -103,20 +88,15 @@ public class Controller : MonoBehaviour
     void Awake()
     {
 
-        if (Controller.instance == null)
+        if (GameManager.instance == null)
         {
-            Controller.instance = this;
+            GameManager.instance = this;
 
             GameObject topLevelParent = gameObject;
 
             while (topLevelParent.transform.parent != null)
             {
                 topLevelParent = topLevelParent.transform.parent.gameObject;
-            }
-
-            if (autoloadCameras)
-            {
-                InitializeCameras();
             }
 
             POIList = new List<POIScript>();
@@ -135,15 +115,12 @@ public class Controller : MonoBehaviour
 
             buttons = monitor.GetComponentsInChildren<MonitorButtonScript>();
 
-            for (int i = 0; i < Controller.buttons.Length; i++)
+            for (int i = 0; i < GameManager.buttons.Length; i++)
             {
-                Controller.buttons[i].gameObject.SetActive(false);
+                GameManager.buttons[i].gameObject.SetActive(false);
             }
 
-            Controller.instance.monitorText.text = Controller.instructionText;
-
-            ActivateDisplays(new Scene(), LoadSceneMode.Additive);
-
+            GameManager.instance.monitorText.text = GameManager.instructionText;
 
         }
 
@@ -151,7 +128,7 @@ public class Controller : MonoBehaviour
         else
         {
 
-            GameObject instanceObject = Controller.instance.gameObject;
+            GameObject instanceObject = GameManager.instance.gameObject;
             GameObject currentObject = gameObject;
 
             while (currentObject.transform.parent != null && instanceObject.transform.parent != null)
@@ -181,34 +158,6 @@ public class Controller : MonoBehaviour
 
     }
 
-    public void InitializeCameras()
-    {
-
-        List<GameObject> leftCameras = new List<GameObject>();
-        List<GameObject> rightCameras = new List<GameObject>();
-
-        foreach (Camera cam in GetComponentsInChildren<Camera>())
-        {
-
-            if (cam.stereoTargetEye == StereoTargetEyeMask.Left)
-            {
-
-                leftCameras.Add(cam.gameObject);
-
-            }
-            else if (cam.stereoTargetEye == StereoTargetEyeMask.Right)
-            {
-
-                rightCameras.Add(cam.gameObject);
-
-            }
-
-
-        }
-
-
-    }
-
     public void Start()
     {
 
@@ -221,9 +170,7 @@ public class Controller : MonoBehaviour
             controllerReady();
         }
 
-        ResetCameraPositions();
-
-        monitor.GetComponentInChildren<Text>().text = Controller.instructionText;
+        monitor.GetComponentInChildren<Text>().text = GameManager.instructionText;
 
 
         FillPOIList(new Scene(), LoadSceneMode.Single);
@@ -288,119 +235,6 @@ public class Controller : MonoBehaviour
             bookmarks.bookmarks.Add(newBookmark);
 
             imageTransform.sizeDelta = sizeDelta;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.B))
-        {
-            ActivateDisplays(new Scene(), LoadSceneMode.Additive);
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Toggle3D();
-        }
-
-        if (is3D && Input.GetKey(KeyCode.Minus))
-        {
-            if (cameraEyeOffset > 0)
-            {
-
-                cameraEyeOffset -= 0.01f;
-                ResetCameraPositions();
-                Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-            }
-
-        }
-
-        if (is3D && Input.GetKey(KeyCode.Equals))
-        {
-
-            cameraEyeOffset += 0.01f;
-            ResetCameraPositions();
-            Debug.LogErrorFormat("Camera Offset: {0}", cameraEyeOffset);
-
-        }
-    }
-
-
-    void ActivateDisplays(Scene scenes, LoadSceneMode mode)
-    {
-        foreach (Display display in Display.displays)
-        {
-            display.Activate();
-            //Debug.LogError("Display number: " + counter + "\n");
-            //counter++;
-        }
-    }
-
-    public void Toggle3D()
-    {
-
-
-        if (is3D)
-        {
-            Make2D();
-        }
-        else
-        {
-            Make3D();
-        }
-        if (Toggle3DDelegate != null)
-        {
-            Toggle3DDelegate();
-        }
-    }
-
-    public void Make2D()
-    {
-        OffsetCameras(leftEyeCameras, cameraEyeOffset / 2);
-        OffsetCameras(rightEyeCameras, -cameraEyeOffset / 2);
-        is3D = false;
-    }
-
-    public void Make3D()
-    {
-        OffsetCameras(leftEyeCameras, -cameraEyeOffset / 2);
-        OffsetCameras(rightEyeCameras, cameraEyeOffset / 2);
-        is3D = true;
-    }
-
-    public void OffsetCameras(GameObject[] cameras, float offset)
-    {
-        foreach (GameObject camera in cameras)
-        {
-            Vector3 newPosition = camera.transform.localPosition;
-            newPosition.x += offset;
-            camera.transform.localPosition = newPosition;
-        }
-    }
-
-    public void moveCameras(GameObject[] cameras, float xVal)
-    {
-        foreach (GameObject camera in cameras)
-        {
-            Vector3 newPosition = camera.transform.localPosition;
-            newPosition.x = xVal;
-            camera.transform.localPosition = newPosition;
-        }
-    }
-
-    private void ResetCameraPositions()
-    {
-        if (!is3D)
-        {
-            moveCameras(leftEyeCameras, 0.0f);
-            moveCameras(rightEyeCameras, 0.0f);
-        }
-        else
-        {
-            moveCameras(leftEyeCameras, -cameraEyeOffset / 2);
-            moveCameras(rightEyeCameras, cameraEyeOffset / 2);
         }
     }
 
