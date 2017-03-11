@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+public class GamepadInputHandler : MonoBehaviour {
 
-public class ControllerInput : MonoBehaviour {
+    public static float timeSinceLastInput = 0.0f;
 
-    private GameManager gameManager;
-
-    [SerializeField]
-    private float maxTiltAngle = 45.0f;
-
-    private float timeSinceLastInput = 1.0f;
+    private List<string> activeInputs;
 
     [SerializeField]
     private float timeBetweenSceneCycles = 10.0f;
@@ -21,10 +19,6 @@ public class ControllerInput : MonoBehaviour {
     [SerializeField]
     private float minutesUntilReset = 5.0f;
 
-    public float xRotationSpeed = 30;
-    public float yRotationSpeed = -30;
-
-    public float forwardSpeed = 5;
 
     //Vars to Avoid duplicate actions on one press.
     //Was the A button just hit?
@@ -52,6 +46,14 @@ public class ControllerInput : MonoBehaviour {
     private bool advancedMode = false;
     private int POILayerMask;
 
+    /*
+    public void CreateInputEvent(InputOption input, Action function) {
+
+
+
+
+    }
+
     private void Awake()
     {
 
@@ -70,15 +72,41 @@ public class ControllerInput : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+
+        for (int i = 0; i < inputOptions.Length; i++)
+        {
+
+            if (Input.GetAxis(inputOptions[i].))
+
+
+        }
+
+        float inputValue;
+
+        if ((inputValue = Input.GetAxis(RIGHT_STICK_HORIZONTAL)) != 0)
+        {
+            onRightStickHorizontal(inputValue);
+            SetInputActive(RIGHT_STICK_HORIZONTAL);
+        }
+
+        if ((inputValue = Input.GetAxis(LEFT_STICK_HORIZONTAL)) != 0)
+        {
+            onLeftStickHorizontal(inputValue);
+            activeInputs.Add(LEFT_STICK_HORIZONTAL);
+        }
+
+        if ((inputValue = Input.GetAxis(RIGHT_STICK_VERTICAL)) != 0)
+        {
+            onRightStickVertical(inputValue);
+            activeInputs.Add(RIGHT_STICK_HORIZONTAL);
+        }
+
+        if ((inputValue = Input.GetAxis(LEFT_STICK_VERTICAL)) != 0)
+        {
+            onLeftStickVertical(inputValue);
+        }
+
         if(Input.GetAxis("RightStickHorizontal") != 0) {
-
-            timeSinceLastInput = 0.0f;
-
-            //Movement allowed, no POI selected or advanced mode.
-            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
-                //Controller.playerShip.transform.Rotate(0, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed, 0, Space.Self, );
-                GameManager.playerShip.transform.RotateAround(GameManager.instance.raycastCam.transform.parent.position, Vector3.up, Time.deltaTime * Input.GetAxis("RightStickHorizontal") * xRotationSpeed);
-            }
 
             //POI selected and not advanced mode, stick controller POI movement.
             else if(!justActivatedRightStickHorizontal) {
@@ -123,36 +151,6 @@ public class ControllerInput : MonoBehaviour {
 
             if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
 
-                Transform shipTransform = GameManager.playerShip.transform;
-
-                Vector3 beforeShipRotation = shipTransform.localRotation.eulerAngles;
-
-                float rotateAngle = Time.deltaTime * Input.GetAxis("RightStickVertical") * yRotationSpeed;
-
-                shipTransform.Rotate(rotateAngle, 0, 0, Space.Self);
-
-                Vector3 afterShipRotation = shipTransform.localRotation.eulerAngles;
-
-                if(afterShipRotation.x > 180.0f) {
-
-                    afterShipRotation.x -= 360.0f;
-
-                }
-
-                if(afterShipRotation.x < -maxTiltAngle) {
-
-                    afterShipRotation.x = -maxTiltAngle;
-
-
-                }
-                else if(afterShipRotation.x > maxTiltAngle) {
-
-                    afterShipRotation.x = maxTiltAngle;
-
-                }
-
-                afterShipRotation.z = 0.0f;
-                shipTransform.localRotation = Quaternion.Euler(afterShipRotation);
             }
             else if(GameManager.selectedPOI != null && !justActivatedRightStickHorizontal) {
 
@@ -175,13 +173,6 @@ public class ControllerInput : MonoBehaviour {
         }
 
         if(Input.GetAxis("Horizontal") != 0) {
-
-            timeSinceLastInput = 0.0f;
-
-            //Movement allowed, no POI selected or advanced mode.
-            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
-                GameManager.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Horizontal") * forwardSpeed * GameManager.playerShip.transform.right);
-            }
 
             //POI selected and not advanced mode, stick controller POI movement.
             else if(!GameManager.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal) {
@@ -225,15 +216,11 @@ public class ControllerInput : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
-                GameManager.playerShip.transform.position += (Time.deltaTime * Input.GetAxis("Vertical") * forwardSpeed * GameManager.playerShip.transform.forward);
-            }
             else if(!justActivatedLeftStickVertical) {
 
                 justActivatedLeftStickVertical = true;
 
                 if(GameManager.instance.bookmarks.bookmarkPanelActivated) {
-
 
                     if(Input.GetAxis("Vertical") < 0) {
 
@@ -552,7 +539,7 @@ public class ControllerInput : MonoBehaviour {
         Color endColor = startColor;
 
 
-        if(fadeIn) {
+        if (fadeIn) {
 
             endColor.a = 1.0f;
 
@@ -561,10 +548,10 @@ public class ControllerInput : MonoBehaviour {
 
             endColor.a = 0.0f;
         }
-    
-        if(startColor.a != endColor.a) {
 
-            for(float i = 0; i < fadeTime; i += Time.deltaTime) {
+        if (startColor.a != endColor.a) {
+
+            for (float i = 0; i < fadeTime; i += Time.deltaTime) {
 
                 renderer.material.SetColor("_Color", Color.Lerp(startColor, endColor, i / newFadeTime));
 
@@ -576,4 +563,20 @@ public class ControllerInput : MonoBehaviour {
 
         }
     }
+
+    private bool IsInputActive(string inputString)
+    {
+        return activeInputs.Contains(inputString);
+    }
+
+    private void SetInputActive(string inputString)
+    {
+
+        if (!IsInputActive(inputString))
+        {
+            activeInputs.Add(inputString);
+        }
+
+    }
+    */
 }

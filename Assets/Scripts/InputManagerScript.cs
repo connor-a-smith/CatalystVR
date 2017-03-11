@@ -15,7 +15,7 @@ public class InputManagerScript : MonoBehaviour
             if (controllerNames[i].Contains("XBOX"))
             {
                 //If this is the controller, then set all gamepadObjects active.
-                GetComponentInChildren<ControllerInput>(true).transform.parent.gameObject.SetActive(true);
+                GetComponentInChildren<GamepadInputHandler>(true).transform.parent.gameObject.SetActive(true);
                 GameManager.isCave = true;
             }
 
