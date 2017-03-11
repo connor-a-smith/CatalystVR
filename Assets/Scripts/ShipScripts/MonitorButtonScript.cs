@@ -154,36 +154,36 @@ public class MonitorButtonScript : MonoBehaviour
     {
         if (connectedType == ComponentType.Photos)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<PhotoComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<PhotoComponent>();
         }
 
         else if (connectedType == ComponentType.Audio)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<AudioComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<AudioComponent>();
 
         }
 
         else if (connectedType == ComponentType.Videos)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<VideoComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<VideoComponent>();
 
         }
 
         else if (connectedType == ComponentType.Text)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<TextComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<TextComponent>();
 
         }
 
         else if (connectedType == ComponentType.Scene)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<SceneLoaderComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<SceneLoaderComponent>();
 
         }
 
         else if (connectedType == ComponentType.Zoom)
         {
-            connectedComponent = GameManager.selectedPOI.GetComponent<FocusTransformComponent>();
+            connectedComponent = POIManager.selectedPOI.GetComponent<FocusTransformComponent>();
 
         }
 

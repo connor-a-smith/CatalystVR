@@ -22,7 +22,7 @@ public class CatalystPlatform : MonoBehaviour
     {
         
         // The platform should only move if no POI is selected and the bookmarks aren't being used.
-        if (GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated)
+        if (POIManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated)
         {
 
             // Rotates the platform horizontally.
@@ -113,5 +113,35 @@ public class CatalystPlatform : MonoBehaviour
         // Updates the rotation of the platform with the correct snapped rotation.
         transform.localRotation = Quaternion.Euler(platformRotation);
 
+    }
+
+    public void SetPlatformVisible(bool visible)
+    {
+
+        foreach (Transform child in GetComponentsInChildren<Transform>())
+        {
+
+            if (child.transform.parent == this.transform && !child.GetComponent<CAVECameraRig>())
+            {
+
+                child.gameObject.SetActive(visible);
+
+            }
+        }
+    }
+
+    public IEnumerator RotatePlatformWhileIdle(float rotateAnglePerSecond)
+    {
+
+        while (true)
+        {
+
+            float rotateAngle = Time.deltaTime * rotateAnglePerSecond;
+
+            transform.Rotate(0, rotateAngle, 0, Space.Self);
+
+            yield return null;
+
+        }
     }
 }

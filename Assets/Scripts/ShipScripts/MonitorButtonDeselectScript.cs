@@ -17,6 +17,6 @@ public class MonitorButtonDeselectScript : POIScriptComponent {
     {
         //Does not need to worry about base.activate, as soon as this component is activated, the entire POI is deactivated.
         //base.Activate();
-        GameManager.selectedPOI.Deactivate();
+        POIManager.selectedPOI.Deactivate();
     }
 }

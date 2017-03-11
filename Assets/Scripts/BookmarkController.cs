@@ -106,13 +106,13 @@ public class BookmarkController : MonoBehaviour {
 
         loc.focusComponent.Activate();
 
-        if (GameManager.selectedPOI != null) {
+        if (POIManager.selectedPOI != null) {
 
-            GameManager.selectedPOI.Deactivate();
+            POIManager.selectedPOI.Deactivate();
 
         }
 
-        GameManager.selectedPOI = null;
+        POIManager.selectedPOI = null;
 
         loc.POI.Activate();
 

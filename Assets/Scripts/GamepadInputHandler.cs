@@ -10,16 +10,6 @@ public class GamepadInputHandler : MonoBehaviour {
 
     private List<string> activeInputs;
 
-    [SerializeField]
-    private float timeBetweenSceneCycles = 10.0f;
-
-    [SerializeField]
-    private float fadeTime = 2.0f;
-
-    [SerializeField]
-    private float minutesUntilReset = 5.0f;
-
-
     //Vars to Avoid duplicate actions on one press.
     //Was the A button just hit?
     private bool justActivatedA = false;
@@ -113,7 +103,7 @@ public class GamepadInputHandler : MonoBehaviour {
 
                 justActivatedRightStickHorizontal = true;
 
-                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = POIManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -149,12 +139,12 @@ public class GamepadInputHandler : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if((GameManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
+            if((POIManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated) || advancedMode) {
 
             }
-            else if(GameManager.selectedPOI != null && !justActivatedRightStickHorizontal) {
+            else if(POIManager.selectedPOI != null && !justActivatedRightStickHorizontal) {
 
-                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = POIManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -178,7 +168,7 @@ public class GamepadInputHandler : MonoBehaviour {
             else if(!GameManager.instance.bookmarks.bookmarkPanelActivated && !justActivatedLeftStickHorizontal) {
                 justActivatedLeftStickHorizontal = true;
 
-                PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
+                PhotoComponent POIPhotos = POIManager.selectedPOI.GetComponent<PhotoComponent>();
 
                 if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -235,9 +225,9 @@ public class GamepadInputHandler : MonoBehaviour {
                     }
 
                 }
-                else if(GameManager.selectedPOI != null) {
+                else if(POIManager.selectedPOI != null) {
 
-                    PhotoComponent POIPhotos = GameManager.selectedPOI.GetComponent<PhotoComponent>();
+                    PhotoComponent POIPhotos = POIManager.selectedPOI.GetComponent<PhotoComponent>();
 
                     if(POIPhotos != null && POIPhotos.loaderObj != null && POIPhotos.loaderObj.activeSelf) {
 
@@ -264,7 +254,7 @@ public class GamepadInputHandler : MonoBehaviour {
 
 
         if(Input.GetAxis("Xbox DpadX") != 0 && !justActivatedDpad) {
-            if(GameManager.selectedPOI != null) {
+            if(POIManager.selectedPOI != null) {
                 pickActiveButton((int)Input.GetAxis("Xbox DpadX"));
                 justActivatedDpad = true;
                 timeSinceLastInput = 0.0f;
@@ -291,14 +281,14 @@ public class GamepadInputHandler : MonoBehaviour {
             }
 
             //If no POI selected, then try to select a new POI
-            else if(GameManager.selectedPOI == null) {
+            else if(POIManager.selectedPOI == null) {
                 RaycastHit hit;
                 Physics.Raycast(GameManager.instance.raycastCam.transform.position, GameManager.instance.raycastCam.transform.forward, out hit, Mathf.Infinity, POILayerMask, QueryTriggerInteraction.Collide);
                 GameManager.inputManager.HandleHit(hit);
 
 
                 //If a POI was selected by this hit, we need to set the active GUI object.
-                if(GameManager.selectedPOI != null) {
+                if(POIManager.selectedPOI != null) {
                     pickActiveButton(0);
                 }
             }
@@ -320,8 +310,8 @@ public class GamepadInputHandler : MonoBehaviour {
 
             timeSinceLastInput = 0.0f;
 
-            if(GameManager.selectedPOI != null) {
-                GameManager.selectedPOI.Deactivate();
+            if(POIManager.selectedPOI != null) {
+                POIManager.selectedPOI.Deactivate();
             }
         }
 
@@ -384,17 +374,6 @@ public class GamepadInputHandler : MonoBehaviour {
             GameManager.instance.inputGuide.MovePanelDown();
 
         }
-
-        //TODO Remove
-        if(Input.GetKey(KeyCode.A)) {//else if (Input.GetButton("joystick button 0"))
-            SceneManager.LoadScene("Mar Saba");
-        }
-        if(Input.GetKey(KeyCode.S)) {//else if (Input.GetButton("joystick button 0"))
-            SceneManager.LoadScene("Luxor");
-        }
-        if(Input.GetKey(KeyCode.D)) {//else if (Input.GetButton("joystick button 0"))
-            SceneManager.LoadScene("MultiDisplayPlanet");
-        }
     }
 
     /// <summary>
@@ -428,155 +407,5 @@ public class GamepadInputHandler : MonoBehaviour {
     }
 
 
-    public IEnumerator CheckForInput() {
-
-        while(true) {
-
-            if(timeSinceLastInput >= 0) {
-
-                timeSinceLastInput += Time.deltaTime;
-
-            }
-
-            if(timeSinceLastInput > (minutesUntilReset * 60.0f)) {
-
-                gameManager.cameraRig.Set3D(false);
-
-                timeSinceLastInput = -1.0f;
-
-                StartCoroutine(CycleScenes());
-
-                GameManager.gameState = GameManager.State.IDLE;
-
-            }
-
-            yield return null;
-
-        }
-    }
-
-    public IEnumerator CycleScenes() {
-
-        yield return StartCoroutine(FadePlane(true, fadeTime));
-
-        SetPlatformVisible(false);
-
-        Coroutine rotationRoutine = StartCoroutine(GameManager.instance.SetIdleRotatePlatform());
-
-        Coroutine cyclingCoroutine = StartCoroutine(CycleSceneTransition());
-
-        yield return StartCoroutine(WatchForControllerInput(cyclingCoroutine));
-
-        yield return StartCoroutine(FadePlane(true, 0.01f));
-
-        SetPlatformVisible(true);
-
-        StopCoroutine(rotationRoutine);
-
-        // NOTE: This line resets the user back to the Earth scene. May want to change later.
-        SceneManager.LoadScene(0);
-
-        yield return StartCoroutine(FadePlane(false, fadeTime/2));
-
-    }
-
-    public IEnumerator CycleSceneTransition() {
-
-        while(true) {
-
-            int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-
-            if(sceneIndex >= SceneManager.sceneCountInBuildSettings) {
-
-                sceneIndex = 1;
-
-            }
-
-            yield return StartCoroutine(FadePlane(true, fadeTime));
-
-            SceneManager.LoadScene(sceneIndex);
-
-            yield return StartCoroutine(FadePlane(false, fadeTime));
-
-            yield return new WaitForSeconds(timeBetweenSceneCycles);
-
-        }
-    }
-
-    public IEnumerator WatchForControllerInput(Coroutine coroutineToStop) {
-
-        while(true) {
-
-            if(timeSinceLastInput >= 0) {
-
-                Debug.LogWarning("Stopping");
-                StopCoroutine(coroutineToStop);
-                GameManager.gameState = GameManager.State.ACTIVE;
-                break;
-
-            }
-
-            yield return null;
-        }
-    }
-
-    public void SetPlatformVisible(bool visible) {
-
-        GameManager.instance.platformMonitor.SetActive(visible);
-        GameManager.instance.platformModel.SetActive(visible);
-        GameManager.instance.bookmarkPanel.SetActive(visible);
-        GameManager.instance.controllerPanel.SetActive(visible);
-
-    }
-
-    public IEnumerator FadePlane(bool fadeIn, float newFadeTime) {
-
-        GameObject plane = GameManager.instance.fadePlane;
-
-        MeshRenderer renderer = plane.GetComponent<MeshRenderer>();
-
-        Color startColor = renderer.material.color;
-        Color endColor = startColor;
-
-
-        if (fadeIn) {
-
-            endColor.a = 1.0f;
-
-        }
-        else {
-
-            endColor.a = 0.0f;
-        }
-
-        if (startColor.a != endColor.a) {
-
-            for (float i = 0; i < fadeTime; i += Time.deltaTime) {
-
-                renderer.material.SetColor("_Color", Color.Lerp(startColor, endColor, i / newFadeTime));
-
-                yield return null;
-
-            }
-
-            renderer.material.SetColor("_Color", endColor);
-
-        }
-    }
-
-    private bool IsInputActive(string inputString)
-    {
-        return activeInputs.Contains(inputString);
-    }
-
-    private void SetInputActive(string inputString)
-    {
-
-        if (!IsInputActive(inputString))
-        {
-            activeInputs.Add(inputString);
-        }
-
-    }
     */
 }
