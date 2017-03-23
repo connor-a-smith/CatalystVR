@@ -7,7 +7,7 @@ public class InputGuideController : MonoBehaviour {
 	//while the L is being pressed, then keep showing
 	private bool initActivated = false;
 
-    public bool panelActive = false;
+    public static bool controlsPanelActive = false;
 
 	private Animator platformAnim;
 
@@ -16,11 +16,13 @@ public class InputGuideController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		platformAnim = GameManager.playerShip.GetComponent<Animator> ();
+        CatalystPlatform platform = GetComponentInParent<CatalystPlatform>();
+
+		platformAnim = platform.GetComponent<Animator> ();
 
         MovePanelUp();
 
-        panelActive = false;
+        controlsPanelActive = false;
 
 	}
 
@@ -43,12 +45,9 @@ public class InputGuideController : MonoBehaviour {
 
             platformAnim.Play("ControlsFloaty", 1, animationStartTime);
 
-
         }
 
-        panelActive = true;
-
-
+        controlsPanelActive = true;
 
     }
 
@@ -69,8 +68,30 @@ public class InputGuideController : MonoBehaviour {
 
         platformAnim.Play("ControlsFally", 1, animationStartTime);
 
-        panelActive = false;
+        controlsPanelActive = false;
         initActivated = true;
 
 	}
+
+    public void Update()
+    {
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.RIGHT_TRIGGER)
+        {
+
+            if (!controlsPanelActive)
+            {
+
+                GameManager.instance.inputGuide.MovePanelUp();
+
+            }
+            else
+            {
+
+                GameManager.instance.inputGuide.MovePanelDown();
+
+            }
+        }
+
+    }
 }

@@ -7,9 +7,8 @@ public class BookmarkController : MonoBehaviour {
 
     [SerializeField] Color selectionColor;
 
-	//update: continuously check when the L button is pressed
-	//while the L is being pressed, then keep showing
-	public bool bookmarkPanelActivated = false;
+	public static bool bookmarkPanelActive = false;
+
 	private bool initActivate;
 	private bool initDeactivate;
 
@@ -26,8 +25,6 @@ public class BookmarkController : MonoBehaviour {
     void Awake() {
 
         bookmarks = new List<Bookmark>();
-
-
     }
 
     // Use this for initialization
@@ -35,10 +32,61 @@ public class BookmarkController : MonoBehaviour {
 
 		bookmarkIndex = 0;
 
-		platformAnim = GameManager.playerShip.GetComponent<Animator> ();
-		initActivate = true;
+        CatalystPlatform platform = GetComponentInParent<CatalystPlatform>();
+
+        platformAnim = platform.GetComponent<Animator>();
+
+        initActivate = true;
 		initDeactivate = false;
 	}
+
+    public void Update()
+    {
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_TRIGGER) && !bookmarkPanelActive)
+        {
+
+            MovePanelUp();
+
+        }
+
+        if (GamepadInput.GetUp(GamepadInput.InputOption.LEFT_TRIGGER) && bookmarkPanelActive)
+        {
+
+            MovePanelDown();
+
+        }
+
+        if (bookmarkPanelActive)
+        {
+
+            if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_STICK_VERTICAL))
+            {
+
+                float stickValue = GamepadInput.GetInputValue(GamepadInput.InputOption.LEFT_STICK_VERTICAL);
+
+                if (stickValue < 0)
+                {
+                    MoveSelectorDown();
+                }
+
+                else
+                {
+                    MoveSelectorUp();
+                }
+            }
+
+            if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
+            {
+
+
+                SelectBookmark();
+
+
+            }
+
+        }
+    }
 
 	/// <summary>
 	/// Move the animation for going up
@@ -59,7 +107,7 @@ public class BookmarkController : MonoBehaviour {
 
        platformAnim.Play("BookmarkFloaty", 0, animationStartTime);
 
-        bookmarkPanelActivated = true;
+        bookmarkPanelActive = true;
 
     }
 
@@ -81,7 +129,7 @@ public class BookmarkController : MonoBehaviour {
 
 		bookmarkIndex = 0; //reset the selection to the first index
 
-        bookmarkPanelActivated = false;
+        bookmarkPanelActive = false;
 
     }
 
@@ -102,7 +150,7 @@ public class BookmarkController : MonoBehaviour {
 
 	void Jump(int index) {
 
-        Bookmark loc = bookmarks [index].GetComponent<Bookmark> ();
+        Bookmark loc = bookmarks[index].GetComponent<Bookmark> ();
 
         loc.focusComponent.Activate();
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonitorScript : MonoBehaviour {
+public class PlatformMonitor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

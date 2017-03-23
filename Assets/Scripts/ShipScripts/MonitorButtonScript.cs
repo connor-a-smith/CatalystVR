@@ -7,7 +7,7 @@ using System.Collections;
 public class MonitorButtonScript : MonoBehaviour
 {
     public ComponentType connectedType;
-    private POIScriptComponent connectedComponent;
+    private POIComponent connectedComponent;
 
     public GameObject activeSprite;
     public GameObject inactiveSprite;

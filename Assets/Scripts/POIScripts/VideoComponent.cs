@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VideoComponent : POIScriptComponent {
+public class VideoComponent : POIComponent {
 
 	// Use this for initialization
 	void Start () {

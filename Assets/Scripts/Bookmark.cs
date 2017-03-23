@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Bookmark : MonoBehaviour {
 
-    public POIScript POI;
+    public POI POI;
     public FocusTransformComponent focusComponent;
 
 

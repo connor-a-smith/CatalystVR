@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //Is this running in the cave?
+    // Is this running in the cave?
     public static bool isCave = false;
 
     public static GameManager instance;
@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public CAVECameraRig cameraRig;
 
+    [HideInInspector]
+    public PhotoController photoController;
+
     [SerializeField]
     public InputGuideController inputGuide;
 
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject fadePlane;
 
-    public static MonitorScript monitor;
+    public static PlatformMonitor monitor;
     public static InputManagerScript inputManager;
 
     public static Object photoPrefab;
@@ -60,6 +63,15 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
+        HandleSingleton();
+        SetupGameManagers();
+
+    }
+
+    public void HandleSingleton()
+    {
+
+
         if (GameManager.instance == null)
         {
             GameManager.instance = this;
@@ -71,8 +83,6 @@ public class GameManager : MonoBehaviour
                 topLevelParent = topLevelParent.transform.parent.gameObject;
             }
 
-            platform = user.GetComponentInChildren<CatalystPlatform>();
-            cameraRig = user.GetComponentInChildren<CAVECameraRig>();
 
             DontDestroyOnLoad(topLevelParent);
 
@@ -116,6 +126,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetupGameManagers()
+    {
+
+        platform = user.GetComponentInChildren<CatalystPlatform>();
+        cameraRig = user.GetComponentInChildren<CAVECameraRig>();
+        monitor = user.GetComponentInChildren<PlatformMonitor>();
+        photoController = GetComponentInChildren<PhotoController>();
+
+    }
+
 
 
     public void Start()
@@ -123,6 +143,22 @@ public class GameManager : MonoBehaviour
 
 
         monitor.GetComponentInChildren<Text>().text = GameManager.instructionText;
+
+    }
+
+    public void Update()
+    {
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.START_BUTTON))
+        {
+            cameraRig.Toggle3D();
+        }
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.BACK_BUTTON))
+        {
+            SceneManager.LoadScene("MultiDisplayPlanet");
+        }
+
 
     }
 }

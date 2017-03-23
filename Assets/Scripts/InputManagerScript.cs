@@ -42,7 +42,7 @@ public class InputManagerScript : MonoBehaviour
         //If it got a POI, activate it.
         if (hit.transform != null)
         {
-            POIScript poi = hit.transform.gameObject.GetComponent<POIScript>();
+            POI poi = hit.transform.gameObject.GetComponent<POI>();
 
             if (poi)
             {
@@ -61,7 +61,7 @@ public class InputManagerScript : MonoBehaviour
         //If it got something, activate it.
         if (hit.transform != null)
         {
-            POIScript poi = hit.collider.transform.gameObject.GetComponent<POIScript>();
+            POI poi = hit.collider.transform.gameObject.GetComponent<POI>();
             if (poi)
             {
                 poi.Toggle();

@@ -22,7 +22,7 @@ public class CatalystPlatform : MonoBehaviour
     {
         
         // The platform should only move if no POI is selected and the bookmarks aren't being used.
-        if (POIManager.selectedPOI == null && !GameManager.instance.bookmarks.bookmarkPanelActivated)
+        if (POIManager.selectedPOI == null && !BookmarkController.bookmarkPanelActive)
         {
 
             // Rotates the platform horizontally.

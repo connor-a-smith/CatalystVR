@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class POIScript : MonoBehaviour
+public class POI : MonoBehaviour
 {
 
     bool activated = false;
-    public List<POIScriptComponent> components;
+
+    public List<POIComponent> components;
+
     public string POIName;
 
     [SerializeField] private float labelSpawnHeight = 1.5f;
@@ -37,7 +39,7 @@ public class POIScript : MonoBehaviour
     void Start()
     {
 
-        components = new List<POIScriptComponent>(GetComponentsInChildren<POIScriptComponent>());
+        components = new List<POIComponent>(GetComponentsInChildren<POIComponent>());
         GameObject label = GameObject.Instantiate(GameManager.instance.labelPrefab, this.transform, false) as GameObject;
         Vector3 newPosition = label.transform.localPosition;
         newPosition.y += labelSpawnHeight;
@@ -48,7 +50,7 @@ public class POIScript : MonoBehaviour
     public void Activate()
     {
         //If selected another node without deactivating an old one, then deactivate the old one.
-        if (POIManager.selectedPOI != null && POIManager.selectedPOI != this && POIManager.selectedPOI)
+        if (POIManager.selectedPOI != null && POIManager.selectedPOI != this)
         {
             POIManager.selectedPOI.Deactivate();
         }
@@ -61,7 +63,6 @@ public class POIScript : MonoBehaviour
         for (int i = 0; i < GameManager.buttons.Length; i++)
         {
             GameManager.buttons[i].gameObject.SetActive(true);
-
             GameManager.buttons[i].OnNewNodeSelected();
         }
 

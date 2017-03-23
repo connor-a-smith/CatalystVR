@@ -2,29 +2,21 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class TextComponent : POIScriptComponent {
+public class TextComponent : POIComponent {
 
     public string sentence;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public override void Activate()
+    public override void Activate(GameManager gameManager)
     {
-        base.Activate();
+        base.Activate(gameManager);
+
         GameManager.instance.monitorText.text = sentence;
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
+
         GameManager.instance.monitorText.text = GameManager.instructionText;
 
     }

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class POIManager : MonoBehaviour {
 
-    public static List<POIScript> POIList;
+    public static List<POI> POIList;
 
     [SerializeField] public BookmarkController bookmarks;
     [SerializeField] public GameObject bookmarkPOIList;
     [SerializeField] public Object bookmarkPrefab;
     [SerializeField] public GameObject bookmarkPanel;
 
-    public static POIScript selectedPOI;
+    public static POI selectedPOI;
 
     public static Material defaultPOIMat;
     public static Material highlightedPOIMat;
@@ -35,12 +35,12 @@ public class POIManager : MonoBehaviour {
 
     }
 
-    public static void AddPOI(POIScript POI)
+    public static void AddPOI(POI POI)
     {
 
         if (POIList == null)
         {
-            POIList = new List<POIScript>();
+            POIList = new List<POI>();
         }
 
         POIList.Add(POI);

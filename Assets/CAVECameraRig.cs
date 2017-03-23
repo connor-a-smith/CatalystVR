@@ -133,6 +133,9 @@ public class CAVECameraRig : MonoBehaviour {
     private void FindCameras()
     {
 
+        leftEyeCameras = new List<Camera>();
+        rightEyeCameras = new List<Camera>();
+
         foreach (Camera cam in GetComponentsInChildren<Camera>())
         {
             if (cam.stereoTargetEye == StereoTargetEyeMask.Left)

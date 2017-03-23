@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MonitorButtonDeselectScript : POIScriptComponent {
+public class MonitorButtonDeselectScript : POIComponent {
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class MonitorButtonDeselectScript : POIScriptComponent {
 	
 	}
 
-    public override void Activate()
+    public override void Activate(GameManager gameManager)
     {
         //Does not need to worry about base.activate, as soon as this component is activated, the entire POI is deactivated.
         //base.Activate();

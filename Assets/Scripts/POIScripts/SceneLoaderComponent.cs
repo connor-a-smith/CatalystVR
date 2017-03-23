@@ -2,23 +2,14 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SceneLoaderComponent : POIScriptComponent {
+public class SceneLoaderComponent : POIComponent {
 
     public string sceneName;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
-
-    public override void Activate()
+    public override void Activate(GameManager gameManager)
     {
-        base.Activate();
+        base.Activate(gameManager);
+
         POIManager.selectedPOI.Deactivate();
 
         SceneManager.LoadSceneAsync(sceneName);

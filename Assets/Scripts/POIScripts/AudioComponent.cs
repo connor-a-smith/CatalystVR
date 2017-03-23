@@ -2,34 +2,25 @@
 using System.Collections;
 
 //Potentially use coroutines for multiple clips if needed?
-public class AudioComponent : POIScriptComponent
+public class AudioComponent : POIComponent
 {
     public AudioClip soundClip;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public override void Activate()
+    public override void Activate(GameManager gameManager)
     {
 
-        base.Activate();
+        base.Activate(gameManager);
 
         AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
-        source.clip= soundClip;
+        source.clip = soundClip;
         source.Play();
 
     }
 
     public override void Deactivate()
     {
-        base.Activate();
+        base.Deactivate();
+
         AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
         source.Stop();
     }
