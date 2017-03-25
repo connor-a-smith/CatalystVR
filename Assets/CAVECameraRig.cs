@@ -23,20 +23,27 @@ public class CAVECameraRig : MonoBehaviour {
     public static Toggle3DDelegate on3DToggled;
 
     private static Transform cameraRigTransform;
+    
+    [HideInInspector]
+    public CameraViewpoint viewpoint;
 
     // Called before first frame. Prepares the displays and loads cameras.
     private void Awake()
     {
         FindCameras();
         ActivateDisplays();
- 
+
+        viewpoint = GetComponentInChildren<CameraViewpoint>();
+        cameraRigTransform = this.transform;
+
+
     }
 
     // Ensures the cameras are in the right positions.
     void Start() {
 
         ResetCameraPositions();
-        cameraRigTransform = this.transform;
+
 
     }
 
@@ -157,22 +164,4 @@ public class CAVECameraRig : MonoBehaviour {
         allCameras.AddRange(leftEyeCameras);
         allCameras.AddRange(rightEyeCameras);
     }
-
-
-    public static RaycastHit GetRaycast()
-    {
-
-        Ray raycastRay = new Ray(cameraRigTransform.position, cameraRigTransform.forward);
-
-        Debug.DrawRay(raycastRay.origin, raycastRay.direction * 1000);
-
-        RaycastHit hitInfo;
-
-        Physics.Raycast(raycastRay, out hitInfo, Mathf.Infinity);
-
-        return hitInfo;
-
-
-    }
-
 }

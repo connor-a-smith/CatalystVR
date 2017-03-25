@@ -7,7 +7,6 @@ public class PlatformInfoText : MonoBehaviour {
 
     private Text infoText;
 
-
 	// Use this for initialization
 	void Start () {
 

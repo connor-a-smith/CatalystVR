@@ -22,7 +22,7 @@ public class InputGuideController : MonoBehaviour {
 
         MovePanelUp();
 
-        controlsPanelActive = false;
+        controlsPanelActive = true;
 
 	}
 
@@ -81,6 +81,8 @@ public class InputGuideController : MonoBehaviour {
 
             if (!controlsPanelActive)
             {
+
+                Debug.Log("Going Up");
 
                 GameManager.instance.inputGuide.MovePanelUp();
 

@@ -85,7 +85,7 @@ public class POIManager : MonoBehaviour {
         if (selectedPOI == null && GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
         {
 
-            RaycastHit cameraRaycast = CAVECameraRig.GetRaycast();
+            RaycastHit cameraRaycast = CameraViewpoint.GetRaycast();
 
             if (cameraRaycast.collider != null)
             {

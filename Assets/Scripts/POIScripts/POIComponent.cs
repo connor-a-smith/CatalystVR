@@ -25,7 +25,7 @@ public abstract class POIComponent : MonoBehaviour
     /// <summary>
     /// Toggles the current state.
     /// </summary>
-    public void Toggle()
+    public void Toggle(GameManager gameManager)
     {
         if (!activated)
         {

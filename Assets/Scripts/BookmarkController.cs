@@ -49,18 +49,18 @@ public class BookmarkController : MonoBehaviour {
     private void Update()
     {
 
-        if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_TRIGGER) && !bookmarkPanelActive)
+        if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_TRIGGER))
         {
 
-            MovePanelUp();
+            if (bookmarkPanelActive)
+            {
+                MovePanelDown();
+            }
+            else
+            {
+                MovePanelUp();
 
-        }
-
-        if (GamepadInput.GetUp(GamepadInput.InputOption.LEFT_TRIGGER) && bookmarkPanelActive)
-        {
-
-            MovePanelDown();
-
+            }
         }
 
         if (bookmarkPanelActive)

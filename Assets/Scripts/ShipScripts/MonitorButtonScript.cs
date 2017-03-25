@@ -89,7 +89,7 @@ public class MonitorButtonScript : MonoBehaviour
 
         else if (activatable)
         {
-            connectedComponent.Toggle();
+            connectedComponent.Toggle(GetComponentInParent<CatalystPlatform>().gameManager);
         }
     }
 

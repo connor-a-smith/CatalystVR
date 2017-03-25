@@ -16,7 +16,7 @@ public class PhotoController : MonoBehaviour
     [SerializeField]
     private bool debug;
 
-    public CatalystPhoto activePhoto;
+    private CatalystPhoto activePhoto;
 
     // List of actual spawned Catalyst Photos
     private List<List<CatalystPhoto>> photos;
@@ -61,13 +61,14 @@ public class PhotoController : MonoBehaviour
 
     private GameManager gameManager;
     private GameObject photoHolder;
-    private CAVECameraRig cameraRig;
+    private CameraViewpoint cameraViewpoint;
 
     // Initialization
     void Start()
     {
 
         gameManager = GetComponentInParent<GameManager>();
+        cameraViewpoint = gameManager.cameraRig.viewpoint;
 
         if (photoPrefab == null)
         {
@@ -273,7 +274,7 @@ public class PhotoController : MonoBehaviour
 
         photoHolder = new GameObject();
         photoHolder.name = "Photo Holder";
-        photoHolder.transform.parent = cameraRig.transform;
+        photoHolder.transform.parent = cameraViewpoint.transform;
         photoHolder.transform.localPosition = Vector3.zero;
         photoHolder.transform.localRotation = Quaternion.identity;
 
@@ -565,7 +566,7 @@ public class PhotoController : MonoBehaviour
     {
 
         // Places the photo holder (Center) directly at camera position.
-        photoHolder.transform.position = cameraRig.transform.position;
+        photoHolder.transform.position = cameraViewpoint.transform.position;
 
         for (int row = 0; row < photos.Count; row++)
         {
