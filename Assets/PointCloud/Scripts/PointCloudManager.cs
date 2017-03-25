@@ -204,7 +204,7 @@ public class PointCloudManager : MonoBehaviour {
 
 
 		if (!loaded){
-			GUI.BeginGroup (new Rect(CAVEScreen.width/2-100, CAVEScreen.height/2, 400.0f, 20));
+			GUI.BeginGroup (new Rect(Screen.width/2-100, Screen.height/2, 400.0f, 20));
 			GUI.Box (new Rect (0, 0, 200.0f, 20.0f), guiText);
 			GUI.Box (new Rect (0, 0, progress*200.0f, 20), "");
 			GUI.EndGroup ();

@@ -12,15 +12,16 @@ public class ScreenConfigLoader : MonoBehaviour
     private string filePath;
     private string fileName = "/ConfigScreen.txt";
 
-    private List<CAVEPipe> pipes = new List<CAVEPipe>();
-    private List<CAVEWindow> windows = new List<CAVEWindow>();
-    private List<CAVEChannel> channels = new List<CAVEChannel>();
+    private List<Pipe> pipes = new List<Pipe>();
+    private List<Window> windows = new List<Window>();
+    private List<Channel> channels = new List<Channel>();
     private List<CAVEScreen> screens = new List<CAVEScreen>();
 
     //variables
     private string host, separation, NumPipes, NumScreens, NumWindows;
 
-    public void LoadScreenConfig()
+    // Use this for initialization
+    void Start()
     {
 
         Debug.Log("Begin Parse Configuration");
@@ -93,12 +94,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Pipe pipeObj;
-                        CAVEPipe pipeObj = null;
+                        Pipe pipeObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            pipeObj = new CAVEPipe();
+                            pipeObj = new Pipe();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -147,12 +148,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Window windowObj;
-                        CAVEWindow windowObj = null;
+                        Window windowObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            windowObj = new CAVEWindow();
+                            windowObj = new Window();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -226,12 +227,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         depthParse = initialParse[i].Split(char.Parse(" "));
 
                         //declare Channel channelObj;
-                        CAVEChannel channelObj = null;
+                        Channel channelObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            channelObj = new CAVEChannel();
+                            channelObj = new Channel();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -578,14 +579,14 @@ public class ScreenConfigLoader : MonoBehaviour
     }
 }
 
-public class CAVEPipe
+public class Pipe
 {
     public string server;
     public string screen;
     public string name;
 }
 
-public class CAVEWindow
+public class Window
 {
     public string width;
     public string comment;
@@ -598,7 +599,7 @@ public class CAVEWindow
     public string cudaDevice; //found in the UCSD Config
 }
 
-public class CAVEChannel
+public class Channel
 {
     public string left;
     public string width;
