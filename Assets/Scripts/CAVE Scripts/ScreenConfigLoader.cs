@@ -59,8 +59,22 @@ public class ScreenConfigLoader : MonoBehaviour
         Debug.Log("location: " + filePath);
 
         //get access to the contents of the config file
-        string text = File.ReadAllText(filePath + fileName);
-        Debug.Log("text is: " + text);
+
+        string text = "";
+
+        try
+        {
+            text = File.ReadAllText(filePath + fileName);
+            Debug.Log("text is: " + text);
+
+        }
+        catch (FileNotFoundException e)
+        {
+
+            Debug.LogError("Unable to load screen configuration: File not found");
+
+        }
+
 
         return text;
     }
