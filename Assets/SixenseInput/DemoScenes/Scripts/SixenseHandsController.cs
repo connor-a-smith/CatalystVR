@@ -76,7 +76,7 @@ public class SixenseHandsController : MonoBehaviour
 	{
 		if ( !m_bInitialized )
 		{
-			GUI.Box( new Rect( Screen.width / 2 - 50, Screen.height - 40, 100, 30 ),  "Press Start" );
+			GUI.Box( new Rect( CAVEScreen.width / 2 - 50, CAVEScreen.height - 40, 100, 30 ),  "Press Start" );
 		}
 	}
 

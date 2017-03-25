@@ -251,7 +251,7 @@ public class SixenseInput : MonoBehaviour
 		}
 
 		// don't let the mobile device sleep
-		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+		CAVEScreen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 	
 	/// <summary>
@@ -370,7 +370,7 @@ public class SixenseInput : MonoBehaviour
 			string boxText = ( m_ControllerManagerState == ControllerManagerState.BIND_CONTROLLER_ONE ) ?
 							 "Point left controller at base and pull trigger." :
 							 "Point right controller at base and pull trigger.";
-			GUI.Box( new Rect( ( ( Screen.width / 2 ) - ( boxWidth / 2 ) ), ( ( Screen.height / 2 ) - ( boxHeight / 2 ) ), boxWidth, boxHeight ), boxText );
+			GUI.Box( new Rect( ( ( CAVEScreen.width / 2 ) - ( boxWidth / 2 ) ), ( ( CAVEScreen.height / 2 ) - ( boxHeight / 2 ) ), boxWidth, boxHeight ), boxText );
 		}
 	}
 	

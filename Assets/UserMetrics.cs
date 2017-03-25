@@ -242,6 +242,16 @@ public class UserMetrics : MonoBehaviour
 
         private string[] userActivityTimeList;
 
+        public SerializeableUserMetrics()
+        {
+
+            uptimeInSeconds = 0.0f;
+            userActivityTimeInSeconds = 0.0f;
+            idleTimeInSeconds = 0.0f;
+            timesActivated = 0;
+
+        }
+
         public void AddTimeActivated()
         {
             timesActivated++;

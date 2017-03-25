@@ -38,7 +38,7 @@ public class SixenseObjectController : MonoBehaviour {
 	{
 		if ( !m_enabled )
 		{
-			GUI.Box( new Rect( Screen.width / 2 - 100, Screen.height - 40, 200, 30 ),  "Press Start To Move/Rotate" );
+			GUI.Box( new Rect( CAVEScreen.width / 2 - 100, CAVEScreen.height - 40, 200, 30 ),  "Press Start To Move/Rotate" );
 		}
 	}
 	
