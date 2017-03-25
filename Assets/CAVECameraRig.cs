@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CAVECameraRig : MonoBehaviour {
 
+    [SerializeField] private bool enableRaycast = true;
+
     // Static bool to keep track of whether or not we're in 3D mode.
     public static bool is3D = false;
 
@@ -20,6 +22,8 @@ public class CAVECameraRig : MonoBehaviour {
     public delegate void Toggle3DDelegate(bool is3D);
     public static Toggle3DDelegate on3DToggled;
 
+    private static Transform cameraRigTransform;
+
     // Called before first frame. Prepares the displays and loads cameras.
     private void Awake()
     {
@@ -32,6 +36,7 @@ public class CAVECameraRig : MonoBehaviour {
     void Start() {
 
         ResetCameraPositions();
+        cameraRigTransform = this.transform;
 
     }
 
@@ -152,4 +157,22 @@ public class CAVECameraRig : MonoBehaviour {
         allCameras.AddRange(leftEyeCameras);
         allCameras.AddRange(rightEyeCameras);
     }
+
+
+    public static RaycastHit GetRaycast()
+    {
+
+        Ray raycastRay = new Ray(cameraRigTransform.position, cameraRigTransform.forward);
+
+        Debug.DrawRay(raycastRay.origin, raycastRay.direction * 1000);
+
+        RaycastHit hitInfo;
+
+        Physics.Raycast(raycastRay, out hitInfo, Mathf.Infinity);
+
+        return hitInfo;
+
+
+    }
+
 }

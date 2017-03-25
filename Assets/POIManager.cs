@@ -8,10 +8,7 @@ public class POIManager : MonoBehaviour {
 
     public static List<POI> POIList;
 
-    [SerializeField] public BookmarkController bookmarks;
-    [SerializeField] public GameObject bookmarkPOIList;
-    [SerializeField] public Object bookmarkPrefab;
-    [SerializeField] public GameObject bookmarkPanel;
+    [HideInInspector] public BookmarkController bookmarks;
 
     public static POI selectedPOI;
 
@@ -23,6 +20,8 @@ public class POIManager : MonoBehaviour {
     public Material highlightedPOIMaterialEditor;
     public Material selectedPOIMaterialEditor;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
 
@@ -32,6 +31,9 @@ public class POIManager : MonoBehaviour {
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;
         selectedPOIMat = selectedPOIMaterialEditor;
+
+        gameManager = GetComponentInParent<GameManager>();
+        bookmarks = gameManager.user.GetComponentInChildren<BookmarkController>();
 
     }
 
@@ -50,62 +52,8 @@ public class POIManager : MonoBehaviour {
     public void UpdateBookmarks(Scene scene, LoadSceneMode mode)
     {
 
-        List<Vector3> panelPositions = new List<Vector3>();
+        bookmarks.UpdateBookmarks(POIList);
 
-        Rect panelRect = bookmarkPOIList.GetComponent<RectTransform>().rect;
-
-        float panelHeight = panelRect.height;
-
-        float buttonHeight = panelHeight / POIList.Count;
-
-        float buttonPadding = buttonHeight / 4.0f;
-
-        buttonHeight -= buttonPadding;
-
-        float heightPilot = panelRect.yMax - (buttonHeight / 2);
-
-        for (int i = 0; i < POIList.Count; i++)
-        {
-
-            panelPositions.Add(new Vector3(0.0f, heightPilot, 0.0f));
-
-            heightPilot -= buttonHeight;
-            heightPilot -= buttonPadding;
-
-        }
-
-        for (int i = 0; i < POIList.Count; i++)
-        {
-
-            GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, bookmarkPOIList.transform) as GameObject;
-
-            RectTransform newTransform = newPanel.GetComponent<RectTransform>();
-            newTransform.localPosition = Vector3.zero;
-            newTransform.localRotation = Quaternion.identity;
-            newTransform.localScale = Vector3.one;
-
-            newTransform.localPosition = panelPositions[i];
-
-            newPanel.name = POIList[i].POIName;
-
-            Text panelText = newPanel.GetComponentInChildren<Text>();
-
-            panelText.text = POIList[i].POIName;
-
-            Image childImage = newTransform.GetComponentInChildren<Image>();
-            RectTransform imageTransform = childImage.GetComponent<RectTransform>();
-
-            Vector3 sizeDelta = imageTransform.sizeDelta;
-            sizeDelta.y = (buttonHeight * (1.0f / imageTransform.localScale.y));
-
-            Bookmark newBookmark = newPanel.GetComponentInChildren<Bookmark>();
-            newBookmark.POI = POIList[i];
-            newBookmark.focusComponent = POIList[i].GetComponentInChildren<FocusTransformComponent>();
-
-            bookmarks.bookmarks.Add(newBookmark);
-
-            imageTransform.sizeDelta = sizeDelta;
-        }
     }
 
     public void ClearPOIList(Scene scene)
@@ -115,5 +63,43 @@ public class POIManager : MonoBehaviour {
 
         bookmarks.ClearBookmarks();
 
+    }
+
+    private void Update()
+    {
+
+        CheckIfPOISelected();
+
+        if (selectedPOI != null && GamepadInput.GetDown(GamepadInput.InputOption.B_BUTTON))
+        {
+
+            selectedPOI.Deactivate();
+
+        }
+
+    }
+
+    public void CheckIfPOISelected()
+    {
+
+        if (selectedPOI == null && GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
+        {
+
+            RaycastHit cameraRaycast = CAVECameraRig.GetRaycast();
+
+            if (cameraRaycast.collider != null)
+            {
+
+                POI hitPOI = cameraRaycast.collider.GetComponent<POI>();
+
+                if (hitPOI != null)
+                {
+
+                    hitPOI.Toggle(gameManager);
+
+
+                }
+            }
+        }
     }
 }

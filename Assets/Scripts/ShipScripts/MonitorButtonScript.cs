@@ -21,44 +21,6 @@ public class MonitorButtonScript : MonoBehaviour
     [Range(0.0f, 1.0f)]
     private float changeTime = 1.0f;
 
-
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void OnMouseDown()
-    {
-        if (activatable)
-        {
-            AttemptToggle();
-        }
-    }
-
-    void OnMouseEnter()
-    {
-        if (activatable)
-        {
-            showSelectedSprite();
-        }
-    }
-
-    void OnMouseExit()
-    {
-        if (activatable)
-        {
-            showActiveSprite();
-        }
-    }
-
     /// <summary>
     /// Handle what happens when a button is selected.
     /// </summary>
@@ -117,20 +79,25 @@ public class MonitorButtonScript : MonoBehaviour
     /// <summary>
     /// Toggle if activatable.
     /// </summary>
-    public void AttemptToggle()
+    public void ToggleButton()
     {
-        if (activatable)
+
+        if (connectedType == ComponentType.Back)
         {
-            //StartCoroutine(selectChangeColor());
+            POIManager.selectedPOI.Deactivate();
+        }
+
+        else if (activatable)
+        {
             connectedComponent.Toggle();
         }
     }
 
-    public void OnNewNodeSelected()
+    public void UpdateButtonState()
     {
         GetComponentFromNode();
 
-        if (connectedComponent)
+        if (connectedComponent || connectedType == ComponentType.Back)
         {
             showActiveSprite();
             activatable = true;
@@ -140,11 +107,6 @@ public class MonitorButtonScript : MonoBehaviour
         {
             showInactiveSprite();
         }
-    }
-
-    public void OnNodeDeselected()
-    {
-        activatable = false;
     }
 
     /// <summary>
@@ -187,13 +149,7 @@ public class MonitorButtonScript : MonoBehaviour
 
         }
 
-        else if (connectedType == ComponentType.Back)
-        {
-            //Bit sketchy, relies on back button having the deselect script.
-            connectedComponent = GetComponent<MonitorButtonDeselectScript>();
-        }
-
-        else
+        else if (connectedType != ComponentType.Back)
         {
             Debug.LogError("Component not setup in MonitorButtonScript");
         }

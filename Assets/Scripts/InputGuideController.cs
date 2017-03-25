@@ -76,7 +76,7 @@ public class InputGuideController : MonoBehaviour {
     public void Update()
     {
 
-        if (GamepadInput.GetDown(GamepadInput.InputOption.RIGHT_TRIGGER)
+        if (GamepadInput.GetDown(GamepadInput.InputOption.RIGHT_TRIGGER))
         {
 
             if (!controlsPanelActive)

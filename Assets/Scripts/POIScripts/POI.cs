@@ -29,12 +29,6 @@ public class POI : MonoBehaviour
 
     }
 
-
-    void OnMouseDown()
-    {
-        Toggle();
-    }
-
     // Use this for initialization
     void Start()
     {
@@ -47,7 +41,7 @@ public class POI : MonoBehaviour
         label.GetComponentInChildren<Text>().text = POIName;
     }
 
-    public void Activate()
+    public void Activate(GameManager gameManager)
     {
         //If selected another node without deactivating an old one, then deactivate the old one.
         if (POIManager.selectedPOI != null && POIManager.selectedPOI != this)
@@ -59,19 +53,14 @@ public class POI : MonoBehaviour
         POIManager.selectedPOI = this;
         GetComponentInChildren<Renderer>().material = POIManager.selectedPOIMat;
 
-        //Tell all the buttons that a new poi was selected.
-        for (int i = 0; i < GameManager.buttons.Length; i++)
-        {
-            GameManager.buttons[i].gameObject.SetActive(true);
-            GameManager.buttons[i].OnNewNodeSelected();
-        }
+        PlatformMonitor.ActivateMonitorButtons();
 
-        //Tell all components to activate.
+        // Tell all components to activate.
         for (int i = 0; i < components.Count; i++)
         {
             if (components[i].activateImmediately)
             {
-                components[i].Activate();
+                components[i].Activate(gameManager);
             }
         }
     }
@@ -91,13 +80,7 @@ public class POI : MonoBehaviour
         POIManager.selectedPOI = null;
         GetComponentInChildren<Renderer>().material = POIManager.defaultPOIMat;
 
-
-        //Tell all the buttons that there is no current POI.
-        for (int i = 0; i < GameManager.buttons.Length; i++)
-        {
-            GameManager.buttons[i].OnNodeDeselected();
-            GameManager.buttons[i].gameObject.SetActive(false);
-        }
+        PlatformMonitor.DeactivateMonitorButtons();
 
         for (int i = 0; i < components.Count; i++)
         {
@@ -108,11 +91,11 @@ public class POI : MonoBehaviour
     /// <summary>
     /// A way to toggle the state without needing to check the current state externally.
     /// </summary>
-    public void Toggle()
+    public void Toggle(GameManager gameManager)
     {
         if (!activated)
         {
-            Activate();
+            Activate(gameManager);
         }
         else
         {

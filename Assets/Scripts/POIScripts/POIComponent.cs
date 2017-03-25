@@ -29,7 +29,7 @@ public abstract class POIComponent : MonoBehaviour
     {
         if (!activated)
         {
-            Activate();
+            Activate(gameManager);
         }
 
         else

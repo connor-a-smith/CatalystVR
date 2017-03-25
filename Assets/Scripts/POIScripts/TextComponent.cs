@@ -10,14 +10,14 @@ public class TextComponent : POIComponent {
     {
         base.Activate(gameManager);
 
-        GameManager.instance.monitorText.text = sentence;
+        PlatformMonitor.SetMonitorText(sentence);
     }
 
     public override void Deactivate()
     {
         base.Deactivate();
 
-        GameManager.instance.monitorText.text = GameManager.instructionText;
+        PlatformMonitor.ResetMonitorText();
 
     }
 }

@@ -21,7 +21,11 @@ public class AudioComponent : POIComponent
     {
         base.Deactivate();
 
-        AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
-        source.Stop();
+        if (GameManager.monitor != null)
+        {
+
+            AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
+            source.Stop();
+        }
     }
 }

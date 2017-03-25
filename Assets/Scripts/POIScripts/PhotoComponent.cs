@@ -31,7 +31,10 @@ public class PhotoComponent : POIComponent
 
         base.Deactivate();
 
-        gameManager.photoController.UnloadPhotos();
+        if (gameManager != null)
+        {
+            gameManager.photoController.UnloadPhotos();
+        }
 
     }
 }

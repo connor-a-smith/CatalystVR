@@ -6,6 +6,7 @@ using UnityEngine.UI; //to enable getComponent<Text>();
 public class BookmarkController : MonoBehaviour {
 
     [SerializeField] Color selectionColor;
+    [SerializeField] Object bookmarkPrefab;
 
 	public static bool bookmarkPanelActive = false;
 
@@ -21,6 +22,9 @@ public class BookmarkController : MonoBehaviour {
 	public List<Bookmark> bookmarks;
 
 	private int bookmarkIndex;
+
+    private CatalystPlatform parentPlatform;
+
 
     void Awake() {
 
@@ -38,9 +42,11 @@ public class BookmarkController : MonoBehaviour {
 
         initActivate = true;
 		initDeactivate = false;
-	}
 
-    public void Update()
+        parentPlatform = GetComponentInParent<CatalystPlatform>();
+    }
+
+    private void Update()
     {
 
         if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_TRIGGER) && !bookmarkPanelActive)
@@ -84,7 +90,6 @@ public class BookmarkController : MonoBehaviour {
 
 
             }
-
         }
     }
 
@@ -152,7 +157,7 @@ public class BookmarkController : MonoBehaviour {
 
         Bookmark loc = bookmarks[index].GetComponent<Bookmark> ();
 
-        loc.focusComponent.Activate();
+        loc.focusComponent.Activate(parentPlatform.gameManager);
 
         if (POIManager.selectedPOI != null) {
 
@@ -162,7 +167,7 @@ public class BookmarkController : MonoBehaviour {
 
         POIManager.selectedPOI = null;
 
-        loc.POI.Activate();
+        loc.POI.Activate(parentPlatform.gameManager);
 
 	}
 
@@ -204,8 +209,6 @@ public class BookmarkController : MonoBehaviour {
    }
 
     public void ClearBookmarks() {
-
-        bookmarkIndex = 0;
        
         foreach (Bookmark bookmark in bookmarks) {
 
@@ -215,6 +218,69 @@ public class BookmarkController : MonoBehaviour {
 
         bookmarks.Clear();
 
+    }
+
+    public void UpdateBookmarks(List<POI> POIList)
+    {
+
+        ClearBookmarks();
+
+        List<Vector3> panelPositions = new List<Vector3>();
+
+        Rect panelRect = GetComponent<RectTransform>().rect;
+
+        float panelHeight = panelRect.height;
+
+        float buttonHeight = panelHeight / POIList.Count;
+
+        float buttonPadding = buttonHeight / 4.0f;
+
+        buttonHeight -= buttonPadding;
+
+        float heightPilot = panelRect.yMax - (buttonHeight / 2);
+
+        for (int i = 0; i < POIList.Count; i++)
+        {
+
+            panelPositions.Add(new Vector3(0.0f, heightPilot, 0.0f));
+
+            heightPilot -= buttonHeight;
+            heightPilot -= buttonPadding;
+
+        }
+
+        for (int i = 0; i < POIList.Count; i++)
+        {
+
+            GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, transform) as GameObject;
+
+            RectTransform newTransform = newPanel.GetComponent<RectTransform>();
+            newTransform.localPosition = Vector3.zero;
+            newTransform.localRotation = Quaternion.identity;
+            newTransform.localScale = Vector3.one;
+
+            newTransform.localPosition = panelPositions[i];
+
+            newPanel.name = POIList[i].POIName;
+
+            Text panelText = newPanel.GetComponentInChildren<Text>();
+
+            panelText.text = POIList[i].POIName;
+
+            Image childImage = newTransform.GetComponentInChildren<Image>();
+            RectTransform imageTransform = childImage.GetComponent<RectTransform>();
+
+            Vector3 sizeDelta = imageTransform.sizeDelta;
+            sizeDelta.y = (buttonHeight * (1.0f / imageTransform.localScale.y));
+
+            Bookmark newBookmark = newPanel.GetComponentInChildren<Bookmark>();
+            newBookmark.POI = POIList[i];
+            newBookmark.focusComponent = POIList[i].GetComponentInChildren<FocusTransformComponent>();
+
+            bookmarks.Add(newBookmark);
+
+            imageTransform.sizeDelta = sizeDelta;
+        }
 
     }
 }

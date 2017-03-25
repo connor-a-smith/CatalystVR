@@ -5,6 +5,9 @@ using UnityEngine;
 public class CatalystPlatform : MonoBehaviour
 {
 
+    [HideInInspector]
+    public GameManager gameManager;
+
     // Modifiers for speed and max/min tilt angles.
     [SerializeField] private float xRotationSpeed = 30;
     [SerializeField] private float yRotationSpeed = -30;
@@ -16,6 +19,58 @@ public class CatalystPlatform : MonoBehaviour
     private GamepadInput.InputOption verticalRotationInput = GamepadInput.InputOption.RIGHT_STICK_VERTICAL;
     private GamepadInput.InputOption horizontalMovementInput = GamepadInput.InputOption.LEFT_STICK_HORIZONTAL;
     private GamepadInput.InputOption forwardMovementInput = GamepadInput.InputOption.LEFT_STICK_VERTICAL;
+
+    private static CatalystPlatform activePlatform;
+
+    private void Awake()
+    {
+
+        if (activePlatform != null)
+        {
+            EnforceSingleton();
+        }
+        else
+        {
+            activePlatform = this;
+            GameObject topLevelParent = gameObject;
+
+            while (topLevelParent.transform.parent != null)
+            {
+                topLevelParent = topLevelParent.transform.parent.gameObject;
+            }
+
+            DontDestroyOnLoad(topLevelParent);
+
+        }
+    }
+
+    private void EnforceSingleton()
+    {
+
+        if (activePlatform != null && activePlatform != this)
+        {
+
+            GameObject instanceObject = activePlatform.gameObject;
+            GameObject currentObject = gameObject;
+
+            while (currentObject.transform.parent != null && instanceObject.transform.parent != null)
+            {
+                instanceObject.transform.localPosition = currentObject.transform.localPosition;
+                instanceObject.transform.localRotation = currentObject.transform.localRotation;
+                instanceObject.transform.localScale = currentObject.transform.localScale;
+
+                instanceObject = instanceObject.transform.parent.gameObject;
+                currentObject = currentObject.transform.parent.gameObject;
+
+            }
+
+            instanceObject.transform.localPosition = currentObject.transform.localPosition;
+            instanceObject.transform.localRotation = currentObject.transform.localRotation;
+            instanceObject.transform.localScale = currentObject.transform.localScale;
+
+            Destroy(currentObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()

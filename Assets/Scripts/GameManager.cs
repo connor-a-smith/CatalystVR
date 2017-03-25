@@ -22,29 +22,19 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PhotoController photoController;
 
-    [SerializeField]
+    [HideInInspector]
     public InputGuideController inputGuide;
-
-    [SerializeField]
-    public GameObject controllerPanel;
 
     [SerializeField]
     public GameObject fadePlane;
 
     public static PlatformMonitor monitor;
-    public static InputManagerScript inputManager;
 
     public static Object photoPrefab;
     public Object photoPrefabEditor;
     public Camera raycastCam;
-    public Text monitorText;
 
     public Object labelPrefab;
-
-    public static MonitorButtonScript[] buttons;
-
-    public static string instructionText = "Welcome to the CAVEkiosk!\n\nUse the Xbox controller to interact with this exhibit, and hold the Right Trigger for a list of detailed controls.";
-
 
     public enum State
     {
@@ -71,7 +61,6 @@ public class GameManager : MonoBehaviour
     public void HandleSingleton()
     {
 
-
         if (GameManager.instance == null)
         {
             GameManager.instance = this;
@@ -83,46 +72,14 @@ public class GameManager : MonoBehaviour
                 topLevelParent = topLevelParent.transform.parent.gameObject;
             }
 
-
             DontDestroyOnLoad(topLevelParent);
 
             photoPrefab = photoPrefabEditor;
 
-            buttons = monitor.GetComponentsInChildren<MonitorButtonScript>();
-
-            for (int i = 0; i < GameManager.buttons.Length; i++)
-            {
-                GameManager.buttons[i].gameObject.SetActive(false);
-            }
-
-            GameManager.instance.monitorText.text = GameManager.instructionText;
-
         }
-
-        //Controller already exists, move the existing to this position and gete rid of this one.
         else
         {
-
-            GameObject instanceObject = GameManager.instance.gameObject;
-            GameObject currentObject = gameObject;
-
-            while (currentObject.transform.parent != null && instanceObject.transform.parent != null)
-            {
-                instanceObject.transform.localPosition = currentObject.transform.localPosition;
-                instanceObject.transform.localRotation = currentObject.transform.localRotation;
-                instanceObject.transform.localScale = currentObject.transform.localScale;
-
-                instanceObject = instanceObject.transform.parent.gameObject;
-                currentObject = currentObject.transform.parent.gameObject;
-
-            }
-
-            instanceObject.transform.localPosition = currentObject.transform.localPosition;
-            instanceObject.transform.localRotation = currentObject.transform.localRotation;
-            instanceObject.transform.localScale = currentObject.transform.localScale;
-
-            Destroy(currentObject);
-
+            GameObject.Destroy(this.gameObject);
         }
     }
 
@@ -133,16 +90,9 @@ public class GameManager : MonoBehaviour
         cameraRig = user.GetComponentInChildren<CAVECameraRig>();
         monitor = user.GetComponentInChildren<PlatformMonitor>();
         photoController = GetComponentInChildren<PhotoController>();
+        inputGuide = user.GetComponentInChildren<InputGuideController>();
 
-    }
-
-
-
-    public void Start()
-    {
-
-
-        monitor.GetComponentInChildren<Text>().text = GameManager.instructionText;
+        platform.gameManager = this;
 
     }
 
@@ -158,7 +108,5 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("MultiDisplayPlanet");
         }
-
-
     }
 }
