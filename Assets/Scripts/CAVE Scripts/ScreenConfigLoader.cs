@@ -9,19 +9,18 @@ public class ScreenConfigLoader : MonoBehaviour
     [SerializeField]
     private System.Environment.SpecialFolder fileLocation;
 
-    private string filePath;
-    private string fileName = "/ConfigScreen.txt";
+    [SerializeField] private string filePath;
+    [SerializeField] private string fileName = "/ConfigScreen.txt";
 
-    private List<Pipe> pipes = new List<Pipe>();
-    private List<Window> windows = new List<Window>();
-    private List<Channel> channels = new List<Channel>();
+    private List<CAVEPipe> pipes = new List<CAVEPipe>();
+    public List<CAVEWindow> windows = new List<CAVEWindow>();
+    private List<CAVEChannel> channels = new List<CAVEChannel>();
     private List<CAVEScreen> screens = new List<CAVEScreen>();
 
     //variables
     private string host, separation, NumPipes, NumScreens, NumWindows;
 
-    // Use this for initialization
-    void Start()
+    public void LoadScreenConfig()
     {
 
         Debug.Log("Begin Parse Configuration");
@@ -55,7 +54,7 @@ public class ScreenConfigLoader : MonoBehaviour
     string ReadFromFile()
     {
         //grab the path to the folder to look for the config file
-        filePath = System.Environment.GetFolderPath(fileLocation);
+        //filePath = System.Environment.GetFolderPath(fileLocation);
         Debug.Log("location: " + filePath);
 
         //get access to the contents of the config file
@@ -71,7 +70,7 @@ public class ScreenConfigLoader : MonoBehaviour
         catch (FileNotFoundException e)
         {
 
-            Debug.LogError("Unable to load screen configuration: File not found");
+            Debug.LogError("Unable to load screen configuration: File not found: " + e.FileName);
 
         }
 
@@ -108,12 +107,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Pipe pipeObj;
-                        Pipe pipeObj = null;
+                        CAVEPipe pipeObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            pipeObj = new Pipe();
+                            pipeObj = new CAVEPipe();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -162,12 +161,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Window windowObj;
-                        Window windowObj = null;
+                        CAVEWindow windowObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            windowObj = new Window();
+                            windowObj = new CAVEWindow();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -241,12 +240,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         depthParse = initialParse[i].Split(char.Parse(" "));
 
                         //declare Channel channelObj;
-                        Channel channelObj = null;
+                        CAVEChannel channelObj = null;
 
                         if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
                         {
                             //declare Screen screenObj;
-                            channelObj = new Channel();
+                            channelObj = new CAVEChannel();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
@@ -593,14 +592,14 @@ public class ScreenConfigLoader : MonoBehaviour
     }
 }
 
-public class Pipe
+public class CAVEPipe
 {
     public string server;
     public string screen;
     public string name;
 }
 
-public class Window
+public class CAVEWindow
 {
     public string width;
     public string comment;
@@ -613,7 +612,7 @@ public class Window
     public string cudaDevice; //found in the UCSD Config
 }
 
-public class Channel
+public class CAVEChannel
 {
     public string left;
     public string width;

@@ -6,6 +6,8 @@ public class CAVECameraRig : MonoBehaviour {
 
     [SerializeField] private bool enableRaycast = true;
 
+    [SerializeField] private Object screenPrefab;
+
     // Static bool to keep track of whether or not we're in 3D mode.
     public static bool is3D = false;
 
@@ -30,10 +32,14 @@ public class CAVECameraRig : MonoBehaviour {
     // Called before first frame. Prepares the displays and loads cameras.
     private void Awake()
     {
-        FindCameras();
-        ActivateDisplays();
 
         viewpoint = GetComponentInChildren<CameraViewpoint>();
+
+        SetupScreens();
+
+   //     FindCameras();
+        ActivateDisplays();
+
         cameraRigTransform = this.transform;
 
 
@@ -44,6 +50,83 @@ public class CAVECameraRig : MonoBehaviour {
 
         ResetCameraPositions();
 
+    }
+
+    private void SetupScreens()
+    {
+
+        ScreenConfigLoader screenLoader = GetComponentInChildren<ScreenConfigLoader>();
+        screenLoader.LoadScreenConfig();
+
+        List<CAVEScreen> screens = screenLoader.GetLoadedScreens();
+        List<CAVEWindow> windows = screenLoader.windows;
+
+        GameObject leftEyeCameraParent = new GameObject("Left Eye Cameras");
+        GameObject rightEyeCameraParent = new GameObject("Right Eye Cameras");
+
+        leftEyeCameraParent.transform.parent = this.transform;
+        rightEyeCameraParent.transform.parent = this.transform;
+
+        leftEyeCameraParent.transform.position = viewpoint.transform.position;
+        rightEyeCameraParent.transform.position = viewpoint.transform.position;
+
+        GameObject screenPlanes = new GameObject("Screen Planes");
+        screenPlanes.transform.parent = this.transform;
+
+        for (int i = 0; i < screens.Count; i++)
+        {
+
+            // Create the screen plane
+
+            GameObject newPlane = GameObject.Instantiate(screenPrefab) as GameObject;
+            newPlane.transform.position = viewpoint.transform.position;
+            newPlane.transform.rotation = Quaternion.Euler(new Vector3(0.0f, float.Parse(screens[i].h), float.Parse(screens[i].r)));
+            newPlane.transform.localScale = new Vector3(float.Parse(screens[i].width) / 10, float.Parse(screens[i].height) / 10, 1.0f);
+
+            Vector3 newPos = newPlane.transform.position;
+            newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), -float.Parse(screens[i].originY));
+
+            newPlane.transform.position = newPos;
+
+            newPlane.transform.parent = screenPlanes.transform;
+
+
+            // Create the cameras
+            leftEyeCameras = new List<Camera>();
+            rightEyeCameras = new List<Camera>();
+
+            Camera newLeftCam = AddCamera(StereoTargetEyeMask.Left, i, leftEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
+
+            newLeftCam.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+
+            Camera newRightCam = AddCamera(StereoTargetEyeMask.Right, i, rightEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
+
+            newRightCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+
+            newLeftCam.transform.parent = leftEyeCameraParent.transform;
+            newRightCam.transform.parent = rightEyeCameraParent.transform;
+
+            leftEyeCameras.Add(newLeftCam);
+            rightEyeCameras.Add(newRightCam);
+
+        }
+    }
+
+    public Camera AddCamera(StereoTargetEyeMask targetEye, int displayIndex, Transform parent, GameObject targetPlane)
+    {
+
+        // Create two cameras for that plane
+        GameObject camera = new GameObject("Display" + displayIndex + "_" + targetEye.ToString());
+        camera.transform.parent = parent;
+        camera.transform.localPosition = Vector3.zero;
+        camera.transform.localRotation = Quaternion.identity;
+        Camera camComponent = camera.AddComponent<Camera>();
+        camComponent.stereoTargetEye = targetEye;
+        camComponent.targetDisplay = displayIndex;
+
+        camera.AddComponent<CAVECamScript>().projectionScreen = targetPlane;
+
+        return camComponent;
 
     }
 
