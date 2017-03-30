@@ -30,7 +30,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ControlsParent/Controls Panel
+    path: Platform/ControlsParent/Controls Panel
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -86,7 +86,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: ControlsParent/Control Panel
+    path: Platform/ControlsParent/Control Panel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -106,7 +106,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: ControlsParent/Controls Panel
+    path: Platform/ControlsParent/Controls Panel
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -126,7 +126,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: ControlParent/Controls Panel
+    path: Platform/ControlParent/Controls Panel
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
