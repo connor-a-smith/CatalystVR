@@ -117,7 +117,7 @@ public class CAVECameraRig : MonoBehaviour {
                 newLeftCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
 
                 // Create the screen plane by swapping height and width, since it's rotated.
-                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height) / 10, float.Parse(screens[i].width) / 10, 1.0f);
+                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height), float.Parse(screens[i].width), 1.0f);
 
             }
 
@@ -130,7 +130,7 @@ public class CAVECameraRig : MonoBehaviour {
                 newRightCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
 
                 // Create the screen plane by swapping height and width, since it's rotated.
-                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height) / 10, float.Parse(screens[i].width) / 10, 1.0f);
+                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height), float.Parse(screens[i].width), 1.0f);
 
             }
 
