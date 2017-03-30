@@ -33,23 +33,23 @@ public class CAVECameraRig : MonoBehaviour {
     private void Awake()
     {
 
-        viewpoint = GetComponentInChildren<CameraViewpoint>();
-
-        SetupScreens();
-
-   //     FindCameras();
-        ActivateDisplays();
-
-        cameraRigTransform = this.transform;
-
 
     }
 
     // Ensures the cameras are in the right positions.
     void Start() {
 
-        ResetCameraPositions();
+        Debug.Log("Object", this);
 
+            viewpoint = GetComponentInChildren<CameraViewpoint>();
+
+            SetupScreens();
+
+            ActivateDisplays();
+
+            cameraRigTransform = this.transform;
+
+            ResetCameraPositions();
     }
 
     private void SetupScreens()

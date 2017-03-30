@@ -79,20 +79,24 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameObject.Destroy(this.gameObject);
+            GameObject.DestroyImmediate(this.gameObject);
+            return;
         }
     }
 
     public void SetupGameManagers()
     {
 
-        platform = user.GetComponentInChildren<CatalystPlatform>();
-        cameraRig = user.GetComponentInChildren<CAVECameraRig>();
-        monitor = user.GetComponentInChildren<PlatformMonitor>();
-        photoController = GetComponentInChildren<PhotoController>();
-        inputGuide = user.GetComponentInChildren<InputGuideController>();
+        if (this != null && user != null) {
 
-        platform.gameManager = this;
+            platform = user.GetComponentInChildren<CatalystPlatform>();
+            cameraRig = user.GetComponentInChildren<CAVECameraRig>();
+            monitor = user.GetComponentInChildren<PlatformMonitor>();
+            photoController = GetComponentInChildren<PhotoController>();
+            inputGuide = user.GetComponentInChildren<InputGuideController>();
+
+            platform.gameManager = this;
+        }
 
     }
 

@@ -22,8 +22,23 @@ public class POIManager : MonoBehaviour {
 
     private GameManager gameManager;
 
+    private static POIManager instance;
+
     private void Awake()
     {
+
+        if (instance == null)
+        {
+
+            instance = this;
+            
+        }
+        else
+        {
+
+            return;
+
+        }
 
         SceneManager.sceneUnloaded += ClearPOIList;
         SceneManager.sceneLoaded += UpdateBookmarks;

@@ -71,7 +71,10 @@ public class PlatformMonitor : MonoBehaviour {
 
     public static void SetMonitorText(string text)
     {
-        monitorText.SetText(text);
+        if (monitorText != null)
+        {
+            monitorText.SetText(text);
+        }
     }
 
     public static void ResetMonitorText()

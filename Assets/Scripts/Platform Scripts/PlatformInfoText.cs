@@ -7,16 +7,18 @@ public class PlatformInfoText : MonoBehaviour {
 
     private Text infoText;
 
-
     public void SetText(string newText)
     {
 
-        if (infoText == null)
+        if (infoText == null && this != null)
         {
             infoText = GetComponent<Text>();
         }
 
-        infoText.text = newText;
+        if (infoText != null)
+        {
+            infoText.text = newText;
+        }
 
     }
 }

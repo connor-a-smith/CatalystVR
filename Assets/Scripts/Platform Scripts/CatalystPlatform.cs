@@ -68,7 +68,9 @@ public class CatalystPlatform : MonoBehaviour
             instanceObject.transform.localRotation = currentObject.transform.localRotation;
             instanceObject.transform.localScale = currentObject.transform.localScale;
 
-            Destroy(currentObject);
+            Debug.LogWarning("DESTROYING");
+
+            GameObject.DestroyImmediate(currentObject);
         }
     }
 
