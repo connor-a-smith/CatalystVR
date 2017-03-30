@@ -64,14 +64,15 @@ public class CAVECameraRig : MonoBehaviour {
         GameObject leftEyeCameraParent = new GameObject("Left Eye Cameras");
         GameObject rightEyeCameraParent = new GameObject("Right Eye Cameras");
 
-        leftEyeCameraParent.transform.parent = this.transform;
-        rightEyeCameraParent.transform.parent = this.transform;
+        leftEyeCameraParent.transform.parent = viewpoint.transform;
+        rightEyeCameraParent.transform.parent = viewpoint.transform;
 
         leftEyeCameraParent.transform.position = viewpoint.transform.position;
         rightEyeCameraParent.transform.position = viewpoint.transform.position;
 
         GameObject screenPlanes = new GameObject("Screen Planes");
         screenPlanes.transform.parent = this.transform;
+        screenPlanes.transform.localPosition = Vector3.zero;
 
         for (int i = 0; i < screens.Count; i++)
         {
@@ -79,16 +80,21 @@ public class CAVECameraRig : MonoBehaviour {
             // Create the screen plane
 
             GameObject newPlane = GameObject.Instantiate(screenPrefab) as GameObject;
-            newPlane.transform.position = viewpoint.transform.position;
-            newPlane.transform.rotation = Quaternion.Euler(new Vector3(0.0f, float.Parse(screens[i].h), float.Parse(screens[i].r)));
+            newPlane.transform.parent = screenPlanes.transform;
+            newPlane.name = "Screen " + i;
+
+            Vector3 newRotation = newPlane.transform.rotation.eulerAngles;
+            newRotation += new Vector3(0.0f, -float.Parse(screens[i].h), -float.Parse(screens[i].r));
+
+            newPlane.transform.localPosition = Vector3.zero;
+            newPlane.transform.rotation = Quaternion.Euler(newRotation);
             newPlane.transform.localScale = new Vector3(float.Parse(screens[i].width) / 10, float.Parse(screens[i].height) / 10, 1.0f);
 
             Vector3 newPos = newPlane.transform.position;
-            newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), -float.Parse(screens[i].originY));
+            newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), float.Parse(screens[i].originY));
 
             newPlane.transform.position = newPos;
 
-            newPlane.transform.parent = screenPlanes.transform;
 
 
             // Create the cameras
