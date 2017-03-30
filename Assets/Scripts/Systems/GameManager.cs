@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
 
         if (GamepadInput.GetDown(GamepadInput.InputOption.BACK_BUTTON))
         {
-            SceneManager.LoadScene("MultiDisplayPlanet");
+            // Loads the first scene. Assumed to be the home scene.
+            SceneManager.LoadScene(0);
         }
     }
 }

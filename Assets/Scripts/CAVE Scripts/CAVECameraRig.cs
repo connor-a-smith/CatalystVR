@@ -77,37 +77,84 @@ public class CAVECameraRig : MonoBehaviour {
         for (int i = 0; i < screens.Count; i++)
         {
 
-            // Create the screen plane
+            // Note we assume that this rotation either 0, 90, 180, or -90.
+            float screenRotation = -float.Parse(screens[i].r);
 
+            // Create the screen plane, name it, and set it's parent.
             GameObject newPlane = GameObject.Instantiate(screenPrefab) as GameObject;
             newPlane.transform.parent = screenPlanes.transform;
             newPlane.name = "Screen " + i;
 
+            // Set the rotation of the screen based on heading from config file.
             Vector3 newRotation = newPlane.transform.rotation.eulerAngles;
-            newRotation += new Vector3(0.0f, -float.Parse(screens[i].h), -float.Parse(screens[i].r));
+            newRotation += new Vector3(0.0f, -float.Parse(screens[i].h), 0.0f);
 
+            // Set the position of the screens to 0 (local space) and rotation to the heading.
             newPlane.transform.localPosition = Vector3.zero;
             newPlane.transform.rotation = Quaternion.Euler(newRotation);
-            newPlane.transform.localScale = new Vector3(float.Parse(screens[i].width) / 10, float.Parse(screens[i].height) / 10, 1.0f);
 
+            // Move the screen from the origin to it's correct position.
             Vector3 newPos = newPlane.transform.position;
             newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), float.Parse(screens[i].originY));
-
             newPlane.transform.position = newPos;
-
-
 
             // Create the cameras
             leftEyeCameras = new List<Camera>();
             rightEyeCameras = new List<Camera>();
 
             Camera newLeftCam = AddCamera(StereoTargetEyeMask.Left, i, leftEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
-
-            newLeftCam.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
-
             Camera newRightCam = AddCamera(StereoTargetEyeMask.Right, i, rightEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
 
-            newRightCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+            // Here we set the camera viewports based on screen rotations. The screens can't actually be "rotated" in Unity since that would rotate the cameras
+            //   (Which would result in some upsidedown/sideway images on the cave. Instead we just scale each "screen" plane accordingly and set viewports.
+
+            // If the screen rotation is -90. We use the halfway threshholds to account for the fact that floating point numbers have rounding errors.
+            if (screenRotation < 0 && screenRotation < -45.0f)
+            {
+
+                // Reversed values since rotation is reversed.
+                newRightCam.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+                newLeftCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+
+                // Create the screen plane by swapping height and width, since it's rotated.
+                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height) / 10, float.Parse(screens[i].width) / 10, 1.0f);
+
+            }
+
+            // If the screen rotation is 90. Normal for UCSD's CAVEkiosk.
+            else if (screenRotation > 45.0f && screenRotation < 135.0f)
+            {
+
+                // Normal values, no reversal.
+                newLeftCam.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+                newRightCam.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+
+                // Create the screen plane by swapping height and width, since it's rotated.
+                newPlane.transform.localScale = new Vector3(float.Parse(screens[i].height) / 10, float.Parse(screens[i].width) / 10, 1.0f);
+
+            }
+
+            // If the screen rotation is 0. (Untested)
+            else if (screenRotation > -45.0f && screenRotation < 45.0f)
+            {
+
+                // UNTESTED ASSUMPTION: Assuming LEFT EYE is supposed to be UPPER HALF of screen.
+                // If this is NOT the case, swap the below code with the code in the 180 degree if statement.
+
+                newLeftCam.rect = new Rect(0.0f, 0.5f, 1.0f, 0.5f);
+                newRightCam.rect = new Rect(0.0f, 0.5f, 0.0f, 0.5f);
+
+            }
+
+            // If the screen rotation is 180 (Untested).
+            else if (screenRotation > 135.0f && screenRotation < 225.0f)
+            {
+
+                // UNTESTED ASSUMPTION: Assuming LEFT EYE is supposed to be UPPER HALF of screen normally (without rotation).
+
+                newRightCam.rect = new Rect(0.0f, 0.5f, 1.0f, 0.5f);
+                newLeftCam.rect = new Rect(0.0f, 0.5f, 0.0f, 0.5f);
+            }
 
             newLeftCam.transform.parent = leftEyeCameraParent.transform;
             newRightCam.transform.parent = rightEyeCameraParent.transform;
