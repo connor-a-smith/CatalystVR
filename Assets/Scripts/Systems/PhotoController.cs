@@ -78,6 +78,8 @@ public class PhotoController : MonoBehaviour
             ((GameObject)photoPrefab).AddComponent<CatalystPhoto>();
             ((GameObject)photoPrefab).AddComponent<SpriteRenderer>();
             ((GameObject)photoPrefab).AddComponent<BoxCollider>();
+            ((GameObject)photoPrefab).SetActive(false);
+           
 
         }
     }
@@ -333,8 +335,12 @@ public class PhotoController : MonoBehaviour
 
                     Debug.Log("Instantiating Image " + imgNum + " of " + imageSprites.Count);
 
+                    ((GameObject)photoPrefab).SetActive(true);
+
                     // Instantiates the image in the scene.
                     GameObject photoObj = (GameObject)GameObject.Instantiate(photoPrefab, pictureLocations[row][col], new Quaternion());
+
+                    ((GameObject)photoPrefab).SetActive(false);
 
                     // Places the sprite in the gameObject
                     photoObj.GetComponent<SpriteRenderer>().sprite = imageSprites[imgNum];

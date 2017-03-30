@@ -72,6 +72,13 @@ public class CatalystPlatform : MonoBehaviour
         }
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+
+        Debug.Log("Colliding with " + collision.collider.name);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
