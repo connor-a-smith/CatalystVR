@@ -33,7 +33,7 @@ public class PlatformMonitor : MonoBehaviour {
             if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
             {
 
-                monitorButtons[selectedButtonIndex].ToggleButton();
+             //  monitorButtons[selectedButtonIndex].ToggleButton();
 
             }
 
