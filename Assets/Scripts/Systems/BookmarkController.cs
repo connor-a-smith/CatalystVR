@@ -63,7 +63,7 @@ public class BookmarkController : MonoBehaviour {
             }
         }
 
-        if (bookmarkPanelActive)
+        if (bookmarkPanelActive && !PlatformMonitor.monitorButtonsActive)
         {
 
             if (GamepadInput.GetDown(GamepadInput.InputOption.LEFT_STICK_VERTICAL))
