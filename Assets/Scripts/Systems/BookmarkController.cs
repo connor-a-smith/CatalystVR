@@ -157,7 +157,10 @@ public class BookmarkController : MonoBehaviour {
 
         Bookmark loc = bookmarks[index].GetComponent<Bookmark> ();
 
-        loc.focusComponent.Activate(parentPlatform.gameManager);
+        if (loc.focusComponent != null)
+        {
+            loc.focusComponent.Activate(parentPlatform.gameManager);
+        }
 
         if (POIManager.selectedPOI != null) {
 
