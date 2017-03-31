@@ -27,14 +27,14 @@ public class FocusTransformComponent : POIComponent
 
         platform.transform.position = this.transform.position + 50 * this.transform.forward + 50 * this.transform.up;
 
-        Quaternion oldRot = GameManager.instance.raycastCam.transform.localRotation;
-        GameManager.instance.raycastCam.transform.LookAt(this.transform.position);
-        Quaternion newRot = GameManager.instance.raycastCam.transform.localRotation;
+        Quaternion oldRot = GameManager.instance.cameraRig.viewpoint.transform.rotation;
+        GameManager.instance.cameraRig.viewpoint.transform.LookAt(this.transform.position);
+        Quaternion newRot = GameManager.instance.cameraRig.viewpoint.transform.rotation;
 
         //Apply to platform, and reset raycastCam pos.
 
         platform.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
-        GameManager.instance.raycastCam.transform.localRotation = oldRot;
+        GameManager.instance.cameraRig.viewpoint.transform.rotation = oldRot;
     }
 
     public override void Deactivate()
