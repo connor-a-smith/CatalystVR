@@ -9,6 +9,7 @@ public class PlatformMonitor : MonoBehaviour {
     private static MonitorButtonScript[] monitorButtons;
     private static int selectedButtonIndex = 0;
     public static bool monitorButtonsActive = false;
+    private static bool readyForInput = false;
     private static PlatformInfoText monitorText;
 
 	// Use this for initialization
@@ -30,10 +31,19 @@ public class PlatformMonitor : MonoBehaviour {
         if (monitorButtonsActive)
         {
 
-            if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
+            if (readyForInput == false)
             {
 
-             //  monitorButtons[selectedButtonIndex].ToggleButton();
+                if (GamepadInput.GetUp(GamepadInput.InputOption.A_BUTTON))
+                {
+                    readyForInput = true;
+                }
+            }
+
+            if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON) && readyForInput)
+            {
+
+                monitorButtons[selectedButtonIndex].ToggleButton();
 
             }
 
@@ -142,8 +152,6 @@ public class PlatformMonitor : MonoBehaviour {
                 monitorButton.activatable = false;
                 monitorButton.gameObject.SetActive(false);
             }
-
-
         }
 
         selectedButtonIndex = 0;
