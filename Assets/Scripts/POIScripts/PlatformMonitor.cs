@@ -156,6 +156,6 @@ public class PlatformMonitor : MonoBehaviour {
 
         selectedButtonIndex = 0;
         monitorButtonsActive = false;
-
+        readyForInput = false;
     }
 }
