@@ -33,6 +33,8 @@ public class CAVECameraRig : MonoBehaviour {
     private void Awake()
     {
 
+        viewpoint = GetComponentInChildren<CameraViewpoint>();
+
 
     }
 
@@ -41,7 +43,6 @@ public class CAVECameraRig : MonoBehaviour {
 
         Debug.Log("Object", this);
 
-            viewpoint = GetComponentInChildren<CameraViewpoint>();
 
             SetupScreens();
 
