@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
             monitor = user.GetComponentInChildren<PlatformMonitor>();
             photoController = GetComponentInChildren<PhotoController>();
             inputGuide = user.GetComponentInChildren<InputGuideController>();
-
             platform.gameManager = this;
         }
 
