@@ -8,7 +8,7 @@ public class PlatformMonitor : MonoBehaviour {
 
     private static MonitorButtonScript[] monitorButtons;
     private static int selectedButtonIndex = 0;
-    private static bool monitorButtonsActive = false;
+    public static bool monitorButtonsActive = false;
     private static PlatformInfoText monitorText;
 
 	// Use this for initialization
