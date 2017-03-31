@@ -33,6 +33,8 @@ public class CAVECameraRig : MonoBehaviour {
     private void Awake()
     {
 
+        leftEyeCameras = new List<Camera>();
+        rightEyeCameras = new List<Camera>();
         viewpoint = GetComponentInChildren<CameraViewpoint>();
 
 
@@ -98,10 +100,6 @@ public class CAVECameraRig : MonoBehaviour {
             Vector3 newPos = newPlane.transform.position;
             newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), float.Parse(screens[i].originY));
             newPlane.transform.position = newPos;
-
-            // Create the cameras
-            leftEyeCameras = new List<Camera>();
-            rightEyeCameras = new List<Camera>();
 
             Camera newLeftCam = AddCamera(StereoTargetEyeMask.Left, i, leftEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
             Camera newRightCam = AddCamera(StereoTargetEyeMask.Right, i, rightEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
