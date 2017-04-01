@@ -45,12 +45,16 @@ public class CAVECameraRig : MonoBehaviour
     [HideInInspector]
     public CameraViewpoint viewpoint;
 
+    private static CAVECameraRig instance;
+
     // Called before first frame. Prepares the displays and loads cameras.
     private void Awake()
     {
-
-
-
+        // Things here should only ever happen once.
+        if (instance == null)
+        {
+            viewpoint = GetComponentInChildren<CameraViewpoint>();
+        }
 
     }
 
@@ -61,7 +65,6 @@ public class CAVECameraRig : MonoBehaviour
         Debug.Log("Object", this);
         leftEyeCameras = new List<Camera>();
         rightEyeCameras = new List<Camera>();
-        viewpoint = GetComponentInChildren<CameraViewpoint>();
 
         SetupScreens();
 
