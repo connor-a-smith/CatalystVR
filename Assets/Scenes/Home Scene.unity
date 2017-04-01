@@ -716,6 +716,11 @@ MonoBehaviour:
   fadeTime: 2
   minutesUntilReset: 2
   idleRotationAnglePerSecond: 4
+--- !u!1 &1452965962 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1360865640107010, guid: 476fdf3d3ff49469ea2292977124dda1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1100916497}
 --- !u!1 &1506068064
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,9 +771,8 @@ MonoBehaviour:
   cameraRig: {fileID: 0}
   photoController: {fileID: 0}
   inputGuide: {fileID: 0}
-  fadePlane: {fileID: 0}
+  fadePlane: {fileID: 1452965962}
   photoPrefabEditor: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
-  raycastCam: {fileID: 0}
   labelPrefab: {fileID: 1000010527999220, guid: 2564fd42a20e524449a2db37676b5842,
     type: 2}
 --- !u!1 &1510144035

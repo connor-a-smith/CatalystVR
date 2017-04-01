@@ -78,6 +78,7 @@ public class PhotoController : MonoBehaviour
 
             photoPrefab = new GameObject();
             photoPrefab.name = "Photo Template";
+            ((GameObject)photoPrefab).transform.parent = this.transform;
             ((GameObject)photoPrefab).AddComponent<CatalystPhoto>();
             ((GameObject)photoPrefab).AddComponent<SpriteRenderer>();
             ((GameObject)photoPrefab).AddComponent<BoxCollider>();
@@ -734,12 +735,19 @@ public class PhotoController : MonoBehaviour
             {
                 MovePhotosOnInput(GamepadInput.InputOption.LEFT_STICK_VERTICAL);
             }
+        }
 
-           if (GamepadInput.GetDown(GamepadInput.InputOption.B_BUTTON))
+        if (GamepadInput.GetDown(GamepadInput.InputOption.B_BUTTON))
+        {
+
+            if (photosLoading)
             {
-
+                StopAllCoroutines();
                 UnloadPhotos();
-
+            }
+            else if (photosActive)
+            {
+                UnloadPhotos();
             }
         }
     }

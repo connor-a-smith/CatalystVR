@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     public static Object photoPrefab;
     public Object photoPrefabEditor;
-    public Camera raycastCam;
 
     public Object labelPrefab;
 

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CAVECameraRig : MonoBehaviour {
+public class CAVECameraRig : MonoBehaviour
+{
 
-    [SerializeField] private bool enableRaycast = true;
+    [SerializeField]
+    private bool enableRaycast = true;
 
-    [SerializeField] private Object screenPrefab;
+    [SerializeField]
+    private Object screenPrefab;
 
     // Static bool to keep track of whether or not we're in 3D mode.
     public static bool is3D = false;
@@ -38,7 +41,7 @@ public class CAVECameraRig : MonoBehaviour {
     public static Toggle3DDelegate on3DToggled;
 
     private static Transform cameraRigTransform;
-    
+
     [HideInInspector]
     public CameraViewpoint viewpoint;
 
@@ -46,26 +49,27 @@ public class CAVECameraRig : MonoBehaviour {
     private void Awake()
     {
 
-        leftEyeCameras = new List<Camera>();
-        rightEyeCameras = new List<Camera>();
-        viewpoint = GetComponentInChildren<CameraViewpoint>();
+
 
 
     }
 
     // Ensures the cameras are in the right positions.
-    void Start() {
+    void Start()
+    {
 
         Debug.Log("Object", this);
+        leftEyeCameras = new List<Camera>();
+        rightEyeCameras = new List<Camera>();
+        viewpoint = GetComponentInChildren<CameraViewpoint>();
 
+        SetupScreens();
 
-            SetupScreens();
+        ActivateDisplays();
 
-            ActivateDisplays();
+        cameraRigTransform = this.transform;
 
-            cameraRigTransform = this.transform;
-
-            ResetCameraPositions();
+        ResetCameraPositions();
     }
 
     private void SetupScreens()
@@ -175,7 +179,7 @@ public class CAVECameraRig : MonoBehaviour {
 
         }
 
-        float viewHeightFromOrigin = 600.0f;
+        float viewHeightFromOrigin = 450.0f;
 
         screenPlanes.transform.position -= new Vector3(0.0f, viewHeightFromOrigin, 0.0f);
 
@@ -235,7 +239,7 @@ public class CAVECameraRig : MonoBehaviour {
     // Activates each display currently hooked up to the computer, to ensure we're displaying across all screens.
     private void ActivateDisplays()
     {
-        foreach(Display display in Display.displays)
+        foreach (Display display in Display.displays)
         {
             display.Activate();
         }
@@ -247,6 +251,8 @@ public class CAVECameraRig : MonoBehaviour {
         ShiftCamerasByXOffset(leftEyeCameras, cameraEyeOffset / 2);
         ShiftCamerasByXOffset(rightEyeCameras, -cameraEyeOffset / 2);
         is3D = false;
+
+        Debug.Log("Making 2D");
     }
 
     // Shifts the cameras to 3D mode, by offsetting left and right cameras.
@@ -255,6 +261,8 @@ public class CAVECameraRig : MonoBehaviour {
         ShiftCamerasByXOffset(leftEyeCameras, -cameraEyeOffset / 2);
         ShiftCamerasByXOffset(rightEyeCameras, cameraEyeOffset / 2);
         is3D = true;
+
+        Debug.Log("Making 3D");
     }
 
     // Moves the cameras back to where they should be for 2D/3D modes.
