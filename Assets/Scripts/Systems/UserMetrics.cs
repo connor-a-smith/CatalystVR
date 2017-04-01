@@ -250,6 +250,8 @@ public class UserMetrics : MonoBehaviour
             idleTimeInSeconds = 0.0f;
             timesActivated = 0;
 
+            userActivityTimeList = new string[0];
+
         }
 
         public void AddTimeActivated()

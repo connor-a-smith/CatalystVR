@@ -714,7 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenSceneCycles: 10
   fadeTime: 2
-  minutesUntilReset: 2
+  minutesUntilReset: 0.1
   idleRotationAnglePerSecond: 4
 --- !u!1 &1452965962 stripped
 GameObject:

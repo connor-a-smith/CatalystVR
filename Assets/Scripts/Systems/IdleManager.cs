@@ -20,6 +20,7 @@ public class IdleManager : MonoBehaviour {
     void Start () {
 
         gameManager = GetComponentInParent<GameManager>();
+        StartCoroutine(CheckForInput());
 		
 	}
 	
@@ -38,13 +39,15 @@ public class IdleManager : MonoBehaviour {
             if (GamepadInput.timeSinceLastInput > (minutesUntilReset * 60.0f))
             {
 
-                gameManager.cameraRig.Set3D(false);
+                if (GameManager.gameState == GameManager.State.ACTIVE)
+                {
 
-                StartCoroutine(CycleScenes());
+                    gameManager.cameraRig.Set3D(false);
 
-                GameManager.gameState = GameManager.State.IDLE;
+                    StartCoroutine(CycleScenes());
 
-                break;
+                    GameManager.gameState = GameManager.State.IDLE;
+                }
 
             }
 

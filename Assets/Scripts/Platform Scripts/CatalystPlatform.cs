@@ -182,14 +182,41 @@ public class CatalystPlatform : MonoBehaviour
     public void SetPlatformVisible(bool visible)
     {
 
-        foreach (Transform child in GetComponentsInChildren<Transform>())
+        foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>(true))
         {
 
-            if (child.transform.parent == this.transform && !child.GetComponent<CAVECameraRig>())
+            if (child.gameObject != gameManager.fadePlane)
+            {
+                child.gameObject.SetActive(visible);
+            }
+        }
+
+        foreach (CanvasRenderer child in GetComponentsInChildren<CanvasRenderer>(true))
+        {
+            child.gameObject.SetActive(visible);
+        }
+
+        foreach (SpriteRenderer child in GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            child.gameObject.SetActive(visible);
+        }
+
+        foreach (RectTransform child in GetComponentsInChildren<RectTransform>(true))
+        {
+            child.gameObject.SetActive(visible);
+        }
+
+
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
+        {
+
+            if (child.GetComponent<MeshRenderer>() || child.GetComponent<CanvasRenderer>() || child.GetComponent<SpriteRenderer>())
             {
 
-                child.gameObject.SetActive(visible);
-
+                if (child.gameObject != gameManager.fadePlane)
+                {
+                    child.gameObject.SetActive(visible);
+                }
             }
         }
     }
