@@ -33,8 +33,9 @@ public class FocusTransformComponent : POIComponent
 
         //Apply to platform, and reset raycastCam pos.
 
-        platform.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
         GameManager.instance.cameraRig.viewpoint.transform.rotation = oldRot;
+        platform.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
+
     }
 
     public override void Deactivate()

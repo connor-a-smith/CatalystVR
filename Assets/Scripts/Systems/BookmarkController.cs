@@ -148,8 +148,11 @@ public class BookmarkController : MonoBehaviour {
 
 	void ChangeColor(int index, Color color) {
 
-        Image panelImage = bookmarks[index].GetComponent<Image>();
-        panelImage.color = color;
+        if (index >= 0 && index <= bookmarks.Count - 1)
+        {
+            Image panelImage = bookmarks[index].GetComponent<Image>();
+            panelImage.color = color;
+        }
 
 	}
 

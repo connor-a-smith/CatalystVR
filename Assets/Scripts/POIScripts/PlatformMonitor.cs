@@ -28,7 +28,7 @@ public class PlatformMonitor : MonoBehaviour {
     public void Update()
     {
 
-        if (monitorButtonsActive)
+        if (monitorButtonsActive && !PhotoController.photosActive && !PhotoController.photosLoading)
         {
 
             if (readyForInput == false)

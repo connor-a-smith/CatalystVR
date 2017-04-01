@@ -14,7 +14,20 @@ public class CAVECameraRig : MonoBehaviour {
     // Lists of left and right eye cameras.
     public static List<Camera> leftEyeCameras;
     public static List<Camera> rightEyeCameras;
-    public static List<Camera> allCameras;
+    public static List<Camera> allCameras
+    {
+
+        get
+        {
+
+            List<Camera> allCameras = new List<Camera>();
+            allCameras.AddRange(leftEyeCameras);
+            allCameras.AddRange(rightEyeCameras);
+            return allCameras;
+
+        }
+
+    }
 
     // Offset between the cameras (total offset, not halfway).
     [SerializeField]
@@ -157,11 +170,16 @@ public class CAVECameraRig : MonoBehaviour {
 
             newLeftCam.transform.parent = leftEyeCameraParent.transform;
             newRightCam.transform.parent = rightEyeCameraParent.transform;
-
             leftEyeCameras.Add(newLeftCam);
             rightEyeCameras.Add(newRightCam);
 
         }
+
+        float viewHeightFromOrigin = 600.0f;
+
+        screenPlanes.transform.position -= new Vector3(0.0f, viewHeightFromOrigin, 0.0f);
+
+
     }
 
     public Camera AddCamera(StereoTargetEyeMask targetEye, int displayIndex, Transform parent, GameObject targetPlane)
@@ -274,29 +292,5 @@ public class CAVECameraRig : MonoBehaviour {
             newPosition.x = xVal;
             camera.transform.localPosition = newPosition;
         }
-    }
-
-    // Finds the Camera components in children, and fills the camera lists respectively.
-    private void FindCameras()
-    {
-
-        leftEyeCameras = new List<Camera>();
-        rightEyeCameras = new List<Camera>();
-
-        foreach (Camera cam in GetComponentsInChildren<Camera>())
-        {
-            if (cam.stereoTargetEye == StereoTargetEyeMask.Left)
-            {
-                leftEyeCameras.Add(cam);
-            }
-            else if (cam.stereoTargetEye == StereoTargetEyeMask.Right)
-            {
-                rightEyeCameras.Add(cam);
-            }
-        }
-
-        allCameras = new List<Camera>(leftEyeCameras.Count + rightEyeCameras.Count);
-        allCameras.AddRange(leftEyeCameras);
-        allCameras.AddRange(rightEyeCameras);
     }
 }

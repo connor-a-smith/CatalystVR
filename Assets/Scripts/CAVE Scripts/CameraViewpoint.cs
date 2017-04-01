@@ -9,13 +9,14 @@ public class CameraViewpoint : MonoBehaviour {
     private void Awake()
     {
 
-        cameraTransform = transform;
-
     }
 
     // Use this for initialization
     void Start () {
-		
+
+
+        cameraTransform = this.transform;
+
 	}
 	
 	// Update is called once per frame

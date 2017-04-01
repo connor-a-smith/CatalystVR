@@ -63,6 +63,9 @@ public class PhotoController : MonoBehaviour
     private GameObject photoHolder;
     private CameraViewpoint cameraViewpoint;
 
+    public static bool photosLoading = false;
+    public static bool photosActive = false;
+
     // Initialization
     void Start()
     {
@@ -261,6 +264,9 @@ public class PhotoController : MonoBehaviour
         photoHolder = null;
         photos.Clear();
 
+        photosActive = false;
+        photosLoading = false;
+
     }
 
     public void LoadPhotos(string filePath)
@@ -285,6 +291,8 @@ public class PhotoController : MonoBehaviour
 
         StartCoroutine(LoadPhotosFromFile(filePath));
 
+
+        photosLoading = true;
 
     }
 
@@ -407,6 +415,10 @@ public class PhotoController : MonoBehaviour
 
                 }
             }
+
+            photosActive = true;
+            photosLoading = false;
+
         }
         else
         {
@@ -700,7 +712,7 @@ public class PhotoController : MonoBehaviour
     void Update()
     {
 
-        if (photoHolder != null)
+        if (photosActive)
         {
 
             if (GamepadInput.GetDown(GamepadInput.InputOption.RIGHT_STICK_HORIZONTAL))
