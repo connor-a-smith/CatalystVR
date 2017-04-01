@@ -22,6 +22,8 @@ public class CatalystPlatform : MonoBehaviour
 
     private static CatalystPlatform activePlatform;
 
+    private List<GameObject> invisibleObjects;
+
     private void Awake()
     {
 
@@ -182,39 +184,57 @@ public class CatalystPlatform : MonoBehaviour
     public void SetPlatformVisible(bool visible)
     {
 
-        foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>(true))
+        if (visible == true)
         {
-
-            if (child.gameObject != gameManager.fadePlane)
+            foreach (GameObject obj in invisibleObjects)
             {
-                child.gameObject.SetActive(visible);
+                if (obj != null)
+                {
+                    obj.SetActive(visible);
+                }
             }
         }
-
-        foreach (CanvasRenderer child in GetComponentsInChildren<CanvasRenderer>(true))
-        {
-            child.gameObject.SetActive(visible);
-        }
-
-        foreach (SpriteRenderer child in GetComponentsInChildren<SpriteRenderer>(true))
-        {
-            child.gameObject.SetActive(visible);
-        }
-
-        foreach (RectTransform child in GetComponentsInChildren<RectTransform>(true))
-        {
-            child.gameObject.SetActive(visible);
-        }
-
-
-        foreach (Transform child in GetComponentsInChildren<Transform>(true))
+        else
         {
 
-            if (child.GetComponent<MeshRenderer>() || child.GetComponent<CanvasRenderer>() || child.GetComponent<SpriteRenderer>())
+            invisibleObjects = new List<GameObject>();
+
+            foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>(true))
             {
 
                 if (child.gameObject != gameManager.fadePlane)
                 {
+                    if (child.gameObject.activeSelf)
+                    {
+                        invisibleObjects.Add(child.gameObject);
+                        child.gameObject.SetActive(visible);
+                    }
+                }
+            }
+
+            foreach (CanvasRenderer child in GetComponentsInChildren<CanvasRenderer>(true))
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    invisibleObjects.Add(child.gameObject);
+                    child.gameObject.SetActive(visible);
+                }
+            }
+
+            foreach (SpriteRenderer child in GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    invisibleObjects.Add(child.gameObject);
+                    child.gameObject.SetActive(visible);
+                }
+            }
+
+            foreach (RectTransform child in GetComponentsInChildren<RectTransform>(true))
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    invisibleObjects.Add(child.gameObject);
                     child.gameObject.SetActive(visible);
                 }
             }

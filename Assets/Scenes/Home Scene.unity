@@ -124,7 +124,7 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1,
     type: 2}
-  m_PrefabInternal: {fileID: 1100916497}
+  m_PrefabInternal: {fileID: 1148639074}
 --- !u!43 &211982235
 Mesh:
   m_ObjectHideFlags: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   highlightedPOIMaterialEditor: {fileID: 0}
   selectedPOIMaterialEditor: {fileID: 2100000, guid: 7b49bcd289d853e4b8f870b6fdd31615,
     type: 2}
---- !u!1001 &1100916497
+--- !u!1001 &1148639074
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -714,13 +714,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenSceneCycles: 10
   fadeTime: 2
-  minutesUntilReset: 0.1
+  minutesUntilReset: 2
   idleRotationAnglePerSecond: 4
 --- !u!1 &1452965962 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1360865640107010, guid: 476fdf3d3ff49469ea2292977124dda1,
     type: 2}
-  m_PrefabInternal: {fileID: 1100916497}
+  m_PrefabInternal: {fileID: 1148639074}
 --- !u!1 &1506068064
 GameObject:
   m_ObjectHideFlags: 0
