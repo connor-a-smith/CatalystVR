@@ -755,7 +755,7 @@ public class CAVEViewerPosition
 
     }
 }
-s
+
 public class CAVEPipe
 {
     public string server;
