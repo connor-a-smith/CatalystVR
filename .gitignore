@@ -26,6 +26,7 @@ Desktop.ini
 *.obj
 *.obj.meta
 *.tif
+*.JPG
 
 # No Catalyst Scenes since they're too big
 /Assets/Scenes/Sites
