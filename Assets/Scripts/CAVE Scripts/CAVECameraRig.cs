@@ -29,7 +29,6 @@ public class CAVECameraRig : MonoBehaviour
             return allCameras;
 
         }
-
     }
 
     // Offset between the cameras (total offset, not halfway).
@@ -210,6 +209,9 @@ public class CAVECameraRig : MonoBehaviour
     // Toggles between 3D and 2D mode, moves cameras appropriately.
     public void Toggle3D()
     {
+
+        Debug.Log("Toggling 3D");
+
         if (is3D)
         {
             Make2D();

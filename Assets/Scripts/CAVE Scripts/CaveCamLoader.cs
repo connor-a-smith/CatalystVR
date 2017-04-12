@@ -5,11 +5,23 @@ using System.Collections.Generic;
 public class CaveCamLoader : MonoBehaviour
 {
 
+    [System.Serializable]
+    public struct StereoCubemap
+    {
+
+        public Material leftEyeCubemap;
+        public Material rightEyeCubemap;
+
+        public string text;
+
+    }
+
+    private StereoCubemap activeCubemap;
+
     [SerializeField]
-    private Material leftEyeCubemap;
-    
-    [SerializeField]
-    private Material rightEyeCubemap;
+    public List<StereoCubemap> cubemaps;
+
+    private int cubemapIndex = 0;
 
     private List<Camera> leftEyeCameras;
     private List<Camera> rightEyeCameras;
@@ -26,39 +38,100 @@ public class CaveCamLoader : MonoBehaviour
 
         CAVECameraRig.on3DToggled += Set3D;
 
-        SetupCubemapOnCameras();
+        SetupCubemapOnCameras(cubemaps[cubemapIndex]);
 
         Set3D(CAVECameraRig.is3D);
 
+        Debug.Log("Starting");
+
+    }
+
+    public void CycleCubemap()
+    {
+
+        cubemapIndex++;
+
+        if (cubemapIndex > cubemaps.Count-1) {
+
+            cubemapIndex = 0;
+
+        }
+
+        SetupCubemapOnCameras(cubemaps[cubemapIndex]);
+
+
+    }
+
+    public void Update()
+    {
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
+        {
+
+            if (cubemaps.Count > 1)
+            {
+                CycleCubemap();
+                Debug.Log("Cycling Cubemap");
+
+            }
+        }
     }
 
 
-    private void SetupCubemapOnCameras()
+    private void SetupCubemapOnCameras(StereoCubemap newCubemap)
     {
+
+        activeCubemap = newCubemap;
 
         foreach (Camera cam in CAVECameraRig.allCameras)
         {
 
+          //  Debug.Log("Setting material for Camera " + cam.name);
+
             StereoTargetEyeMask targetEye = cam.stereoTargetEye;
-            Material skyboxMaterial = rightEyeCubemap;
+
+            Material skyboxMaterial = newCubemap.rightEyeCubemap;
 
             if (targetEye == StereoTargetEyeMask.Left)
             {
-                skyboxMaterial = leftEyeCubemap;
+
+      //          Debug.Log("Setting material for left eye Camera: " + cam.name);
+
+                skyboxMaterial = newCubemap.leftEyeCubemap;
             }
 
-            Skybox camSkybox = cam.gameObject.AddComponent<Skybox>();
-            camSkybox.material = skyboxMaterial;
+            Skybox camSkybox = cam.GetComponent<Skybox>();
 
+            if (camSkybox == null)
+            {
+                camSkybox = cam.gameObject.AddComponent<Skybox>();
+            }
+
+            camSkybox.material = skyboxMaterial;
+            camSkybox.enabled = true;
+
+            if (skyboxMaterial == null)
+            {
+                //Debug.LogError("No skybox material found for Camera " + cam.name);
+            }
         }
+
+        Debug.Log("Added Cubemaps");
+
+        Set3D(CAVECameraRig.is3D);
+        PlatformMonitor.SetMonitorText(newCubemap.text);
+
     }
 
     private void RemoveCubemapFromCameras()
     {
         foreach (Camera cam in CAVECameraRig.allCameras)
         {
-            Destroy(cam.GetComponent<Skybox>());
+            cam.GetComponent<Skybox>().enabled = false;
         }
+
+      Debug.Log("Removed Cubemaps");
+
     }
 
     public void Set3D(bool is3D)
@@ -70,12 +143,12 @@ public class CaveCamLoader : MonoBehaviour
 
             if (is3D)
             {
-                camSkybox.material = leftEyeCubemap;
+                camSkybox.material = activeCubemap.leftEyeCubemap;
             }
 
             else
             {
-                camSkybox.material = rightEyeCubemap;
+                camSkybox.material = activeCubemap.rightEyeCubemap;
             }
         }
     }
@@ -83,8 +156,9 @@ public class CaveCamLoader : MonoBehaviour
     public void OnDestroy()
     {
 
-        CAVECameraRig.on3DToggled -= Set3D;
+        Debug.Log("Destroying");
 
+        CAVECameraRig.on3DToggled -= Set3D;
         RemoveCubemapFromCameras();
 
     }
@@ -100,13 +174,13 @@ public class CaveCamLoader : MonoBehaviour
         {
 
             // First, add the right eye to this camera for non-3D mode.
-            camera.gameObject.AddComponent<Skybox>().material = rightEyeCubemap;
+            camera.gameObject.AddComponent<Skybox>().material = activeCubemap.rightEyeCubemap;
 
             // Then, create a new skybox camera that uses the correct cubemap.
             GameObject newCamera = GameObject.Instantiate(camera.gameObject, camera.transform.position, camera.transform.rotation) as GameObject;
             newCamera.transform.parent = skyboxCameras.transform;
             newCamera.GetComponent<Camera>().cullingMask = 0;
-            newCamera.GetComponent<Skybox>().material = leftEyeCubemap;
+            newCamera.GetComponent<Skybox>().material = activeCubemap.leftEyeCubemap;
             newCamera.GetComponent<Camera>().depth = -1;
         }
 
@@ -114,13 +188,13 @@ public class CaveCamLoader : MonoBehaviour
         {
 
             // First, add the right eye to this camera for non-3D mode.
-            camera.gameObject.AddComponent<Skybox>().material = rightEyeCubemap;
+            camera.gameObject.AddComponent<Skybox>().material = activeCubemap.rightEyeCubemap;
 
             // Then, create a new skybox camera that uses the correct cubemap.
             GameObject newCamera = GameObject.Instantiate(camera.gameObject, camera.transform.position, camera.transform.rotation) as GameObject;
             newCamera.transform.parent = skyboxCameras.transform;
             newCamera.GetComponent<Camera>().cullingMask = 0;
-            newCamera.GetComponent<Skybox>().material = rightEyeCubemap;
+            newCamera.GetComponent<Skybox>().material = activeCubemap.rightEyeCubemap;
             newCamera.GetComponent<Camera>().depth = -1;
 
         }

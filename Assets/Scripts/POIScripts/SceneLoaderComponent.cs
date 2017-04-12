@@ -13,6 +13,9 @@ public class SceneLoaderComponent : POIComponent {
         POIManager.selectedPOI.Deactivate();
 
         SceneManager.LoadSceneAsync(sceneName);
+
+        gameManager.platform.GetComponentInChildren<BookmarkController>().MovePanelDown();
+
     }
 
     public override void Deactivate()

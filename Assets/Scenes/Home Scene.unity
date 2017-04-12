@@ -253,6 +253,10 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!4 &274869200 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 431172, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+  m_PrefabInternal: {fileID: 459647179}
 --- !u!1 &408383647 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
@@ -396,6 +400,10 @@ Prefab:
     - target: {fileID: 431172, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013590378736, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
@@ -585,6 +593,157 @@ MonoBehaviour:
   highlightedPOIMaterialEditor: {fileID: 0}
   selectedPOIMaterialEditor: {fileID: 2100000, guid: 7b49bcd289d853e4b8f870b6fdd31615,
     type: 2}
+--- !u!1 &1121353388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1121353389}
+  - component: {fileID: 1121353396}
+  - component: {fileID: 1121353395}
+  - component: {fileID: 1121353394}
+  - component: {fileID: 1121353393}
+  - component: {fileID: 1121353392}
+  - component: {fileID: 1121353391}
+  - component: {fileID: 1121353390}
+  m_Layer: 0
+  m_Name: POI- Steno
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1121353389
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4000013864975016, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_LocalRotation: {x: -0.27060404, y: -0.5373584, z: -0.40685257, w: -0.6873794}
+  m_LocalPosition: {x: -6.46, y: 12.94, z: 15.42}
+  m_LocalScale: {x: 1.0000005, y: 1.0000005, z: 1.0000013}
+  m_Children: []
+  m_Father: {fileID: 274869200}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: -3.7400002, y: 73.941, z: 58.426003}
+--- !u!65 &1121353390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 65000011787455892, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2400004, y: 2.5617914, z: 1.2400008}
+  m_Center: {x: 0, y: -0.0000038146973, z: 0}
+--- !u!33 &1121353391
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 33000013995202414, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Mesh: {fileID: 4300000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+--- !u!23 &1121353392
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 23000012155161460, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7610b171e598f40e496299754135e6c6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1121353393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000013096624112, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709c34509a517ef47acbe7cb02a2dbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  components: []
+  POIName: Steno
+  labelSpawnHeight: 1.5
+--- !u!114 &1121353394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000012109721388, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044ea7fba164f14b98ddfe74bf27288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 1
+  sentence: New Cyber-Archaeology Expedition from Greece.
+--- !u!114 &1121353395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114000010434631686, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324dfa019a10c946ae2b7d54fc95c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateImmediately: 0
+  sceneName: Steno
+--- !u!95 &1121353396
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 95000010358328194, guid: c2e22098ce7c8da4590cceb5113bd50e,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1121353388}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ca564e8f457be41178576dafc8700bc6, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1148639074
 Prefab:
   m_ObjectHideFlags: 0

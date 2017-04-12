@@ -98,6 +98,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public static void GoHome()
+    {
+        SceneManager.LoadScene(0);
+        PlatformMonitor.ResetMonitorText();
+    }
+
     public void Update()
     {
 
@@ -109,7 +115,7 @@ public class GameManager : MonoBehaviour
         if (GamepadInput.GetDown(GamepadInput.InputOption.BACK_BUTTON))
         {
             // Loads the first scene. Assumed to be the home scene.
-            SceneManager.LoadScene(0);
+            GoHome();
         }
     }
 }

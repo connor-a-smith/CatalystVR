@@ -89,7 +89,7 @@ public class IdleManager : MonoBehaviour {
         StopCoroutine(rotationRoutine);
 
         // NOTE: This line resets the user back to the Earth scene. May want to change later.
-        SceneManager.LoadScene(0);
+        GameManager.GoHome();
 
         // Do a fade-in now that everything is ready.
         yield return StartCoroutine(FadePlane(false, fadeTime / 2));
