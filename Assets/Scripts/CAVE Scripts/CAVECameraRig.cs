@@ -80,8 +80,7 @@ public class CAVECameraRig : MonoBehaviour
         ScreenConfigLoader screenLoader = GetComponentInChildren<ScreenConfigLoader>();
         screenLoader.LoadScreenConfig();
 
-        List<CAVEScreen> screens = screenLoader.GetLoadedScreens();
-        List<CAVEWindow> windows = screenLoader.windows;
+        List<CAVEScreen> screens = screenLoader.screens;
 
         GameObject leftEyeCameraParent = new GameObject("Left Eye Cameras");
         GameObject rightEyeCameraParent = new GameObject("Right Eye Cameras");
@@ -181,10 +180,7 @@ public class CAVECameraRig : MonoBehaviour
 
         }
 
-        float viewHeightFromOrigin = 450.0f;
-
-        screenPlanes.transform.position -= new Vector3(0.0f, viewHeightFromOrigin, 0.0f);
-
+        screenPlanes.transform.position -= screenLoader.viewerPosition.vector;
 
     }
 

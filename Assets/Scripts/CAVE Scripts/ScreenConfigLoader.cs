@@ -7,15 +7,17 @@ public class ScreenConfigLoader : MonoBehaviour
 {
 
     [SerializeField]
-    private System.Environment.SpecialFolder fileLocation;
+    private string filePath = "./";
 
-    [SerializeField] private string filePath;
-    [SerializeField] private string fileName = "/ConfigScreen.txt";
+    [SerializeField]
+    private string fileName = "screenConfig.txt";
 
     private List<CAVEPipe> pipes = new List<CAVEPipe>();
-    public List<CAVEWindow> windows = new List<CAVEWindow>();
+    private List<CAVEWindow> windows = new List<CAVEWindow>();
     private List<CAVEChannel> channels = new List<CAVEChannel>();
-    private List<CAVEScreen> screens = new List<CAVEScreen>();
+    public List<CAVEScreen> screens = new List<CAVEScreen>();
+
+    public CAVEViewerPosition viewerPosition;
 
     //variables
     private string host, separation, NumPipes, NumScreens, NumWindows;
@@ -26,7 +28,7 @@ public class ScreenConfigLoader : MonoBehaviour
         Debug.Log("Begin Parse Configuration");
         Debug.Log("Begin Reading From Configuration Text File");
 
-        //read the contents of ConfigScreen.txt file in Desktop folder
+        //read the contents of ConfigCAVEScreen.txt file in Desktop folder
         string text = ReadFromFile();
 
         Debug.Log("Finished Retrieving Text From Configuration File");
@@ -46,34 +48,12 @@ public class ScreenConfigLoader : MonoBehaviour
 
     }
 
-    public List<CAVEScreen> GetLoadedScreens()
-    {
-        return screens;
-    }
-
     string ReadFromFile()
     {
-        //grab the path to the folder to look for the config file
-        //filePath = System.Environment.GetFolderPath(fileLocation);
-        Debug.Log("location: " + filePath);
 
         //get access to the contents of the config file
-
-        string text = "";
-
-        try
-        {
-            text = File.ReadAllText(filePath + fileName);
-            Debug.Log("text is: " + text);
-
-        }
-        catch (FileNotFoundException e)
-        {
-
-            Debug.LogError("Unable to load screen configuration: File not found: " + e.FileName);
-
-        }
-
+        string text = File.ReadAllText(filePath + fileName);
+        Debug.Log("text is: " + text);
 
         return text;
     }
@@ -82,6 +62,8 @@ public class ScreenConfigLoader : MonoBehaviour
     {
 
         text = text.Replace('>', ' ');
+        text = text.Replace('\n', ' ');
+        text = text.Replace('/', ' ');
 
         //parsing the text by splitting versus the '<'
         string[] initialParse = text.Split(char.Parse("<"));
@@ -101,25 +83,44 @@ public class ScreenConfigLoader : MonoBehaviour
                     Debug.Log("Parsing PipeConfig");
                     //increment i to start reading the next line
                     i++;
+
+                    //skip comments
+                    while (initialParse[i].Contains("--"))
+                    {
+                        i++;
+                    }
+
                     //while initialParse[i] does not equal PipeConfig because second PipeConfig signifies end of the Pipe section
                     while (!(initialParse[i].Contains("PipeConfig")))
                     {
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
+
+                        //trim the leading blank spaces tab before content
+                        initialParse[i] = initialParse[i].Trim();
+
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Pipe pipeObj;
                         CAVEPipe pipeObj = null;
 
-                        if (!(depthParse[0].Contains("!"))) //don't make a channel on a comment
+                        if (!(depthParse[0].Contains("!"))) //don't make a Pipe on a comment
                         {
-                            //declare Screen screenObj;
+                            //declare pipe screenObj;
                             pipeObj = new CAVEPipe();
                         }
 
                         //for (int j = 0; j < depthParse.Length; j++) loop through the line properties
                         for (int j = 0; j < depthParse.Length; j++)
                         {
-                            if (depthParse[j] != "Pipe") // if depthParse[j] is a property element of Pipe
+
+                            if (!string.IsNullOrEmpty(depthParse[j]) && depthParse[j] != "Pipe") // if depthParse[j] is a property element of Pipe
                             {
+
                                 //split the current line by "=" and save into propertyParse
                                 string[] propertyParse = depthParse[j].Split(char.Parse("="));
 
@@ -135,6 +136,10 @@ public class ScreenConfigLoader : MonoBehaviour
                                 {
                                     pipeObj.name = propertyParse[1].Trim('"'); //e.g.name="aaa"
                                 }
+                                else //unknown variable
+                                {
+                                    Debug.LogError("Unknown Variable \"" + propertyParse[0] + "\" in Pipe " + pipes.Count);
+                                }
 
                             }
                         }
@@ -147,6 +152,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         //increment i to move along the file text
                         i++;
 
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
+
                     }
                 }
                 //check if the line equals WindowConfig
@@ -155,9 +166,26 @@ public class ScreenConfigLoader : MonoBehaviour
                     Debug.Log("Parsing WindowConfig");
                     //increment i to start reading the next line
                     i++;
+
+                    //skip comments
+                    while (initialParse[i].Contains("--"))
+                    {
+                        i++;
+                    }
+
                     //while initialParse[i] does not equal WindowConfig because second WindowConfig signifies end of the Window section
                     while (!(initialParse[i].Contains("WindowConfig")))
                     {
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
+
+                        //trim the leading blank spaces tab before content
+                        initialParse[i] = initialParse[i].Trim();
+
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
                         //declare Window windowObj;
@@ -173,7 +201,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         for (int j = 0; j < depthParse.Length; j++)
                         {
                             //if depthParse[j] != "Window"
-                            if (depthParse[j] != "Window")
+                            if (!string.IsNullOrEmpty(depthParse[j]) && depthParse[j] != "Window")
                             {
                                 //split the current line by "=" and save into propertyParse
                                 string[] propertyParse = depthParse[j].Split(char.Parse("="));
@@ -214,6 +242,10 @@ public class ScreenConfigLoader : MonoBehaviour
                                 {
                                     windowObj.cudaDevice = propertyParse[1].Trim('"'); //e.g. cudaDevice="0"
                                 }
+                                else //unknown variable
+                                {
+                                    Debug.LogError("Unknown Variable \"" + propertyParse[0] + "\" in Window " + windows.Count);
+                                }
                             }
                         }
 
@@ -225,6 +257,12 @@ public class ScreenConfigLoader : MonoBehaviour
 
                         //increment i to move along the file text
                         i++;
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
                     }
                 }
                 //check if the line equals ChannelConfig
@@ -233,9 +271,26 @@ public class ScreenConfigLoader : MonoBehaviour
                     Debug.Log("Parsing ChannelConfig");
                     //increment i to start reading the next line
                     i++;
+
+                    //skip comments
+                    while (initialParse[i].Contains("--"))
+                    {
+                        i++;
+                    }
+
                     //while initialParse[i] does not equal ChannelConfig because second ChannelConfig signifies end of the Channel section
                     while (!(initialParse[i].Contains("ChannelConfig")))
                     {
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
+
+                        //trim the leading blank spaces tab before content
+                        initialParse[i] = initialParse[i].Trim();
+
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
 
@@ -252,7 +307,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         for (int j = 0; j < depthParse.Length; j++)
                         {
                             //if depthParse[j] != "Channel"
-                            if (depthParse[j] != "Channel")
+                            if (!string.IsNullOrEmpty(depthParse[j]) && depthParse[j] != "Channel")
                             {
                                 //split the current line by "=" and save into propertyParse
                                 string[] propertyParse = depthParse[j].Split(char.Parse("="));
@@ -289,6 +344,10 @@ public class ScreenConfigLoader : MonoBehaviour
                                 {
                                     channelObj.comment = propertyParse[1].Trim('"'); //e.g. comment="LEFT"
                                 }
+                                else //unknown variable
+                                {
+                                    Debug.LogError("Unknown Variable \"" + propertyParse[0] + "\" in Channel " + channels.Count);
+                                }
 
                             }
                         }
@@ -299,6 +358,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         }
                         //increment i to move along the file text
                         i++;
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
                     }
                 }
                 //check if the line equals ScreenConfig
@@ -307,9 +372,25 @@ public class ScreenConfigLoader : MonoBehaviour
                     Debug.Log("Parsing ScreenConfig");
                     //increment i to start reading the next line
                     i++;
+
+                    while (initialParse[i].Contains("!--"))
+                    {
+                        i++;
+                    }
+
                     //while initialParse[i] does not equal ScreenConfig because second ScreenConfig signifies end of the screen section
                     while (!(initialParse[i].Contains("ScreenConfig")))
                     {
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
+
+                        //trim the leading blank spaces tab before content
+                        initialParse[i] = initialParse[i].Trim();
+
                         //split the current line by " " and save into depthParse
                         depthParse = initialParse[i].Split(char.Parse(" "));
 
@@ -326,7 +407,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         for (int j = 0; j < depthParse.Length; j++)
                         {
                             //if depthParse[j] != "Screen"
-                            if (depthParse[j] != "Screen")
+                            if (!string.IsNullOrEmpty(depthParse[j]) && depthParse[j] != "Screen")
                             {
                                 //split the current line by "=" and save into propertyParse
                                 string[] propertyParse = depthParse[j].Split(char.Parse("="));
@@ -375,6 +456,10 @@ public class ScreenConfigLoader : MonoBehaviour
                                 {
                                     screenObj.screen = propertyParse[1].Trim('"'); //e.g. screen="0"
                                 }
+                                else //unknown variable
+                                {
+                                    Debug.LogError("Unknown Variable \"" + propertyParse[0] + "\" in Screen " + screens.Count);
+                                }
 
                             }
                         }
@@ -385,6 +470,12 @@ public class ScreenConfigLoader : MonoBehaviour
                         }
                         //increment i to move along the file text
                         i++;
+
+                        //skip comments
+                        while (initialParse[i].Contains("!--"))
+                        {
+                            i++;
+                        }
                     }
                 }
                 //else
@@ -409,12 +500,55 @@ public class ScreenConfigLoader : MonoBehaviour
                         //else 
                         else
                         {
-                            Debug.Log("Unknown Property in Local");
+                            Debug.LogError("Unknown Property in Local");
                         }
+                    }
+                    //check if depthParse[0] is ViewerPosition
+                    else if (depthParse[0] == "ViewerPosition")
+                    {
+
+                        viewerPosition = new CAVEViewerPosition();
+
+                        //start with the next property(e.g. ViewerPosition x="0" y="0" z="400" />
+                        for (int k = 1; k < depthParse.Length; k++)
+                        {
+
+                            depthParse[k] = depthParse[k].Trim();
+
+                            //split depthParse[1] by "=" and save into string[] tempArray
+                            string[] tempArray = depthParse[k].Split(char.Parse("="));
+
+                            if (!string.IsNullOrEmpty(tempArray[0]))
+                            {
+                                //if tempArray[0]== "x"
+                                if (tempArray[0] == "x")
+                                {
+                                    //set x = tempArray[1]
+                                    viewerPosition.x = tempArray[1].Trim('"');
+                                }
+                                else if (tempArray[0] == "y")
+                                {
+                                    //set y = temparray[1]
+                                    viewerPosition.y = tempArray[1].Trim('"');
+                                }
+                                else if (tempArray[0] == "z")
+                                {
+                                    //set z = tempArray[1]
+                                    viewerPosition.z = tempArray[1].Trim('"');
+                                }
+                                else
+                                {
+                                    Debug.LogError("Unknown Property *" + tempArray[0] + "* in Global Viewer Position");
+                                }
+                            }
+
+                        }
+
                     }
                     //check if depthParse[0] is Stereo
                     else if (depthParse[0] == "Stereo")
                     {
+
                         //split depthParse[1] by "=" and save into string[] tempArray
                         string[] tempArray = depthParse[1].Split(char.Parse("="));
                         //if tempArray[0] == "seperation"
@@ -426,7 +560,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         //else
                         else
                         {
-                            Debug.Log("Unknown Property in Stereo");
+                            Debug.LogError("Unknown Property in Stereo");
                         }
                     }
                     //check if depthParse[0] is NumPipes
@@ -443,7 +577,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         //else
                         else
                         {
-                            Debug.Log("Unknown Property in NumPipes");
+                            Debug.LogError("Unknown Property in NumPipes");
                         }
                     }
                     //check if depthParse[0] is NumScreens
@@ -460,7 +594,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         //else
                         else
                         {
-                            Debug.Log("Unknown Property in NumScreens");
+                            Debug.LogError("Unknown Property in NumScreens");
                         }
                     }
                     //check if depthParse[0] is NumWindows
@@ -477,7 +611,7 @@ public class ScreenConfigLoader : MonoBehaviour
                         //else
                         else
                         {
-                            Debug.Log("Unknown Property in NumWindows");
+                            Debug.LogError("Unknown Property in NumWindows");
                         }
                     }
                 }
@@ -495,11 +629,16 @@ public class ScreenConfigLoader : MonoBehaviour
         Debug.Log("NumScreens: " + NumScreens);
         Debug.Log("NumWindows: " + NumWindows);
 
+        if (viewerPosition != null)
+        {
+            Debug.Log("ViewerPosition: (" + viewerPosition.x + ", " + viewerPosition.y + ", " + viewerPosition.z + ")");
+        }
+
         //loop through PipeList
         Debug.Log("Reading Pipes: ");
         for (int i = 0; i < pipes.Count; i++)
         {
-            //print server
+            //print server  
             Debug.Log("Pipe #" + i + " Server: " + pipes[i].server);
             //print screen
             Debug.Log("Pipe #" + i + " Screen: " + pipes[i].screen);
@@ -589,6 +728,31 @@ public class ScreenConfigLoader : MonoBehaviour
                 Debug.Log("Screen #" + i + " Screen: " + screens[i].screen);
             }
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
+
+
+public class CAVEViewerPosition
+{
+    public string x;
+    public string y;
+    public string z;
+
+    public Vector3 vector
+    {
+        
+        get
+        {
+            return new Vector3(float.Parse(x), float.Parse(y), float.Parse(z));
+        }
+
+
     }
 }
 
