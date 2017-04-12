@@ -17,7 +17,7 @@ public class ScreenConfigLoader : MonoBehaviour
     private List<CAVEChannel> channels = new List<CAVEChannel>();
     public List<CAVEScreen> screens = new List<CAVEScreen>();
 
-    public CAVEViewerPosition ViewerPosition;
+    public CAVEViewerPosition viewerPosition;
 
     //variables
     private string host, separation, NumPipes, NumScreens, NumWindows;
@@ -507,7 +507,7 @@ public class ScreenConfigLoader : MonoBehaviour
                     else if (depthParse[0] == "ViewerPosition")
                     {
 
-                        ViewerPosition = new CAVEViewerPosition();
+                        viewerPosition = new CAVEViewerPosition();
 
                         //start with the next property(e.g. ViewerPosition x="0" y="0" z="400" />
                         for (int k = 1; k < depthParse.Length; k++)
@@ -524,17 +524,17 @@ public class ScreenConfigLoader : MonoBehaviour
                                 if (tempArray[0] == "x")
                                 {
                                     //set x = tempArray[1]
-                                    ViewerPosition.x = tempArray[1].Trim('"');
+                                    viewerPosition.x = tempArray[1].Trim('"');
                                 }
                                 else if (tempArray[0] == "y")
                                 {
                                     //set y = temparray[1]
-                                    ViewerPosition.y = tempArray[1].Trim('"');
+                                    viewerPosition.y = tempArray[1].Trim('"');
                                 }
                                 else if (tempArray[0] == "z")
                                 {
                                     //set z = tempArray[1]
-                                    ViewerPosition.z = tempArray[1].Trim('"');
+                                    viewerPosition.z = tempArray[1].Trim('"');
                                 }
                                 else
                                 {
@@ -629,9 +629,9 @@ public class ScreenConfigLoader : MonoBehaviour
         Debug.Log("NumScreens: " + NumScreens);
         Debug.Log("NumWindows: " + NumWindows);
 
-        if (ViewerPosition != null)
+        if (viewerPosition != null)
         {
-            Debug.Log("ViewerPosition: (" + ViewerPosition.x + ", " + ViewerPosition.y + ", " + ViewerPosition.z + ")");
+            Debug.Log("ViewerPosition: (" + viewerPosition.x + ", " + viewerPosition.y + ", " + viewerPosition.z + ")");
         }
 
         //loop through PipeList
@@ -743,8 +743,19 @@ public class CAVEViewerPosition
     public string x;
     public string y;
     public string z;
-}
 
+    public Vector3 vector
+    {
+        
+        get
+        {
+            return new Vector3(float.Parse(x), float.Parse(y), float.Parse(z));
+        }
+
+
+    }
+}
+s
 public class CAVEPipe
 {
     public string server;
