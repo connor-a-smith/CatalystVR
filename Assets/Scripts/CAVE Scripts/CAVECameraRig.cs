@@ -180,7 +180,12 @@ public class CAVECameraRig : MonoBehaviour
 
         }
 
-        screenPlanes.transform.position -= screenLoader.viewerPosition.vector;
+        Vector3 viewerPosition = screenLoader.viewerPosition.vector;
+        float zVal = viewerPosition.z;
+        viewerPosition.z = viewerPosition.y;
+        viewerPosition.y = zVal;
+
+        screenPlanes.transform.position -= viewerPosition;
 
     }
 
