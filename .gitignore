@@ -29,10 +29,10 @@ Desktop.ini
 *.tif.meta
 
 # No Catalyst Scenes since they're too big
-/Assets/Scenes/Sites
+/Assets/Scenes/Sites/
 
 # Resources contains tons of large files. Also too big.
-/Assets/Resources
+/Assets/Resources/
 
 # Don't push any site data. Way too large.
-/Assets/SiteData
+/Assets/SiteData/
