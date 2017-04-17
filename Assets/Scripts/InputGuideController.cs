@@ -11,7 +11,15 @@ public class InputGuideController : MonoBehaviour {
 
 	private Animator platformAnim;
 
-	public GameObject controlsPanel;
+    [SerializeField]
+    private Sprite cavecamControls;
+
+    [SerializeField]
+    private Sprite poiControls;
+
+    [SerializeField]
+    private Image controlsImage;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +33,18 @@ public class InputGuideController : MonoBehaviour {
         controlsPanelActive = true;
 
 	}
+
+    public void SetControlsImage(bool isCavecam)
+    {
+        if (isCavecam)
+        {
+            controlsImage.sprite = cavecamControls;
+        }
+        else
+        {
+            controlsImage.sprite = poiControls;
+        }
+    }
 
 	/// <summary>
 	/// Move the animation for going up

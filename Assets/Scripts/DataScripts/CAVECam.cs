@@ -56,7 +56,7 @@ public class CAVECam : MonoBehaviour
     private Cubemap CreateCubemapFromCaveCamEye(SerializableCAVECamEye camEye)
     {
 
-        Cubemap 
+        return new Cubemap(1, TextureFormat.Alpha8, false);
 
 
 

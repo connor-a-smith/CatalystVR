@@ -5423,7 +5423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94960429019f8b14d89a7267ba2097c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlsPanel: {fileID: 1000011644047666}
+  cavecamControls: {fileID: 21300000, guid: fbb540a0536c4a34e99bfaee6d699114, type: 3}
+  poiControls: {fileID: 21300000, guid: 268912c50bf115e4e984a369522da1c1, type: 3}
+  controlsImage: {fileID: 114000010461693108}
 --- !u!114 &114000012645648416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6683,7 +6685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9f643b8a53f7744ae13fd7460c6a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileLocation: 0
   filePath: 
   fileName: screenConfig.txt
 --- !u!114 &114817088401869148
@@ -6716,7 +6717,7 @@ MonoBehaviour:
   selectionColor: {r: 0.255731, g: 0.63235295, b: 0.32066584, a: 0.5}
   bookmarkPrefab: {fileID: 1000013807972154, guid: cbbc9e8b70ceefe479219fd057e7ce77,
     type: 2}
-  bookmarkImagePanel: {fileID: 1000011348747562}
+  bookmarkImagePanel: {fileID: 0}
   noSelection: 0
   bookmarks: []
 --- !u!135 &135000014204173326
