@@ -15,8 +15,6 @@ public class BookmarkController : MonoBehaviour {
 
 	private Animator platformAnim;
 
-	//public GameObject bookmark;
-	public GameObject bookmarkImagePanel;
 	public bool noSelection;
 
 	public List<Bookmark> bookmarks;

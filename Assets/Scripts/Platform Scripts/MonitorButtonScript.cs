@@ -21,6 +21,32 @@ public class MonitorButtonScript : MonoBehaviour
     [Range(0.0f, 1.0f)]
     private float changeTime = 1.0f;
 
+    public void Awake()
+    {
+        
+        foreach (MonitorButtonState buttonState in GetComponentsInChildren<MonitorButtonState>(true))
+        {
+
+            if (buttonState.state == MonitorButtonState.ButtonState.ACTIVE)
+            {
+                activeSprite = buttonState.gameObject;
+            }
+            else if (buttonState.state == MonitorButtonState.ButtonState.DISABLED)
+            {
+                inactiveSprite = buttonState.gameObject;
+            }
+            else if (buttonState.state == MonitorButtonState.ButtonState.SELECTED)
+            {
+                selectedSprite = buttonState.gameObject;
+            }
+            else if (buttonState.state == MonitorButtonState.ButtonState.PRESSED)
+            {
+                pressedSprite = buttonState.gameObject;
+            }
+        }
+        
+    }
+
     /// <summary>
     /// Handle what happens when a button is selected.
     /// </summary>
