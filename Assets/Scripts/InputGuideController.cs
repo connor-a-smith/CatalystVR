@@ -4,14 +4,16 @@ using UnityEngine.UI; //to enable getComponent<Text>();
 
 public class InputGuideController : MonoBehaviour {
 
-	//while the L is being pressed, then keep showing
-	private bool initActivated = false;
+    //while the L is being pressed, then keep showing
+    private bool initActivated = false;
 
     public static bool controlsPanelActive = false;
 
-	private Animator platformAnim;
+    private Animator platformAnim;
 
-	public GameObject controlsPanel;
+    [SerializeField] private Sprite poiControls;
+    [SerializeField] private Sprite cavecamControls;
+    [SerializeField] private Image controlsImage;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +27,19 @@ public class InputGuideController : MonoBehaviour {
         controlsPanelActive = true;
 
 	}
+
+    public void SetControlsPicture(bool cavecamVersion)
+    {
+
+        if (cavecamVersion)
+        {
+            controlsImage.sprite = cavecamControls;
+        }
+        else
+        {
+            controlsImage.sprite = poiControls;
+        }
+    }
 
 	/// <summary>
 	/// Move the animation for going up

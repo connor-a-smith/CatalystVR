@@ -33,7 +33,24 @@ public class CAVECam : MonoBehaviour
 
         SerializableCAVECam camFile = JsonUtility.FromJson<SerializableCAVECam>(camJson);
 
-        
+
+        string leftEyePath = camFile.leftEye.filePath;
+        string rightEyePath = camFile.rightEye.filePath;
+
+        Texture2D leftTexture = LoadImageAsTexture(leftEyePath);
+        Texture2D rightTexture = LoadImageAsTexture(rightEyePath);
+
+        Cubemap leftCubemap = CreateCubemapFromTexture(leftTexture);
+        Cubemap rightCubemap = CreateCubemapFromTexture(rightTexture);
+
+        Material leftMaterial = new Material(Shader.Find("Skybox/Cubemap"));
+        Material rightMaterial = new Material(Shader.Find("Skybox/Cubemap"));
+
+        leftMaterial.mainTexture = leftCubemap;
+        rightMaterial.mainTexture = rightCubemap;
+
+        leftEye = leftMaterial;
+        rightEye = rightMaterial;
 
 
         yield return null;
@@ -53,23 +70,27 @@ public class CAVECam : MonoBehaviour
 
     }
 
-    private Cubemap CreateCubemapFromCaveCamEye(SerializableCAVECamEye camEye)
+    
+    // TODO: implement this
+    private Cubemap CreateCubemapFromTexture(Texture2D tex)
     {
 
-        Cubemap 
-
+        // Garbage
+        return new Cubemap(1, TextureFormat.Alpha8, false);
 
 
 
     }
 
+
+
     [System.Serializable]
     private class SerializableCAVECam
     {
 
-        SerializableCAVECamEye leftEye;
-        SerializableCAVECamEye rightEye;
-        string description;
+        public SerializableCAVECamEye leftEye;
+        public SerializableCAVECamEye rightEye;
+        public string description;
 
     }
 
@@ -77,12 +98,7 @@ public class CAVECam : MonoBehaviour
     private class SerializableCAVECamEye
     {
 
-        string leftFace;
-        string rightFace;
-        string topFace;
-        string bottomFace;
-        string frontFace;
-        string backFace;
+        public string filePath;
 
     }
 }

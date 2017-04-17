@@ -44,6 +44,8 @@ public class CaveCamLoader : MonoBehaviour
 
         Debug.Log("Starting");
 
+        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsPicture(true);
+
     }
 
     public void CycleCubemap()
@@ -156,8 +158,7 @@ public class CaveCamLoader : MonoBehaviour
     public void OnDestroy()
     {
 
-        Debug.Log("Destroying");
-
+        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsPicture(false);
         CAVECameraRig.on3DToggled -= Set3D;
         RemoveCubemapFromCameras();
 
