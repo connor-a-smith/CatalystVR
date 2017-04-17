@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 222000013242601036}
   - component: {fileID: 114000010461693108}
   m_Layer: 0
-  m_Name: Image
+  m_Name: ListPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4376,13 +4376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  connectedType: 5
+  activeSprite: {fileID: 1000014117519362}
+  inactiveSprite: {fileID: 1000014263298516}
+  selectedSprite: {fileID: 1000012713866658}
+  pressedSprite: {fileID: 1000013741684212}
   activatable: 0
-  changeTime: 1
+  changeTime: 0
 --- !u!114 &114000010295489156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4418,7 +4418,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0ef9f6758177a6443920dc32ef1c62d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7abd430794178a4408c6c3fcd92811a6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 0
@@ -4697,13 +4697,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  connectedType: 6
+  activeSprite: {fileID: 1000010376019926}
+  inactiveSprite: {fileID: 1000010789337514}
+  selectedSprite: {fileID: 1000012805145938}
+  pressedSprite: {fileID: 1000010244384094}
   activatable: 0
-  changeTime: 1
+  changeTime: 0
 --- !u!114 &114000011387117464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5193,13 +5193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  connectedType: 4
+  activeSprite: {fileID: 1000011156197094}
+  inactiveSprite: {fileID: 1000011945504536}
+  selectedSprite: {fileID: 1000014220410668}
+  pressedSprite: {fileID: 1000011069437834}
   activatable: 0
-  changeTime: 1
+  changeTime: 0.05
 --- !u!114 &114000012158560356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5423,8 +5423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94960429019f8b14d89a7267ba2097c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poiControls: {fileID: 21300000, guid: 0ef9f6758177a6443920dc32ef1c62d0, type: 3}
-  cavecamControls: {fileID: 21300000, guid: 4a3c52d90e89da74a9bd025b2a7fc5fc, type: 3}
+  cavecamControls: {fileID: 21300000, guid: fbb540a0536c4a34e99bfaee6d699114, type: 3}
+  poiControls: {fileID: 21300000, guid: 268912c50bf115e4e984a369522da1c1, type: 3}
   controlsImage: {fileID: 114000010461693108}
 --- !u!114 &114000012645648416
 MonoBehaviour:
@@ -5763,13 +5763,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  connectedType: 1
+  activeSprite: {fileID: 1000010764278104}
+  inactiveSprite: {fileID: 1000011821573864}
+  selectedSprite: {fileID: 1000012086913830}
+  pressedSprite: {fileID: 1000011151898000}
   activatable: 0
-  changeTime: 1
+  changeTime: 0
 --- !u!114 &114000013146585962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6242,12 +6242,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  activeSprite: {fileID: 1000011047272612}
+  inactiveSprite: {fileID: 1000013690988236}
+  selectedSprite: {fileID: 1000013418988582}
+  pressedSprite: {fileID: 1000012036448530}
   activatable: 0
-  changeTime: 1
+  changeTime: 0
 --- !u!114 &114000013911939550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6354,13 +6354,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beaf51f08bb67884594ab5558427666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectedType: 0
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
-  selectedSprite: {fileID: 0}
-  pressedSprite: {fileID: 0}
+  connectedType: 2
+  activeSprite: {fileID: 1000010238406546}
+  inactiveSprite: {fileID: 1000010048021192}
+  selectedSprite: {fileID: 1000013893721800}
+  pressedSprite: {fileID: 1000011779629510}
   activatable: 0
-  changeTime: 1
+  changeTime: 0
 --- !u!114 &114000014032549258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6650,7 +6650,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   xRotationSpeed: 30
   yRotationSpeed: -30
-  movementSpeed: 5
+  movementSpeed: 20
   maxTiltAngle: 45
 --- !u!114 &114136142824220948
 MonoBehaviour:
@@ -6685,7 +6685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9f643b8a53f7744ae13fd7460c6a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: ./
+  filePath: 
   fileName: screenConfig.txt
 --- !u!114 &114817088401869148
 MonoBehaviour:
@@ -6714,8 +6714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f1933b8ff6917468a60d31237c57ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionColor: {r: 0, g: 0, b: 0, a: 0}
-  bookmarkPrefab: {fileID: 0}
+  selectionColor: {r: 0.255731, g: 0.63235295, b: 0.32066584, a: 0.5}
+  bookmarkPrefab: {fileID: 1000013807972154, guid: cbbc9e8b70ceefe479219fd057e7ce77,
+    type: 2}
   bookmarkImagePanel: {fileID: 0}
   noSelection: 0
   bookmarks: []
