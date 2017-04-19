@@ -4,16 +4,22 @@ using UnityEngine.UI; //to enable getComponent<Text>();
 
 public class InputGuideController : MonoBehaviour {
 
-    //while the L is being pressed, then keep showing
-    private bool initActivated = false;
+	//while the L is being pressed, then keep showing
+	private bool initActivated = false;
 
     public static bool controlsPanelActive = false;
 
-    private Animator platformAnim;
+	private Animator platformAnim;
 
-    [SerializeField] private Sprite poiControls;
-    [SerializeField] private Sprite cavecamControls;
-    [SerializeField] private Image controlsImage;
+    [SerializeField]
+    private Sprite cavecamControls;
+
+    [SerializeField]
+    private Sprite poiControls;
+
+    [SerializeField]
+    private Image controlsImage;
+
 
 	// Use this for initialization
 	void Start () {
@@ -28,10 +34,9 @@ public class InputGuideController : MonoBehaviour {
 
 	}
 
-    public void SetControlsPicture(bool cavecamVersion)
+    public void SetControlsImage(bool isCavecam)
     {
-
-        if (cavecamVersion)
+        if (isCavecam)
         {
             controlsImage.sprite = cavecamControls;
         }

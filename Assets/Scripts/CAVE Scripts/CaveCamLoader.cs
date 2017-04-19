@@ -42,9 +42,9 @@ public class CaveCamLoader : MonoBehaviour
 
         Set3D(CAVECameraRig.is3D);
 
-        Debug.Log("Starting");
+        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsImage(true);
 
-        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsPicture(true);
+        Debug.Log("Starting");
 
     }
 
@@ -158,7 +158,11 @@ public class CaveCamLoader : MonoBehaviour
     public void OnDestroy()
     {
 
-        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsPicture(false);
+        Debug.Log("Destroying");
+
+        GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsImage(false);
+
+
         CAVECameraRig.on3DToggled -= Set3D;
         RemoveCubemapFromCameras();
 
