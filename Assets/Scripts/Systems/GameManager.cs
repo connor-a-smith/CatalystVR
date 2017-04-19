@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    public const string dataDirectory = "./CAVEkiosk_SiteData";
+    public const string cacheDirectory = dataDirectory + "/CachedData";
+
     // Is this running in the cave?
     public static bool isCave = false;
 
