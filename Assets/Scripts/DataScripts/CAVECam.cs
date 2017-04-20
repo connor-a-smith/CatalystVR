@@ -63,9 +63,11 @@ public class CAVECam : MonoBehaviour
             if (File.Exists(defaultCamPath))
             {
 
-                camFile = JsonUtility.FromJson<SerializableCAVECam>(defaultCamPath);
-
                 Debug.LogWarning("No CAVECam JSON found at " + camJSONPath + ". Attempting to use default path: " + defaultCamPath);
+
+                string objJSON = File.ReadAllText(defaultCamPath);
+
+                camFile = JsonUtility.FromJson<SerializableCAVECam>(objJSON);
 
                 yield return null;
 
@@ -81,7 +83,7 @@ public class CAVECam : MonoBehaviour
 
                 camFile = new SerializableCAVECam(defaultLeftEyePath, defaultRightEyePath, "Default Text");
 
-                File.WriteAllText(defaultCamPath, camFile.GetJSON());
+                File.WriteAllText(defaultCamPath, JsonUtility.ToJson(camFile));
 
                 Debug.LogWarningFormat("No CAVECam JSON found at {0}, and no default JSON at {1}. Creating a blank cam with left eye {2} and right eye {3}.", camJSONPath, defaultCamPath, defaultLeftEyePath, defaultRightEyePath);
 
@@ -91,8 +93,8 @@ public class CAVECam : MonoBehaviour
         }
 
 
-        leftEyePath = camFile.leftEye.filePath;
-        rightEyePath = camFile.rightEye.filePath;
+        leftEyePath = camFile.leftEyePath;
+        rightEyePath = camFile.rightEyePath;
 
         List<Texture2D> leftTextures = new List<Texture2D>();
         List<Texture2D> rightTextures = new List<Texture2D>();
@@ -204,30 +206,7 @@ public class CAVECam : MonoBehaviour
 
                 yield return null;
 
-                Debug.LogFormat("NEW TEXTURE WIDTH: {0}", newTex.width);
-
-
                 Debug.Log("Path is: " + fullPath);
-
-                /*
-                WWW www = new WWW(fullPath);
-
-
-                while (!www.isDone)
-                {
-                    yield return null;
-                }
-
-                www.LoadImageIntoTexture(newTex);
-
-
-                File.ReadAllBytes()
-
-                while (!www.isDone)
-                {
-                    yield return null;
-                }
-                */
 
                 textures.Add(newTex);
 
@@ -431,48 +410,22 @@ public class CAVECam : MonoBehaviour
     }
 
 
-    [System.Serializable]
-    private class SerializableCAVECam
+}
+
+
+[System.Serializable]
+public class SerializableCAVECam : SerializableCatalystDataType
+{
+
+    public string leftEyePath;
+    public string rightEyePath;
+
+    public SerializableCAVECam(string leftEye, string rightEye, string description)
     {
 
-        public SerializableCAVECamEye leftEye;
-        public SerializableCAVECamEye rightEye;
-        public string description = "Empty Description";
+        this.leftEyePath = leftEye;
+        this.rightEyePath = rightEye;
+        this.description = description;
 
-        public SerializableCAVECam(SerializableCAVECamEye leftEye, SerializableCAVECamEye rightEye, string description)
-        {
-
-            this.leftEye = leftEye;
-            this.rightEye = rightEye;
-            this.description = description;
-
-        }
-
-        public SerializableCAVECam(string leftEyePath, string rightEyePath, string description)
-        {
-
-            leftEye = new SerializableCAVECamEye(leftEyePath);
-            rightEye = new SerializableCAVECamEye(rightEyePath);
-            this.description = description;
-
-
-        }
-
-        public string GetJSON()
-        {
-            return JsonUtility.ToJson(this);
-        }
-    }
-
-    [System.Serializable]
-    private class SerializableCAVECamEye
-    {
-
-        public string filePath;
-
-        public SerializableCAVECamEye(string path)
-        {
-            this.filePath = path;
-        }
     }
 }
