@@ -13,8 +13,6 @@ public class CatalystSite : MonoBehaviour {
 	void Update () {
 		
 	}
-
-
 }
 
 [System.Serializable]
