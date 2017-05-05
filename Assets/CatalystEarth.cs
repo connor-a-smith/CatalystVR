@@ -26,6 +26,8 @@ public class CatalystEarth : MonoBehaviour {
     {
 
         CalculateRadius();
+        earthTransform = this.transform;
+
 
     }
 
@@ -42,10 +44,7 @@ public class CatalystEarth : MonoBehaviour {
     private void CalculateRadius()
     {
 
-        planetRadius = GetComponent<SphereCollider>().radius * 5.32f;
-        earthTransform = this.transform;
-
-        Debug.Log("Found radius: " + planetRadius);
+        planetRadius = GetComponent<SphereCollider>().radius * 5.6f;
 
     }
 
@@ -64,32 +63,14 @@ public class CatalystEarth : MonoBehaviour {
         float lon = latLon.lon;
 
         /*
-        float flattening = 0.0f;
-
-        float ls = Mathf.Atan(Mathf.Pow((1 - flattening), 2) * Mathf.Tan(lat));
-
-        float altitude = planetRadius;
-
-        float x = planetRadius * Mathf.Cos(ls) * Mathf.Cos(lon) + altitude * Mathf.Cos(lat) * Mathf.Cos(lon);
-
-        Debug.Log("Radius is still: " + planetRadius);
-        Debug.Log("Found X: " + x);
-
-        float y = planetRadius * Mathf.Cos(ls) * Mathf.Sin(lon) + altitude * Mathf.Cos(lat) * Mathf.Sin(lon);
-
-        float z = planetRadius * Mathf.Sin(ls) + altitude * Mathf.Sin(lat);
-
-        Vector3 posRelativeToEarth = new Vector3(x, y, z);
-
-        Debug.LogFormat("Found position relative to earth: ({0}, {1}, {2})", posRelativeToEarth.x, posRelativeToEarth.y, posRelativeToEarth.z);
-
-        Vector3 worldPos = earthCenter + posRelativeToEarth;
-
-        return worldPos;
-        */
-
         Vector3 worldPos = Quaternion.AngleAxis(lon, -Vector3.up) * 
                            Quaternion.AngleAxis(lat, -Vector3.right) * 
+                           new Vector3(0.0f, 0.0f, planetRadius);
+
+    */
+
+        Vector3 worldPos = Quaternion.AngleAxis(lon, -Vector3.up) *
+                           Quaternion.AngleAxis(lat, -Vector3.right) *
                            new Vector3(0.0f, 0.0f, planetRadius);
 
         worldPos += earthTransform.position;

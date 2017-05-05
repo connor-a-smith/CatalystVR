@@ -18,7 +18,7 @@ public class POI : MonoBehaviour
     private void Awake()
     {
 
-        POIManager.AddPOI(this);
+    //    POIManager.AddPOI(this);
 
     }
 
@@ -36,7 +36,7 @@ public class POI : MonoBehaviour
         components = new List<POIComponent>(GetComponentsInChildren<POIComponent>());
         GameObject label = GameObject.Instantiate(GameManager.instance.labelPrefab, this.transform, false) as GameObject;
         Vector3 newPosition = label.transform.localPosition;
-        newPosition.y += labelSpawnHeight;
+        newPosition.z -= labelSpawnHeight;
         label.transform.localPosition = newPosition;
         label.GetComponentInChildren<Text>().text = POIName;
     }

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public const string dataDirectory = "./CAVEkiosk_SiteData";
     public const string cacheDirectory = dataDirectory + "/CachedData";
+    public const string dataJsonFile = dataDirectory + "/siteData.json";
 
     // Is this running in the cave?
     public static bool isCave = false;
@@ -99,7 +100,6 @@ public class GameManager : MonoBehaviour
             inputGuide = user.GetComponentInChildren<InputGuideController>();
             platform.gameManager = this;
         }
-
     }
 
     public static void GoHome()

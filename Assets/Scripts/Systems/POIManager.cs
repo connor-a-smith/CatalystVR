@@ -9,6 +9,8 @@ public class POIManager : MonoBehaviour {
 
     public static List<POI> POIList;
 
+    public static List<CatalystSite> siteList;
+
     [SerializeField] private Object poiPrefab;
 
     [HideInInspector] public BookmarkController bookmarks;
@@ -43,9 +45,6 @@ public class POIManager : MonoBehaviour {
 
         }
 
-        SceneManager.sceneUnloaded += ClearPOIList;
-        SceneManager.sceneLoaded += UpdateBookmarks;
-
         defaultPOIMat = defaultPOIMaterialEditor;
         highlightedPOIMat = highlightedPOIMaterialEditor;
         selectedPOIMat = selectedPOIMaterialEditor;
@@ -58,25 +57,15 @@ public class POIManager : MonoBehaviour {
     public void Start()
     {
 
-        //   CreateNewPOI(32.8801f, 117.2340f);
+        LoadSites();
 
-       // LatLonTest newTest = new LatLonTest();
-       // string jsonText = JsonUtility.ToJson(newTest);
-       // File.WriteAllText("testa.json", jsonText);
+        UpdateBookmarks(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
-      string readJSON = File.ReadAllText("latlonsample.json");
+        SceneManager.sceneUnloaded += ClearPOIList;
+        SceneManager.sceneLoaded += UpdateBookmarks;
 
-      LatLonTest loadedLatLon = JsonUtility.FromJson<LatLonTest>(readJSON);
-
-        foreach (LatLonTest.location loc in loadedLatLon.latlons) {
-
-
-            CreateNewPOI(loc.latitude, loc.longitude, loc.state);
-
-         }
 
     }
-
     public static void AddPOI(POI POI)
     {
 
@@ -92,7 +81,17 @@ public class POIManager : MonoBehaviour {
     public void UpdateBookmarks(Scene scene, LoadSceneMode mode)
     {
 
+        Debug.LogWarning("Updating Bookmarks");
+
+
+
+        if (POIList == null)
+        {
+            LoadSites();
+        }
+
         bookmarks.UpdateBookmarks(POIList);
+
 
     }
 
@@ -116,26 +115,83 @@ public class POIManager : MonoBehaviour {
             selectedPOI.Deactivate();
 
         }
-
     }
 
-    public POI CreateNewPOI(float latitude, float longitude, string name)
+    public void LoadSites()
     {
 
-        Vector3 pos = CatalystEarth.Get3DPositionFromLatLon(latitude, longitude);
+        if (!File.Exists(GameManager.dataJsonFile))
+        {
 
-        Debug.LogFormat("Getting 3D Position of {0}, {1}: ({2}, {3}, {4})", latitude, longitude, pos.x, pos.y, pos.z);
+            SerializableCatalystSites sampleSites = new SerializableCatalystSites();
+
+            sampleSites.sites = new CatalystSite[1];
+
+            CatalystSite newSite = new CatalystSite();
+
+            // UC San Diego Lat/Lon as sample
+            newSite.latitude = 32.8801f;
+            newSite.longitude = 117.2340f;
+            newSite.name = "UC San Diego";
+            newSite.description = "This site was generated as a sample of what the JSON file should look like, roughly";
+
+            sampleSites.sites[0] = newSite;
+
+            string jsonText = JsonUtility.ToJson(sampleSites);
+
+            File.WriteAllText(GameManager.dataJsonFile, jsonText);
+
+            return;
+
+        }
+
+        string jsonString = File.ReadAllText(GameManager.dataJsonFile);
+
+        SerializableCatalystSites siteData = JsonUtility.FromJson<SerializableCatalystSites>(jsonString);
+
+        if (siteData.sites != null && siteData.sites.Length > 0)
+        {
+            siteList = new List<CatalystSite>(siteData.sites);
+        }
+        else
+        {
+            Debug.LogErrorFormat("Error: No sites loaded. Please check the following file: {0}", GameManager.dataJsonFile);
+            return;
+        }
+
+        Debug.LogFormat("Loaded {0} sites", siteList.Count);
+
+        POIList = new List<POI>();
+
+        foreach (CatalystSite site in siteList)
+        {
+
+            CreateNewPOI(site);
+
+        }
+    }
+
+    public POI CreateNewPOI(CatalystSite site)
+    {
+        Vector3 pos = CatalystEarth.Get3DPositionFromLatLon(site.latitude, site.longitude);
+
+        Debug.LogFormat("Getting 3D Position of {0}, {1}: ({2}, {3}, {4})", site.latitude, site.longitude, pos.x, pos.y, pos.z);
 
         GameObject newObj = GameObject.Instantiate(poiPrefab, pos, Quaternion.identity) as GameObject;
         POI newPOI = newObj.GetComponent<POI>();
-        newPOI.POIName = name;
+        newPOI.POIName = site.name;
 
         newObj.transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.up) * Quaternion.LookRotation(CatalystEarth.earthTransform.position);
-
         newObj.transform.LookAt(CatalystEarth.earthTransform.position);
 
-        return newPOI;
+        if (POIList == null)
+        {
+            POIList = new List<POI>();
+        }
 
+        POIList.Add(newPOI);
+
+        return newPOI;
     }
 
     public void CheckIfPOISelected()
@@ -155,8 +211,7 @@ public class POIManager : MonoBehaviour {
                 {
 
                     hitPOI.Toggle(gameManager);
-
-
+                   
                 }
             }
         }
@@ -164,41 +219,9 @@ public class POIManager : MonoBehaviour {
 }
 
 [System.Serializable]
-public class LatLonTest
+public class SerializableCatalystSites
 {
 
-    [System.Serializable]
-    public struct location
-    {
-
-        public string state;
-        public float latitude;
-        public float longitude;
-
-        public location (string name, float lat, float lon)
-        {
-
-            state = name;
-            latitude = lat;
-            longitude = lon;
-        }
-
-    }
-
-    public location[] latlons;
-
-    public LatLonTest()
-    {
-
-
-        location test1 = new location("test1", 1.0f, 2.0f);
-        location test2 = new location("test2", 2.0f, 5.0f);
-
-        latlons = new location[] { test1, test2 };
-
-    }
-
-
-
+    public CatalystSite[] sites;
 
 }
