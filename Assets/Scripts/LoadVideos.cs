@@ -14,7 +14,7 @@ public class LoadVideos : MonoBehaviour
     void Start()
     {
         WWW www = new WWW("http://www.unity3d.com/webplayers/Movie/sample.ogg");
-        movieTexture = (MovieTexture)www.movie;
+        movieTexture = (MovieTexture)www.GetMovieTexture();
         this.GetComponent<Renderer>().material.SetTexture("_MainTex", movieTexture);
         GetComponent<AudioSource>().clip = movieTexture.audioClip;
     }

@@ -1,4 +1,6 @@
-﻿Shader "Custom/CubeShader"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/CubeShader"
 {
 	Properties
 	{
@@ -142,7 +144,7 @@
 		for (i = 0; i<TAM; i++) v[i].uv_MainTex = TRANSFORM_TEX(UV1[i],_MainTex);
 
 		// Position in view space
-		for (i = 0; i<TAM; i++) { v[i].pos = mul(UNITY_MATRIX_MVP, v[i].pos); }
+		for (i = 0; i<TAM; i++) { v[i].pos = UnityObjectToClipPos(v[i].pos); }
 
 		// Build the cube tile by submitting triangle strip vertices
 		for (i = 0; i<TAM / 3; i++)
