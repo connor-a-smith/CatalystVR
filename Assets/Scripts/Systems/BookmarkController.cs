@@ -16,8 +16,11 @@ public class BookmarkController : MonoBehaviour {
 	private Animator platformAnim;
 
 	public bool noSelection;
+    public static bool isCanvasOn = false; //notifies system if canvas is on
 
 	public List<Bookmark> bookmarks;
+
+    public GameObject submenuRect;
 
 	private int bookmarkIndex;
 
@@ -42,6 +45,8 @@ public class BookmarkController : MonoBehaviour {
 		initDeactivate = false;
 
         parentPlatform = GetComponentInParent<CatalystPlatform>();
+
+        submenuRect.SetActive(false);
     }
 
     private void Update()
@@ -82,13 +87,25 @@ public class BookmarkController : MonoBehaviour {
 
             if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
             {
-
-
-                SelectBookmark();
+                //SelectBookmark();
+                SubMenu(bookmarkIndex);
+                Debug.Log("pressing the a button");
 
 
             }
         }
+    }
+
+    /// <summary>
+	/// Method to create an options submenu for a location
+	/// </summary>
+    public void SubMenu(int indexOfBookmark)
+    {
+
+        submenuRect.SetActive(true);
+        Debug.Log("The submenu rect is active");
+        submenuRect.gameObject.transform.localPosition = new Vector3(panelPositions[indexOfBookmark].x + 25.0f, panelPositions[indexOfBookmark].y, panelPositions[indexOfBookmark].z + 1.0f);
+       
     }
 
 	/// <summary>
@@ -172,11 +189,13 @@ public class BookmarkController : MonoBehaviour {
         POIManager.selectedPOI = null;
 
         loc.POI.Activate(parentPlatform.gameManager);
+        Debug.Log("inside jump");
 
 	}
 
     public void MoveSelectorUp() {
 
+        submenuRect.gameObject.SetActive(false);
         RevertColor(bookmarkIndex);
 
         bookmarkIndex--;
@@ -193,6 +212,8 @@ public class BookmarkController : MonoBehaviour {
 
     public void MoveSelectorDown() {
 
+        submenuRect.gameObject.SetActive(false);
+
         RevertColor(bookmarkIndex);
 
         bookmarkIndex++;
@@ -207,7 +228,8 @@ public class BookmarkController : MonoBehaviour {
     }
 
     public void SelectBookmark() {
-    
+
+        Debug.Log("Inside select bookmark");
         Jump( bookmarkIndex);
 
    }
@@ -226,6 +248,8 @@ public class BookmarkController : MonoBehaviour {
 
     }
 
+    public List<Vector3> panelPositions = new List<Vector3>();
+
     public void UpdateBookmarks(List<POI> POIList)
     {
 
@@ -234,7 +258,7 @@ public class BookmarkController : MonoBehaviour {
 
             ClearBookmarks();
 
-            List<Vector3> panelPositions = new List<Vector3>();
+            //List<Vector3> panelPositions = new List<Vector3>();
 
             Rect panelRect = GetComponent<RectTransform>().rect;
 

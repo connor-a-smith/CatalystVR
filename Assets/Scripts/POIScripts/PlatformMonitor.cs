@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class PlatformMonitor : MonoBehaviour {
 
-    [SerializeField] private static string startText = "Welcome to the CAVEkiosk!\n\nUse the Xbox controller to interact with this exhibit, and press the Right Trigger for a list of detailed controls.";
+    //[SerializeField] private static string startText = "Welcome to the CAVEkiosk!\n\nUse the Xbox controller to interact with this exhibit, and press the Right Trigger for a list of detailed controls.";
+    [SerializeField] private static string startText = "";
 
     private static MonitorButtonScript[] monitorButtons;
     private static int selectedButtonIndex = 0;
