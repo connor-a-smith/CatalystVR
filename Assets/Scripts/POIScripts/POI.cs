@@ -15,6 +15,8 @@ public class POI : MonoBehaviour
 
     [SerializeField] private float labelSpawnHeight = 1.5f;
 
+    public CatalystSite associatedSite;
+
     private void Awake()
     {
 

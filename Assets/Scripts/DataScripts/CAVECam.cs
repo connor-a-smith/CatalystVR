@@ -6,7 +6,6 @@ using System.Drawing;
 
 public class CAVECam : MonoBehaviour
 {
-
     public const string cacheLocation = GameManager.cacheDirectory + "/CAVECams";
 
     public const int FRONT_INDEX = 0;
@@ -25,7 +24,6 @@ public class CAVECam : MonoBehaviour
     private string cacheDirectory;
 
     [SerializeField] private string defaultCamPath = "./defaultCam.json";
-
     [SerializeField] private string defaultLeftEyePath = "./leftEye.tif";
     [SerializeField] private string defaultRightEyePath = "./rightEye.tif";
 
@@ -146,18 +144,8 @@ public class CAVECam : MonoBehaviour
         leftEye.SetTexture(Shader.PropertyToID("_Tex"), leftCubemap);
         rightEye.SetTexture(Shader.PropertyToID("_Tex"), rightCubemap);
 
-
         yield return null;
 
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown("l"))
-        {
-                    Camera.main.gameObject.AddComponent<Skybox>().material = leftEye;
-
-        }
     }
 
     public IEnumerator GetTexturesFromCache(string filePath, List<Texture2D> textures)
@@ -209,8 +197,6 @@ public class CAVECam : MonoBehaviour
                 Debug.Log("Path is: " + fullPath);
 
                 textures.Add(newTex);
-
-
 
             }
         }
@@ -408,8 +394,6 @@ public class CAVECam : MonoBehaviour
 
         yield return null;
     }
-
-
 }
 
 

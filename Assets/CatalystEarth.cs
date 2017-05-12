@@ -68,8 +68,9 @@ public class CatalystEarth : MonoBehaviour {
                            new Vector3(0.0f, 0.0f, planetRadius);
 
     */
+        float existingYRotation = earthTransform.rotation.eulerAngles.y;
 
-        Vector3 worldPos = Quaternion.AngleAxis(lon, -Vector3.up) *
+        Vector3 worldPos = Quaternion.AngleAxis(lon - existingYRotation, -Vector3.up) *
                            Quaternion.AngleAxis(lat, -Vector3.right) *
                            new Vector3(0.0f, 0.0f, planetRadius);
 

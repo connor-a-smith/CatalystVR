@@ -88,12 +88,16 @@ public class CAVECameraRig : MonoBehaviour
         leftEyeCameraParent.transform.parent = viewpoint.transform;
         rightEyeCameraParent.transform.parent = viewpoint.transform;
 
-        leftEyeCameraParent.transform.position = viewpoint.transform.position;
-        rightEyeCameraParent.transform.position = viewpoint.transform.position;
+        leftEyeCameraParent.transform.localPosition = Vector3.zero;
+        rightEyeCameraParent.transform.localPosition = Vector3.zero;
+
+        leftEyeCameraParent.transform.localRotation = Quaternion.identity;
+        rightEyeCameraParent.transform.localRotation = Quaternion.identity;
 
         GameObject screenPlanes = new GameObject("Screen Planes");
         screenPlanes.transform.parent = this.transform;
         screenPlanes.transform.localPosition = Vector3.zero;
+        screenPlanes.transform.localRotation = Quaternion.identity;
 
         for (int i = 0; i < screens.Count; i++)
         {
@@ -112,12 +116,13 @@ public class CAVECameraRig : MonoBehaviour
 
             // Set the position of the screens to 0 (local space) and rotation to the heading.
             newPlane.transform.localPosition = Vector3.zero;
-            newPlane.transform.rotation = Quaternion.Euler(newRotation);
+            newPlane.transform.localRotation = Quaternion.Euler(newRotation);
 
             // Move the screen from the origin to it's correct position.
-            Vector3 newPos = newPlane.transform.position;
+            Vector3 newPos = newPlane.transform.localPosition;
             newPos += new Vector3(float.Parse(screens[i].originX), float.Parse(screens[i].originZ), float.Parse(screens[i].originY));
-            newPlane.transform.position = newPos;
+
+            newPlane.transform.localPosition = newPos;
 
             Camera newLeftCam = AddCamera(StereoTargetEyeMask.Left, i, leftEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);
             Camera newRightCam = AddCamera(StereoTargetEyeMask.Right, i, rightEyeCameraParent.transform, newPlane.GetComponentsInChildren<Transform>()[1].gameObject);

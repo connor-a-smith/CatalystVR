@@ -154,14 +154,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 185075358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.70693654, z: -0, w: 0.707277}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 200103281}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.97201, z: 0}
 --- !u!4 &200103281 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1,
@@ -301,7 +301,7 @@ Transform:
   m_PrefabParentObject: {fileID: 431172, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 888717627}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -319,7 +319,7 @@ Transform:
   - {fileID: 1974370948}
   m_Father: {fileID: 1063659235}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &408383648 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4194016651414472, guid: c261ceef94331e0469d7437073d981c8,
@@ -468,6 +468,47 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 538914181}
   m_Mesh: {fileID: 211982235}
+--- !u!1 &748611541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 748611542}
+  - component: {fileID: 748611543}
+  m_Layer: 0
+  m_Name: SiteManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &748611542
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748611541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1506068065}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &748611543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748611541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c535ab8b0877ef44e97774e16c5c8a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sites: []
 --- !u!1 &825786937
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +644,11 @@ MonoBehaviour:
   components: []
   POIName: Iraq
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!95 &825786945
 Animator:
   serializedVersion: 3
@@ -726,6 +772,11 @@ MonoBehaviour:
   components: []
   POIName: Geisel Library
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &860299381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,6 +1168,11 @@ MonoBehaviour:
   components: []
   POIName: Mar Saba
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1006012464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,16 +1336,16 @@ Transform:
   m_PrefabParentObject: {fileID: 432644, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1063659232}
-  m_LocalRotation: {x: 0, y: -0.9999955, z: 0, w: 0.003000289}
-  m_LocalPosition: {x: -0.00009199103, y: 0, z: 399.9}
-  m_LocalScale: {x: 5.6108737, y: 5.610879, z: 5.6108813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1430477558}
   - {fileID: 538914182}
   - {fileID: 274869200}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1509086083}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -179.656, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1063659236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,6 +1462,11 @@ MonoBehaviour:
   components: []
   POIName: Steno
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1121353394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1667,6 +1728,11 @@ MonoBehaviour:
   components: []
   POIName: Stone Bear
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1186613551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,6 +1946,11 @@ MonoBehaviour:
   components: []
   POIName: Mada'in Saleh
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1421881876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2004,6 +2075,7 @@ Transform:
   - {fileID: 1651537066}
   - {fileID: 1510144036}
   - {fileID: 1158852590}
+  - {fileID: 748611542}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2027,6 +2099,35 @@ MonoBehaviour:
   photoPrefabEditor: {fileID: 113990, guid: 0258a125e16b49b4393a858e6bc418a0, type: 2}
   labelPrefab: {fileID: 1000010527999220, guid: 2564fd42a20e524449a2db37676b5842,
     type: 2}
+--- !u!1 &1509086082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1509086083}
+  m_Layer: 2
+  m_Name: EarthParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509086083
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1509086082}
+  m_LocalRotation: {x: -0, y: -0.54970634, z: -0, w: 0.835358}
+  m_LocalPosition: {x: -0.00009199103, y: 0, z: 399.9}
+  m_LocalScale: {x: 5.6108775, y: 5.610879, z: 5.610885}
+  m_Children:
+  - {fileID: 1063659235}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -66.694, z: 0}
 --- !u!1 &1510144035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,6 +2316,11 @@ MonoBehaviour:
   components: []
   POIName: Copper Mine
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1723999974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2367,6 +2473,11 @@ MonoBehaviour:
   components: []
   POIName: Al-Samlagi Dam
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1735985692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2647,11 @@ MonoBehaviour:
   components: []
   POIName: Melbourne
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1765595050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2704,6 +2820,11 @@ MonoBehaviour:
   components: []
   POIName: Ushaiger
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1772511467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2918,6 +3039,11 @@ MonoBehaviour:
   components: []
   POIName: Steno
   labelSpawnHeight: 1.5
+  associatedSite:
+    name: 
+    description: 
+    latitude: 0
+    longitude: 0
 --- !u!114 &1974370953
 MonoBehaviour:
   m_ObjectHideFlags: 0

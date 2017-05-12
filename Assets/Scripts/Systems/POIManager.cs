@@ -57,8 +57,6 @@ public class POIManager : MonoBehaviour {
     public void Start()
     {
 
-        LoadSites();
-
         UpdateBookmarks(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
         SceneManager.sceneUnloaded += ClearPOIList;
@@ -85,14 +83,6 @@ public class POIManager : MonoBehaviour {
 
 
 
-        if (POIList == null)
-        {
-            LoadSites();
-        }
-
-        bookmarks.UpdateBookmarks(POIList);
-
-
     }
 
     public void ClearPOIList(Scene scene)
@@ -117,62 +107,9 @@ public class POIManager : MonoBehaviour {
         }
     }
 
-    public void LoadSites()
-    {
-
-        if (!File.Exists(GameManager.dataJsonFile))
-        {
-
-            SerializableCatalystSites sampleSites = new SerializableCatalystSites();
-
-            sampleSites.sites = new CatalystSite[1];
-
-            CatalystSite newSite = new CatalystSite();
-
-            // UC San Diego Lat/Lon as sample
-            newSite.latitude = 32.8801f;
-            newSite.longitude = 117.2340f;
-            newSite.name = "UC San Diego";
-            newSite.description = "This site was generated as a sample of what the JSON file should look like, roughly";
-
-            sampleSites.sites[0] = newSite;
-
-            string jsonText = JsonUtility.ToJson(sampleSites);
-
-            File.WriteAllText(GameManager.dataJsonFile, jsonText);
-
-            return;
-
-        }
-
-        string jsonString = File.ReadAllText(GameManager.dataJsonFile);
-
-        SerializableCatalystSites siteData = JsonUtility.FromJson<SerializableCatalystSites>(jsonString);
-
-        if (siteData.sites != null && siteData.sites.Length > 0)
-        {
-            siteList = new List<CatalystSite>(siteData.sites);
-        }
-        else
-        {
-            Debug.LogErrorFormat("Error: No sites loaded. Please check the following file: {0}", GameManager.dataJsonFile);
-            return;
-        }
-
-        Debug.LogFormat("Loaded {0} sites", siteList.Count);
-
-        POIList = new List<POI>();
-
-        foreach (CatalystSite site in siteList)
-        {
-
-            CreateNewPOI(site);
-
-        }
-    }
-
     public POI CreateNewPOI(CatalystSite site)
     {
+
         Vector3 pos = CatalystEarth.Get3DPositionFromLatLon(site.latitude, site.longitude);
 
         Debug.LogFormat("Getting 3D Position of {0}, {1}: ({2}, {3}, {4})", site.latitude, site.longitude, pos.x, pos.y, pos.z);
@@ -189,7 +126,11 @@ public class POIManager : MonoBehaviour {
             POIList = new List<POI>();
         }
 
+        newPOI.associatedSite = site;
+
         POIList.Add(newPOI);
+
+        bookmarks.UpdateBookmarks(POIList);
 
         return newPOI;
     }
@@ -216,12 +157,4 @@ public class POIManager : MonoBehaviour {
             }
         }
     }
-}
-
-[System.Serializable]
-public class SerializableCatalystSites
-{
-
-    public CatalystSite[] sites;
-
 }
