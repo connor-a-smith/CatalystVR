@@ -1,10 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
-public class IdleManager : MonoBehaviour {
+public class IdleManager : MonoBehaviour
+{
 
     [SerializeField] private float timeBetweenSceneCycles = 10.0f;
 
@@ -14,20 +16,24 @@ public class IdleManager : MonoBehaviour {
 
     [SerializeField] private float idleRotationAnglePerSecond = 5.0f;
 
+    public GameObject ScreensaverText;
+
     private GameManager gameManager;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         gameManager = GetComponentInParent<GameManager>();
         StartCoroutine(CheckForInput());
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     public IEnumerator CheckForInput()
@@ -47,6 +53,8 @@ public class IdleManager : MonoBehaviour {
                     StartCoroutine(CycleScenes());
 
                     GameManager.gameState = GameManager.State.IDLE;
+
+                    activateText();
                 }
 
             }
@@ -181,5 +189,21 @@ public class IdleManager : MonoBehaviour {
             renderer.material.SetColor("_Color", endColor);
 
         }
+    }
+
+    void activateText()
+    {
+        Debug.Log("Method was called");
+        if (GameManager.gameState == GameManager.State.IDLE)
+        {
+            Debug.Log("Text should show");
+            ScreensaverText.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Text should not show");
+            ScreensaverText.SetActive(false);
+        }
+
     }
 }

@@ -89,6 +89,7 @@ public class POIManager : MonoBehaviour {
         {
 
             selectedPOI.Deactivate();
+            //BookmarkController.submenuRect.SetActive(false);
 
         }
 

@@ -13,16 +13,21 @@ public class PlatformMonitor : MonoBehaviour {
     private static bool readyForInput = false;
     private static PlatformInfoText monitorText;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
 
         monitorButtons = GetComponentsInChildren<MonitorButtonScript>(true);
 
         monitorText = GetComponentInChildren<PlatformInfoText>();
 
-        SetMonitorText(startText);
-
         DeactivateMonitorButtons();
+
+    }
+
+    // Use this for initialization
+    void Start () {
+
+        SetMonitorText(startText);
 
 	}
 
@@ -44,6 +49,7 @@ public class PlatformMonitor : MonoBehaviour {
             if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON) && readyForInput)
             {
 
+                Debug.Log("The A button was pressed down on a submenu button");
                 monitorButtons[selectedButtonIndex].ToggleButton();
 
             }
@@ -129,7 +135,6 @@ public class PlatformMonitor : MonoBehaviour {
 
     public static void ActivateMonitorButtons()
     {
-
         foreach (MonitorButtonScript monitorButton in monitorButtons)
         {
 

@@ -87,9 +87,8 @@ public class BookmarkController : MonoBehaviour {
 
             if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
             {
-                //SelectBookmark();
+                SelectBookmark();
                 SubMenu(bookmarkIndex);
-                Debug.Log("pressing the a button");
 
 
             }
@@ -188,7 +187,6 @@ public class BookmarkController : MonoBehaviour {
 
         POIManager.selectedPOI = null;
 
-        loc.POI.Activate(parentPlatform.gameManager);
         Debug.Log("inside jump");
 
 	}
@@ -229,10 +227,13 @@ public class BookmarkController : MonoBehaviour {
 
     public void SelectBookmark() {
 
-        Debug.Log("Inside select bookmark");
-        Jump( bookmarkIndex);
+        Bookmark loc = bookmarks[bookmarkIndex].GetComponent<Bookmark>();
 
-   }
+        loc.POI.Activate(parentPlatform.gameManager);
+
+        //Jump( bookmarkIndex);
+
+    }
 
     public void ClearBookmarks() {
 
