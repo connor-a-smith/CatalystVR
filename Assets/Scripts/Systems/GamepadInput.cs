@@ -72,12 +72,19 @@ public class GamepadInput : MonoBehaviour {
 
     }
 
-    private void Start()
+    private void Awake()
     {
+
 
         downInputs = new List<InputOption>();
         heldInputs = new List<InputOption>();
         releasedInputs = new List<InputOption>();
+
+    }
+
+    private void Start()
+    {
+
 
     }
 

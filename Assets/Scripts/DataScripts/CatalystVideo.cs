@@ -15,7 +15,7 @@ public class CatalystVideo : MonoBehaviour {
 	}
 }
 
-public class SerializableVideo : SerializableCatalystDataType
+public class SerializableVideo : SerializableCatalystSiteElement
 {
 
 

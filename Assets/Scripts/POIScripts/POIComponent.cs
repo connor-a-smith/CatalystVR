@@ -11,9 +11,12 @@ public abstract class POIComponent : MonoBehaviour
 
     protected GameManager gameManager;
 
-    public virtual void Activate(GameManager gameManager)
+    private CatalystSite associatedSite;
+
+    public virtual void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
         this.gameManager = gameManager;
+        this.associatedSite = associatedSite;
         activated = true;
     }
 

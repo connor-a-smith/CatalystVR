@@ -135,7 +135,7 @@ public class PhotoController : MonoBehaviour
             unitCircleLocations.Add(new List<Vector3>());
 
             // Calculates the positions based on number of sides for shape of i sides.
-            unitCircleLocations[i] = GetPositionsOnUnitCircleBySides(i + 1);
+            unitCircleLocations[i] = CommonCatalystMath.GetPositionsOnUnitCircleBySides(i + 1);
 
         }
 
@@ -555,30 +555,7 @@ public class PhotoController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Uses math to determine unit circle positions for a shape of certain sides.
-    /// </summary>
-    /// <param name="numSides"> Number of sides the shape to calculate for has </param>
-    /// <returns> A list of 3D Vector3 coordinates for each point on the unit circle </returns>
-    List<Vector3> GetPositionsOnUnitCircleBySides(int numSides)
-    {
 
-        // Creates a list to return.
-        List<Vector3> returnList = new List<Vector3>();
-
-        // Math works. Always believe. Genius Credit: Anish
-        for (int i = 0; i < numSides; i++)
-        {
-            float radAngle = i * (2 * (Mathf.PI / numSides));
-            radAngle += (Mathf.PI / 2);
-            returnList.Add(new Vector3(Mathf.Cos(radAngle), 0, Mathf.Sin(radAngle)));
-        }
-
-
-
-        // Returns the list.
-        return returnList;
-    }
 
     // Places the photos around user.
     public void PlacePhotos()

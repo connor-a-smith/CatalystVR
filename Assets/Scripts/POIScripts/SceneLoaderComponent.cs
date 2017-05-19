@@ -4,15 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderComponent : POIComponent {
 
-    public string sceneName;
-
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
-        base.Activate(gameManager);
+        base.Activate(gameManager, associatedSite);
 
         POIManager.selectedPOI.Deactivate();
 
-        SceneManager.LoadSceneAsync(sceneName);
+        StartCoroutine(associatedSite.ShowCAVECams());
 
         gameManager.platform.GetComponentInChildren<BookmarkController>().MovePanelDown();
 

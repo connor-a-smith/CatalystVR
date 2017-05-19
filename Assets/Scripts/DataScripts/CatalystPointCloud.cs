@@ -15,7 +15,7 @@ public class CatalystPointCloud : MonoBehaviour {
 	}
 }
 
-public class SerializablePointCloud : SerializableCatalystDataType
+public class SerializablePointCloud : SerializableCatalystSiteElement
 {
 
 

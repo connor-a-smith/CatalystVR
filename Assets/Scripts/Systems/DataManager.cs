@@ -25,6 +25,6 @@ public class DataManager : MonoBehaviour {
 public class CatalystSiteData
 {
 
-    CatalystSite[] sites;
+    SerializableCatalystSite[] sites;
 
 }

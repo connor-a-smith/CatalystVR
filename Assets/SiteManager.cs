@@ -18,9 +18,9 @@ public class SiteManager : MonoBehaviour {
 
             SerializableCatalystSites sampleSites = new SerializableCatalystSites();
 
-            sampleSites.sites = new CatalystSite[1];
+            sampleSites.sites = new SerializableCatalystSite[1];
 
-            CatalystSite newSite = new CatalystSite();
+            SerializableCatalystSite newSite = new SerializableCatalystSite();
 
             // UC San Diego Lat/Lon as sample
             newSite.latitude = 32.8801f;
@@ -44,7 +44,14 @@ public class SiteManager : MonoBehaviour {
 
         if (siteData.sites != null && siteData.sites.Length > 0)
         {
-            sites = new List<CatalystSite>(siteData.sites);
+            foreach (SerializableCatalystSite site in siteData.sites)
+            {
+
+                CatalystSite newSite = gameObject.AddComponent<CatalystSite>();
+                newSite.siteData = site;
+                sites.Add(newSite);
+
+            }
         }
         else
         {
@@ -80,7 +87,7 @@ public class SiteManager : MonoBehaviour {
     private class SerializableCatalystSites
     {
 
-        public CatalystSite[] sites;
+        public SerializableCatalystSite[] sites;
 
     }
 }

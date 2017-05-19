@@ -9,7 +9,7 @@ public class POIManager : MonoBehaviour {
 
     public static List<POI> POIList;
 
-    public static List<CatalystSite> siteList;
+    public static List<SerializableCatalystSite> siteList;
 
     [SerializeField] private Object poiPrefab;
 
@@ -110,13 +110,13 @@ public class POIManager : MonoBehaviour {
     public POI CreateNewPOI(CatalystSite site)
     {
 
-        Vector3 pos = CatalystEarth.Get3DPositionFromLatLon(site.latitude, site.longitude);
+        Vector3 pos = CatalystEarth.Get3DPositionFromLatLon(site.siteData.latitude, site.siteData.longitude);
 
-        Debug.LogFormat("Getting 3D Position of {0}, {1}: ({2}, {3}, {4})", site.latitude, site.longitude, pos.x, pos.y, pos.z);
+        Debug.LogFormat("Getting 3D Position of {0}, {1}: ({2}, {3}, {4})", site.siteData.latitude, site.siteData.longitude, pos.x, pos.y, pos.z);
 
         GameObject newObj = GameObject.Instantiate(poiPrefab, pos, Quaternion.identity) as GameObject;
         POI newPOI = newObj.GetComponent<POI>();
-        newPOI.POIName = site.name;
+        newPOI.POIName = site.siteName;
 
         newObj.transform.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.up) * Quaternion.LookRotation(CatalystEarth.earthTransform.position);
         newObj.transform.LookAt(CatalystEarth.earthTransform.position);

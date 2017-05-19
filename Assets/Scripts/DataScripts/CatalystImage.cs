@@ -16,7 +16,7 @@ public class CatalystImage : MonoBehaviour {
 }
 
 [System.Serializable]
-public class SerializableImage : SerializableCatalystDataType
+public class SerializableImage : SerializableCatalystSiteElement
 {
 
 
