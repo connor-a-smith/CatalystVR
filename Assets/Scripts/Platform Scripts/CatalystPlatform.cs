@@ -202,7 +202,7 @@ public class CatalystPlatform : MonoBehaviour
             foreach (MeshRenderer child in GetComponentsInChildren<MeshRenderer>(true))
             {
 
-                if (child.gameObject != gameManager.fadePlane)
+                if (child.gameObject != gameManager.fadePlane && child.gameObject.tag != "DontHideOnIdle")
                 {
                     if (child.gameObject.activeSelf)
                     {
@@ -214,7 +214,7 @@ public class CatalystPlatform : MonoBehaviour
 
             foreach (CanvasRenderer child in GetComponentsInChildren<CanvasRenderer>(true))
             {
-                if (child.gameObject.activeSelf)
+                if (child.gameObject.activeSelf && child.gameObject.tag != "DontHideOnIdle")
                 {
                     invisibleObjects.Add(child.gameObject);
                     child.gameObject.SetActive(visible);
@@ -223,7 +223,7 @@ public class CatalystPlatform : MonoBehaviour
 
             foreach (SpriteRenderer child in GetComponentsInChildren<SpriteRenderer>(true))
             {
-                if (child.gameObject.activeSelf)
+                if (child.gameObject.activeSelf && child.gameObject.tag != "DontHideOnIdle")
                 {
                     invisibleObjects.Add(child.gameObject);
                     child.gameObject.SetActive(visible);
@@ -232,7 +232,7 @@ public class CatalystPlatform : MonoBehaviour
 
             foreach (RectTransform child in GetComponentsInChildren<RectTransform>(true))
             {
-                if (child.gameObject.activeSelf)
+                if (child.gameObject.activeSelf && child.gameObject.tag != "DontHideOnIdle")
                 {
                     invisibleObjects.Add(child.gameObject);
                     child.gameObject.SetActive(visible);

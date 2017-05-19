@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     public static void GoHome()
     {
         SceneManager.LoadScene(0);
-        PlatformMonitor.ResetMonitorText();
+     //   PlatformMonitor.ResetMonitorText();
     }
 
     public void Update()

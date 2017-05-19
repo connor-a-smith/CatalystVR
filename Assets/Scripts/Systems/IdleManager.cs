@@ -157,14 +157,14 @@ public class IdleManager : MonoBehaviour
         GameObject plane = GameManager.instance.fadePlane;
 
         MeshRenderer renderer = plane.GetComponent<MeshRenderer>();
-
+        
         Color startColor = renderer.material.color;
         Color endColor = startColor;
 
 
         if (fadeIn)
         {
-
+            
             endColor.a = 1.0f;
 
         }
@@ -172,6 +172,7 @@ public class IdleManager : MonoBehaviour
         {
 
             endColor.a = 0.0f;
+            Debug.LogWarning("Fading out now");
         }
 
         if (startColor.a != endColor.a)
@@ -196,12 +197,12 @@ public class IdleManager : MonoBehaviour
         Debug.Log("Method was called");
         if (GameManager.gameState == GameManager.State.IDLE)
         {
-            Debug.Log("Text should show");
+            Debug.LogWarning("Text should show");
             ScreensaverText.SetActive(true);
         }
         else
         {
-            Debug.Log("Text should not show");
+            Debug.LogWarning("Text should not show");
             ScreensaverText.SetActive(false);
         }
 
