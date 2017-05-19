@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Drawing;
+//using System.Drawing;
 
 public class CAVECam : MonoBehaviour
 {
@@ -33,10 +33,7 @@ public class CAVECam : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("Starting");
-
-        StartCoroutine(LoadCamFromFile("garbage"));
-
+       
     }
 
     private IEnumerator LoadCamFromFile(string camJSONPath)
@@ -248,6 +245,7 @@ public class CAVECam : MonoBehaviour
 
     public IEnumerator GetTexturesFromTif(string tifPath, List<Texture2D> textures)
     {
+        /*
 
         List<Image> images = new List<Image>();
 
@@ -260,6 +258,9 @@ public class CAVECam : MonoBehaviour
         yield return StartCoroutine(LoadImagesAsTextures(images, textures));
 
         StartCoroutine(CacheTextures(textures, tifPath));
+        */
+
+        yield return null;
 
     }
 
@@ -339,6 +340,7 @@ public class CAVECam : MonoBehaviour
         yield return null;
     }
 
+    /*
     public IEnumerator LoadTifPages(string imagePath, List<Image> tifImages)
     {
 
@@ -361,7 +363,8 @@ public class CAVECam : MonoBehaviour
 
         }
     }
-
+    */
+    /*
     public IEnumerator LoadImagesAsTextures(List<Image> images, List<Texture2D> textures)
     {
 
@@ -405,6 +408,7 @@ public class CAVECam : MonoBehaviour
 
         }
     }
+    */
 
 
     public IEnumerator CreateCubemapFromTextures(List<Texture2D> textures, Cubemap newCubemap)

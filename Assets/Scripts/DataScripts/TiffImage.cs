@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
+//using System.Drawing;
+//using System.Drawing.Imaging;
 using System.IO;
 
 public class TiffImage
 {
-
+    /*
     public TiffImage(string fileName)
     {
         this.FileName = fileName;
@@ -18,7 +18,7 @@ public class TiffImage
         get
         {
             // Get the frame dimension list from the image of the file and
-            Image image = Image.FromFile(FileName);
+           // Image image = Image.FromFile(FileName);
 
             // Get the globally unique identifier (GUID)
             Guid frameGuid = image.FrameDimensionsList[0];
@@ -51,5 +51,6 @@ public class TiffImage
             return streamImage;
         }
     }
+    */
 
 }
