@@ -156,11 +156,19 @@ public class BookmarkController : MonoBehaviour {
 
 	void Jump(int index) {
 
+    
+        if (index < 0 || index > bookmarks.Count - 1)
+        {
+
+            Debug.LogWarningFormat("Bookmark index {0} is out of range. There are currently {1} bookmarks.", index, bookmarks.Count);
+
+        }
+
         Bookmark loc = bookmarks[index].GetComponent<Bookmark> ();
 
         if (loc.focusComponent != null)
         {
-            loc.focusComponent.Activate(parentPlatform.gameManager);
+       //     loc.focusComponent.Activate(parentPlatform.gameManager);
         }
 
         if (POIManager.selectedPOI != null) {

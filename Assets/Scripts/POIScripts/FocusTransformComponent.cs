@@ -4,9 +4,13 @@ using System.Collections;
 public class FocusTransformComponent : POIComponent
 {
 
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
-        base.Activate(gameManager);
+        base.Activate(gameManager, associatedSite);
+
+        associatedSite.StartCoroutine(associatedSite.ShowModels());
+
+
         /*
         //Want the raycast cam to look at the POI. So we get the rotation needed for the cam to see it and we apply to the entire platform.
         Quaternion oldRot = Controller.instance.raycastCam.transform.localRotation;
@@ -20,7 +24,7 @@ public class FocusTransformComponent : POIComponent
         
         //
         Controller.playerShip.transform.position = this.transform.position - Controller.instance.raycastCam.transform.forward * 50.0f;
-        */
+        
         //Teleport to location.
 
         CatalystPlatform platform = gameManager.platform;
@@ -35,6 +39,8 @@ public class FocusTransformComponent : POIComponent
 
         GameManager.instance.cameraRig.viewpoint.transform.rotation = oldRot;
         platform.transform.rotation *= ((newRot * Quaternion.Inverse(oldRot)));
+
+    */
 
     }
 

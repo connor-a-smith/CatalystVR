@@ -4,14 +4,25 @@ using UnityEngine;
 
 public abstract class CatalystSiteElement : MonoBehaviour {
 
+    public bool initialized = false;
+
     protected abstract IEnumerator InitializeCoroutine(SerializableCatalystSiteElement siteData);
-    protected abstract IEnumerator ActivateCoroutine(SerializableCatalystSiteElement siteData);
+    protected abstract IEnumerator ActivateCoroutine();
     protected abstract IEnumerator DeactivateCoroutine();
 
-    public Coroutine Activate(SerializableCatalystSiteElement siteData)
+    public Coroutine Activate()
     {
 
-        return StartCoroutine(ActivateCoroutine(siteData));
+        if (initialized == false)
+        {
+
+            Debug.LogError("Catalyst site element has not yet been initialized. Please call the Initialize function first. Aborting");
+            return null;
+
+        }
+
+        Coroutine createdCoroutine = StartCoroutine(ActivateCoroutine());
+        return createdCoroutine;
 
     }
 
@@ -25,7 +36,15 @@ public abstract class CatalystSiteElement : MonoBehaviour {
     public Coroutine Initialize(SerializableCatalystSiteElement siteData)
     {
 
-        return StartCoroutine(InitializeCoroutine(siteData));
+        return StartCoroutine(WaitForInitialize(siteData));
+
+    }
+
+    private IEnumerator WaitForInitialize(SerializableCatalystSiteElement siteData)
+    {
+
+        yield return StartCoroutine(InitializeCoroutine(siteData));
+        initialized = true;
 
     }
 

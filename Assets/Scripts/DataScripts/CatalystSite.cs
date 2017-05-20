@@ -26,10 +26,12 @@ public class CatalystSite : MonoBehaviour
 
     public SerializableCatalystSite siteData;
 
-    CatalystSiteElement activeElement;
+    public CatalystSiteElement activeElement;
 
     public IEnumerator ShowCAVECams()
     {
+
+        DeactivateActiveElement();
 
         if (caveCams == null || caveCams.Count == 0)
         {
@@ -39,19 +41,35 @@ public class CatalystSite : MonoBehaviour
         }
 
         camIndex = 0;
-        caveCams[camIndex].Activate(siteData.caveCams[camIndex]);
+
+        SceneManager.LoadSceneAsync("Buffer Scene");
+
+        if (camIndex < caveCams.Count)
+        {
+
+            caveCams[camIndex].Activate();
+            activeElement = caveCams[camIndex];
+
+        }
+        else
+        {
+            Debug.LogError("No panos loaded. Aborting.");
+        }
 
     }
 
     public IEnumerator HideCAVECams()
     {
 
-        yield return caveCams[camIndex].Deactivate();
+        DeactivateActiveElement();
+        yield return null;
 
     }
 
     public IEnumerator ShowModels()
     {
+
+        DeactivateActiveElement();
 
         if (models == null || models.Count == 0)
         {
@@ -59,6 +77,9 @@ public class CatalystSite : MonoBehaviour
             yield return StartCoroutine(LoadModels());
 
         }
+
+        SceneManager.LoadSceneAsync("Buffer Scene");
+
         modelParent.localPosition = Vector3.zero;
 
         List<Vector3> positions = CommonCatalystMath.GetPositionsOnUnitCircleBySides(models.Count);
@@ -73,8 +94,9 @@ public class CatalystSite : MonoBehaviour
         for (int i = 0; i < models.Count; i++)
         {
 
-            models[i].Activate(siteData.models[i]);
+            models[i].Activate();
             models[i].SetLocalPosition(positions[i]);
+            activeElement = models[i];
 
         }
     }
@@ -90,15 +112,32 @@ public class CatalystSite : MonoBehaviour
         }
     }
 
+    public void DeactivateActiveElement()
+    {
+
+        if (activeElement != null)
+        {
+            activeElement.Deactivate();
+        }
+
+    }
+
     public void CycleCAVECams()
     {
         if (activeElement is CAVECam)
         {
+
+            activeElement.Deactivate();
+
             camIndex++;
             if (camIndex > caveCams.Count)
             {
                 camIndex = 0;
             }
+
+            caveCams[camIndex].Activate();
+            activeElement = caveCams[camIndex];
+
         }
         else
         {
@@ -111,15 +150,24 @@ public class CatalystSite : MonoBehaviour
     public IEnumerator LoadCAVECams()
     {
 
-        caveCams = new List<CAVECam>();
-
-        foreach (SerializableCAVECam camJSON in siteData.caveCams)
+        if (caveCams == null || caveCams.Count == 0)
         {
 
-            CAVECam newCam = new CAVECam();
-            yield return newCam.Activate(camJSON);
-            caveCams.Add(newCam);
+            caveCams = new List<CAVECam>();
 
+            for (int i = 0; i < siteData.panos.Length; i++)
+            {
+
+                SerializableCAVECam camJSON = siteData.panos[i];
+
+                Debug.LogFormat("Initializing pano {0} of {1}", i+1, siteData.panos.Length);
+
+                CAVECam newCam = gameObject.AddComponent<CAVECam>();
+                yield return newCam.Initialize(camJSON);
+
+                caveCams.Add(newCam);
+
+            }
         }
     }
 
@@ -158,7 +206,7 @@ public class SerializableCatalystSite
     public float latitude;
     public float longitude;
 
-    public SerializableCAVECam[] caveCams;
+    public SerializableCAVECam[] panos;
     public SerializableVideo[] videos;
     public SerializableModel[] models;
     public SerializableImage[] images;

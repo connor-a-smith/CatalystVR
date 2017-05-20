@@ -16,11 +16,11 @@ public class PhotoComponent : POIComponent
     [SerializeField]
     private int maximumNumberOfPictures = 24;
 
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
 
         // Calls Activate on parent object.
-        base.Activate(gameManager);
+        base.Activate(gameManager, associatedSite);
 
         gameManager.photoController.LoadPhotos(photoPath);
 

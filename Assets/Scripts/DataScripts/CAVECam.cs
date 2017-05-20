@@ -46,17 +46,10 @@ public class CAVECam : CatalystSiteElement
 
     }
 
-    protected override IEnumerator ActivateCoroutine(SerializableCatalystSiteElement siteData)
+    protected override IEnumerator ActivateCoroutine()
     {
 
         List<Camera> allCams = CAVECameraRig.allCameras;
-
-        if (leftEye == null || rightEye == null)
-        {
-
-            yield return Initialize(siteData);
-
-        }
 
         foreach (Camera cam in allCams)
         {
@@ -85,6 +78,8 @@ public class CAVECam : CatalystSiteElement
 
             }
         }
+
+        yield return null;
     }
 
     protected override IEnumerator DeactivateCoroutine()
@@ -111,61 +106,71 @@ public class CAVECam : CatalystSiteElement
     public IEnumerator LoadCamFromJSON(SerializableCAVECam camData)
     {
 
-        leftEyePath = camData.leftEyePath;
-        rightEyePath = camData.rightEyePath;
+        leftEyePath = camData.left_eye;
+        rightEyePath = camData.right_eye;
 
-        List<Texture2D> leftTextures = new List<Texture2D>();
-        List<Texture2D> rightTextures = new List<Texture2D>();
+        if (!File.Exists(leftEyePath) || !File.Exists(rightEyePath))
+        {
 
-        if (Directory.Exists(GetCacheDirectory(leftEyePath)))
-        {
-            yield return StartCoroutine(GetTexturesFromCache(leftEyePath, leftTextures));
-        }
-        else
-        {
-            yield return StartCoroutine(GetTexturesFromTif(leftEyePath, leftTextures));
+            Debug.LogErrorFormat("Could not load pano: Failed to find left pano {0} or right pano {1}", leftEyePath, rightEyePath);
+
         }
 
-        if (Directory.Exists(GetCacheDirectory(rightEyePath)))
-        {
-            yield return StartCoroutine(GetTexturesFromCache(rightEyePath, rightTextures));
+        else {
+
+            List<Texture2D> leftTextures = new List<Texture2D>();
+            List<Texture2D> rightTextures = new List<Texture2D>();
+
+            if (Directory.Exists(GetCacheDirectory(leftEyePath)))
+            {
+                yield return StartCoroutine(GetTexturesFromCache(leftEyePath, leftTextures));
+            }
+            else
+            {
+                yield return StartCoroutine(GetTexturesFromTif(leftEyePath, leftTextures));
+            }
+
+            if (Directory.Exists(GetCacheDirectory(rightEyePath)))
+            {
+                yield return StartCoroutine(GetTexturesFromCache(rightEyePath, rightTextures));
+            }
+            else
+            {
+                yield return StartCoroutine(GetTexturesFromTif(rightEyePath, rightTextures));
+            }
+
+            int leftTexSize = leftTextures[0].width;
+            int rightTexSize = rightTextures[0].width;
+
+            TextureFormat format = leftTextures[0].format;
+
+            Cubemap leftCubemap = new Cubemap(leftTexSize, format, false);
+            Cubemap rightCubemap = new Cubemap(rightTexSize, format, false);
+
+            Debug.LogFormat("Left Tex Size: {0}", leftTexSize);
+            Debug.LogFormat("Right Tex Size: {0}", rightTexSize);
+
+            yield return StartCoroutine(CreateCubemapFromTextures(leftTextures, leftCubemap));
+            yield return StartCoroutine(CreateCubemapFromTextures(rightTextures, rightCubemap));
+
+            leftCubemap.Apply();
+            rightCubemap.Apply();
+
+            Debug.Log("Created Cubemaps");
+
+            Debug.LogFormat("LEFT CUBEMAP: {0}", leftCubemap);
+
+            yield return null;
+
+            leftEye = new Material(Shader.Find("Skybox/Cubemap"));
+            rightEye = new Material(Shader.Find("Skybox/Cubemap"));
+
+            leftEye.SetTexture(Shader.PropertyToID("_Tex"), leftCubemap);
+            rightEye.SetTexture(Shader.PropertyToID("_Tex"), rightCubemap);
+
+            yield return null;
+
         }
-        else
-        {
-            yield return StartCoroutine(GetTexturesFromTif(rightEyePath, rightTextures));
-        }
-
-        int leftTexSize = leftTextures[0].width;
-        int rightTexSize = rightTextures[0].width;
-
-        TextureFormat format = leftTextures[0].format;
-
-        Cubemap leftCubemap = new Cubemap(leftTexSize, format, false);
-        Cubemap rightCubemap = new Cubemap(rightTexSize, format, false);
-
-        Debug.LogFormat("Left Tex Size: {0}", leftTexSize);
-        Debug.LogFormat("Right Tex Size: {0}", rightTexSize);
-
-        yield return StartCoroutine(CreateCubemapFromTextures(leftTextures, leftCubemap));
-        yield return StartCoroutine(CreateCubemapFromTextures(rightTextures, rightCubemap));
-
-        leftCubemap.Apply();
-        rightCubemap.Apply();
-
-        Debug.Log("Created Cubemaps");
-
-        Debug.LogFormat("LEFT CUBEMAP: {0}", leftCubemap);
-
-        yield return null;
-
-        leftEye = new Material(Shader.Find("Skybox/Cubemap"));
-        rightEye = new Material(Shader.Find("Skybox/Cubemap"));
-
-        leftEye.SetTexture(Shader.PropertyToID("_Tex"), leftCubemap);
-        rightEye.SetTexture(Shader.PropertyToID("_Tex"), rightCubemap);
-
-        yield return null;
-
     }
 
     private IEnumerator LoadCamFromFile(string camJSONPath)
@@ -478,14 +483,14 @@ public class CAVECam : CatalystSiteElement
 public class SerializableCAVECam : SerializableCatalystSiteElement
 {
 
-    public string leftEyePath;
-    public string rightEyePath;
+    public string left_eye;
+    public string right_eye;
 
     public SerializableCAVECam(string leftEye, string rightEye, string description)
     {
 
-        this.leftEyePath = leftEye;
-        this.rightEyePath = rightEye;
+        this.left_eye = leftEye;
+        this.right_eye = rightEye;
         this.description = description;
 
     }

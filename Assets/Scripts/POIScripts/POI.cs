@@ -45,6 +45,7 @@ public class POI : MonoBehaviour
 
     public void Activate(GameManager gameManager)
     {
+
         //If selected another node without deactivating an old one, then deactivate the old one.
         if (POIManager.selectedPOI != null && POIManager.selectedPOI != this)
         {
@@ -57,12 +58,14 @@ public class POI : MonoBehaviour
 
         PlatformMonitor.ActivateMonitorButtons();
 
+        SiteManager.activeSite = associatedSite;
+
         // Tell all components to activate.
         for (int i = 0; i < components.Count; i++)
         {
             if (components[i].activateImmediately)
             {
-                components[i].Activate(gameManager);
+                components[i].Activate(gameManager, associatedSite);
             }
         }
     }

@@ -10,7 +10,7 @@ public class SceneLoaderComponent : POIComponent {
 
         POIManager.selectedPOI.Deactivate();
 
-        StartCoroutine(associatedSite.ShowCAVECams());
+        associatedSite.StartCoroutine(associatedSite.ShowCAVECams());
 
         gameManager.platform.GetComponentInChildren<BookmarkController>().MovePanelDown();
 

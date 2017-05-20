@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ComponentType { Photos, Audio, Videos, Text, Scene, Zoom, Back }
+public enum ComponentType { Photos, Audio, Videos, Text, CAVECam, Model, Back }
 
 public abstract class POIComponent : MonoBehaviour
 {
@@ -28,11 +28,11 @@ public abstract class POIComponent : MonoBehaviour
     /// <summary>
     /// Toggles the current state.
     /// </summary>
-    public void Toggle(GameManager gameManager)
+    public void Toggle(GameManager gameManager, CatalystSite associatedSite)
     {
         if (!activated)
         {
-            Activate(gameManager);
+            Activate(gameManager, associatedSite);
         }
 
         else

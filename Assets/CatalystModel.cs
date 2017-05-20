@@ -26,16 +26,16 @@ public class CatalystModel : CatalystSiteElement {
 
     }
 
-    protected override IEnumerator ActivateCoroutine(SerializableCatalystSiteElement siteData)
+    protected override IEnumerator ActivateCoroutine()
     {
 
-        if (model == null) {
+        if (model != null)
+        {
 
-            yield return Initialize(siteData);
+            model.SetActive(true);
+            yield return null;
 
         }
-
-        model.SetActive(true);
 
     }
 

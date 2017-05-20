@@ -47,6 +47,12 @@ public class MonitorButtonScript : MonoBehaviour
         
     }
 
+    public void Start()
+    {
+
+
+    }
+
     /// <summary>
     /// Handle what happens when a button is selected.
     /// </summary>
@@ -115,15 +121,58 @@ public class MonitorButtonScript : MonoBehaviour
 
         else if (activatable)
         {
-            connectedComponent.Toggle(GetComponentInParent<CatalystPlatform>().gameManager);
+
+            CatalystSite selectedSite = POIManager.selectedPOI.associatedSite;
+
+            if (connectedType == ComponentType.Photos)
+            {
+
+                 //selectedSite.ShowImages
+
+            }
+
+            else if (connectedType == ComponentType.Audio)
+            {
+
+                //TODO: Add audio to JSON
+                
+
+            }
+
+            else if (connectedType == ComponentType.Videos)
+            {
+
+                // Not implemented yet.
+
+            }
+
+            else if (connectedType == ComponentType.Text)
+            {
+
+                PlatformMonitor.SetMonitorText(selectedSite.siteData.description);
+
+            }
+
+            else if (connectedType == ComponentType.CAVECam)
+            {
+
+                selectedSite.StartCoroutine(selectedSite.ShowCAVECams());
+
+            }
+
+            else if (connectedType == ComponentType.Model)
+            {
+
+                selectedSite.StartCoroutine(selectedSite.ShowModels());
+
+
+            }
         }
     }
 
     public void UpdateButtonState()
     {
-        GetComponentFromNode();
-
-        if (connectedComponent || connectedType == ComponentType.Back)
+        if (SiteElementExists())
         {
             showActiveSprite();
             activatable = true;
@@ -133,6 +182,58 @@ public class MonitorButtonScript : MonoBehaviour
         {
             showInactiveSprite();
         }
+    }
+
+    public bool SiteElementExists()
+    {
+
+        CatalystSite selectedSite = POIManager.selectedPOI.associatedSite;
+
+        if (connectedType == ComponentType.Photos)
+        {
+
+            return (selectedSite.siteData.images != null);
+
+        }
+
+        else if (connectedType == ComponentType.Audio)
+        {
+
+            //TODO: Add audio to JSON
+            return false;
+
+        }
+
+        else if (connectedType == ComponentType.Videos)
+        {
+
+            return (selectedSite.siteData.videos != null);
+
+        }
+
+        else if (connectedType == ComponentType.Text)
+        {
+
+            return selectedSite.siteData.description != "";
+
+        }
+
+        else if (connectedType == ComponentType.CAVECam)
+        {
+            return (selectedSite.siteData.panos != null);
+
+        }
+
+        else if (connectedType == ComponentType.Model)
+        {
+
+            return (selectedSite.siteData.models != null);
+
+
+        }
+
+        return false;
+
     }
 
     /// <summary>
@@ -163,13 +264,13 @@ public class MonitorButtonScript : MonoBehaviour
 
         }
 
-        else if (connectedType == ComponentType.Scene)
+        else if (connectedType == ComponentType.CAVECam)
         {
             connectedComponent = POIManager.selectedPOI.GetComponent<SceneLoaderComponent>();
 
         }
 
-        else if (connectedType == ComponentType.Zoom)
+        else if (connectedType == ComponentType.Model)
         {
             connectedComponent = POIManager.selectedPOI.GetComponent<FocusTransformComponent>();
 

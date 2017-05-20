@@ -644,11 +644,7 @@ MonoBehaviour:
   components: []
   POIName: Iraq
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!95 &825786945
 Animator:
   serializedVersion: 3
@@ -772,11 +768,7 @@ MonoBehaviour:
   components: []
   POIName: Geisel Library
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &860299381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Dr Seuss
 --- !u!95 &860299383
 Animator:
   serializedVersion: 3
@@ -1168,11 +1159,7 @@ MonoBehaviour:
   components: []
   POIName: Mar Saba
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1006012464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,7 +1204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Mar Saba
 --- !u!95 &1006012467
 Animator:
   serializedVersion: 3
@@ -1462,11 +1448,7 @@ MonoBehaviour:
   components: []
   POIName: Steno
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1121353394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,7 +1476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Steno
 --- !u!95 &1121353396
 Animator:
   serializedVersion: 3
@@ -1522,7 +1503,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.859381
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1530,23 +1511,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.893748
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_RootOrder
@@ -1558,6 +1539,84 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 268912c50bf115e4e984a369522da1c1,
         type: 3}
+    - target: {fileID: 114000013062462160, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: CAVE Cams
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013062462160, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011958682236, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013356309258, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010615767062, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: Images
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014076405692, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: Videos
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011503513050, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011483226268, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: 3D Models
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013356309258, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011958682236, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012108336846, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013383700370, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
+      propertyPath: m_Name
+      value: 3D Model Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012108336846, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011599924380, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114049909592261452, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: maxTiltAngle
+      value: 89
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
   m_IsPrefabParent: 0
@@ -1728,11 +1787,7 @@ MonoBehaviour:
   components: []
   POIName: Stone Bear
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1186613551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,7 +1816,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Stone Bear
 --- !u!95 &1186613553
 Animator:
   serializedVersion: 3
@@ -1946,11 +2000,7 @@ MonoBehaviour:
   components: []
   POIName: Mada'in Saleh
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1421881876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1979,7 +2029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Madain Saleh Tomb
 --- !u!95 &1421881878
 Animator:
   serializedVersion: 3
@@ -2120,14 +2169,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1509086082}
-  m_LocalRotation: {x: -0, y: -0.54970634, z: -0, w: 0.835358}
-  m_LocalPosition: {x: -0.00009199103, y: 0, z: 399.9}
+  m_LocalRotation: {x: -0, y: -0.9922098, z: -0, w: 0.124578476}
+  m_LocalPosition: {x: -0.0001415736, y: 0, z: 399.9}
   m_LocalScale: {x: 5.6108775, y: 5.610879, z: 5.610885}
   m_Children:
   - {fileID: 1063659235}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -66.694, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -165.68701, z: 0}
 --- !u!1 &1510144035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,11 +2365,7 @@ MonoBehaviour:
   components: []
   POIName: Copper Mine
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1723999974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,7 +2394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Copper Mine
 --- !u!95 &1723999976
 Animator:
   serializedVersion: 3
@@ -2473,11 +2517,7 @@ MonoBehaviour:
   components: []
   POIName: Al-Samlagi Dam
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1735985692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2506,7 +2546,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Al-Samlagi Dam
 --- !u!95 &1735985694
 Animator:
   serializedVersion: 3
@@ -2647,11 +2686,7 @@ MonoBehaviour:
   components: []
   POIName: Melbourne
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1765595050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2679,7 +2714,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Botanical Garden
 --- !u!95 &1765595052
 Animator:
   serializedVersion: 3
@@ -2820,11 +2854,7 @@ MonoBehaviour:
   components: []
   POIName: Ushaiger
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1772511467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,7 +2883,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Ushaiger
 --- !u!95 &1772511469
 Animator:
   serializedVersion: 3
@@ -3039,11 +3068,7 @@ MonoBehaviour:
   components: []
   POIName: Steno
   labelSpawnHeight: 1.5
-  associatedSite:
-    name: 
-    description: 
-    latitude: 0
-    longitude: 0
+  associatedSite: {fileID: 0}
 --- !u!114 &1974370953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3071,7 +3096,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateImmediately: 0
-  sceneName: Steno
 --- !u!95 &1974370955
 Animator:
   serializedVersion: 3

@@ -104,6 +104,8 @@ public class GameManager : MonoBehaviour
 
     public static void GoHome()
     {
+        SiteManager.activeSite.DeactivateActiveElement();
+        SiteManager.activeSite = null;
         SceneManager.LoadScene(0);
         PlatformMonitor.ResetMonitorText();
     }

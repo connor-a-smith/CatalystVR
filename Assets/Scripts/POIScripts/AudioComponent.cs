@@ -6,10 +6,10 @@ public class AudioComponent : POIComponent
 {
     public AudioClip soundClip;
 
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
 
-        base.Activate(gameManager);
+        base.Activate(gameManager, associatedSite);
 
         AudioSource source = GameManager.monitor.GetComponentInChildren<AudioSource>();
         source.clip = soundClip;

@@ -6,9 +6,9 @@ public class TextComponent : POIComponent {
 
     public string sentence;
 
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
-        base.Activate(gameManager);
+        base.Activate(gameManager, associatedSite);
 
         PlatformMonitor.SetMonitorText(sentence);
     }

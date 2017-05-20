@@ -13,7 +13,7 @@ public class MonitorButtonDeselectScript : POIComponent {
 	
 	}
 
-    public override void Activate(GameManager gameManager)
+    public override void Activate(GameManager gameManager, CatalystSite associatedSite)
     {
         //Does not need to worry about base.activate, as soon as this component is activated, the entire POI is deactivated.
         //base.Activate();

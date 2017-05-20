@@ -9,6 +9,16 @@ public class SiteManager : MonoBehaviour {
     public List<CatalystSite> sites;
     private GameManager gameManager;
 
+    public static CatalystSite activeSite;
+
+    public void Update()
+    {
+
+        Debug.LogFormat("Active Site {0}", activeSite);
+
+
+    }
+
     public void LoadSites(string dataPath)
     {
         gameManager = GetComponentInParent<GameManager>();
@@ -47,9 +57,12 @@ public class SiteManager : MonoBehaviour {
             foreach (SerializableCatalystSite site in siteData.sites)
             {
 
-                CatalystSite newSite = gameObject.AddComponent<CatalystSite>();
+                GameObject newSiteObject = new GameObject();
+                newSiteObject.transform.parent = this.transform;
+                CatalystSite newSite = newSiteObject.AddComponent<CatalystSite>();
                 newSite.siteData = site;
                 sites.Add(newSite);
+                newSiteObject.name = newSite.siteName;
 
             }
         }
@@ -78,11 +91,6 @@ public class SiteManager : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     [System.Serializable]
     private class SerializableCatalystSites
     {
