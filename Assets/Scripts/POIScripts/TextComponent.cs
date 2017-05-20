@@ -17,7 +17,7 @@ public class TextComponent : POIComponent {
     {
         base.Deactivate();
 
-        PlatformMonitor.ResetMonitorText();
+        //PlatformMonitor.ResetMonitorText();
 
     }
 }

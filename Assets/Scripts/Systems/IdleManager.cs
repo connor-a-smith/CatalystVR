@@ -197,7 +197,7 @@ public class IdleManager : MonoBehaviour
         Debug.Log("Method was called");
         if (GameManager.gameState == GameManager.State.IDLE)
         {
-            Debug.LogWarning("Text should show");
+            Debug.Log("Text should show");
             ScreensaverText.SetActive(true);
         }
         else

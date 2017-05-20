@@ -20,6 +20,8 @@ public class POIManager : MonoBehaviour {
     public Material highlightedPOIMaterialEditor;
     public Material selectedPOIMaterialEditor;
 
+    public GameObject submenuRect;
+
     private GameManager gameManager;
 
     private static POIManager instance;
@@ -89,7 +91,7 @@ public class POIManager : MonoBehaviour {
         {
 
             selectedPOI.Deactivate();
-            //BookmarkController.submenuRect.SetActive(false);
+            submenuRect.SetActive(false);
 
         }
 

@@ -43,6 +43,8 @@ public class CatalystPlatform : MonoBehaviour
 
             DontDestroyOnLoad(topLevelParent);
 
+            GetComponentInChildren<PlatformMonitor>().SetupMonitor();
+
         }
     }
 

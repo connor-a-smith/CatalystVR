@@ -16,11 +16,7 @@ public class PlatformMonitor : MonoBehaviour {
     private void Awake()
     {
 
-        monitorButtons = GetComponentsInChildren<MonitorButtonScript>(true);
 
-        monitorText = GetComponentInChildren<PlatformInfoText>();
-
-        DeactivateMonitorButtons();
 
     }
 
@@ -30,6 +26,16 @@ public class PlatformMonitor : MonoBehaviour {
         SetMonitorText(startText);
 
 	}
+
+    public void SetupMonitor()
+    {
+
+        monitorButtons = GetComponentsInChildren<MonitorButtonScript>(true);
+
+        monitorText = GetComponentInChildren<PlatformInfoText>();
+
+        DeactivateMonitorButtons();
+    }
 
     public void Update()
     {
