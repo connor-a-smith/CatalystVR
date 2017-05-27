@@ -147,6 +147,21 @@ public class CatalystSite : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+
+        if (GamepadInput.GetDown(GamepadInput.InputOption.A_BUTTON))
+        {
+
+            if (activeElement is CAVECam)
+            {
+
+                CycleCAVECams();
+
+            }
+        }
+    }
+
     public IEnumerator LoadCAVECams()
     {
 

@@ -102,12 +102,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void GoHome()
+    public void GoHome()
     {
         SiteManager.activeSite.DeactivateActiveElement();
         SiteManager.activeSite = null;
         SceneManager.LoadScene(0);
         PlatformMonitor.ResetMonitorText();
+
+        SiteManager siteManager = GetComponentInChildren<SiteManager>();
+
+        siteManager.StartCoroutine(siteManager.PlacePOIsWhenReady());
+
     }
 
     public void Update()

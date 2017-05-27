@@ -234,7 +234,7 @@ public class BookmarkController : MonoBehaviour {
 
     }
 
-    public void UpdateBookmarks(List<POI> POIList)
+    public void RefreshBookmarks()
     {
 
         if (this != null)
@@ -248,7 +248,7 @@ public class BookmarkController : MonoBehaviour {
 
             float panelHeight = panelRect.height;
 
-            float buttonHeight = panelHeight / POIList.Count;
+            float buttonHeight = panelHeight / POIManager.POIList.Count;
 
             float buttonPadding = buttonHeight / 4.0f;
 
@@ -256,7 +256,7 @@ public class BookmarkController : MonoBehaviour {
 
             float heightPilot = panelRect.yMax - (buttonHeight / 2);
 
-            for (int i = 0; i < POIList.Count; i++)
+            for (int i = 0; i < POIManager.POIList.Count; i++)
             {
 
                 panelPositions.Add(new Vector3(0.0f, heightPilot, 0.0f));
@@ -266,7 +266,7 @@ public class BookmarkController : MonoBehaviour {
 
             }
 
-            for (int i = 0; i < POIList.Count; i++)
+            for (int i = 0; i < POIManager.POIList.Count; i++)
             {
 
                 GameObject newPanel = GameObject.Instantiate(bookmarkPrefab, panelPositions[i], Quaternion.identity, transform) as GameObject;
@@ -278,11 +278,11 @@ public class BookmarkController : MonoBehaviour {
 
                 newTransform.localPosition = panelPositions[i];
 
-                newPanel.name = POIList[i].POIName;
+                newPanel.name = POIManager.POIList[i].POIName;
 
                 Text panelText = newPanel.GetComponentInChildren<Text>();
 
-                panelText.text = POIList[i].POIName;
+                panelText.text = POIManager.POIList[i].POIName;
 
                 Image childImage = newTransform.GetComponentInChildren<Image>();
                 RectTransform imageTransform = childImage.GetComponent<RectTransform>();
@@ -291,8 +291,8 @@ public class BookmarkController : MonoBehaviour {
                 sizeDelta.y = (buttonHeight * (1.0f / imageTransform.localScale.y));
 
                 Bookmark newBookmark = newPanel.GetComponentInChildren<Bookmark>();
-                newBookmark.POI = POIList[i];
-                newBookmark.focusComponent = POIList[i].GetComponentInChildren<FocusTransformComponent>();
+                newBookmark.POI = POIManager.POIList[i];
+                newBookmark.focusComponent = POIManager.POIList[i].GetComponentInChildren<FocusTransformComponent>();
 
                 bookmarks.Add(newBookmark);
 

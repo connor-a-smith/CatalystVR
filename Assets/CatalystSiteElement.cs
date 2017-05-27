@@ -6,6 +6,10 @@ public abstract class CatalystSiteElement : MonoBehaviour {
 
     public bool initialized = false;
 
+    public int id;
+    public string name;
+    public string description;
+
     protected abstract IEnumerator InitializeCoroutine(SerializableCatalystSiteElement siteData);
     protected abstract IEnumerator ActivateCoroutine();
     protected abstract IEnumerator DeactivateCoroutine();
@@ -22,6 +26,9 @@ public abstract class CatalystSiteElement : MonoBehaviour {
         }
 
         Coroutine createdCoroutine = StartCoroutine(ActivateCoroutine());
+
+        PlatformMonitor.SetMonitorText(description);
+
         return createdCoroutine;
 
     }
@@ -35,6 +42,10 @@ public abstract class CatalystSiteElement : MonoBehaviour {
 
     public Coroutine Initialize(SerializableCatalystSiteElement siteData)
     {
+
+        name = siteData.name;
+        description = siteData.description;
+        id = siteData.id;
 
         return StartCoroutine(WaitForInitialize(siteData));
 

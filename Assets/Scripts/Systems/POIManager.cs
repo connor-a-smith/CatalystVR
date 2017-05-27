@@ -106,7 +106,7 @@ public class POIManager : MonoBehaviour {
 
         }
     }
-
+   
     public POI CreateNewPOI(CatalystSite site)
     {
 
@@ -129,8 +129,6 @@ public class POIManager : MonoBehaviour {
         newPOI.associatedSite = site;
 
         POIList.Add(newPOI);
-
-        bookmarks.UpdateBookmarks(POIList);
 
         return newPOI;
     }

@@ -28,7 +28,6 @@ public class CatalystEarth : MonoBehaviour {
         CalculateRadius();
         earthTransform = this.transform;
 
-
     }
 
     // Use this for initialization
@@ -52,7 +51,6 @@ public class CatalystEarth : MonoBehaviour {
     {
 
         return Get3DPositionFromLatLon(new LatLon(latitude, longitude));
-
 
     }
 

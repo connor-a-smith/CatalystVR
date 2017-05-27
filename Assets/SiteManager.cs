@@ -14,8 +14,6 @@ public class SiteManager : MonoBehaviour {
     public void Update()
     {
 
-        Debug.LogFormat("Active Site {0}", activeSite);
-
 
     }
 
@@ -74,6 +72,14 @@ public class SiteManager : MonoBehaviour {
 
         Debug.LogFormat("Loaded {0} sites", sites.Count);
 
+        CreatePOIs();
+
+
+    }
+
+    public void CreatePOIs()
+    {
+
         POIManager poiManager = gameManager.GetComponentInChildren<POIManager>();
 
         foreach (CatalystSite site in sites)
@@ -82,6 +88,24 @@ public class SiteManager : MonoBehaviour {
             poiManager.CreateNewPOI(site);
 
         }
+
+        gameManager.user.GetComponentInChildren<BookmarkController>().RefreshBookmarks();
+
+
+    }
+
+    public IEnumerator PlacePOIsWhenReady()
+    {
+
+        while (CatalystEarth.earthTransform == null)
+        {
+            yield return null;
+        }
+
+        CreatePOIs();
+
+
+
     }
 
         // Use this for initialization
