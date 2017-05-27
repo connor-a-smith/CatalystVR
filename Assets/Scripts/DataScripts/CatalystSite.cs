@@ -130,7 +130,7 @@ public class CatalystSite : MonoBehaviour
             activeElement.Deactivate();
 
             camIndex++;
-            if (camIndex > caveCams.Count)
+            if (camIndex > caveCams.Count-1)
             {
                 camIndex = 0;
             }
