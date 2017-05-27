@@ -16,7 +16,7 @@ public class IdleManager : MonoBehaviour
 
     [SerializeField] private float idleRotationAnglePerSecond = 5.0f;
 
-    public GameObject ScreensaverText;
+    public ScreensaverPlane myScreensaverPlane;
 
     private GameManager gameManager;
 
@@ -126,6 +126,8 @@ public class IdleManager : MonoBehaviour
 
             SceneManager.LoadScene(sceneIndex);
 
+            myScreensaverPlane.changePosition();
+
             yield return StartCoroutine(FadePlane(false, fadeTime));
 
             yield return new WaitForSeconds(timeBetweenSceneCycles);
@@ -192,18 +194,19 @@ public class IdleManager : MonoBehaviour
         }
     }
 
+    
     void activateText()
     {
         Debug.Log("Method was called");
         if (GameManager.gameState == GameManager.State.IDLE)
         {
-            Debug.Log("Text should show");
-            ScreensaverText.SetActive(true);
+            Debug.Log("Text should show IDLE MANAGER");
+            myScreensaverPlane.gameObject.SetActive(true);
         }
         else
         {
             Debug.LogWarning("Text should not show");
-            ScreensaverText.SetActive(false);
+            myScreensaverPlane.gameObject.SetActive(false);
         }
 
     }
