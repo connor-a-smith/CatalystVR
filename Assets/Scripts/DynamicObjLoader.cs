@@ -5,11 +5,22 @@ using System.IO;
 
 public class DynamicObjLoader : MonoBehaviour {
 
-    public void Start()
+
+    private enum FaceMode
     {
-        LoadOBJ("CAVEkiosk_SiteData/cube.obj");
+
+        None,
+        V,
+        VT,
+        VN,
+        VTN,
+
     }
 
+    public void Start()
+    {
+       // LoadOBJ("CAVEkiosk_SiteData/cube.obj");
+    }
 
     public static GameObject LoadOBJ(string filePath, Transform parent = null)
     {
@@ -21,12 +32,14 @@ public class DynamicObjLoader : MonoBehaviour {
         List<int> faces = new List<int>();
         List<Vector2> texCoords = new List<Vector2>();
 
+        FaceMode faceMode = FaceMode.None;
+
         string[] objText = File.ReadAllLines(filePath);
 
         foreach (string line in objText)
         {
 
-            string[] lineVals = line.Split(' ', '/');
+            string[] lineVals = line.Split(' ');
 
 
             List<string> parsedLineVals = new List<string>();
@@ -59,11 +72,54 @@ public class DynamicObjLoader : MonoBehaviour {
                     break;
 
                 case "f":
-                    
+
+                    if (faceMode == FaceMode.None)
+                    {
+
+                        faceMode = FaceMode.V;
+                        int slashCount = 0;
+
+                        for (int i = 0; i < lineVals[1].Length; i++)
+                        {
+
+                            char lineChar = lineVals[1][i];
+
+                            if (lineChar == '/')
+                            {
+
+                                slashCount++;
+
+                                // Two Slashes
+                                if (i+1 < lineVals[1].Length - 1 && lineVals[1][i + 1] == '/')
+                                {
+
+                                    faceMode = FaceMode.VN;
+                                    break;
+
+                                }
+                                else if (slashCount > 1)
+                                {
+
+                                    faceMode = FaceMode.VTN;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (faceMode == FaceMode.V && slashCount > 0)
+                        {
+
+                            faceMode = FaceMode.VT;
+
+                        }
+                    }
+
+                   // string[] 
+
                     for (int i = 1; i < lineVals.Length; i++)
                     {
 
-                        Debug.Log("Face Val: " + lineVals[i]);
+                        Debug.Log("Face Val: (" + lineVals[i] + ")");
                         faces.Add(int.Parse(lineVals[i]));
 
                     }
@@ -142,8 +198,6 @@ public class DynamicObjLoader : MonoBehaviour {
         for (int i = 0; i < indices.Count; i++)
         {
 
-            Debug.Log("Index Number: " + indices[i]);
-
             // Unity's vertex max is 65k vertices. Every time we hit that, create a new mesh.
             if (activeVertices.Count >= (65000-3))
             {
@@ -169,11 +223,14 @@ public class DynamicObjLoader : MonoBehaviour {
             // This will be the new index of the vertex
             int newIndex = 0;
 
+            Debug.LogFormat("Original Index Is {0}. Vertices Count is {1} and normals count is {2}", originalIndex, vertices.Count, normals.Count);
+
             // If we've already encountered this index, no need to create a new Vertex
             if (dict.ContainsKey(originalIndex))
             {
 
                 // Grab the new, updated index
+                Debug.Log("EXISTS");
                 newIndex = dict[originalIndex];
 
             }
@@ -182,15 +239,10 @@ public class DynamicObjLoader : MonoBehaviour {
             else
             {
 
-                dict.Add(originalIndex, newIndex);
-
-                Debug.LogFormat("Original Index Is {0}. Vertices Count is {1} and normals count is {2}", originalIndex, vertices.Count, normals.Count);
-
                 if (originalIndex <= vertices.Count)
                 {
                     Vector3 newVertex = vertices[originalIndex-1];
                     activeVertices.Add(newVertex);
-                    Debug.Log("adding vertex number " + activeVertices.Count);
                 }
 
                 if (originalIndex <= normals.Count)
@@ -206,11 +258,19 @@ public class DynamicObjLoader : MonoBehaviour {
                 }
 
                 newIndex = activeVertices.Count;
+                dict.Add(originalIndex, newIndex);
+
+                if (newIndex <= 0 || newIndex > vertices.Count)
+                {
+                    Debug.LogError("ERROR INDEX OUT OF BOUNDS");
+                }
+
 
             }
 
             // Save the new index in our list of faces.
-            activeIndices.Add(newIndex);
+            activeIndices.Add(newIndex-1);
+            Debug.Log("Adding index " + newIndex);
 
         }
 
@@ -227,6 +287,9 @@ public class DynamicObjLoader : MonoBehaviour {
         }
 
         activeMesh.SetIndices(activeIndices.ToArray(), MeshTopology.Triangles, 0);
+        activeMesh.RecalculateBounds();
+        activeMesh.RecalculateNormals();
+
         meshes.Add(activeMesh);
 
         return meshes;

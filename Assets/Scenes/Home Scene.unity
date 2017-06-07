@@ -517,6 +517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748611542}
   - component: {fileID: 748611543}
+  - component: {fileID: 748611544}
   m_Layer: 0
   m_Name: SiteManager
   m_TagString: Untagged
@@ -549,6 +550,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sites: []
+--- !u!114 &748611544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748611541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1366542118, guid: 637190b257a314b9595a86e2318b4c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoints: 2147483647
+  combineMultipleGroups: 1
+  useSubmeshesWhenCombining: 1
+  useFileNameAsObjectName: 0
+  computeTangents: 0
+  useSuppliedNormals: 0
+  overrideDiffuse: 0
+  overrideSpecular: 0
+  overrideAmbient: 0
+  suppressWarnings: 0
+  useMTLFallback: 0
+  autoCenterOnOrigin: 0
+  scaleFactor: {x: 1, y: 1, z: 1}
+  objRotation: {x: 0, y: 0, z: 0}
+  objPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &825786937
 GameObject:
   m_ObjectHideFlags: 0

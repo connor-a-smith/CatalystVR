@@ -78,7 +78,7 @@ public class CatalystSite : MonoBehaviour
 
         }
 
-        SceneManager.LoadSceneAsync("Buffer Scene");
+       // SceneManager.LoadSceneAsync("Buffer Scene");
 
         modelParent.localPosition = Vector3.zero;
 
@@ -97,6 +97,7 @@ public class CatalystSite : MonoBehaviour
             models[i].Activate();
             models[i].SetLocalPosition(positions[i]);
             activeElement = models[i];
+            models[i].model.SetActive(true);
 
         }
     }
@@ -193,7 +194,7 @@ public class CatalystSite : MonoBehaviour
 
         modelParent = new GameObject().transform;
 
-        modelParent.name = siteData.name + " - Images";
+        modelParent.name = siteData.name + " - Models";
 
         modelParent.parent = GameManager.instance.cameraRig.viewpoint.transform;
 
@@ -203,7 +204,7 @@ public class CatalystSite : MonoBehaviour
         foreach (SerializableModel modelData in siteData.models)
         {
 
-            CatalystModel newModel = new CatalystModel();
+            CatalystModel newModel = gameObject.AddComponent<CatalystModel>();
             yield return newModel.Initialize(modelData);
             newModel.transform.parent = modelParent;
 

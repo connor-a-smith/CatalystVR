@@ -86,14 +86,41 @@ public class CatalystModel : CatalystSiteElement {
 
             yield return null;
         }
+        else if (Path.GetExtension(path) == ".obj")
+        {
+
+            Debug.LogWarning("LOADING OBJ");
+
+            Material defaultMat = new Material(Shader.Find("Standard"));
+            GameObject[] objects = ObjReader.use.ConvertFile(path, true, defaultMat);
+
+            model = new GameObject(modelData.name);
+            model.transform.parent = this.transform;
+
+            foreach (GameObject obj in objects)
+            {
+
+                obj.transform.parent = model.transform;
+
+            }
+
+            Debug.LogWarning("RESULT: " + objects[0]);
+
+        }
         else
         {
 
             Debug.LogError("Failed to load model, unsupported file extension: " + path);
-
+            yield break;
         }
 
-        model.SetActive(false);
+        if (model == null)
+        {
+            yield break;
+        }
+
+       // model.SetActive(false);
+
    }
 
     private IEnumerator LoadTextures(GameObject go, string originalUrl)
