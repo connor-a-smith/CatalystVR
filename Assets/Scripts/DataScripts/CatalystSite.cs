@@ -192,7 +192,9 @@ public class CatalystSite : MonoBehaviour
 
         models = new List<CatalystModel>();
 
-        modelParent = new GameObject().transform;
+        GameObject modelParentObj = new GameObject();
+
+        modelParent = modelParentObj.transform;
 
         modelParent.name = siteData.name + " - Models";
 

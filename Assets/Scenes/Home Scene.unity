@@ -558,12 +558,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 748611541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1366542118, guid: 637190b257a314b9595a86e2318b4c14, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b482ceec9d344077b9a299ce8e1be10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPoints: 2147483647
-  combineMultipleGroups: 1
-  useSubmeshesWhenCombining: 1
+  maxPoints: 30000
+  combineMultipleGroups: 0
+  useSubmeshesWhenCombining: 0
   useFileNameAsObjectName: 0
   computeTangents: 0
   useSuppliedNormals: 0

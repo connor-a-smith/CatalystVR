@@ -361,6 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38041aa4b5d948fa8586196e391d981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objFileName: 5069675f6f626a2e747874
+  objFileName: Pig_obj.txt
   standardMaterial: {fileID: 2100000, guid: b4449ebcada0548a18fb60de2431cd5c, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 952e1d10efa1449c0a8dbbb1e8c02824, type: 2}

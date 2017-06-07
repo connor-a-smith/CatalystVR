@@ -92,6 +92,7 @@ public class CatalystModel : CatalystSiteElement {
             Debug.LogWarning("LOADING OBJ");
 
             Material defaultMat = new Material(Shader.Find("Standard"));
+            PreprocessObjFile(path);
             GameObject[] objects = ObjReader.use.ConvertFile(path, true, defaultMat);
 
             model = new GameObject(modelData.name);
@@ -122,6 +123,66 @@ public class CatalystModel : CatalystSiteElement {
        // model.SetActive(false);
 
    }
+
+    private void PreprocessObjFile(string filepath)
+    {
+        Debug.Log("Processing file " + filepath);
+
+        string[] file = File.ReadAllLines(filepath);
+        HashSet<string> seenIndices = new HashSet<string>();
+
+        List<string> finalLines = new List<string>();
+
+        int groupNum = 0;
+
+        for (int lineIndex = 0; lineIndex < file.Length; lineIndex++)
+        {
+
+
+            string line = file[lineIndex];
+
+            finalLines.Add(line);
+
+            string[] lineValues = line.Split(' ', '/');
+
+            if (lineValues[0] == "f")
+            {
+
+                for (int i = 1; i < lineValues.Length; i++)
+                {
+                    string index = lineValues[i];
+                    if (!seenIndices.Contains(index))
+                    {
+
+                        seenIndices.Add(index);
+
+                    }
+
+                    if (seenIndices.Count >= ObjReader.use.maxPoints)
+                    {
+
+                        if (lineIndex < file.Length - 1 && file[lineIndex + 1][0] != 'g')
+                        {
+                            finalLines.Add("g group" + groupNum++);
+                            seenIndices.Clear();
+                        }
+
+                    }
+                }
+            }
+            else if (lineValues[0] == "g")
+            {
+
+                seenIndices.Clear();
+
+            }
+        }
+
+        File.WriteAllLines(filepath, finalLines.ToArray());
+
+
+
+    }
 
     private IEnumerator LoadTextures(GameObject go, string originalUrl)
     {

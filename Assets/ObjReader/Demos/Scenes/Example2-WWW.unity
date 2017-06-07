@@ -361,5 +361,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb89cfdc3cfb4c97967cbf854efb888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objFileName: 687474703a2f2f7777772e737461727363656e65736f6674776172652e636f6d2f6f626a746573742f53706f742e6f626a
+  objFileName: http://www.starscenesoftware.com/objtest/Spot.obj
   standardMaterial: {fileID: 2100000, guid: 3534237fb47ab4ef092dd24b64a28c06, type: 2}
