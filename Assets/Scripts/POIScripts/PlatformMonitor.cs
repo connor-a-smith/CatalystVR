@@ -85,6 +85,10 @@ public class PlatformMonitor : MonoBehaviour {
         {
             monitorText.SetText(text);
         }
+        else
+        {
+            Debug.LogError("Could not set monitor text, text is null");
+        }
     }
 
     public static void ResetMonitorText()

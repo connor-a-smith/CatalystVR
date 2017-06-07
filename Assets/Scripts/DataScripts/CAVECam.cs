@@ -120,7 +120,9 @@ public class CAVECam : CatalystSiteElement
 
             List<Texture2D> leftTextures = new List<Texture2D>();
             List<Texture2D> rightTextures = new List<Texture2D>();
+            
 
+            // Stage 1: Load Textures
             if (Directory.Exists(GetCacheDirectory(leftEyePath)))
             {
                 yield return StartCoroutine(GetTexturesFromCache(leftEyePath, leftTextures));
@@ -144,6 +146,7 @@ public class CAVECam : CatalystSiteElement
 
             TextureFormat format = leftTextures[0].format;
 
+            // Stage 2: Create Cubemaps
             Cubemap leftCubemap = new Cubemap(leftTexSize, format, false);
             Cubemap rightCubemap = new Cubemap(rightTexSize, format, false);
 
@@ -162,6 +165,7 @@ public class CAVECam : CatalystSiteElement
 
             yield return null;
 
+            // Stage 3: Apply textures
             leftEye = new Material(Shader.Find("Skybox/Cubemap"));
             rightEye = new Material(Shader.Find("Skybox/Cubemap"));
 
@@ -267,6 +271,10 @@ public class CAVECam : CatalystSiteElement
             {
 
                 Debug.Log("Loading Texture " + i + " from cache");
+
+                string statusText = string.Format("Loading textures: \n{0} of {1}", i+1, 6);
+
+                PlatformMonitor.SetMonitorText(statusText);
 
                 string fullPath = Path.GetFullPath(facePaths[i]);
 
@@ -400,6 +408,10 @@ public class CAVECam : CatalystSiteElement
         for (int i = 0; i < loadedTiff.PageCount; i++)
         {
 
+            string statusText = string.Format("Loading tif pages: \n{0} of {1}", i+1, loadedTiff.PageCount);
+
+            PlatformMonitor.SetMonitorText(statusText);
+
             tifImages.Add(loadedTiff.GetTiffSpecificPage(i));
 
             Debug.LogFormat("Loaded page {0} of the tif {1}", i, imagePath);
@@ -416,6 +428,10 @@ public class CAVECam : CatalystSiteElement
 
         foreach (Image img in images)
         {
+
+            string statusText = string.Format("Loading textures: \n{0} of {1}", pageNum+1, images.Count);
+
+            PlatformMonitor.SetMonitorText(statusText);
 
             Bitmap bitmap = new Bitmap(img);
 

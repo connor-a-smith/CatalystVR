@@ -97,21 +97,26 @@ public class BookmarkController : MonoBehaviour {
 	public void MovePanelUp() {
         //for the initial idle animation
 
-        ChangeColor(0, selectionColor);
+        if (bookmarks.Count > 0)
+        {
 
-        float animationStartTime = 0.0f;
-	
-        if (platformAnim.GetCurrentAnimatorStateInfo(0).IsName("BookmarkFally")) {
+            ChangeColor(0, selectionColor);
 
-			float playbackTime = Mathf.Min(1.0f, platformAnim.GetCurrentAnimatorStateInfo (0).normalizedTime); //never go higher than 1
-			platformAnim.StopPlayback ();
-			animationStartTime = 1.0f - playbackTime;
-		}
+            float animationStartTime = 0.0f;
 
-       platformAnim.Play("BookmarkFloaty", 0, animationStartTime);
+            if (platformAnim.GetCurrentAnimatorStateInfo(0).IsName("BookmarkFally"))
+            {
 
-        bookmarkPanelActive = true;
+                float playbackTime = Mathf.Min(1.0f, platformAnim.GetCurrentAnimatorStateInfo(0).normalizedTime); //never go higher than 1
+                platformAnim.StopPlayback();
+                animationStartTime = 1.0f - playbackTime;
+            }
 
+            platformAnim.Play("BookmarkFloaty", 0, animationStartTime);
+
+            bookmarkPanelActive = true;
+
+        }
     }
 
     /// <summary>

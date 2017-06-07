@@ -77,7 +77,8 @@ public class CatalystModel : CatalystSiteElement {
         {
             string colladaString = File.ReadAllText(path);
             model = ColladaImporter.Import(colladaString);
-
+            LoadTextures(model, colladaString);
+            
             if (model == null)
             {
                 Debug.LogError("Failed to load model from " + path);
@@ -94,6 +95,46 @@ public class CatalystModel : CatalystSiteElement {
 
         model.SetActive(false);
    }
+
+    private IEnumerator LoadTextures(GameObject go, string originalUrl)
+    {
+        string path = originalUrl;
+        int lastSlash = path.LastIndexOf('/', path.Length - 1);
+        if (lastSlash >= 0) path = path.Substring(0, lastSlash + 1);
+        Renderer[] renderers = go.GetComponentsInChildren<Renderer>(true);
+        foreach (Renderer r in renderers)
+        {
+            foreach (Material m in r.materials)
+            {
+                if (m.mainTexture != null)
+                {
+                    Texture2D texture = null;
+                    string texUrl = path + m.mainTexture.name;
+                    yield return StartCoroutine(LoadTexture(texUrl, retval => texture = retval));
+                    if (texture != null)
+                    {
+                        m.mainTexture = texture;
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator LoadTexture(string url, System.Action<Texture2D> result)
+    {
+        WWW www = new WWW(url);
+        yield return www;
+        if (www.error != null)
+        {
+
+            Debug.LogError("Failed to load texture: " + url);
+
+        }
+        else
+        {
+        }
+        result(www.texture);
+    }
 
 
 }
