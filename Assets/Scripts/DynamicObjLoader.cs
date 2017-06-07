@@ -7,11 +7,7 @@ public class DynamicObjLoader : MonoBehaviour {
 
     public void Start()
     {
-
-
-        LoadOBJ("CAVEkiosk_SiteData/EastMound/Catal_East Mound.obj");
-
-
+        LoadOBJ("CAVEkiosk_SiteData/cube.obj");
     }
 
 
@@ -32,16 +28,33 @@ public class DynamicObjLoader : MonoBehaviour {
 
             string[] lineVals = line.Split(' ', '/');
 
+
+            List<string> parsedLineVals = new List<string>();
+
+            foreach (string val in lineVals)
+            {
+                if (!string.IsNullOrEmpty(val) && val != " ")
+                {
+                    parsedLineVals.Add(val);
+                }
+            }
+
+            lineVals = parsedLineVals.ToArray();
+
+            if (lineVals.Length <= 0)
+            {
+                continue;
+            }
             switch (lineVals[0])
             {
 
                 case "v":
-                    Vector3 vertex = new Vector3(float.Parse(lineVals[1]), float.Parse(lineVals[2]), float.Parse(lineVals[2]));
+                    Vector3 vertex = new Vector3(float.Parse(lineVals[1]), float.Parse(lineVals[2]), float.Parse(lineVals[3]));
                     vertices.Add(vertex);
                     break;
 
-                case "n":
-                    Vector3 normal = new Vector3(float.Parse(lineVals[1]), float.Parse(lineVals[2]), float.Parse(lineVals[2]));
+                case "vn":
+                    Vector3 normal = new Vector3(float.Parse(lineVals[1]), float.Parse(lineVals[2]), float.Parse(lineVals[3]));
                     normals.Add(normal);
                     break;
 
@@ -50,6 +63,7 @@ public class DynamicObjLoader : MonoBehaviour {
                     for (int i = 1; i < lineVals.Length; i++)
                     {
 
+                        Debug.Log("Face Val: " + lineVals[i]);
                         faces.Add(int.Parse(lineVals[i]));
 
                     }
@@ -120,13 +134,18 @@ public class DynamicObjLoader : MonoBehaviour {
         List<Vector2> activeTexCoords = new List<Vector2>();
         Dictionary<int, int> dict = new Dictionary<int, int>();
 
-        
+        Debug.Log("Vertices Count: " + vertices.Count);
+
+        Debug.Log("Starting Indices Count: " + indices.Count);
+
         // Iterate through all the face indices
         for (int i = 0; i < indices.Count; i++)
         {
 
+            Debug.Log("Index Number: " + indices[i]);
+
             // Unity's vertex max is 65k vertices. Every time we hit that, create a new mesh.
-            if (activeVertices.Count >= 65000)
+            if (activeVertices.Count >= (65000-3))
             {
 
                 activeMesh.SetVertices(activeVertices);
@@ -163,17 +182,30 @@ public class DynamicObjLoader : MonoBehaviour {
             else
             {
 
-                newIndex = activeVertices.Count;
-
                 dict.Add(originalIndex, newIndex);
 
-                Vector3 newVertex = vertices[originalIndex];
-                Vector3 newNormal = normals[originalIndex];
-                Vector2 newTexCoord = texCoords[originalIndex];
+                Debug.LogFormat("Original Index Is {0}. Vertices Count is {1} and normals count is {2}", originalIndex, vertices.Count, normals.Count);
 
-                activeVertices.Add(newVertex);
-                activeNormals.Add(newNormal);
-                activeTexCoords.Add(newTexCoord);
+                if (originalIndex <= vertices.Count)
+                {
+                    Vector3 newVertex = vertices[originalIndex-1];
+                    activeVertices.Add(newVertex);
+                    Debug.Log("adding vertex number " + activeVertices.Count);
+                }
+
+                if (originalIndex <= normals.Count)
+                {
+                    Vector3 newNormal = normals[originalIndex-1];
+                    activeNormals.Add(newNormal);
+                }
+
+                if (originalIndex <= texCoords.Count)
+                {
+                    Vector2 newTexCoord = texCoords[originalIndex-1];
+                    activeTexCoords.Add(newTexCoord);
+                }
+
+                newIndex = activeVertices.Count;
 
             }
 
@@ -181,6 +213,21 @@ public class DynamicObjLoader : MonoBehaviour {
             activeIndices.Add(newIndex);
 
         }
+
+        activeMesh.SetVertices(activeVertices);
+
+        if (activeVertices.Count > 0)
+        {
+            activeMesh.SetNormals(activeNormals);
+        }
+
+        if (activeTexCoords.Count > 0)
+        {
+            activeMesh.SetUVs(0, activeTexCoords);
+        }
+
+        activeMesh.SetIndices(activeIndices.ToArray(), MeshTopology.Triangles, 0);
+        meshes.Add(activeMesh);
 
         return meshes;
 
