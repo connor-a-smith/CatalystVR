@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &185075359
 Transform:
   m_ObjectHideFlags: 0
@@ -1609,7 +1609,7 @@ Prefab:
     - target: {fileID: 114000013062462160, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_Text
-      value: CAVE Cams
+      value: Panoramas
       objectReference: {fileID: 0}
     - target: {fileID: 114000013062462160, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
@@ -1619,12 +1619,12 @@ Prefab:
     - target: {fileID: 224000011958682236, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 224000013356309258, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -90
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114000010615767062, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
@@ -1644,36 +1644,36 @@ Prefab:
     - target: {fileID: 114000011483226268, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_Text
-      value: 3D Models
+      value: 3D Sites
       objectReference: {fileID: 0}
     - target: {fileID: 224000013356309258, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224000011958682236, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000012108336846, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -30
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 1000013383700370, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_Name
-      value: 3D Model Button
+      value: 3D Sites
       objectReference: {fileID: 0}
     - target: {fileID: 224000012108336846, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000011599924380, guid: 476fdf3d3ff49469ea2292977124dda1,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 30
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4000010041021936, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1683,6 +1683,63 @@ Prefab:
         type: 2}
       propertyPath: maxTiltAngle
       value: 89
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013216655948, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
+      propertyPath: m_Name
+      value: CAVECams
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012139083386, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
+      propertyPath: m_Name
+      value: Artifacts
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013767882438, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
+      propertyPath: m_Name
+      value: Audio Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012103361152, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_Text
+      value: Artifacts
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010790402860, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012122688068, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013846604596, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010251402372, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011357683334, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014021714708, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013091064242, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: connectedType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010790402860, guid: 476fdf3d3ff49469ea2292977124dda1,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 476fdf3d3ff49469ea2292977124dda1, type: 2}
@@ -1702,7 +1759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1158852590
 Transform:
   m_ObjectHideFlags: 0
@@ -1916,7 +1973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1385979066
 Transform:
   m_ObjectHideFlags: 0
@@ -2175,7 +2232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1506068065
 Transform:
   m_ObjectHideFlags: 0
@@ -2229,7 +2286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1509086083
 Transform:
   m_ObjectHideFlags: 0
@@ -2300,7 +2357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1651537066
 Transform:
   m_ObjectHideFlags: 0

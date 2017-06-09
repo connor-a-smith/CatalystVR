@@ -104,8 +104,12 @@ public class GameManager : MonoBehaviour
 
     public void GoHome()
     {
-        SiteManager.activeSite.DeactivateActiveElement();
-        SiteManager.activeSite = null;
+        if (SiteManager.activeSite != null)
+        {
+            SiteManager.activeSite.Deselect();
+
+        }
+
         SceneManager.LoadScene(0);
         PlatformMonitor.ResetMonitorText();
 

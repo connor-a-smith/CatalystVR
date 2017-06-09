@@ -146,7 +146,22 @@ public class CatalystSite : MonoBehaviour
         if (activeElement != null)
         {
             activeElement.Deactivate();
+            activeElement = null;
         }
+    }
+
+    public void Select()
+    {
+
+        SiteManager.activeSite = this;
+
+    }
+
+    public void Deselect()
+    {
+
+        DeactivateActiveElement();
+        SiteManager.activeSite = null;
 
     }
 

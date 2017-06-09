@@ -58,7 +58,7 @@ public class POI : MonoBehaviour
 
         PlatformMonitor.ActivateMonitorButtons();
 
-        SiteManager.activeSite = associatedSite;
+        associatedSite.Select();
 
         // Tell all components to activate.
         for (int i = 0; i < components.Count; i++)

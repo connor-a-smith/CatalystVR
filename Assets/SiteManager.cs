@@ -104,8 +104,6 @@ public class SiteManager : MonoBehaviour {
 
         CreatePOIs();
 
-
-
     }
 
         // Use this for initialization
