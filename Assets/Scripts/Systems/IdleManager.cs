@@ -84,6 +84,10 @@ public class IdleManager : MonoBehaviour
 
         /* Everything after this will only be reached when user inputs something */
 
+        // disables the text when user interrupts the screensaver
+        myScreensaverPlane.gameObject.SetActive(false);
+        //activateText();
+
         // Stop the automatic scene cycling.
         StopCoroutine(cyclingCoroutine);
 

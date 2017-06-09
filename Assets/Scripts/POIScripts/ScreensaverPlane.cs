@@ -17,7 +17,8 @@ public class ScreensaverPlane : MonoBehaviour
     void Start()
     {
 
-       // activateText();
+        // activateText();
+        gameObject.SetActive(false);
 
     }
 

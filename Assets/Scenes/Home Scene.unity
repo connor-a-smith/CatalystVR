@@ -2571,6 +2571,7 @@ MonoBehaviour:
   bookmarkPrefab: {fileID: 1000013807972154, guid: cbbc9e8b70ceefe479219fd057e7ce77,
     type: 2}
   noSelection: 0
+  target: {fileID: 0}
   bookmarks: []
   submenuRect: {fileID: 1997630993}
   panelPositions: []
@@ -2723,7 +2724,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012715246720, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000010693728702, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
       propertyPath: m_IsActive
@@ -2736,6 +2737,14 @@ Prefab:
     - target: {fileID: 4202141354429516, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 432644, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 432644, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000012365131946, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
@@ -2859,6 +2868,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460924124}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &483996214 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 157262, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 2}
+  m_PrefabInternal: {fileID: 459647179}
+--- !u!114 &483996215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 483996214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f69bb7075e8159449586a151631a7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &498967681
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,7 +5329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bookmarks: {fileID: 0}
-  defaultPOIMaterialEditor: {fileID: 2100000, guid: e714ca7b8a616924f80a39b0bd281552,
+  defaultPOIMaterialEditor: {fileID: 2100000, guid: 5d259714e1883b341a1c90fda5d6dd07,
     type: 2}
   highlightedPOIMaterialEditor: {fileID: 0}
   selectedPOIMaterialEditor: {fileID: 2100000, guid: 7b49bcd289d853e4b8f870b6fdd31615,
@@ -5528,7 +5552,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1066664623}
   m_LocalRotation: {x: -0, y: 0.8191521, z: -0, w: -0.5735764}
-  m_LocalPosition: {x: -51.500004, y: -84.3, z: 98.90001}
+  m_LocalPosition: {x: -58.5, y: -91.2, z: 96.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 156626972}
@@ -6847,7 +6871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenSceneCycles: 10
   fadeTime: 2
-  minutesUntilReset: 0.1
+  minutesUntilReset: 2
   idleRotationAnglePerSecond: 4
   myScreensaverPlane: {fileID: 1434820689}
 --- !u!1 &1387703044
@@ -8721,7 +8745,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1833089690}
   m_LocalRotation: {x: 0.7071068, y: -0.0000005584457, z: -0.0000005584457, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.79}
   m_LocalScale: {x: 0.058823533, y: 0.2500001, z: 1}
   m_Children: []
   m_Father: {fileID: 1295399845}
@@ -8729,7 +8753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.100034386}
+  m_AnchoredPosition: {x: 0.87, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833089692
@@ -9385,14 +9409,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1997630993}
-  m_LocalRotation: {x: -0, y: 0.0038119252, z: -0, w: -0.9999927}
-  m_LocalPosition: {x: 22.127586, y: 17.189655, z: -0.15639512}
-  m_LocalScale: {x: 21.622244, y: 4.1188736, z: 1.1280729}
+  m_LocalRotation: {x: -0.0360136, y: 0.014531073, z: 0.00024911572, w: -0.99924564}
+  m_LocalPosition: {x: 23.5, y: 17.2, z: -0.3}
+  m_LocalScale: {x: 24.484995, y: 4.664207, z: 0.024750346}
   m_Children:
   - {fileID: 1363913021}
   m_Father: {fileID: 414064888}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -20.437, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.1270003, y: -1.669, z: -0.089}
 --- !u!23 &1997630995
 MeshRenderer:
   m_ObjectHideFlags: 0

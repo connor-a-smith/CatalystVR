@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class CaveCamLoader : MonoBehaviour
 {
+    public GameObject bookmark;
 
     [System.Serializable]
     public struct StereoCubemap
@@ -32,7 +33,6 @@ public class CaveCamLoader : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         leftEyeCameras = CAVECameraRig.leftEyeCameras;
         rightEyeCameras = CAVECameraRig.rightEyeCameras;
 
@@ -43,6 +43,8 @@ public class CaveCamLoader : MonoBehaviour
         Set3D(CAVECameraRig.is3D);
 
         GameManager.instance.platform.GetComponentInChildren<InputGuideController>().SetControlsImage(true);
+
+        bookmark.gameObject.SetActive(false);
 
         Debug.Log("Starting");
 

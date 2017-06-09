@@ -18,7 +18,9 @@ public class BookmarkController : MonoBehaviour {
 	public bool noSelection;
     public static bool isCanvasOn = false; //notifies system if canvas is on
 
-	public List<Bookmark> bookmarks;
+    public Transform target;
+
+    public List<Bookmark> bookmarks;
 
     public GameObject submenuRect;
 
@@ -89,7 +91,7 @@ public class BookmarkController : MonoBehaviour {
             {
                 SelectBookmark();
                 SubMenu(bookmarkIndex);
-
+                //rotateEarth();
 
             }
         }
@@ -103,8 +105,46 @@ public class BookmarkController : MonoBehaviour {
 
         submenuRect.SetActive(true);
         Debug.Log("The submenu rect is active");
-        submenuRect.gameObject.transform.localPosition = new Vector3(panelPositions[indexOfBookmark].x + 25.0f, panelPositions[indexOfBookmark].y, panelPositions[indexOfBookmark].z + 1.0f);
+        submenuRect.gameObject.transform.localPosition = new Vector3(panelPositions[indexOfBookmark].x + 23.0f, panelPositions[indexOfBookmark].y - 0.8f, panelPositions[indexOfBookmark].z + 1.0f);
        
+    }
+
+    public void rotateEarth()
+    {
+
+        //POIManager.selectedPOI.transform.parent = CatalystEarth.earthTransform;
+
+        Vector3 earthRotation = CatalystEarth.earthTransform.rotation.eulerAngles;
+
+        Transform activePOITransform = POIManager.selectedPOI.transform;
+
+        Transform poiParent = POIManager.selectedPOI.transform.parent;
+        Debug.LogWarning(poiParent);
+
+        Vector3 poiPos = activePOITransform.transform.localPosition;
+
+        activePOITransform.transform.position = CatalystEarth.earthTransform.position;
+
+        POIManager.selectedPOI.transform.parent = null;
+  
+        //Transform earthParent = CatalystEarth.earthTransform.parent;
+        CatalystEarth.earthTransform.parent = POIManager.selectedPOI.transform;
+        Debug.LogWarning(CatalystEarth.earthTransform.parent);
+
+
+        POIManager.selectedPOI.transform.LookAt(GameManager.instance.cameraRig.viewpoint.transform);
+        Debug.Log("earth should rotate");
+
+        CatalystEarth.earthTransform.parent = null;
+        POIManager.selectedPOI.transform.parent = poiParent;
+
+        activePOITransform.localPosition = poiPos;
+
+        Vector3 newEarthRotation = CatalystEarth.earthTransform.rotation.eulerAngles;
+
+        Vector3 newRotation = new Vector3(earthRotation.x, newEarthRotation.y, earthRotation.z);
+        CatalystEarth.earthTransform.rotation = Quaternion.Euler(newRotation);
+
     }
 
 	/// <summary>

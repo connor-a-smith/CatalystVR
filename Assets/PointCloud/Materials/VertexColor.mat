@@ -16,7 +16,31 @@ Material:
     serializedVersion: 2
     m_TexEnvs:
     - first:
+        name: _BumpMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Detail
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _NightTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _SpecularTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -29,21 +53,51 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: _AtmosFalloff
+      second: 12
+    - first:
+        name: _DetailIntensity
+      second: 0
+    - first:
+        name: _NightIntensity
+      second: 0
+    - first:
+        name: _NightTransitionVariable
+      second: 4
+    - first:
         name: _PointSize
       second: 25.17
+    - first:
+        name: _RimPower
+      second: 3
     - first:
         name: _Shininess
       second: 1
     - first:
         name: _Size
       second: 0.35
+    - first:
+        name: _Smoothness
+      second: 0.5
+    - first:
+        name: _SpecularPower
+      second: 0
     m_Colors:
+    - first:
+        name: _AtmosFar
+      second: {r: 0.4557808, g: 0.5187039, b: 0.9850746, a: 1}
+    - first:
+        name: _AtmosNear
+      second: {r: 0.1686275, g: 0.7372549, b: 1, a: 1}
     - first:
         name: _Color
       second: {r: 0.03676468, g: 0.01486807, b: 0.01486807, a: 1}
     - first:
         name: _Emission
       second: {r: 0.8602941, g: 0.18977073, b: 0.18977073, a: 1}
+    - first:
+        name: _RimColor
+      second: {r: 0.26, g: 0.19, b: 0.16, a: 0}
     - first:
         name: _SpecColor
       second: {r: 0.9264706, g: 0.25886682, b: 0.25886682, a: 1}
