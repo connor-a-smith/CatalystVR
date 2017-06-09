@@ -8,7 +8,7 @@ public class FocusTransformComponent : POIComponent
     {
         base.Activate(gameManager, associatedSite);
 
-        associatedSite.StartCoroutine(associatedSite.ShowModels());
+        associatedSite.StartCoroutine(associatedSite.Show3DSites());
 
 
         /*

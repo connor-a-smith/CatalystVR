@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ComponentType { Photos, Audio, Videos, Text, CAVECam, Model, Back }
+public enum ComponentType { CAVECam, Site3D, Artifact, Audio, Picture, Video }
 
 public abstract class POIComponent : MonoBehaviour
 {

@@ -114,17 +114,12 @@ public class MonitorButtonScript : MonoBehaviour
     public void ToggleButton()
     {
 
-        if (connectedType == ComponentType.Back)
-        {
-            POIManager.selectedPOI.Deactivate();
-        }
-
-        else if (activatable)
+        if (activatable)
         {
 
             CatalystSite selectedSite = POIManager.selectedPOI.associatedSite;
 
-            if (connectedType == ComponentType.Photos)
+            if (connectedType == ComponentType.Picture)
             {
 
                  //selectedSite.ShowImages
@@ -139,17 +134,10 @@ public class MonitorButtonScript : MonoBehaviour
 
             }
 
-            else if (connectedType == ComponentType.Videos)
+            else if (connectedType == ComponentType.Video)
             {
 
                 // Not implemented yet.
-
-            }
-
-            else if (connectedType == ComponentType.Text)
-            {
-
-                PlatformMonitor.SetMonitorText(selectedSite.siteData.description);
 
             }
 
@@ -160,11 +148,17 @@ public class MonitorButtonScript : MonoBehaviour
 
             }
 
-            else if (connectedType == ComponentType.Model)
+            else if (connectedType == ComponentType.Site3D)
             {
 
-                selectedSite.StartCoroutine(selectedSite.ShowModels());
+                selectedSite.StartCoroutine(selectedSite.Show3DSites());
 
+
+            }
+            else if (connectedType == ComponentType.Artifact)
+            {
+
+                // Not implemented yet.
 
             }
         }
@@ -189,7 +183,7 @@ public class MonitorButtonScript : MonoBehaviour
 
         CatalystSite selectedSite = POIManager.selectedPOI.associatedSite;
 
-        if (connectedType == ComponentType.Photos)
+        if (connectedType == ComponentType.Picture)
         {
 
             return (selectedSite.siteData.images != null);
@@ -204,17 +198,10 @@ public class MonitorButtonScript : MonoBehaviour
 
         }
 
-        else if (connectedType == ComponentType.Videos)
+        else if (connectedType == ComponentType.Video)
         {
 
             return (selectedSite.siteData.videos != null);
-
-        }
-
-        else if (connectedType == ComponentType.Text)
-        {
-
-            return selectedSite.siteData.description != "";
 
         }
 
@@ -224,63 +211,22 @@ public class MonitorButtonScript : MonoBehaviour
 
         }
 
-        else if (connectedType == ComponentType.Model)
+        else if (connectedType == ComponentType.Site3D)
         {
 
-            return (selectedSite.siteData.models != null);
+            return (selectedSite.siteData.sites3D != null);
 
 
+        }
+        else if (connectedType == ComponentType.Artifact)
+        {
+            return (selectedSite.siteData.artifacts != null);
         }
 
         return false;
 
     }
 
-    /// <summary>
-    /// Using the enum, determine the connected component 
-    /// </summary>
-    void GetComponentFromNode()
-    {
-        if (connectedType == ComponentType.Photos)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<PhotoComponent>();
-        }
-
-        else if (connectedType == ComponentType.Audio)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<AudioComponent>();
-
-        }
-
-        else if (connectedType == ComponentType.Videos)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<VideoComponent>();
-
-        }
-
-        else if (connectedType == ComponentType.Text)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<TextComponent>();
-
-        }
-
-        else if (connectedType == ComponentType.CAVECam)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<SceneLoaderComponent>();
-
-        }
-
-        else if (connectedType == ComponentType.Model)
-        {
-            connectedComponent = POIManager.selectedPOI.GetComponent<FocusTransformComponent>();
-
-        }
-
-        else if (connectedType != ComponentType.Back)
-        {
-            Debug.LogError("Component not setup in MonitorButtonScript");
-        }
-    }
 
     IEnumerator selectChangeColor()
     {

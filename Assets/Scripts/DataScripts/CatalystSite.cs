@@ -18,9 +18,14 @@ public class CatalystSite : MonoBehaviour
     }
 
     public List<CAVECam> caveCams;
-    public List<CatalystModel> models;
-    private Transform modelParent;
     private int camIndex = 0;
+
+    private Transform modelParent;
+
+
+    public List<CatalystModel> sites3D;
+    private int modelIndex = 0;
+
 
     [SerializeField] private float modelDistanceFromCam = 3.0f;
 
@@ -66,22 +71,41 @@ public class CatalystSite : MonoBehaviour
 
     }
 
-    public IEnumerator ShowModels()
+    public IEnumerator Show3DSites()
     {
 
         DeactivateActiveElement();
 
-        if (models == null || models.Count == 0)
+        modelIndex = 0;
+
+        Debug.Log("Showing Models!");
+        yield return null;
+
+
+        if (sites3D == null || sites3D.Count == 0)
         {
 
-            yield return StartCoroutine(LoadModels());
+            Debug.Log("Loading Models!");
+            yield return null;
+
+            yield return StartCoroutine(Load3DSites());
 
         }
 
-       // SceneManager.LoadSceneAsync("Buffer Scene");
 
-        modelParent.localPosition = Vector3.zero;
+        SceneManager.LoadSceneAsync("Buffer Scene");
 
+      //  modelParent.localPosition = Vector3.zero;
+
+        if (modelIndex < sites3D.Count)
+        {
+
+            sites3D[modelIndex].Activate();
+            activeElement = sites3D[modelIndex];
+
+        }
+
+        /*
         List<Vector3> positions = CommonCatalystMath.GetPositionsOnUnitCircleBySides(models.Count);
 
         for (int i = 0; i < positions.Count; i++)
@@ -100,17 +124,20 @@ public class CatalystSite : MonoBehaviour
             models[i].model.SetActive(true);
 
         }
+        */
+
+        if (activeElement != null)
+        {
+            PlatformMonitor.SetMonitorText(activeElement.description);
+        }
+
     }
 
-    public IEnumerator HideModels()
+    public IEnumerator Hide3DSites()
     {
 
-        foreach (CatalystModel model in models)
-        {
-
-            yield return model.Deactivate();
-
-        }
+        DeactivateActiveElement();
+        yield return null;
     }
 
     public void DeactivateActiveElement()
@@ -148,6 +175,26 @@ public class CatalystSite : MonoBehaviour
         }
     }
 
+    public void Cycle3DSites()
+    {
+
+        if (activeElement is CatalystModel)
+        {
+
+            activeElement.Deactivate();
+
+            modelIndex++;
+            if (modelIndex > sites3D.Count-1)
+            {
+                modelIndex = 0;
+            }
+
+            sites3D[modelIndex].Activate();
+            activeElement = sites3D[modelIndex];
+
+        }
+    }
+
     public void Update()
     {
 
@@ -159,6 +206,17 @@ public class CatalystSite : MonoBehaviour
 
                 CycleCAVECams();
 
+            }
+
+            if (activeElement is CatalystModel)
+            {
+
+                if ((activeElement as CatalystModel).isSite)
+                {
+
+                    Cycle3DSites();
+
+                }
             }
         }
     }
@@ -187,10 +245,13 @@ public class CatalystSite : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadModels()
+    public IEnumerator Load3DSites()
     {
 
-        models = new List<CatalystModel>();
+        Debug.Log("Beginning model load");
+        yield return null;
+
+        sites3D = new List<CatalystModel>();
 
         GameObject modelParentObj = new GameObject();
 
@@ -203,14 +264,24 @@ public class CatalystSite : MonoBehaviour
         modelParent.transform.localPosition = Vector3.zero;
         modelParent.transform.localRotation = Quaternion.identity;
 
-        foreach (SerializableModel modelData in siteData.models)
+        modelParent.parent = this.transform;
+
+        foreach (SerializableModel modelData in siteData.sites3D)
         {
 
+            Debug.Log("Initializing models");
+            yield return null;
+
             CatalystModel newModel = gameObject.AddComponent<CatalystModel>();
+            newModel.isSite = true;
             yield return newModel.Initialize(modelData);
-            newModel.transform.parent = modelParent;
+            newModel.model.transform.parent = modelParent.transform;
+            sites3D.Add(newModel);
 
         }
+
+        modelParent.Translate(new Vector3(0.0f, -40.0f, 0.0f));
+
     }
 }
 
@@ -226,7 +297,8 @@ public class SerializableCatalystSite
 
     public SerializableCAVECam[] panos;
     public SerializableVideo[] videos;
-    public SerializableModel[] models;
+    public SerializableModel[] artifacts;
+    public SerializableModel[] sites3D;
     public SerializableImage[] images;
     public SerializablePointCloud[] pointClouds;
 
