@@ -47,7 +47,9 @@ Once you've created the scene, make sure to add it to the scenes in build (in yo
 
 Currently, the process of making all data dynamically load is nearly complete, and the process of actually showing this data is much, much easier. In the "DynamicDataLoading" branch you'll find all of this work.
 
-Here, all of the data exists OUTSIDE of the Unity Editor. The most important file here 
+Here, all of the data exists OUTSIDE of the Unity Editor. The most important file here is a "siteData.json" file, that should be in a folder titled "CAVEkiosk_SiteData" in the same directory as the .exe file. Right now, there's a lot of dummy data in there, but it should give a very good idea for how data loading works. Data is referenced through filepaths, all of which are in that JSON file. It really is as easy as just adding a new site, updating it's metadata, and giving paths to the file all in that JSON. 
+
+Now, the existing issue with this branch and the reason it isn't on master is because of load times. Right now, the data is loading VERY slow. A good place to start investigating this would be the CAVECam.cs script, where you can see how CAVECams are being dynamically loaded. After that, CatalystModel.cs is where 3D models are being loaded, and is also a good place to investigate.
 
 
 
