@@ -33,6 +33,3 @@ Desktop.ini
 
 # Resources contains tons of large files. Also too big.
 /Assets/Resources/
-
-# Don't push any site data. Way too large.
-/Assets/SiteData/
