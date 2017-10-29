@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 Shader "test/MyShader"
 {
@@ -43,7 +45,7 @@ Shader "test/MyShader"
 	v2f vert(appdata v)
 	{
 		v2f o;
-		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+		o.vertex = UnityObjectToClipPos(v.vertex);
 		o.color = v.color;
 		o.worldPos = v.vertex;
 		return o;
@@ -64,22 +66,22 @@ Shader "test/MyShader"
 				//test.normal = normal;
 			test.vertex = input[i].worldPos += float4(-_sphereRadius,-_sphereRadius, 0,0);
 			test.color = input[i].color;
-			test.vertex = mul(UNITY_MATRIX_MVP, test.vertex);
+			test.vertex = UnityObjectToClipPos(test.vertex);
 			OutputStream.Append(test);
 
 			test.vertex = input[i].worldPos += float4(-_sphereRadius, _sphereRadius, 0, 0);
 			test.color = input[i].color;
-			test.vertex = mul(UNITY_MATRIX_MVP, test.vertex);
+			test.vertex = UnityObjectToClipPos(test.vertex);
 			OutputStream.Append(test);
 
 			test.vertex = input[i].worldPos += float4(_sphereRadius, -_sphereRadius, 0, 0);
 			test.color = input[i].color;
-			test.vertex = mul(UNITY_MATRIX_MVP, test.vertex);
+			test.vertex = UnityObjectToClipPos(test.vertex);
 			OutputStream.Append(test);
 
 			test.vertex = input[i].worldPos += float4(_sphereRadius, _sphereRadius, 0, 0);
 			test.color = input[i].color;
-			test.vertex = mul(UNITY_MATRIX_MVP, test.vertex);
+			test.vertex = UnityObjectToClipPos(test.vertex);
 			OutputStream.Append(test);
 
 			//test.uv = input[i].uv;
